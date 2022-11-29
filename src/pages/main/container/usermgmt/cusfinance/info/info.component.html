@@ -1,0 +1,65 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>时间</span>
+        <span>{{bemInfoData.Time}}</span>
+    </div>
+
+    <div>
+        <span>关联的派单号</span>
+        <span>{{bemInfoData.OrderNo}}</span>
+    </div>
+    <div>
+        <span>收款人</span>
+        <span>{{bemInfoData.PayeeName}}</span>
+    </div>
+    <div>
+        <span>收款账号</span>
+        <span>{{bemInfoData.PayeeAct}}</span>
+    </div>
+    <div>
+        <span>收款账号类型</span>
+        <span *ngIf="bemInfoData.PayeeActType === 0">
+            <span *ngIf="bemInfoData.Payee === 0">平台账户</span>
+            <span *ngIf="bemInfoData.Payee !== 0">用户账户</span>
+        </span>
+        <span *ngIf="bemInfoData.PayeeActType !== 0">
+            <span>{{bemInfoData.PayeeActType | accountsTypeTranslate}}</span>
+        </span>
+    </div>
+    <div>
+        <span>付款人</span>
+        <span>{{bemInfoData.PayerName}}</span>
+    </div>
+    <div>
+        <span>付款账号</span>
+        <span>{{bemInfoData.PayerAct}}</span>
+    </div>
+    <div>
+        <span>付款账号类型</span>
+        <span *ngIf="bemInfoData.PayerActType === 0">
+            <span *ngIf="bemInfoData.Payer === 0">平台账户</span>
+            <span *ngIf="bemInfoData.Payer !== 0">用户账户</span>
+        </span>
+        <span *ngIf="bemInfoData.PayerActType !== 0">
+            <span>{{bemInfoData.PayerActType | accountsTypeTranslate}}</span>
+        </span>
+    </div>
+    <div>
+        <span>状态</span>
+        <span>{{bemInfoData.State | financeTypeTranslate}}</span>
+    </div>
+    <div>
+        <span>订单金额</span>
+        <span>{{bemInfoData.Amount}}</span>
+    </div>
+    <div *ngIf="bemInfoData.State === 1">
+        <span>重新支付</span>
+        <span>
+         <qr-code *ngIf="bemInfoData.CodeUrl" [value]="bemInfoData.CodeUrl" [size]="150"></qr-code>
+        </span>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

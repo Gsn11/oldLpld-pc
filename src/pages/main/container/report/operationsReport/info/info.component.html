@@ -1,0 +1,46 @@
+
+<div class="detailOut">
+    <div class="title">{{data.MSName}}报表</div>
+    <div class="Order"><span>派单号:{{data.OrderNo}}</span><span>日期:{{data.OrderTime}}</span></div>
+    <div class="header">巡检描述:<span>{{data.MSDesc}}</span></div>
+    <div class="type">
+        <table mat-table [dataSource]="dataCheckList" class="mat-elevation-z8">
+
+            <!--- Note that these columns can be defined in any order.
+                  The actual rendered columns are set as a property on the row definition" -->
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="BuildingName">
+              <th mat-header-cell *matHeaderCellDef> 设备位置 </th>
+              <td mat-cell *matCellDef="let i"> {{i.BuildingName || i.CName || i.Building }} - {{i.Floor}}层 - {{i.Zone}} - {{i.SpacePos}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="DeviceNo">
+              <th mat-header-cell *matHeaderCellDef> 设备编号 </th>
+              <td mat-cell *matCellDef="let i"> {{i.DeviceNo}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="DeviceName">
+              <th mat-header-cell *matHeaderCellDef> 设备名称 </th>
+              <td mat-cell *matCellDef="let i">{{i.DeviceName}}  </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Item">
+              <th mat-header-cell *matHeaderCellDef> 条目 </th>
+              <td mat-cell *matCellDef="let i"> {{i.Item}}</td>
+            </ng-container>
+           <!-- Symbol Column -->
+           <ng-container matColumnDef="FeedbackType">
+            <th mat-header-cell *matHeaderCellDef> 反馈信息 </th>
+            <td mat-cell *matCellDef="let i"> {{i.MoiValue}} </td>
+          </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+    </div>
+    <div class="pro"><span>负责人:{{data.WorkerInfo}}</span><span>审核员:{{data.CreatorName}}</span></div>
+    <div class="btn"> <button mat-raised-button   class="back" (click)="goback()"><span class="iconfont iconpstep"></span>返回</button> <button color="primary" mat-raised-button  class="edit" (click)="downloadDeviceFile()">导出excel</button></div>
+</div>

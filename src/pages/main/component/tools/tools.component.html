@@ -1,0 +1,30 @@
+<div class="toolsBox">
+  <div>
+    <i class="iconfont iconoutdent" (click)="switchMeun()" [ngClass]="{'off': !meunState}"></i>
+    <span class="welcomeInfo">{{this.welcomeInfo}}</span>
+    <!-- <span class="welcomeInfo">欢迎 <span class="info">{{this.welcomeInfo}}</span> 使用万楼云平台</span> -->
+  </div>
+  <div class="rightTools">
+    <div class="toolsMeun">
+      <!-- http://168.1.7.63:20080/bemcloudweb/   东南水厂正式接口地址要隐藏地图导航 -->
+      <div *ngIf="buildData.buildType === '联排联调'" (click)="goPage('ord/file:%5Ehtml/framework/html/home.html;type=map', true)">
+        <span>地图导航</span>
+      </div>
+      <div (click)="goPage('ord/file:%5Ehtml/framework/html/home.html;type=index', true)">
+        <span>{{buildData.buildType === '联排联调' ? '集中控制' : '全场监测'}}</span>
+      </div>
+      <div class="active-headeritem">
+        <span>{{buildData.buildType === '联排联调' ? 'AIOT运维' : '全场运维'}}</span>
+      </div>
+    </div>
+    <div class="toolsList">
+      <!-- <div><span (click)="gotoAgreement()" class="iconfont iconhelp"></span></div> -->
+      <!-- matTooltip="通知" -->
+      <div><span matTooltip="报警通知" (click)="gotoDiagonDevice()" class="iconfont iconguangbo"></span></div>
+      <div><span matTooltip="消息" (click)="gotoMsg()" class="iconfont iconmsg"></span></div>
+      <!-- matTooltip="退出" -->
+      <div><span matTooltip="退出" (click)="showConfim()" class="iconfont iconoff"></span></div>
+    </div>
+  </div>
+</div>
+<app-confim [confim]="setConfim" [title]="confimTitle" (setConfimResult)="tableConfimResult($event)"></app-confim>

@@ -1,0 +1,61 @@
+<div class="add_bg" *ngIf="fshow">
+    <img src="../../../../../assets/inspection/tree.png" alt="">
+    <div class="add_body">
+        <div class="space_container">
+            <div class="header">
+                <div class="input">
+                    <div class="search_input">
+                        <input type="text" placeholder="设备名称/故障类型" [(ngModel)]="deviceName">
+                    </div>
+                    <div class="search_btn" (click)="search()">
+                        <img class="search_img" src="../../../../../assets/all/search.png" mode="widthFix" alt="">
+                        <span>搜索</span>
+                    </div>
+                </div>
+                <div class="btn">
+                    <div class="btn_c cy" (click)="spaceChoose()">确认</div>
+                    <div class="btn_c " (click)="fshow=false">取消</div>
+                </div>
+            </div>
+            <div class="add_bottom">
+
+                <div class="add_scr">
+                    <div class="input_box">
+                        <mat-card>
+                            <div class="template title">
+                                <mat-checkbox class="example-margin allCheckItem" [disabled]="!data"
+                                    (change)="checkAll($event)" [(ngModel)]="allIsCheck" [(indeterminate)]="indeterminate">
+                                </mat-checkbox>
+                                <div style="margin-left: 10px;"><span>设备编号(名称)</span></div>
+                                <div><span>测量变量</span></div>
+                                <div><span>报警点/数据点</span></div>
+                            </div>
+                        </mat-card>
+                        <mat-card *ngFor="let d of data, let dIndex = index">
+                            <div class="template body_con">
+                                <mat-checkbox class="example-margin allCheckItem" (change)="checkItem()" [(ngModel)]="d.uCheck">
+                                </mat-checkbox>
+                                <div style="margin-left: 10px;"><span>{{d.DeviceNo}}({{d.DevName}})</span></div>
+                                <div><span>{{d.MetricsDesc}}({{d.Id}})</span></div>
+                                <div><span>{{d.IsAlert===0?'报警点':'数据点'}}</span></div>
+                            </div>
+                        </mat-card>
+                        <!-- <div class="deList">
+                            <div class="input_List">
+                                <div><mat-checkbox color="#21A1E0"></mat-checkbox></div>
+                                <div>设备编号(名称)</div>
+                                <div>测量变量</div>
+                                <div>报警点/数据点</div>
+                            </div>
+                            <div class="input_List" *ngFor="let item of data">
+                                <div><mat-checkbox color="#21A1E0"></mat-checkbox></div>
+                                <div>{{item.DeviceNo}}({{item.DevName}})</div>
+                                <div>{{item.MetricsDesc}}({{item.Id}})</div>
+                                <div>{{item.IsAlert===0?'报警点':'数据点'}}</div>
+                            </div>  
+                        </div> -->
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,31 @@
+<div class="modal-out" [ngClass]="{'active': show}">
+    <div class="bg" (click)="switchModalBox()"></div>
+    <div class="container">
+        <div class="header"><span class="title">新增模版条目</span></div>
+        <div class="main">
+            <div>
+                <span (click)="openBuildDialog()" class="chooseDeviceName">{{DefalutName}}</span>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="请输入条目" [(ngModel)]="Item">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <mat-label>请选择反馈类型</mat-label>
+                    <mat-select [formControl]="SelectFeedbackType">
+                        <mat-option>无</mat-option>
+                        <mat-option *ngFor="let f of FeedbackType" [value]="f.state">
+                            {{f.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="goCancel()"><span class="iconfont iconpstep"></span>取消</button>
+            <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        </div>
+    </div>
+</div>

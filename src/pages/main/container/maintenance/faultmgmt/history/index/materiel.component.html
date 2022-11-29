@@ -1,0 +1,95 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+	<div style="background: #fff;">
+		<div class="searchList">
+			<div>
+				<mat-form-field>
+					<mat-select placeholder="子系统" [formControl]="SystemSelect">
+						<mat-option [value]="''">无</mat-option>
+						<mat-option *ngFor="let s of gradeList" [value]="s.Seq">{{s.SName}}</mat-option>
+					</mat-select>
+				</mat-form-field>
+				<app-calendar [setCreateDate]="BeginTime" (getTime)="getBeginTime($event)" title="开始日期"></app-calendar>
+				<span style="margin: 0 10px;"> - </span>
+				<app-calendar [setCreateDate]="EndTime" (getTime)="getEndTime($event)" title="结束日期"></app-calendar>
+			</div>
+			<button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1;getList()">搜索</button>
+		</div>
+	</div>
+
+	<div>
+		<div class="mat-elevation-z8">
+			<table mat-table [dataSource]="list" style="width: 100%;">
+				<ng-container matColumnDef="inOut">
+					<th mat-header-cell *matHeaderCellDef> 位置 </th>
+					<td mat-cell *matCellDef="let element; let i = index" > {{element.Device.building}}-{{element.Device.floor}}-{{element.Device.zone}}</td>
+				</ng-container>
+				<ng-container matColumnDef="num">
+					<th mat-header-cell *matHeaderCellDef> 设备 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> {{element.Device.device}} </td>
+				</ng-container>
+				<ng-container matColumnDef="unitPrice">
+					<th mat-header-cell *matHeaderCellDef> 重要等级 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> {{element.Device.levelName}} </td>
+				</ng-container>
+				<ng-container matColumnDef="operate">
+					<th mat-header-cell *matHeaderCellDef> 操作 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> 
+						<span  style="color: #2196f3; cursor: pointer;" (click)="lookInfo(i)">查看</span>
+					</td>
+				</ng-container>
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+			</table>
+			<!-- <div style="background: white;">
+				<mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+					[pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+			</div> -->
+		</div>
+	</div>
+</div>
+<div class="dialog-window" *ngIf="alarmInfo">
+	<div class="dialog">
+		<div class="dialog-padding">
+			<div class="dialog-title">子集内容详情</div>
+			<div class="dialog-button" style="margin-top: 10px;">
+				<button mat-raised-button class="back" (click)="alarmInfo = false">返回</button>
+			</div>
+			<div class="dialog-info">
+				<table mat-table [dataSource]="elementInfo" style="width: 100%;">
+					<ng-container matColumnDef="itemId">
+						<th mat-header-cell *matHeaderCellDef> itemId </th>
+						<td mat-cell *matCellDef="let element; let i = index"> {{element[0].itemId}} </td>
+					</ng-container>
+					<ng-container matColumnDef="PT">
+						<th mat-header-cell *matHeaderCellDef> 点位 </th>
+						<td mat-cell *matCellDef="let element; let i = index"> {{element[0].metricDesc }} </td>
+					</ng-container>
+					<ng-container matColumnDef="chart">
+						<th mat-header-cell *matHeaderCellDef> 图表 </th>
+						<td mat-cell *matCellDef="let element; let i = index"> 
+							<span  style="color: #2196f3; cursor: pointer;" (click)="lookCharts(element)">查看</span>
+						</td>
+					</ng-container>
+					<tr mat-header-row *matHeaderRowDef="subset"></tr>
+					<tr mat-row *matRowDef="let row; columns: subset;" class="example-element-row"></tr>
+				</table>
+			</div>
+		</div>	
+	</div>
+	<div  class="dialog" *ngIf="chartFlag" >
+		<div class="dialog-padding">
+			<div class="dialog-title">图像内容详情</div>
+			<div class="dialog-button" style="margin-top: 10px;">
+				<app-calendar [setCreateDate]="BeginTime" (getTime)="getBeginTime($event)" title="开始日期"></app-calendar>
+				<span style="margin: 0 10px;"> - </span>
+				<app-calendar [setCreateDate]="EndTime" (getTime)="getEndTime($event)" title="结束日期"></app-calendar>
+				<button mat-raised-button class="back" (click)="chartFlag = false" style="margin: 0 20px;">返回</button>
+				<button mat-raised-button color="primary" class="loginBtn" (click)="saveInfo()">搜索</button>
+			</div>
+			 <div class="dialog-info" style="margin-top: 10px;">
+				<div id="muddyStatic" echarts [options]="online" class="chart" ></div>
+			</div> 
+		</div>
+	</div>
+ </div>

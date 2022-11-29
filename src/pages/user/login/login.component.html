@@ -1,0 +1,79 @@
+
+
+<div class="lpldBackground" *ngIf="loginType === 'lpld'">
+  <div class="loginBox">
+    <div class="left">
+      <img class="Img" src="../../../assets/login/longin1.png" alt="">
+    </div>
+    <div class="right">
+      <div class="title">
+        <span>福州市联排联调</span>
+        <span>全生命周期监控数据采集与录入</span>
+        <span>AIOT运维</span>
+        <!-- <span>
+          东南水厂运维智慧云平台
+        </span> -->
+      </div>
+      <div class="userInfo">
+        <mat-form-field style="width: 100%;">
+          <input matInput placeholder="手机/用户名" (keyup.enter)="gotoPlant()" [(ngModel)]="lpldUserName" [formControl]="userName" required>
+        </mat-form-field>
+        <mat-form-field style="width: 100%;">
+          <input matInput placeholder="密码" type="password" (keyup.enter)="gotoPlant()" [(ngModel)]="lpldUserPwd" [formControl]="userPwd" required>
+        </mat-form-field>
+        <div>
+          <mat-checkbox class="checkBox" [(ngModel)]="UserNameIsSaveLPLD" disabled>记住用户名</mat-checkbox>
+        </div>
+        <button style="margin-top: 20px; width: 100%;" mat-raised-button color="primary" class="loginBtn" (click)="gotoPlant()">登录</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="bg" *ngIf="loginType === 'wly'">
+  <div class="topMenu">
+    <div class="rightList">
+      <div class="wlyIntroduce" (click)="goWlyIntroducePage()">
+        <span class="icon iconfont home"></span> 万楼云简介
+      </div>
+      <div class="info">
+        <span class="icon iconfont iconmsg"></span> 售前咨询
+      </div>
+      <div class="phone">
+        <span class="icon iconfont iconserver"></span> 售后客服 400 0039 395
+      </div>
+    </div>
+  </div>
+
+  <div class="loginBox">
+    <div class="errorInfo" *ngIf="isError">
+      <span>{{errorMsg}}</span>
+      <span class="result" (click)="hiddenErrorBox()">确定</span>
+    </div>
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput placeholder="手机/用户名" [formControl]="userName" (keyup.enter)="gotoPlant()" required>
+        <mat-error *ngIf="userName.invalid">{{getUserNameErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="密码" type="password" [formControl]="userPwd" (keyup.enter)="gotoPlant()" required>
+        <mat-error *ngIf="userPwd.invalid">{{getUserPwdErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field *ngIf="buildData.buildType != '东南水厂'">
+        <input matInput placeholder="企业ID" [formControl]="userCID" (keyup.enter)="gotoPlant()" required>
+        <mat-error *ngIf="userCID.invalid">{{getUserCIDErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <div class="checkBox" *ngIf="buildData.buildType != '东南水厂'">
+        <mat-form-field>
+          <input matInput placeholder="验证码" [formControl]="userCode" maxlength="4" (keyup.enter)="gotoPlant()" required>
+          <mat-error *ngIf="userCode.invalid">{{getUserCodeErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <img class="codeImg" [src]="codeImg" (click)="getCodeImg()" alt="codeImg">
+      </div>
+    </div>
+    <div>
+      <mat-checkbox [(ngModel)]="userNameIsSave">记住用户名</mat-checkbox>
+    </div>
+    <button mat-raised-button color="primary" class="loginBtn" (click)="gotoPlant()">登录</button>
+    <div class="registerBtn"><span (click)="gotoRegsiter()">立即注册</span></div>
+  </div>
+</div>

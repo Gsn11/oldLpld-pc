@@ -1,0 +1,13 @@
+<div class="productList">
+    <div class="item">
+        <div *ngFor="let p of productList, let pIndex = index">
+            {{p}}
+            <span class="iconfont iconclose" (click)="deleteItem(pIndex)"></span>
+        </div>
+    </div>
+    <mat-form-field class="example-full-width" *ngIf="inputProduct">
+        <input matInput placeholder="请输入产品" [(ngModel)]="productName" (blur)="inputItem()">
+    </mat-form-field>
+    <div class="addBtn" *ngIf="!inputProduct" (click)="addProduct()"><span>+ 添加产品</span></div>
+</div>
+<app-confim [confim]="setProductConfim" (setConfimResult)="productConfimResult($event)"></app-confim>

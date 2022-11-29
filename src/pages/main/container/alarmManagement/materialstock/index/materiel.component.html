@@ -1,0 +1,106 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+	<div style="background: #fff;">
+		<div class="searchList">
+			<div>
+				<mat-form-field class="example-form-field">
+					<mat-label>请选择报警等级</mat-label>
+					<mat-select [formControl]="buildingType">
+						  <mat-option [value]="">无</mat-option>
+							<mat-option *ngFor="let i of gradeList" [value]="i.Seq">
+									{{i.AlertLevelName}}
+							</mat-option>
+					</mat-select>
+			  </mat-form-field>
+				<mat-form-field>
+          <input matInput placeholder="请输入模板名称或电话" [(ngModel)]="templateName" >
+        </mat-form-field>
+			</div>
+			<div>
+				<button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1;getList()">搜索</button>
+			  <button mat-raised-button color="primary" class="loginBtn" (click)="allocation()">模板配置</button>
+			</div>
+		</div>
+	</div>
+
+	<div>
+		<div class="mat-elevation-z8">
+			<table mat-table [dataSource]="list" style="width: 100%;">
+				<ng-container matColumnDef="garel">
+					<th mat-header-cell *matHeaderCellDef> 报警等级 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> {{element.LevelName}} </td>
+				</ng-container>
+				<ng-container matColumnDef="LevelType">
+					<th mat-header-cell *matHeaderCellDef> 报警类别 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> 
+						{{element.LevelType == 0 ? '设备故障': element.LevelType == 1 ? '防汛防台风' : element.LevelType == 2 ? '次氯酸钠泄漏事故' : element.LevelType == 3 ? '水源水质突发事件' : element.LevelType == 4 ? '制水生产水质突发事件': element.LevelType == 5 ? '反恐怖防范' : element.LevelType == 6 ? '火灾事故' : element.LevelType == 7 ? '供水设备故障突发事件' : '有限空间作业事故'}}
+					</td>
+				</ng-container>
+				<ng-container matColumnDef="modouName">
+					<th mat-header-cell *matHeaderCellDef> 模板名称 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> {{element.Name}} </td>
+				</ng-container>
+				<ng-container matColumnDef="name">
+					<th mat-header-cell *matHeaderCellDef> 用户姓名 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> {{element.names}} </td>
+				</ng-container>
+				<ng-container matColumnDef="phone">
+					<th mat-header-cell *matHeaderCellDef> 电话号码 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> {{element.phones}} </td>
+				</ng-container>
+				<ng-container matColumnDef="operate">
+					<th mat-header-cell *matHeaderCellDef> 操作 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> 
+						<span  style="color: #2196f3; cursor: pointer;margin-right: 10px;" (click)="compileClass(element,1)">编辑</span>
+						<span  style="color: #e4526a; cursor: pointer;" (click)="delSeq = element.Seq; setConfim = true">删除</span>
+					</td>
+				</ng-container>
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+			</table>
+			<div style="background: white;">
+				<!-- <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+					[pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator> -->
+			</div>
+		</div>
+	</div>
+	 <div class="dialog-window" *ngIf="alarmInfo">
+		<div class="dialog">
+			<div class="dialog-padding">
+				<div class="dialog-title">模板配置</div>
+				<i nz-icon [nzType]="'close'" (click)="alarmInfo = false;typeSave = ''" style="position: absolute;top: 10px;right: 10px;cursor: pointer;width: 30px;height: 30px;"></i>
+				<div class="dialog-info">
+					<mat-form-field class="example-form-field">
+						<mat-label>请选择报警等级</mat-label>
+						<select matNativeControl  [(ngModel)]="classSeq">
+							<option [value]="">无</option>
+							<option *ngFor="let i of gradeList" [value]="i.Seq">
+								{{i.AlertLevelName}} {{i.LevelType == 0 ? '设备故障': i.LevelType == 1 ? '防汛防台风' : i.LevelType == 2 ? '次氯酸钠泄漏事故' : i.LevelType == 3 ? '水源水质突发事件' : i.LevelType == 4 ? '制水生产水质突发事件': i.LevelType == 5 ? '反恐怖防范' : i.LevelType == 6 ? '火灾事故' : element.LevelType == 7 ? '供水设备故障突发事件' : '有限空间作业事故'}}
+						</option>
+					 </select>
+					</mat-form-field>
+					<mat-form-field>
+						<input matInput placeholder="请输入警报名称" required [(ngModel)]="warningName" >
+					</mat-form-field>
+					<mat-form-field>
+					   <textarea  matInput rows='4' style="resize: none;" required placeholder="请输入报警内容" [(ngModel)]="warningContent"></textarea>
+				  </mat-form-field>
+					<mat-form-field class="example-form-field">
+						<mat-label>是否启用报警铃声</mat-label>
+							<select matNativeControl  required [(ngModel)]="ringType">
+									<option value="0">无铃声</option>
+									<option value="1">火警铃声</option>
+									<option value="2">水警铃声</option>
+							</select>
+					</mat-form-field>
+					<div><span>送达用户：</span>{{saveUserData.names}}<button mat-raised-button color="primary" class="loginBtn" (click)="openUserModelDialog()">添加用户</button></div>
+				</div>
+				<div class="dialog-button" style="margin-top: 80px;">
+					<button mat-raised-button class="back" (click)="alarmInfo = false;typeSave = ''">取消</button>
+					<button mat-raised-button color="primary" class="loginBtn" (click)="saveInfo()">保存</button>
+				</div>
+			</div>	
+		</div>
+	 </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="delete($event)"></app-confim>

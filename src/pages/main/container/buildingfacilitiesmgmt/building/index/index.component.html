@@ -1,0 +1,69 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+  <div class="searchList">
+    <div>
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" [placeholder]="'Name' | wordTranslate" [(ngModel)]="searchName" (keyup.enter)="getList()">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1;getList()">搜索</button>
+    </div>
+
+    <div>
+      <button mat-stroked-button color="primary" class="download" (click)="downloadBuildingFile()">导出Excel</button>
+      <button mat-raised-button color="primary" class="loginBtn" (click)="gotoAdd()">新增</button>
+    </div>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="list" style="width: 100%;">
+      <ng-container matColumnDef="Name" *ngIf="buildData.buildType === '联排联调'">
+        <th mat-header-cell *matHeaderCellDef> {{'Name' | wordTranslate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Name" *ngIf="buildData.buildType === '东南水厂'">
+        <th mat-header-cell *matHeaderCellDef> 功能位置名称 </th>
+        <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="BGName" *ngIf="buildData.buildType === '联排联调'">
+        <th mat-header-cell *matHeaderCellDef> {{'BGName' | wordTranslate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.BGName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="BGName" *ngIf="buildData.buildType === '东南水厂'">
+        <th mat-header-cell *matHeaderCellDef> 所属厂区 </th>
+        <td mat-cell *matCellDef="let element"> {{element.BGName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Stat">
+        <th mat-header-cell *matHeaderCellDef> 状态 </th>
+        <td mat-cell *matCellDef="let element"> {{element.Stat | statTranslate}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Addr">
+        <th mat-header-cell *matHeaderCellDef> 地址 </th>
+        <td mat-cell *matCellDef="let element"> {{element.Addr}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Tel">
+        <th mat-header-cell *matHeaderCellDef> 联系电话 </th>
+        <td mat-cell *matCellDef="let element"> {{element.Tel}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Id">
+        <th mat-header-cell *matHeaderCellDef> id </th>
+        <td mat-cell *matCellDef="let element"> {{element.Seq}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Other">
+        <th mat-header-cell *matHeaderCellDef> 操作 </th>
+        <td mat-cell *matCellDef="let element" class="Other">
+          <span (click)="gotoInfo(element)">查看</span>
+          <span *ngIf="customer === element.Customer" (click)="gotoEdit(element)">编辑</span>
+          <span *ngIf="customer === element.Customer" class="deleteItem" (click)="showConfim(element.Seq)">删除</span>
+          <span *ngIf="customer !== element.Customer" class="enable">不可操作</span>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+    </table>
+    <div style="background: white;">
+      <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+        [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+  <app-confim [confim]="setConfim" (setConfimResult)="tableConfimResult($event)"></app-confim>
+</div>

@@ -1,0 +1,79 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>{{'customer' | wordTranslate}}</span>
+        <span>{{bemInfoData.customer}}</span>
+    </div>
+    <div>
+        <span>省份/城市/区县</span>
+        <span>
+            <span *ngIf="bemInfoData.Country">{{bemInfoData.Country === 'CN'? '中国': ''}}</span>
+            <span *ngIf="bemInfoData.provinceCode"> / {{bemInfoData.provinceCode | codeTranslateProvince}}</span>
+            <span *ngIf="bemInfoData.cityCode"> /
+                {{bemInfoData.cityCode | codeTranslateCity: bemInfoData.provinceCode }}</span>
+            <span *ngIf="bemInfoData.districtCode"> /
+                {{bemInfoData.districtCode | codeTranslateDistrict: [bemInfoData.provinceCode, bemInfoData.cityCode]}}</span>
+        </span>
+    </div>
+    <div>
+        <span>itemId</span>
+        <span>{{bemInfoData.itemId}}</span>
+    </div>
+    <div>
+        <span>计算公式</span>
+        <span>{{bemInfoData.formula}}</span>
+    </div>
+    <div>
+        <span>上传公式</span>
+        <span>{{bemInfoData.formulaAlert}}</span>
+    </div>
+    <div>
+        <span>报警公式</span>
+        <span>{{bemInfoData.formulaUpload}}</span>
+    </div>
+    <div>
+        <span>报警内容</span>
+        <span>{{bemInfoData.metricDesc}}({{bemInfoData.orgmetric}})</span>
+    </div>
+    <div>
+        <span>报警时间</span>
+        <span>{{bemInfoData.timeStr}}</span>
+    </div>
+    <div>
+        <span>报警设备编号</span>
+        <span>{{bemInfoData.device}}</span>
+    </div>
+    <div>
+        <span>报警设备</span>
+        <span>{{bemInfoData.devName}}</span>
+    </div>
+    <div>
+        <span>报警位置</span>
+        <span>
+            <span *ngIf="bemInfoData.building">{{bemInfoData.building}}</span>
+            <span *ngIf="bemInfoData.floor"> - {{bemInfoData.floor}}</span>
+            <span *ngIf="bemInfoData.zone"> - {{bemInfoData.zone}}</span>
+            <span *ngIf="bemInfoData.spacePos"> - {{bemInfoData.spacePos}}</span>
+        </span>
+    </div>
+    <div>
+        <span>设备重要性等级</span>
+        <span>{{bemInfoData.levelName}}</span>
+    </div>
+    <div>
+        <span>报警首次产生时间</span>
+        <span>{{bemInfoData.firstTimeStr}}</span>
+    </div>
+    <div>
+        <span>持续时间</span>
+        <span>{{getTime()}}</span>
+    </div>
+    <div>
+        <span>派单状态</span>
+        <span>{{bemInfoData.orderState | stateTypeTranslate}}</span>
+    </div>
+    <div class="btnList">
+        <button *ngIf="bemInfoData.orderState === -1" mat-button (click)="gotoAdd()"><span class="iconfont iconpstep"></span>派单</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

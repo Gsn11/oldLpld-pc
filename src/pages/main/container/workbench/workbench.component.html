@@ -1,0 +1,281 @@
+<div class="workbenchContainer">
+    <div class="bar1">
+        <div class="box1">
+            <div class="box-head">
+                <div class="icon">
+                    <img src="../../../../assets/workbench/toBeDone.png" alt="">
+                </div>
+                <div class="head-con">
+                    <p>
+                        我的待办
+                        <span class="corner-marker">{{todoData.total}}</span>
+                    </p>
+                    <div></div>
+                </div>
+            </div>
+            <div style="margin-bottom: 20px;background: #fff;">
+                <div class="tab">
+                    <div (click)="todoType = 1" [ngClass]="{'on': todoType == 1}">待审核（{{todoData.dshXJ + todoData.dshWX + todoData.dshBY}}）</div>
+                    <div (click)="todoType = 2"  [ngClass]="{'on': todoType == 2}">待评价（{{todoData.dpjXJ + todoData.dpjWX + todoData.dpjBY}}）</div>
+                </div>
+                <div class="data" *ngIf="todoType == 1">
+                    <div (click)="goPage('db-dsh-xj')">
+                        <p>{{todoData.dshXJ}}</p>
+                        <span>巡检</span>
+                    </div>
+                    <div (click)="goPage('db-dsh-wx')">
+                        <p>{{todoData.dshWX}}</p>
+                        <span>维修</span>
+                    </div>
+                    <div (click)="goPage('db-dsh-by')">
+                        <p>{{todoData.dshBY}}</p>
+                        <span>保养</span>
+                    </div>
+                </div>
+                <div class="data" *ngIf="todoType == 2">
+                    <div (click)="goPage('db-dsh-xj')">
+                        <p>{{todoData.dpjXJ}}</p>
+                        <span>巡检</span>
+                    </div>
+                    <div (click)="goPage('db-dsh-wx')">
+                        <p>{{todoData.dpjWX}}</p>
+                        <span>维修</span>
+                    </div>
+                    <div (click)="goPage('db-dsh-by')">
+                        <p>{{todoData.dpjBY}}</p>
+                        <span>保养</span>
+                    </div>
+                </div>
+            </div>
+            <div class="box-head">
+                <div class="icon">
+                    <img src="../../../../assets/workbench/operationPlan.png" alt="">
+                </div>
+                <div class="head-con">
+                    <p>本周运维计划</p>
+                    <div></div>
+                </div>
+            </div>
+            <div>
+                <div class="data">
+                    <div (click)="goPage('yy-xj', null)">
+                        <p>{{devOpsPlanData.xj}}</p>
+                        <span>巡检</span>
+                    </div>
+                    <div (click)="goPage('yy-wx', null)">
+                        <p>{{devOpsPlanData.wx}}</p>
+                        <span>维修</span>
+                    </div>
+                    <div (click)="goPage('yy-by', null)">
+                        <p>{{devOpsPlanData.by}}</p>
+                        <span>保养</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box2">
+            <div class="box-head">
+                <div class="icon">
+                    <img src="../../../../assets/workbench/inspection.png" alt="">
+                </div>
+                <div class="head-con">
+                    <p>自动巡检</p>
+                    <div></div>
+                </div>
+            </div>
+
+            <div class="con">
+                <div class="annular">
+                    <div class="square">
+                        <div class="bg-fff"></div>
+                        <img src="../../../../assets/workbench/square.png" />
+                    </div>
+                    <div class="main" (click)="goPage('AIOT-xj', null)">
+                        <div class="txt">
+                            <p>
+                                <span style="color: #2196F3;">{{AIOTData.WorkingTotal}}</span>/{{AIOTData.Total}}
+                            </p>
+                            <p>启动/总数</p>
+                        </div>
+                        <div echarts [options]="pieInspection" style="height:100%; width:100% "></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="box3">
+            <div class="box-head">
+                <div class="icon">
+                    <img src="../../../../assets/workbench/deviceStatus.png" alt="">
+                </div>
+                <div class="head-con">
+                    <p>设备状态</p>
+                    <div></div>
+                </div>
+            </div>
+
+
+            <div class="con">
+                <div class="annular">
+                    <div class="square">
+                        <div class="bg-fff"></div>
+                        <img src="../../../../assets/workbench/square.png" />
+                    </div>
+                    <div class="main" (click)="goPage('sbzt-zs', null)">
+                        <div class="txt">
+                            <p>
+                                <span style="color: #13B5B1;">{{deviceStateData.OnlineDevices}}</span>/{{deviceStateData.TotalDevices}}
+                            </p>
+                            <p>在线/总数</p>
+                        </div>
+                        <div echarts [options]="pieDeviceAll" style="height:100%; width:100% "></div>
+                    </div>
+                </div>
+                <div class="annular">
+                    <div class="square">
+                        <div class="bg-fff"></div>
+                        <img src="../../../../assets/workbench/square.png" />
+                    </div>
+                    <div class="main" (click)="goPage('sbzt-cs', null)">
+                        <div class="txt">
+                            <p>
+                                <span style="color: #EC6941;">{{deviceStateData.OverDevices}}</span>台
+                            </p>
+                            <p>维保超时</p>
+                        </div>
+                        <div echarts [options]="pieDeviceOvertime" style="height:100%; width:100% "></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="bar2">
+        <div class="box1">
+            <div class="box-head">
+                <div class="icon">
+                    <img src="../../../../assets/workbench/operationAndMaintenanceQuality.png" alt="">
+                </div>
+                <div class="head-con">
+                    <p>运维质量</p>
+                    <div>
+                        <mat-radio-group (change)="devOpsQuality()" [(ngModel)]="operationAndMaintenanceCheck">
+                            <mat-radio-button *ngFor="let item of checkList" [value]="item.value">{{item.name}}</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </div>
+            <div class="table-w">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <!-- 服务分联排联调才有 -->
+                            <!-- <th>服务分</th>  -->
+                            <th>及时率</th>
+                            <th>完成率</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of devOpsQualityList">
+                            <td>{{item.TeamName}}</td>
+                            <!-- 服务分联排联调才有 -->
+                            <!-- <td>{{item.Score}}</td> -->
+                            <td>{{item.InTimePer}}</td>
+                            <td>{{item.FinishPer}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="box2">
+            <div class="box-head">
+                <div class="icon">
+                    <img src="../../../../assets/workbench/workData.png" alt="">
+                </div>
+                <div class="head-con">
+                    <p>工单数据</p>
+                    <div>
+                        <mat-radio-group (change)="getWorkData()" [(ngModel)]="workDataCheck">
+                            <mat-radio-button *ngFor="let item of checkList" [value]="item.value">{{item.name}}</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </div>
+            <div class="table-w">
+                <table>
+                    <thead>
+                        <tr (click)="goPage('gdsj', null)">
+                            <th></th>
+                            <th>巡检</th>
+                            <th>保养</th>
+                            <th>维修</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let item of workDataList">
+                            <td>{{item.name}}</td>
+                            <td (click)="goPage('gdsj', 'xj')">{{item.value2}}</td>
+                            <td (click)="goPage('gdsj', 'by')">{{item.value3}}</td>
+                            <td (click)="goPage('gdsj', 'wx')">{{item.value1}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="box3">
+            <div class="box-head">
+                <div class="icon">
+                    <img src="../../../../assets/workbench/operationAndMaintenanceSchedule.png" alt="">
+                </div>
+                <div class="head-con">
+                    <p>运维日程（<span class="date">{{todyTime}}</span>）</p>
+                    <div>
+                        <mat-radio-group (change)="getDevOpsSchedule()" [(ngModel)]="operationAndMaintenanceDateCheck">
+                            <mat-radio-button [value]="'0,4'">巡检</mat-radio-button>
+                            <mat-radio-button [value]="'1'">保养</mat-radio-button>
+                            <mat-radio-button [value]="'2,3'">维修</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+            </div>
+            <div class="table-w">
+                <table>
+                    <tbody>
+                        <tr *ngFor="let item of devOpsScheduleData" (click)="goPage('ywrc', item)">
+                            <td>{{item.MsTime}}</td>
+                            <td style="white-space: nowrap">{{item.MsName}}</td>
+                            <td style="white-space: nowrap">{{item.UName}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="bar3">
+        <div class="box-head">
+            <div class="icon">
+                <img src="../../../../assets/workbench/note.png" alt="">
+            </div>
+            <div class="head-con">
+                <p>通知公告</p>
+                <div></div>
+            </div>
+        </div>
+        <div class="table-w">
+            <table>
+                <tbody>
+                    <tr *ngFor="let item of messageList" (click)="goPage('gg')">
+                        <td>{{item.time.split(' ')[0]}}</td>
+                        <td>
+                            {{item.title}}
+                            <!-- <div class="top">置顶</div> -->
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

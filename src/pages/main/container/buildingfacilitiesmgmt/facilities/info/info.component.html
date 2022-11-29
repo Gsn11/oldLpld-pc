@@ -1,0 +1,93 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>设施名称</span>
+        <span>{{bemInfoData.Name}}</span>
+    </div>
+    <div>
+        <span>{{'BUDesc' | detailsTranslate}}</span>
+        <span>{{bemInfoData.BUDesc}}</span>
+    </div>
+    <div>
+        <span>{{'BuildGroups' | detailsTranslate}}</span>
+        <span>{{BuildGroups}}</span>
+    </div>
+    <div>
+        <span>归属区域</span>
+        <span>{{Subjection}}</span>
+    </div>
+    <div>
+        <span>状态</span>
+        <span>{{bemInfoData.Stat | statTranslate}}</span>
+    </div>
+    <div>
+        <span>联系电话</span>
+        <span>{{bemInfoData.Tel}}</span>
+    </div>
+    <div>
+        <span>行政区</span>
+        <span>
+            <span>{{bemInfoData.Country === 'CN'? '中国': ''}}</span>
+            <span *ngIf="bemInfoData.ProvinceCode">{{bemInfoData.ProvinceCode | codeTranslateProvince}}</span>
+            <span *ngIf="bemInfoData.CityCode"> / {{bemInfoData.CityCode | codeTranslateCity: bemInfoData.ProvinceCode }}</span>
+            <span *ngIf="bemInfoData.DistrictCode"> / {{bemInfoData.DistrictCode | codeTranslateDistrict: [bemInfoData.ProvinceCode, bemInfoData.CityCode]}}</span>
+        </span>
+    </div>
+    <div>
+        <span>地址</span>
+        <span>{{bemInfoData.Addr}}</span>
+    </div>
+    <div>
+        <span>总投资（万元）</span>
+        <span>{{bemInfoData.InvestCapital}}</span>
+    </div>
+    <div>
+        <span>规模（座 / 台）</span>
+        <span>{{bemInfoData.Scale}}</span>
+    </div>
+    <div>
+        <span>开工日期</span>
+        <span>{{bemInfoData.BuildingTime}}</span>
+    </div>
+    <div>
+        <span>完工日期</span>
+        <span>{{bemInfoData.BuildEnd}}</span>
+    </div>
+    <div>
+        <span>保修截止日期</span>
+        <span>{{bemInfoData.WarrantyEnd}}</span>
+    </div>
+    <div>
+        <span>建设方</span>
+        <span>{{bemInfoData.ConstructCompany}}</span>
+    </div>
+    <div>
+        <span>施工方</span>
+        <span>{{bemInfoData.BuildCompany}}</span>
+    </div>
+    <div>
+        <span>监理方</span>
+        <span>{{bemInfoData.SuperVisor}}</span>
+    </div>
+    <div>
+        <span>设计方</span>
+        <span>{{bemInfoData.DesignCompany}}</span>
+    </div>
+    <div>
+        <span>设施简介</span>
+        <span>{{bemInfoData.BDesc}}</span>
+    </div>
+    <div>
+        <div id='container' style='width:100%; height:200px;'></div>
+    </div>
+    <div>
+        <span>设施图片</span>
+        <app-manyfile [setImgsrcData]="imgsrcData" [setType]="manyFileUseType"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoEdit()" *ngIf="userPower"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()" *ngIf="userPower"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

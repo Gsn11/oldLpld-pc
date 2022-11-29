@@ -1,0 +1,3 @@
+<div class="bar">
+    <span *ngFor="let c of crumbs, let cIndex = index" (click)="gotoLink(cIndex)" [ngClass]="{'isClick': c.open === true}">{{c.name}}</span>
+</div>

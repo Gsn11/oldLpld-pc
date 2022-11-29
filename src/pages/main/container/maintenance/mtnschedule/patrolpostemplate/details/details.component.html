@@ -1,0 +1,39 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span><span style="color: red;">*</span> 模版名称</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入模版名称" [(ngModel)]="MTName">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>模板条目</span>
+        <button mat-raised-button color="primary" style="margin-right: 10px;" class="loginBtn" (click)="openBuildDialog()">空间位置</button>
+        <button mat-raised-button color="primary" class="loginBtn" (click)="addItem()">新增</button>
+    </div>
+    <mat-card>
+        <div class="template">
+            <div><span>设施位置</span></div>
+            <div><span>条目</span></div>
+            <div><span>反馈类型</span></div>
+            <div><span>操作</span></div>
+        </div>
+    </mat-card>
+
+    <mat-card *ngFor="let i of Items, let iIndex = index">
+        <div class="template">
+            <div><span *ngIf="i.CName">{{i.CName}} ({{i.BuildingName}}) - {{i.Zone}} - {{i.SpacePos}}</span></div>
+            <div><span>{{i.Item}}</span></div>
+            <div><span>{{i.FeedbackType | feedbacktypeTranslate}}</span></div>
+            <div>
+                <span class="editItem" (click)="editItem(iIndex)">编辑</span>
+                <span class="deleteItem" (click)="deleteItem(iIndex)">删除</span>
+            </div>
+        </div>
+    </mat-card>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-modal [Items]="Items"></app-modal>

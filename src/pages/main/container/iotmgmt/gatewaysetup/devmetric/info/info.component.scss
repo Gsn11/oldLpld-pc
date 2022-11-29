@@ -1,0 +1,45 @@
+
+.detailOut {
+    margin:20px 35px 50px;
+    padding: 25px;
+    background: white;
+    box-shadow:0px 0px 10px 0px rgba(11,7,8,0.1);
+    >div {
+        margin-bottom: 30px;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        >span {
+            font-size: 16px;
+            &:first-child {
+                padding-right: 10px;
+                min-width: 210px;
+                color: #626262;
+            }
+            &:last-child {
+                width: 100%;
+                color: #0152AD;
+            }
+        }
+    }
+    .btnList {
+        justify-content: center;
+        >button {
+            margin: 0 35px;
+            .iconfont {
+                padding-right: 5px;
+            }
+            &:nth-child(1) {
+                color: white;
+                background: #10A0F6;
+            }
+            &:nth-child(3) {
+                background: #EEEEEE;
+            }
+            &:nth-child(2) {
+                color: #FF0000;
+                background: rgba(255,0,0,0.1);;
+            }
+        }
+    }
+}

@@ -1,0 +1,37 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>角色名称</span>
+        <span>{{bemInfoData.RoleName}}</span>
+    </div>
+    <div>
+        <span>角色说明</span>
+        <span>{{bemInfoData.RoleDesc}}</span>
+    </div>
+    <div>
+        <span>功能权限</span>
+        <div>
+            <app-tree class="treeList" [List]="userPowerList" [allSwitchIsOpen]="allSwitchIsOpen"
+                (setTreeChange)="powerTreeChange($event)"></app-tree>
+        </div>
+    </div>
+    <div>
+        <span>菜单权限</span>
+        <div>
+            <app-tree class="treeList" [List]="userMenuList" [allSwitchIsOpen]="allSwitchIsOpen"
+                (setTreeChange)="menuTreeChange($event)"></app-tree>
+        </div>
+    </div>
+    <div>
+        <span>移动端权限</span>
+        <div>
+            <span *ngFor="let m of this.mpower" style="padding: 10px 0;display: block;">{{m}}</span>
+        </div>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoEdit()"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

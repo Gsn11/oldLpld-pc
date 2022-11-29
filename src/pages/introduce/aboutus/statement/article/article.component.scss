@@ -1,0 +1,31 @@
+.wlyIntroduce {
+  background: #ffffff;
+  .main {
+    margin: 0 auto;
+    width: 910px;
+    .title {
+      padding: 30px 0;
+      text-align: center;
+      >span {
+        font-size: 32px;
+      }
+    }
+    p {
+      line-height: 28px;
+      font-size: 16px;
+      color: rgb(100,100,100);
+    }
+    >div {
+      padding-top: 35px;
+      font-size: 16px;
+      color: rgb(100,100,100);
+      span {
+        line-height: 28px;
+        display: block;
+        &:nth-child(1) {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+<div class="bg">
+  <div class="topMenu">
+    <div class="rightList">
+      <div class="wlyIntroduce" (click)="goWlyIntroducePage()">
+        <span class="icon iconfont home"></span> 万楼云简介
+      </div>
+      <div class="info">
+        <span class="icon iconfont iconmsg"></span> 售前咨询
+      </div>
+      <div class="phone">
+        <span class="icon iconfont iconserver"></span> 售后客服 400 0039 395
+      </div>
+    </div>
+  </div>
+
+  <div class="regsiterBox">
+    <div class="errorInfo" *ngIf="isError && errorMsg">
+      <span>{{errorMsg}}</span>
+      <span class="result" (click)="hiddenErrorBox()">确定</span>
+    </div>
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput placeholder="请输入企业登录名" [formControl]="LoginId" required>
+        <mat-error *ngIf="LoginId.invalid">{{getLoginIdErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="请输入企业名称" [formControl]="Name" required>
+        <mat-error *ngIf="Name.invalid">{{getNameErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="请输入企业地址" [(ngModel)]="Addr">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="请输入联系人" [formControl]="LegalPerson" required>
+        <mat-error *ngIf="LegalPerson.invalid">{{getLegalPersonErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput placeholder="联系电话" [formControl]="Tel" maxlength="11" (keyup)="telChanger()" required>
+        <mat-error *ngIf="Tel.invalid">{{getTelErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+          <input matInput placeholder="请输入推荐企业码" [(ngModel)]="ReffererCode">
+      </mat-form-field>
+      <div class="regsiterInfo">
+        <span>请完整填写本表格，我司客服人员将在5个工作日与您联系</span>
+      </div>
+    </div>
+    <button mat-raised-button color="primary" class="regsiterBtn" [disabled]="checkIsSetInformation" (click)="gotoPlant()">确认提交</button>
+    <div class="registerBtn"><span (click)="gotoLogin()">已有账号，去登录</span></div>
+  </div>
+</div>

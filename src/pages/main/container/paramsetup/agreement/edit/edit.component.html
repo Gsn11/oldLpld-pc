@@ -1,0 +1,25 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span><span style="color: red;">*</span> 协议类型</span>
+        <mat-form-field>
+            <mat-label>请选择协议类型</mat-label>
+            <mat-select [formControl]="SelectAgreementType">
+                <mat-option *ngFor="let a of AgreementType" [value]="a.type">
+                    {{a.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 协议标题</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入协议标题" [(ngModel)]="Title">
+        </mat-form-field>
+    </div>
+    <quill-editor [placeholder]="'请输入协议内容'" [(ngModel)]="htmlString"></quill-editor>
+    <div style="margin-top: 30px;" class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span *ngIf="buildData.buildType === '联排联调'"><span style="color: red;">*</span> {{'BuildingName' | wordTranslate}}</span>
+        <span *ngIf="buildData.buildType === '东南水厂'"><span style="color: red;">*</span> 功能位置</span>
+        <mat-form-field>
+            <mat-label>请选择{{'BuildingName' | wordTranslate}}</mat-label>
+            <mat-select [formControl]="SelectBuildings">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let b of Buildings" [value]="b.Seq">
+                    {{b.CustomerName}}({{b.Name}})
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="buildData.buildType === '联排联调'">
+        <span>所在楼层</span>
+        <mat-form-field class="example-full-width">
+            <input type="number" matInput placeholder="请输入所在楼层" [(ngModel)]="Floor">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>{{buildData.buildType === '联排联调' ? '所在楼层的区域/房间' : '安装地点'}}</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="例如：602，A区，2梯等" [(ngModel)]="Zone">
+        </mat-form-field>
+    </div>
+    <div *ngIf="buildData.buildType === '联排联调'">
+        <span>所在区域/房间的空间位置</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="例如：壁橱，吊顶，弱电井等" [(ngModel)]="SpacePos">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>空间位置图片</span>
+        <app-manyfile [setImgsrcData]="imgsrcData"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

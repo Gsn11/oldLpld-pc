@@ -1,0 +1,115 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span><span style="color: red;">*</span> 登录名</span>
+        <span *ngIf="pageType === 'edit'">{{LoginId}}</span>
+        <mat-form-field *ngIf="pageType !== 'edit'" class="example-full-width">
+            <input matInput placeholder="请输入登录名" [(ngModel)]="LoginId">
+        </mat-form-field>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 姓名</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入姓名" [(ngModel)]="Name">
+        </mat-form-field>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 手机号</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入手机号" [(ngModel)]="Tel" maxlength="11">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>紧急联系人</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入紧急联系人" [(ngModel)]="emergencyContact" maxlength="11">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>紧急联系电话</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入紧急联系电话" [(ngModel)]="emergencyTel" maxlength="11">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>Email</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入Email" [(ngModel)]="Email">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>性别</span>
+        <mat-form-field>
+            <mat-label>选择性别</mat-label>
+            <mat-select [formControl]="SelectSex">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let s of Sex" [value]="s.state">
+                    {{s.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <span>超级管理员</span>
+        <div>
+            <mat-slide-toggle [checked]="adminChecked" (toggleChange)="adminToggleChange()">是</mat-slide-toggle>
+        </div>
+    </div>
+    <div>
+        <span>上级领导</span>
+        <div>
+            <span (click)="openUserModelDialog()" class="chooseName">
+                {{ChooseUserName}}
+            </span>
+        </div>
+    </div>
+    <div>
+        <span>角色</span>
+        <mat-form-field class="select-out">
+            <mat-select placeholder="请选择角色" [formControl]="SelectRole" multiple>
+                <mat-option *ngFor="let r of Role" [value]="r.RoleSeq">{{r.RoleName}} - {{r.RoleDesc}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <app-job [userJob]="userJob"></app-job>
+    <div>
+        <span>归属区域</span>
+        <mat-form-field>
+            <mat-label>请选择归属区域</mat-label>
+            <mat-select [formControl]="SelectSubjections" multiple>
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let s of Subjections" [value]="s.Seq">
+                    {{s.SubjectionId}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <span>维客</span>
+        <div>
+            <mat-slide-toggle [checked]="wkChecked" (toggleChange)="wkToggleChange()">是</mat-slide-toggle>
+        </div>
+    </div>
+    <div *ngIf="wkChecked === true">
+        <span>擅长系统分类</span>
+        <mat-form-field class="select-out">
+            <mat-select placeholder="请选择擅长系统分类" [formControl]="SelectBusiDomains" multiple>
+                <mat-option *ngFor="let b of BusiDomains" [value]="b.Seq">{{b.SName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <app-servicezoom *ngIf="wkChecked === true" [pageType]="pageType" [regionChooseList]="regionChooseList">
+    </app-servicezoom>
+    <div *ngIf="wkChecked === true">
+        <span>服务响应时间</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入服务响应时间" [(ngModel)]="ResponseTime">
+        </mat-form-field>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

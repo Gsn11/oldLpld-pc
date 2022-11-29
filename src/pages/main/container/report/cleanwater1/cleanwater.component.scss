@@ -1,0 +1,172 @@
+@import '../../../../common/utils/css/flex.css';
+*{
+  box-sizing: border-box;
+}
+
+.tit{
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+  color: #333;
+}
+::ng-deep .ant-table-small.ant-table-bordered .ant-table-title{
+  text-align: center;
+ }
+.parent-row >div input{
+  width: 95%;
+  height: 95%;
+  border: 0;
+  text-align: center;
+  font-size: 14px;
+}
+.inputClass{
+  width: 100% !important;
+  height: 100% !important;
+  border: 0 !important;
+  border-top:2px solid #221e1e !important;
+  border-bottom:3px solid #221e1e !important;
+}
+.inputClass:first-child{
+  border-left:2px solid #221e1e !important;
+}
+.Box::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width : 15px;  /*高宽分别对应横竖滚动条的尺寸*/
+  height: 15px;
+}
+.Box::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 10px;
+  box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background   : #535353;
+}
+.Box::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  box-shadow   : inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background   : #ededed;
+}
+.table{
+  border: 1px solid #221e1e;
+  border-bottom: none;
+
+  .parent-row{
+    padding: 0 !important;
+    font-size: 14px;
+    & > div{
+      overflow: hidden;
+      position: relative;
+      &::before{
+        content: '';
+        display: block;
+        position: absolute;
+        right: 0;
+        width: 1px;
+        top: 0;
+        bottom: 0;
+        background-color: #221e1e;
+      }
+      &:last-child{
+        border: none;
+      }
+    }
+  }
+
+  .parent-column{
+    padding: 0 !important;
+    & > div{
+      overflow: hidden;
+      position: relative;
+      &::before{
+        content: '';
+        display: block;
+        position: absolute;
+        right: 0;
+        height: 1px;
+        left: 0;
+        bottom: 0;
+        background-color: #221e1e;
+      }
+      &:last-child{
+        border: none;
+      }
+    }
+  }
+
+  .table-c div{
+    p {
+      margin: 5px;
+    }
+  }
+
+  .other div p{
+    padding: 10px 5px;
+    margin: 0;
+  }
+} 
+.table > div{
+  position: relative;
+  &::before{
+    content: '';
+    display: block;
+    position: absolute;
+    right: 0;
+    height: 1px;
+    left: 0;
+    bottom: 0;
+    background-color: #221e1e;
+  }
+  text-align: center;
+  
+  & > div{
+    overflow: hidden;
+    flex-shrink: 0;
+    position: relative;
+    &::before{
+      content: '';
+      display: block;
+      position: absolute;
+      right: 0;
+      width: 1px;
+      top: 0;
+      bottom: 0;
+      background-color: #221e1e;
+    }
+  }
+}
+.windowBox{
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 3;
+  background: rgba($color: #000000, $alpha: 0.5);
+}
+.window{
+  width: 300px;
+  height: 150px;
+  position: fixed;
+  left: 50%;
+  margin-left: -150px;
+  top: 50%;
+  margin-top: -75px;
+  background-color: #fff;
+  border-radius: 15px;
+  z-index: 3;
+}
+.windowPadd{
+  padding: 30px;
+}
+.windowPadd>div{
+  display: flex;
+  align-items: center;
+}
+.windowPadd>div>input{
+  width: 160px;
+  border: 1px solid #ccc;
+}
+.windowPadd>button{
+  margin-top: 30px;
+  margin-left: 40px;
+}

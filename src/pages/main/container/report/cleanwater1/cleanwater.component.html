@@ -1,0 +1,700 @@
+<!-- <app-crumbs [crumbs]="crumbsList"></app-crumbs> -->
+<div class="containerPadding">
+	<!-- <app-valuerange [value]="[1, 2]" [showValuerange]="showValuerange" (confirm)="valueRangeConfirm($event)"></app-valuerange> -->
+	<div class="mat-elevation-z8" style="margin: 20px; background-color: #fff; padding: 20px;">
+		<mat-form-field>
+			<mat-label>日期</mat-label>
+			<mat-select [formControl]="selectDate" (selectionChange)="changeDate($event)">
+				<mat-option *ngFor="let s of ['今日', '昨日']" [value]="s">
+					{{s}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<p>{{selectDataVal}}</p>
+		
+		<p class="tit">净水工艺报表1</p>
+		<div class="Box" style="width: 100%; overflow-x: scroll;height:660px">
+			<div style="width: 7000px;" flex="dir:top" class="table">
+				<div class="table-hd parent-row" flex>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">时间</div>
+					</div>
+					<div style="flex: 2;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">高密池A池进水量</div>
+						<div style="flex: 5;" flex class="parent-row">
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数（m³）</div>
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">水量(m³)<br/>＜2500m³</div>
+						</div>
+					</div>
+					<div style="flex: 2;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">高密池B池进水量</div>
+						<div style="flex: 5;" flex class="parent-row">
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数（m³）</div>
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">水量(m³)<br/>＜2500m³</div>
+						</div>
+					</div>
+					<div style="flex: 2;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">高密池C池进水量</div>
+						<div style="flex: 5;" flex class="parent-row">
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数（m³）</div>
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">水量(m³)<br/>＜2500m³</div>
+						</div>
+					</div>
+					<div style="flex: 1;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">高密池<br/>进水量(m³)<br/>＜7500m³</div>
+					</div>
+					<div style="flex: 1;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">原水量读<br/>数(m³)</div>
+					</div>
+					<div style="flex: 1;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">原水量(m³)<br/>＜7500m³</div>
+					</div>
+					<div style="flex: 6;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">溶液池</div>
+						<div style="flex: 5;" flex class="parent-row">
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">A池</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">药包</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">浓度(‰）<br/>≤100</div>
+									<div style="flex: 1; padding: 5px;">液位<br/>（m）<br/>＜1.75m</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">B池</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">药包</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">浓度(‰）<br/>≤100</div>
+									<div style="flex: 1; padding: 5px;">液位<br/>（m）<br/>＜1.75m</div>
+								</div>
+							</div>
+						</div>
+					</div><div style="flex: 1;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">混凝剂<br/>PAC<br/>使用量(kg)</div>
+					</div>
+					<div style="flex: 3;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">高密池A池加药量（PAC）</div>
+						<div style="flex: 5;" flex class="parent-row">
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数<br/>（m³）</div>
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">药量<br/>(kg)</div>
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">投率<br/>(kg/kt)<br/>＜7</div>
+						</div>
+					</div>
+					<div style="flex: 3;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">高密池B池加药量（PAC）</div>
+						<div style="flex: 5;" flex class="parent-row">
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数<br/>（m³）</div>
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">药量<br/>(kg)</div>
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">投率<br/>(kg/kt)<br/>＜7</div>
+						</div>
+					</div>
+					<div style="flex: 3;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">高密池C池加药量（PAC）</div>
+						<div style="flex: 5;" flex class="parent-row">
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数<br/>（m³）</div>
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">药量<br/>(kg)</div>
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">投率<br/>(kg/kt)<br/>＜7</div>
+						</div>
+					</div>
+					<div style="flex: 3;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">高密池后混合池加药量（PAC）</div>
+						<div style="flex: 5;" flex class="parent-row">
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数<br/>（m³）</div>
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">药量<br/>(kg)</div>
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">投率<br/>(kg/kt)<br/>＜0.5</div>
+						</div>
+					</div>
+					<div style="flex: 1;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">混凝剂（PAC）<br/>单耗（原水)<br/>(kg/kt)<br/>≤7.5</div>
+					</div>
+					<div style="flex: 1;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">混凝剂（PAC）<br/>单耗<br/>(清水)<br/>(kg/kt)<br/>≤7.5</div>
+					</div>
+					<div style="flex: 1;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">助凝剂（PAM）<br/>浓度<br/>(‰)<br/>≤1<br/></div>
+					</div>
+					<div style="flex: 9;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">助凝剂加药泵流量(PAM)</div>
+						<div style="flex: 5;" flex class="parent-row">
+							<div style="flex: 1;" class="parent-column" flex="dir:top">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">高密池A池</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">累积流量<br/>(m³)</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">药量(kg)</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">投率<br/>(kg/kt)<br/>≤0.05</div>
+								</div>
+							</div>
+							<div style="flex: 1;" class="parent-column" flex="dir:top">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">高密池B池</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">累积流量<br/>(m³)</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">药量(kg)</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">投率<br/>(kg/kt)<br/>≤0.05</div>
+								</div>
+							</div>
+							<div style="flex: 1;" class="parent-column" flex="dir:top">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">高密池C池</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">累积流量<br/>(m³)</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">药量(kg)</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">投率<br/>(kg/kt)<br/>≤0.05</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="flex: 1;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">助凝剂(PAM)<br/>使用量<br/>(kg)</div>
+					</div>
+					<div style="flex: 1;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">助凝剂(PAM)<br/>单耗（原水)<br/>(kg/kt)<br/>≤0.05</div>
+					</div>
+					<div style="flex: 1;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">助凝剂(PAM)<br/>单耗(清水)<br/>(kg/kt)<br/>≤0.05</div>
+					</div>
+					<div style="flex: 9;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">次氯酸钠流量计累计流量</div>
+						<div style="flex: 5;" flex class="parent-row">
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">滤前加氯</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1;" flex="cross:center main:center">流量<br/>（m³）</div>
+									<div style="flex: 1;" flex="cross:center main:center">投率<br/>(kg/kt)<br/>≤5</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">中间加氯</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1;" flex="cross:center main:center">流量<br/>（m³）</div>
+									<div style="flex: 1;" flex="cross:center main:center">投率<br/>(kg/kt)<br/>≤15</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">滤后加氯</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1;" flex="cross:center main:center">流量<br/>（m³）</div>
+									<div style="flex: 1;" flex="cross:center main:center">投率<br/>(kg/kt)<br/>≤15</div>
+								</div>
+							</div>
+							<div style="flex: 3;" flex="dir:top" class="parent-column">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">补氯</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1;" flex="cross:center main:center">东清水池流量<br/>（m³）</div>
+									<div style="flex: 1;" flex="cross:center main:center">西清水池流量<br/>（m³）</div>
+									<div style="flex: 1;" flex="cross:center main:center">投率<br/>(kg/kt)<br/>≤3</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="flex: 9;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">次氯酸钠储罐</div>
+						<div style="flex: 5;" flex class="parent-row">
+							<div style="flex: 3;" flex="dir:top" class="parent-column">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">1号</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1;" flex="cross:center main:center">液位(m)</div>
+									<div style="flex: 1;" flex="cross:center main:center">浓度</div>
+									<div style="flex: 1;" flex="cross:center main:center">重量(t)</div>
+								</div>
+							</div>
+							<div style="flex: 3;" flex="dir:top" class="parent-column">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">2号</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1;" flex="cross:center main:center">液位(m)</div>
+									<div style="flex: 1;" flex="cross:center main:center">浓度</div>
+									<div style="flex: 1;" flex="cross:center main:center">重量(t)</div>
+								</div>
+							</div>
+							<div style="flex: 3;" flex="dir:top" class="parent-column">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">3号</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1;" flex="cross:center main:center">液位(m)</div>
+									<div style="flex: 1;" flex="cross:center main:center">浓度</div>
+									<div style="flex: 1;" flex="cross:center main:center">重量(t)</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="flex: 1;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">助凝剂(PAM)<br/>使用量<br/>(kg)</div>
+					</div>
+					<div style="flex: 1;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">助凝剂(PAM)<br/>单耗（原水)<br/>(kg/kt)<br/>≤0.05</div>
+					</div>
+					<div style="flex: 1;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">助凝剂(PAM)<br/>单耗(清水)<br/>(kg/kt)<br/>≤0.05</div>
+					</div>
+				</div>
+				<div [ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff'}" *ngFor="let item of list;let i = index" class="table-c parent-row" flex (mouseover)="blurChangeOver(i)" (mouseleave)="blurChangeLeave()">
+					<div style="flex: 1;" >
+						<p>{{(i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 )? '小计' : i == 27 ? '总计' : ( i > 8 && i < 18  ) ? i-1 :  ( i > 17  ) ? i-2 : i }}</p>
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.inFollowNowA,'高密池A池进水量(读数（m³）)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.inFollowNowA == null?'#000':item.inFollowNowA.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.inFollowNowA == null ? '0' : item.inFollowNowA.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.inFollowCalA,'高密池A池进水量(水量(m³)＜2500m³)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.inFollowCalA == null?'#000':item.inFollowCalA.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.inFollowCalA == null ? '0' : item.inFollowCalA.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.inFollowNowB,'高密池B池进水量(读数（m³）)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.inFollowNowB == null?'#000':item.inFollowNowB.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.inFollowNowB == null ? '0' : item.inFollowNowB.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.inFollowCalB,'高密池B池进水量(水量(m³)＜2500m³)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.inFollowCalB == null?'#000':item.inFollowCalB.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.inFollowCalB == null ? '0' : item.inFollowCalB.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.inFollowNowC,'高密池C池进水量(读数（m³）)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.inFollowNowC == null?'#000':item.inFollowNowC.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.inFollowNowC == null ? '0' : item.inFollowNowC.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.inFollowCalC,'高密池C池进水量(水量(m³)＜2500m³)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.inFollowCalC == null?'#000':item.inFollowCalC.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.inFollowCalC == null ? '0' : item.inFollowCalC.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.inFollowCalTotal,'高密池进水量(m³)＜7500m³')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.inFollowCalTotal == null?'#000':item.inFollowCalTotal.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.inFollowCalTotal == null ? '0' : item.inFollowCalTotal.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.rawWaterVolNow,'原水量读数(m³)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.rawWaterVolNow == null?'#000':item.rawWaterVolNow.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.rawWaterVolNow == null ? '0' : item.rawWaterVolNow.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.rawWaterVolCal,'原水量(m³)＜7500m³')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.rawWaterVolCal == null?'#000':item.rawWaterVolCal.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.rawWaterVolCal == null ? '0' : item.rawWaterVolCal.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.meBagSolA,'溶液池(A池(药包)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.meBagSolA == null?'#000':item.meBagSolA.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.meBagSolA == null ? '0' : item.meBagSolA.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.conSolA,'溶液池(A池(浓度(‰）≤100))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.conSolA == null?'#000':item.conSolA.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.conSolA == null ? '0' : item.conSolA.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.levelSolA,'溶液池(A池(液位（m）＜1.75m)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.levelSolA == null?'#000':item.levelSolA.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.levelSolA == null ? '0' : item.levelSolA.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.meBagSolB,'溶液池(B池(药包)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.meBagSolB == null?'#000':item.meBagSolB.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.meBagSolB == null ? '0' : item.meBagSolB.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.conSolB,'溶液池((B池(浓度(‰）≤100))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.conSolB == null?'#000':item.conSolB.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.conSolB == null ? '0' : item.conSolB.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.levelSolB,'溶液池(B池(液位（m）＜1.75m)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.levelSolB == null?'#000':item.levelSolB.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.levelSolB == null ? '0' : item.levelSolB.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pacUsage,'混凝剂PAC使用量(kg)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pacUsage == null?'#000':item.pacUsage.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pacUsage == null ? '0' : item.pacUsage.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.dosagePacNowA,'高密池A池加药量（PAC）(读数（m³）)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.dosagePacNowA == null?'#000':item.dosagePacNowA.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.dosagePacNowA == null ? '0' : item.dosagePacNowA.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.dosagePacA,'高密池A池加药量（PAC）(药量(kg))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.dosagePacA == null?'#000':item.dosagePacA.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.dosagePacA == null ? '0' : item.dosagePacA.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pacRateA,'高密池A池加药量（PAC）(投率(kg/kt)＜7)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pacRateA == null?'#000':item.pacRateA.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pacRateA == null ? '0' : item.pacRateA.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.dosagePacNowB,'高密池B池加药量（PAC）(读数（m³）)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.dosagePacNowB == null?'#000':item.dosagePacNowB.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.dosagePacNowB == null ? '0' : item.dosagePacNowB.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.dosagePacB,'高密池B池加药量（PAC）(药量(kg))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.dosagePacB == null?'#000':item.dosagePacB.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.dosagePacB == null ? '0' : item.dosagePacB.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pacRateB,'高密池B池加药量（PAC）(投率(kg/kt)＜7)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pacRateB == null?'#000':item.pacRateB.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pacRateB == null ? '0' : item.pacRateB.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.dosagePacNowC,'高密池C池加药量（PAC）(读数（m³）)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.dosagePacNowC == null?'#000':item.dosagePacNowC.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.dosagePacNowC == null ? '0' : item.dosagePacNowC.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.dosagePacC,'高密池C池加药量（PAC）(药量(kg))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.dosagePacC == null?'#000':item.dosagePacC.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.dosagePacC == null ? '0' : item.dosagePacC.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pacRateC,'高密池C池加药量（PAC）(投率(kg/kt)＜7)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pacRateC == null?'#000':item.pacRateC.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pacRateC == null ? '0' : item.pacRateC.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pacNowBlend,'高密池后混合池加药量（PAC）(读数（m³）)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pacNowBlend == null?'#000':item.pacNowBlend.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pacNowBlend == null ? '0' : item.pacNowBlend.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.dosagePacBlend,'高密池后混合池加药量（PAC）(药量(kg))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.dosagePacBlend == null?'#000':item.dosagePacBlend.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.dosagePacBlend == null ? '0' : item.dosagePacBlend.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pacRateBlend,'高密池后混合池加药量（PAC）(投率(kg/kt)＜7)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pacRateBlend == null?'#000':item.pacRateBlend.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pacRateBlend == null ? '0' : item.pacRateBlend.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pacUnitConRawWater,'混凝剂（PAC）单耗(原水)(kg/kt)≤7.5')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pacUnitConRawWater == null?'#000':item.pacUnitConRawWater.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pacUnitConRawWater == null ? '0' : item.pacUnitConRawWater.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pacUnitConClearWater,'混凝剂（PAC）单耗(清水)(kg/kt)≤7.5')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pacUnitConClearWater == null?'#000':item.pacUnitConClearWater.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pacUnitConClearWater == null ? '0' : item.pacUnitConClearWater.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pamCon,'助凝剂（PAM）浓度(‰)≤1')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pamCon == null?'#000':item.pamCon.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pamCon == null ? '0' : item.pamCon.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pamCumFlowA,'助凝剂加药泵流量(PAM)(高密池A池(累积流量(m³)))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pamCumFlowA == null?'#000':item.pamCumFlowA.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pamCumFlowA == null ? '0' : item.pamCumFlowA.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.dosagePamA,'助凝剂加药泵流量(PAM)(高密池A池(药量(kg)))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.dosagePamA == null?'#000':item.dosagePamA.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.dosagePamA == null ? '0' : item.dosagePamA.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pamRateA,'助凝剂加药泵流量(PAM)(高密池A池(投率(kg/kt)≤0.05))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pamRateA == null?'#000':item.pamRateA.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pamRateA == null ? '0' : item.pamRateA.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pamCumFlowB,'助凝剂加药泵流量(PAM)(高密池B池(累积流量(m³)))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pamCumFlowB == null?'#000':item.pamCumFlowB.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pamCumFlowB == null ? '0' : item.pamCumFlowB.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.dosagePamB,'助凝剂加药泵流量(PAM)(高密池B池(药量(kg)))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.dosagePamB == null?'#000':item.dosagePamB.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.dosagePamB == null ? '0' : item.dosagePamB.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pamRateB,'助凝剂加药泵流量(PAM)(高密池B池(投率(kg/kt)≤0.05))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pamRateB == null?'#000':item.pamRateB.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pamRateB == null ? '0' : item.pamRateB.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pamCumFlowC,'助凝剂加药泵流量(PAM)(高密池C池(累积流量(m³)))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pamCumFlowC == null?'#000':item.pamCumFlowC.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pamCumFlowC == null ? '0' : item.pamCumFlowC.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.dosagePamC,'助凝剂加药泵流量(PAM)(高密池C池(药量(kg)))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.dosagePamC == null?'#000':item.dosagePamC.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.dosagePamC == null ? '0' : item.dosagePamC.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pamRateC,'助凝剂加药泵流量(PAM)(高密池C池(投率(kg/kt)≤0.05))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pamRateC == null?'#000':item.pamRateC.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pamRateC == null ? '0' : item.pamRateC.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pamUsage,'助凝剂(PAM)使用量(kg)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pamUsage == null?'#000':item.pamUsage.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pamUsage == null ? '0' : item.pamUsage.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pamUnitConRawWater,'助凝剂(PAM)单耗(原水)(kg/kt)≤0.05')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pamUnitConRawWater == null?'#000':item.pamUnitConRawWater.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pamUnitConRawWater == null ? '0' : item.pamUnitConRawWater.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pamUnitConClearWater,'助凝剂(PAM)单耗(清水)(kg/kt)≤0.05')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pamUnitConClearWater == null?'#000':item.pamUnitConClearWater.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pamUnitConClearWater == null ? '0' : item.pamUnitConClearWater.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloFlowBefore,'次氯酸钠流量计累计流量(滤前加氯(流量（m³）))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloFlowBefore == null?'#000':item.naCloFlowBefore.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloFlowBefore == null ? '0' : item.naCloFlowBefore.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloRateBefore,'次氯酸钠流量计累计流量(滤前加氯(投率(kg/kt)≤5))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloRateBefore == null?'#000':item.naCloRateBefore.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloRateBefore == null ? '0' : item.naCloRateBefore.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloFlowBetween,'次氯酸钠流量计累计流量(中间加氯(流量（m³）))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloFlowBetween == null?'#000':item.naCloFlowBetween.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloFlowBetween == null ? '0' : item.naCloFlowBetween.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloRateBetween,'次氯酸钠流量计累计流量(中间加氯(投率(kg/kt)≤15))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloRateBetween == null?'#000':item.naCloRateBetween.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloRateBetween == null ? '0' : item.naCloRateBetween.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloFlowAfter,'次氯酸钠流量计累计流量(滤后加氯(流量（m³）))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloFlowAfter == null?'#000':item.naCloFlowAfter.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloFlowAfter == null ? '0' : item.naCloFlowAfter.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloRateAfter,'次氯酸钠流量计累计流量(滤后加氯(投率(kg/kt)≤15))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloRateAfter == null?'#000':item.naCloRateAfter.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloRateAfter == null ? '0' : item.naCloRateAfter.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloFlowSupEast,'次氯酸钠流量计累计流量(补氯(东清水池流量（m³）))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloFlowSupEast == null?'#000':item.naCloFlowSupEast.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloFlowSupEast == null ? '0' : item.naCloFlowSupEast.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloFlowSupWest,'次氯酸钠流量计累计流量(补氯(西清水池流量（m³）))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloFlowSupWest == null?'#000':item.naCloFlowSupWest.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloFlowSupWest == null ? '0' : item.naCloFlowSupWest.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloRateSup,'次氯酸钠流量计累计流量(补氯(投率(kg/kt)≤3))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloRateSup == null?'#000':item.naCloRateSup.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloRateSup == null ? '0' : item.naCloRateSup.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloLevelOne,'次氯酸钠储罐(1号(液位(m)))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloLevelOne == null?'#000':item.naCloLevelOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloLevelOne == null ? '0' : item.naCloLevelOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloConOne,'次氯酸钠储罐(1号(浓度))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloConOne == null?'#000':item.naCloConOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloConOne == null ? '0' : item.naCloConOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloWeightOne,'次氯酸钠储罐(1号(重量(t)))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloWeightOne == null?'#000':item.naCloWeightOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloWeightOne == null ? '0' : item.naCloWeightOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloLevelTwo,'次氯酸钠储罐(2号(液位(m)))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloLevelTwo == null?'#000':item.naCloLevelTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloLevelTwo == null ? '0' : item.naCloLevelTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloConTwo,'次氯酸钠储罐(2号(浓度))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloConTwo == null?'#000':item.naCloConTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloConTwo == null ? '0' : item.naCloConTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloWeightTwo,'次氯酸钠储罐(2号(重量(t)))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloWeightTwo == null?'#000':item.naCloWeightTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloWeightTwo == null ? '0' : item.naCloWeightTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloLevelThree,'次氯酸钠储罐(3号(液位(m)))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloLevelThree == null?'#000':item.naCloLevelThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloLevelThree == null ? '0' : item.naCloLevelThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloConThree,'次氯酸钠储罐(3号(浓度))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloConThree == null?'#000':item.naCloConThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloConThree == null ? '0' : item.naCloConThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloWeightThree,'次氯酸钠储罐(3号(重量(t)))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloWeightThree == null?'#000':item.naCloWeightThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloWeightThree == null ? '0' : item.naCloWeightThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloUsage,'助凝剂(PAM)使用量(kg)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloUsage == null?'#000':item.naCloUsage.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloUsage == null ? '0' : item.naCloUsage.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloUnitConRawWater,'助凝剂(PAM)单耗（原水)(kg/kt)≤0.05')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloUnitConRawWater == null?'#000':item.naCloUnitConRawWater.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloUnitConRawWater == null ? '0' : item.naCloUnitConRawWater.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.naCloUnitConClearWater,'助凝剂(PAM)单耗（清水)(kg/kt)≤0.05')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloUnitConClearWater == null?'#000':item.naCloUnitConClearWater.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.naCloUnitConClearWater == null ? '0' : item.naCloUnitConClearWater.value">
+					</div>
+				</div>
+				<div class="other parent-row" flex style="height: 250px;">
+					<div style="flex: 6;" class="table-hd parent-column" flex="dir:top">
+						<div style="flex: 3;" class="table-hd parent-row" flex>
+							<div style="flex: 1;" flex="cross:center main:justify">
+								<div style="flex: 1; text-align: center;">班次</div>
+							</div>
+							<div style="flex: 4;" flex="dir:top" class="parent-column">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">混凝剂</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">实际用量<br/>kg</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">实际单耗<br/>kg/kt</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">计划单耗<br/>kg/kt</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">节超单耗<br/>kg/kt</div>
+								</div>
+							</div>
+							<div style="flex: 4;" flex="dir:top" class="parent-column">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">助凝剂</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">实际用量<br/>kg</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">实际单耗<br/>kg/kt</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">计划单耗<br/>kg/kt</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">节超单耗<br/>kg/kt</div>
+								</div>
+							</div>
+							<div style="flex: 4;" flex="dir:top" class="parent-column">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">消毒剂</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">实际用量<br/>kg</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">实际单耗<br/>kg/kt</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">计划单耗<br/>kg/kt</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">节超单耗<br/>kg/kt</div>
+								</div>
+							</div>
+						</div>
+						<div style="flex: 1;" *ngFor="let item of shiftDetails;let i = index" class="table-c parent-row" flex >
+							<div style="flex: 1;" flex="cross:center main:center"><p>{{ i == 0 ? '早班' : i==1 ? '中班' : i == 2 ? '晚班' : '合计' }}</p></div>
+							<div style="flex: 1;" flex="cross:center main:center"><p>{{item.pacDosage.value}}</p></div>
+							<div style="flex: 1;" flex="cross:center main:center"><p>{{item.pacActualCon.value}}</p></div>
+							<div style="flex: 1;" flex="cross:center main:center"><p>{{item.pacPlanCon.value}}</p></div>
+							<div style="flex: 1;" flex="cross:center main:center"><p>{{item.pacMoreCon.value}}</p></div>
+							<div style="flex: 1;" flex="cross:center main:center"><p>{{item.pamDosage.value}}</p></div>
+							<div style="flex: 1;" flex="cross:center main:center"><p>{{item.pamActualCon.value}}</p></div>
+							<div style="flex: 1;" flex="cross:center main:center"><p>{{item.pamPlanCon.value}}</p></div>
+							<div style="flex: 1;" flex="cross:center main:center"><p>{{item.pamMoreCon.value}}</p></div>
+							<div style="flex: 1;" flex="cross:center main:center"><p>{{item.disDosage.value}}</p></div>
+							<div style="flex: 1;" flex="cross:center main:center"><p>{{item.disActualCon.value}}</p></div>
+							<div style="flex: 1;" flex="cross:center main:center"><p>{{item.disPlanCon.value}}</p></div>
+							<div style="flex: 1;" flex="cross:center main:center"><p>{{item.disMoreCon.value}}</p></div>
+						</div>
+					</div>
+					<div style="flex: 1;" class="parent-column" flex="dir:top">
+						<div style="flex: 1;" flex="cross:center main:center"><p>早班</p></div>
+						<div style="flex: 1;" flex="cross:center main:center"><p>中班</p></div>
+						<div style="flex: 1;" flex="cross:center main:center"><p>晚班</p></div>
+					</div>
+					<div style="flex: 2;" class="parent-column" flex="dir:top" *ngIf= " signOrExamine ">
+						<div style="flex: 1;display: flex;flex-direction: column; align-items: center;justify-content: center;" >
+							<div *ngIf= " signOrExamine.signMorning != null ">
+								<div >签到人：{{signOrExamine == null ? '': signOrExamine.signMorning == null ? '': signOrExamine.signMorning}}</div>
+								<div >时间：{{signOrExamine == null ? '': signOrExamine.signMorningTime}}</div>
+							</div>
+							<button *ngIf= "signOrExamine.signMorning === null " nz-button nzType="primary" (click)="signButton('早','1')">签到</button>
+						</div>
+						<div style="flex: 1;display: flex;flex-direction: column; align-items: center;justify-content: center;">
+							<div *ngIf= "signOrExamine.signAfternoon != null ">
+								<div >签到人：{{signOrExamine.signAfternoon}}</div>
+								<div >时间：{{signOrExamine.signAfternoonTime}}</div>
+							</div>
+							<button *ngIf= "signOrExamine.signAfternoon === null " nz-button  nzType="primary" (click)="signButton('中','1')">签到</button>
+						</div>
+						<div style="flex: 1;display: flex;flex-direction: column; align-items: center;justify-content: center;">
+							<div *ngIf= "signOrExamine.signEvening != null ">
+								<div >签到人：{{signOrExamine.signEvening}}</div>
+								<div >时间：{{signOrExamine.signEveningTime}}</div>
+							</div>
+							<button *ngIf= "signOrExamine.signEvening === null " nz-button  nzType="primary" (click)="signButton('晚','1')">签到</button>
+						</div>
+					</div>
+					<div style="flex: 1;" class="parent-column" flex="dir:top">
+						<div style="flex: 1;" flex="cross:center main:center"><p>早班审核</p></div>
+						<div style="flex: 1;" flex="cross:center main:center"><p>中班审核</p></div>
+						<div style="flex: 1;" flex="cross:center main:center"><p>晚班审核</p></div>
+					</div>
+					<div style="flex: 2;" class="parent-column" flex="dir:top" *ngIf= " signOrExamine ">
+						<div style="flex: 1;display: flex;flex-direction: column; align-items: center;justify-content: center;">
+							<div *ngIf= "signOrExamine.examineMorning != null ">{{signOrExamine.examineMorning}}</div>
+							<button *ngIf= "signOrExamine.examineMorning === null " nz-button nzType="primary" (click)="signButton('早','2')">审核</button>
+						</div>
+						<div style="flex: 1;display: flex;flex-direction: column; align-items: center;justify-content: center;">
+							<div *ngIf= "signOrExamine.examineAfternoon != null ">{{signOrExamine.examineAfternoon}}</div>
+							<button *ngIf= "signOrExamine.examineAfternoon === null " nz-button nzType="primary" (click)="signButton('中','2')">审核</button>
+						</div>
+						<div style="flex: 1;display: flex;flex-direction: column; align-items: center;justify-content: center;">
+							<div *ngIf= "signOrExamine.examineEvening != null ">{{signOrExamine.examineEvening}}</div>
+							<button *ngIf= "signOrExamine.examineEvening === null " nz-button nzType="primary" (click)="signButton('晚','2')">审核</button>
+						</div>
+					</div>
+					<!-- <div style="flex: 1;" flex="cross:center main:center">
+						历史记录：
+					</div>
+					<div style="flex: 2;" flex="cross:center main:center">
+						<span style="flex-shrink: 0; padding-left: 20px;">说明：</span>
+						<textarea style="height: 200px; width: 100%; margin: 0 10px;"></textarea>
+					</div> -->
+				</div>
+				
+			</div>
+			<div style="margin-top: 20px;" *ngIf ="record != undefined">
+				<nz-table #middleTable [nzTitle]="'历史记录表'"  nzBordered nzSize="small" [nzData]="record">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>修改字段</th>
+							<th>修改时间</th>
+							<th>修改前数据</th>
+							<th>修改后数据</th>
+							<th>修改人</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let data of middleTable.data;let i = index">
+							<td>{{ i + 1 }}</td>
+							<td>{{ data.updateField }}</td>
+							<td>{{ data.updateTime }}</td>
+							<td>{{ data.updateFrontData }}</td>
+							<td>{{ data.updateAfterData }}</td>
+							<td>{{ data.updateName }}</td>
+						</tr>
+					</tbody>
+				</nz-table>
+			</div>
+		</div>
+	</div>
+<div class="windowBox" *ngIf="amendFlag">
+		<div class="window">
+			<div class="windowPadd">
+				<div>
+					修改值：<input type="text" [(ngModel)]="amendInfo">
+				</div>
+				<button nz-button nzType="primary" (click)="amendButton(1)">保存</button>
+			  <button nz-button nzType="text" (click)="amendButton(2)">取消</button>
+			</div>
+		</div>
+	</div>
+</div>

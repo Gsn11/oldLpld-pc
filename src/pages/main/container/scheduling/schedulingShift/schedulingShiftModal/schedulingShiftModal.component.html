@@ -1,0 +1,58 @@
+<div class="add_bg" *ngIf="show">
+    <div class="model" style="position: relative;">
+        <i nz-icon [nzType]="'close'" (click)="show=false" style="position: absolute;top: 10px;right: 10px;cursor: pointer;width: 30px;height: 30px;"></i>
+        <!-- <input type="text" id="test1"> -->
+        <div class="model_box">
+            <div class="title">{{title==='edit'?'编辑班次':'新增班次'}}</div>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="请输入班次名称" [(ngModel)]="Name">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="请输入简称(最多四个字)" [(ngModel)]="AbbrName">
+                </mat-form-field>
+            </div>
+            <!-- <div>
+                <mat-form-field>
+                    <input matInput placeholder="请选择颜色">
+                </mat-form-field>
+            </div> -->
+            <div class="colors">
+                <div *ngFor="let item of colors" class="colorbox" [ngStyle]="{'background': item.color}" [ngClass]="{border:item.id==seletId}" (click)="selectColr(item.id)"></div>
+            </div>
+            <div>
+            <mat-form-field class="example-form-field">
+                <mat-select placeholder="班次类型" [formControl]="SelectServiceType">
+                    <mat-option *ngFor="let item of workteamType"[value]="item.id" >
+                        {{item.name}}
+                    </mat-option>
+                    <!-- <mat-option [value]="1">
+                        休息班次
+                    </mat-option> -->
+                </mat-select>
+            
+            </mat-form-field>
+        </div>
+                <div class="date_time">
+                    <input type="text" class="demo-input" placeholder="开始时间" id="test1" [(ngModel)]="WorkStart">
+                    
+                </div>
+                <div class="date_time">
+                    <input type="text" class="demo-input" placeholder="结束时间" id="test2" [(ngModel)]="WorkEnd">                    
+                </div>
+                
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="工作时长(小时)" [(ngModel)]="allTime">
+                </mat-form-field>
+            </div>
+            <div class="btn">
+                <button mat-stroked-button color="primary" class="download" (click)="show=false">关闭</button>
+                <button mat-stroked-button class="btno"
+                    color="primary" class="download" (click)=submit()>保存</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,167 @@
+<div class="add_bg" *ngIf="show">
+    <div class="model" *ngIf="select==0" style="position: relative;">
+        <i nz-icon [nzType]="'close'" (click)="close()" style="position: absolute;top: 10px;right: 10px;cursor: pointer;width: 30px;height: 30px;"></i>
+        <div class="model_box">
+            <div class="title">设置排班规则</div>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="请输入规则名称" [(ngModel)]="Name">
+                </mat-form-field>
+            </div>
+            <mat-form-field class="example-form-field">
+                <mat-select placeholder="请选择班次"  [formControl]="SelectServiceType">
+                    <mat-option *ngFor="let item of FrequencyList" [value]="item.Seq">
+                     {{item.Name}}（{{item.AbbrName}}）-{{item.WorkStart}}-{{item.WorkEnd}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="example-form-field">
+                <mat-select placeholder="应用类别" required  [formControl]="ApplyType">
+                    <mat-option [value]="0">排班</mat-option>
+                    <mat-option [value]="1">值班</mat-option>
+                </mat-select>
+            </mat-form-field>
+            
+            <div class="date_time">设置工作日</div>
+            <div class="colors">
+                <mat-checkbox *ngFor="let d of chs, let dIndex = index" (change)="checkItem()" [(ngModel)]="d.uCheck">{{d.time}}</mat-checkbox>
+            </div>
+            <div class="date_time">选择人员</div>
+            <div class="select_body">
+                <button mat-stroked-button class="btno"
+                color="primary" class="download" (click)="openUserModelDialog(0)">选择主班人员</button>
+                <button mat-stroked-button class="btno"
+                color="primary" class="download" (click)="openUserModelDialog(1)">选择副班人员</button>
+            </div>
+            <div class="people">
+                <div class="people_all people_name"><div>姓名</div><div>级别</div><div>操作</div> </div>
+                <div class="people_all" *ngFor="let item of Members,let i=index"><div>{{item.Name}}</div><div>{{item.Level===1?'主班':'副班'}}</div><div (click)="Pdelete(i)">删除</div> </div>
+            </div>
+            <div class="date_time">
+                <input type="text" class="demo-input demoinput" placeholder="开始日期" id="test1">
+            </div>
+            <div class="date_time">
+                <input type="text" class="demo-input demoinput" placeholder="结束日期" id="test2"> 
+            </div>
+            <mat-form-field class="example-form-field">
+                <mat-select placeholder="是否发短信" required  [formControl]="Sms">
+                    <mat-option [value]="0">无需短信通知</mat-option>
+                    <mat-option [value]="1">需要短信通知</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div>
+                <mat-form-field>
+                    <input matInput type="number" placeholder="提前发送短信时间(小时)" [(ngModel)]="SmsPrehours">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput type="text" placeholder="短信名" [(ngModel)]="SmsName">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <textarea  matInput rows='4'   placeholder="请输入短信内容" [(ngModel)]="SmsContent"></textarea>
+               </mat-form-field>
+            </div>
+            <!-- <div>
+                <mat-form-field>
+                    <input matInput placeholder="工作时长">
+                </mat-form-field>
+            </div> -->
+            <div class="btn">
+                <button mat-stroked-button color="primary" class="download" (click)="close()">关闭</button>
+                <button mat-stroked-button class="btno"
+                    color="primary" class="download" (click)="save()">保存</button>
+            </div>
+        </div>
+    </div>
+    <div class="model" *ngIf="select==1" style="position: relative;">
+        <i nz-icon [nzType]="'close'" (click)="close()" style="position: absolute;top: 10px;right: 10px;cursor: pointer;width: 30px;height: 30px;"></i>
+        <div class="model_box">
+            <div class="title" >设置排班规则</div>
+            <div>
+                <mat-form-field>
+                    <input matInput placeholder="请输入规则名称" [(ngModel)]="Name">
+                </mat-form-field>
+            </div>
+            <mat-form-field class="example-form-field">
+                <mat-select placeholder="请选择班次" (selectionChange)='dateSelect($event)' [(ngModel)]="dateSeq">
+                    <mat-option *ngFor="let item of FrequencyList" [value]="item.Seq">
+                     {{item.Name}}（{{item.AbbrName}}）-{{item.WorkStart}}-{{item.WorkEnd}}
+                    </mat-option>
+                </mat-select>
+                
+            </mat-form-field>
+            <!-- <nz-select [ngModel]="dateSeq" style="margin-top: 20px;" (ngModelChange)="dateSelect($event)">
+                <nz-option *ngFor="let i of FrequencyList" [nzValue]="i.Seq" [nzLabel]="i.Name + '(' + i.AbbrName +')' + i.WorkStart + i.WorkEnd "></nz-option>
+            </nz-select> -->
+            <div>
+                <mat-form-field>
+                    <input matInput type="number" placeholder="请输入天数" [(ngModel)]="Days">
+                </mat-form-field>
+            </div>
+            <mat-form-field class="example-form-field">
+                <mat-select placeholder="应用类别" required  [formControl]="ApplyType">
+                    <mat-option [value]="0">排班</mat-option>
+                    <mat-option [value]="1">值班</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="date_time">
+                 <button mat-stroked-button class="btno" color="primary" class="download" (click)="addDay()">添加</button>
+            </div>
+            <div class="people">
+                <div class="people_all people_name"><div>班次</div><div>时间段</div><div>天数</div><div>操作</div> </div>
+                <div class="people_all" *ngFor="let item of daylist,let i=index"><div>{{item.Name}}</div><div>{{item.WorkStart}}-{{item.WorkEnd}}</div><div>{{item.Days}}天</div><div (click)="Ddelete(i)">删除</div> </div>
+            </div>
+            <!-- <div class="date_time">选择人员</div> -->
+            <div class="select_body date_time">
+                <button mat-stroked-button class="btno"
+                color="primary" class="download" (click)="openUserModelDialog(0)">选择主班人员</button>
+                <button mat-stroked-button class="btno"
+                color="primary" class="download" (click)="openUserModelDialog(1)">选择副班人员</button>
+            </div>
+            <div class="people">
+                <div class="people_all people_name"><div>姓名</div><div>级别</div><div>操作</div> </div>
+                <div class="people_all" *ngFor="let item of Members,let i=index"><div>{{item.Name}}</div><div>{{item.Level===1?'主班':'副班'}}</div><div (click)="Pdelete(i)">删除</div> </div>
+            </div>
+            <div class="date_time">
+                <input type="text" class="demo-input demoinput" placeholder="开始日期" id="test1">
+            </div>
+            <div class="date_time">
+                <input type="text" class="demo-input demoinput" placeholder="结束日期" id="test2"> 
+            </div>
+            <mat-form-field class="example-form-field">
+                <mat-select placeholder="是否发短信" required  [formControl]="Sms">
+                    <mat-option [value]="0">无需短信通知</mat-option>
+                    <mat-option [value]="1">需要短信通知</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div>
+                <mat-form-field>
+                    <input matInput type="number" placeholder="提前发送短信时间(小时)" [(ngModel)]="SmsPrehours">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <input matInput type="text" placeholder="短信名" [(ngModel)]="SmsName">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field>
+                    <textarea  matInput rows='4'   placeholder="请输入短信内容" [(ngModel)]="SmsContent"></textarea>
+               </mat-form-field>
+            </div>
+            <!-- <div>
+                <mat-form-field>
+                    <input matInput placeholder="工作时长">
+                </mat-form-field>
+            </div> -->
+            <div class="btn">
+                <button mat-stroked-button color="primary" class="download" (click)="close()">关闭</button>
+                <button mat-stroked-button class="btno"
+                    color="primary" class="download" (click)="save()">保存</button>
+            </div>
+        </div>
+    </div>
+</div>

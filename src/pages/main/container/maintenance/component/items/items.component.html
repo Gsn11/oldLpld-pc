@@ -1,0 +1,39 @@
+<div class="Items-out">
+    <div class="btn-list">
+        <button mat-raised-button color="primary" (click)="spaceModalBox()">选择设备</button>
+        <!-- <button *ngIf="type != '维修'" mat-raised-button color="primary" (click)="tamplateModalBox()">模版库</button> -->
+        <button *ngIf="type != '维修'" mat-raised-button color="primary" (click)="itemModalBox()">新增条目</button>
+    </div>
+
+    <mat-card>
+        <div class="template">
+            <div ><span>设施位置</span></div>
+            <div ><span>设备</span></div>
+            <div *ngIf="type != '维修'" ><span>条目</span></div>
+            <div *ngIf="type != '维修'" ><span>反馈类型</span></div>
+            <div *ngIf="type != '维修'" ><span>描述</span></div>
+            <div><span>操作</span></div>
+        </div>
+    </mat-card>
+
+    <mat-card *ngFor="let i of Items, let iIndex = index">
+        <div class="template">
+            <div>
+                <span  >{{i.BuildingName || i.CName || i.Building }} - {{i.Floor}}层 - {{i.Zone}} - {{i.SpacePos}}</span>
+            </div>
+            <div ><span >{{i.DeviceName}}({{i.DeviceNo}})</span></div>
+            <div *ngIf="type != '维修'" ><span>{{i.Item}}</span></div>
+            <div *ngIf="type != '维修'" ><span>{{i.FeedbackType ===0? '是否' : i.FeedbackType | feedbacktypeTranslate}}</span></div>
+            <div *ngIf="type != '维修'" ><span></span></div>
+            <div>
+                <span class="editItem" (click)="itemModalBox('edit', iIndex)">编辑</span>
+                <span class="deleteItem" (click)="checkDeleteItem(iIndex)">删除</span>
+            </div>
+        </div>
+    </mat-card>
+</div>
+
+<app-spacetree [Items]="Items" [Builds]="Builds" [MaintenanceTemplates]="MaintenanceTemplates" (getBuildings)="getBuildings($event)"></app-spacetree>
+<app-template [Items]="Items" [MaintenanceTemplates]="MaintenanceTemplates" (getBuildings)="getBuildings($event)"></app-template>
+<app-item [Items]="Items" (getBuildings)="getBuildings($event)"></app-item>
+<app-confim [confim]="setConfim" (setConfimResult)="deleteItem($event)"></app-confim>

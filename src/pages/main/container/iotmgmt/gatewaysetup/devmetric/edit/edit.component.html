@@ -1,0 +1,261 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>智联网关</span>
+        <div>
+            <span>{{deviceInfo.DeviceName}} ({{deviceInfo.DeviceNo}})</span>
+        </div>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> JACE/DDC/PLC/Modbus路由</span>
+        <span (click)="openDialog('1')">{{deviceName}}</span>
+    </div>
+    <div>
+        <span>协议类型</span>
+        <div>
+            <span>{{deviceInfo.Protocol | procotolTranslate}}</span>
+        </div>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 设备编号</span>
+        <span (click)="openDialog('0,1')">{{deviceNoName}}</span>
+    </div>
+
+    <div>
+        <span>归属箱/柜编号</span>
+        <span (click)="openDialog('0,1', '3')">{{boxDevFullName}}</span>
+    </div>
+
+    <div>
+        <span><span style="color: red;">*</span> 测量变量</span>
+        <mat-form-field class="inputField">
+            <mat-label>请选择测量变量</mat-label>
+            <mat-select [formControl]="SelectMetrics">
+                <mat-option *ngFor="let m of Metrics" [value]="m.MCode">
+                    {{m.MDesc}} ({{m.MCode}})
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <span>数据点/报警点</span>
+        <mat-form-field>
+            <mat-label>请选择测量变量</mat-label>
+            <mat-select [formControl]="SelectIsAlert">
+                <mat-option *ngFor="let i of IsAlert" [value]="i.id">
+                    {{i.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <!-- 1.BACENT -->
+    <ng-container *ngIf="deviceInfo.Protocol.toString() === '0'">
+        <div>
+            <span><span style="color: red;">*</span> BACNET协议中的device id</span>
+            <div>
+                <mat-form-field class="inputField">
+                    <mat-label>请选择协议类型</mat-label>
+                    <mat-select [formControl]="SelectBacnetObjects">
+                        <mat-option>无</mat-option>
+                        <mat-option *ngFor="let b of BacnetObjects" [value]="b.BOCode">
+                            {{b.BOCode}} ({{b.BODesc}})
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="请输入BACNET协议中的device id" [(ngModel)]="BacnetDeviceId">
+                </mat-form-field>
+            </div>
+        </div>
+        <div>
+            <span><span style="color: red;">*</span> BACNET协议中的测量点object id</span>
+            <div>
+                <mat-form-field class="inputField">
+                    <mat-label>请选择协议中的测量点</mat-label>
+                    <mat-select [formControl]="SelectBacnetDevId">
+                        <mat-option>无</mat-option>
+                        <mat-option *ngFor="let b of BacnetDevId" [value]="b.BOCode">
+                            {{b.BOCode}} ({{b.BODesc}})
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="请输入BACNET协议中的object id" [(ngModel)]="BacnetObjectId">
+                </mat-form-field>
+            </div>
+        </div>
+    </ng-container>
+
+    <!-- 2.MODBUS -->
+    <ng-container *ngIf="deviceInfo.Protocol.toString() === '1'">
+        <div>
+            <span><span style="color: red;">*</span> 从站id</span>
+            <div>
+                <mat-form-field class="example-full-width inputField">
+                    <input type="number" matInput placeholder="请输入从站id" [(ngModel)]="SlaveId">
+                </mat-form-field>
+            </div>
+        </div>
+        <div>
+            <span><span style="color: red;">*</span> 寄存器类型</span>
+            <mat-form-field class="inputField">
+                <mat-label>请选择寄存器类型</mat-label>
+                <mat-select [formControl]="SelectRegister">
+                    <mat-option>无</mat-option>
+                    <mat-option *ngFor="let r of Register" [value]="r">
+                        {{r | registerTranslate}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <span>值类型</span>
+            <mat-form-field class="inputField">
+                <mat-label>请选择值类型</mat-label>
+                <mat-select [formControl]="SelectValType">
+                    <mat-option>无</mat-option>
+                    <mat-option *ngFor="let v of ValType" [value]="v.id">
+                        {{v.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div>
+            <span><span style="color: red;">*</span> 起始地址</span>
+            <mat-form-field class="example-full-width inputField">
+                <input type="number" matInput placeholder="请输入起始地址" [(ngModel)]="StartAddr">
+            </mat-form-field>
+        </div>
+        <div>
+            <span><span style="color: red;">*</span> 字数量（word quantity）</span>
+            <div>
+                <mat-form-field class="example-full-width inputField">
+                    <input type="number" matInput placeholder="请输入字数量（word quantity）" [(ngModel)]="Quantity">
+                </mat-form-field>
+                <div><span>从起始地址开始，要读取的字节数，一个字（word）=2个字节</span></div>
+            </div>
+        </div>
+        <div>
+            <span>大端模式 / 小端模式</span>
+            <mat-form-field class="inputField">
+                <mat-label>请选择模式</mat-label>
+                <mat-select [formControl]="SelectBigEndian">
+                    <mat-option>无</mat-option>
+                    <mat-option *ngFor="let b of BigEndian" [value]="b">
+                        {{b | bigEndianTranslate}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </ng-container>
+
+    <!-- 3.OPC DA  4.OPC UA -->
+    <ng-container *ngIf="deviceInfo.Protocol.toString() === '2' || deviceInfo.Protocol.toString() === '3'">
+        <div>
+            <span><span style="color: red;">*</span> OPC协议版本</span>
+            <div>
+                <mat-form-field class="inputField">
+                    <mat-label>请选择OPC协议版本</mat-label>
+                    <mat-select [formControl]="SelectProtocolVer">
+                        <mat-option>无</mat-option>
+                        <mat-option *ngFor="let p of ProtocolVer" [value]="p">
+                            {{p | protocolVerTranslate}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div>
+            <span><span style="color: red;">*</span> 条目（item）</span>
+            <mat-form-field class="example-full-width inputField">
+                <input matInput placeholder="请输入条目（item）" [(ngModel)]="OPCItem">
+            </mat-form-field>
+        </div>
+        <div>
+            <span>OPC服务器ip</span>
+            <div>
+                <mat-form-field class="example-full-width inputField">
+                    <input matInput placeholder="请输入OPC服务器ip" [(ngModel)]="Ip">
+                </mat-form-field>
+                <div><span>opc服务器ip，对于多opc服务器，此字段才有意义</span></div>
+            </div>
+        </div>
+        <div>
+            <span>OPC服务器端口</span>
+            <div>
+                <mat-form-field class="example-full-width inputField">
+                    <input matInput placeholder="请输入OPC服务器端口" [(ngModel)]="Port">
+                </mat-form-field>
+                <div><span>opc服务器端口，对于多opc服务器，此字段才有意义</span></div>
+            </div>
+        </div>
+        <div>
+            <span>ClsId / Endpoint Url</span>
+            <div>
+                <mat-form-field class="example-full-width inputField">
+                    <input matInput placeholder="请输入ClsId / Endpoint Url" [(ngModel)]="ClsId">
+                </mat-form-field>
+                <div><span>opc-da服务clsid，opc-ua服务器则为endpoint url，对于多opc服务器，此字段才有意义</span></div>
+            </div>
+        </div>
+    </ng-container>
+
+
+    <!-- 5.OBIX -->
+    <div *ngIf="deviceInfo.Protocol.toString() === '4'">
+        <span><span style="color: red;">*</span> 点路径url</span>
+        <mat-form-field class="example-full-width inputField">
+            <textarea matInput placeholder="请输入点路径url" [(ngModel)]="UrlItem"></textarea>
+        </mat-form-field>
+    </div>
+    <!-- 6.BEM -->
+    <div *ngIf="deviceInfo.Protocol.toString() === '5'">
+        <span><span style="color: red;">*</span> 点路径ord</span>
+        <mat-form-field class="example-full-width inputField">
+            <textarea matInput placeholder="请输入点路径ord" [(ngModel)]="Item"></textarea>
+        </mat-form-field>
+    </div>
+
+    <!-- 响应模块 END -->
+    <div>
+        <span>测量说明</span>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput placeholder="请输入测量说明" [(ngModel)]="DMBDesc">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>计算公式</span>
+        <div>
+            <mat-form-field class="example-full-width inputField">
+                <input matInput placeholder="请输入计算公式" [(ngModel)]="Formula">
+            </mat-form-field>
+            <div><span>计算公式，采集的原始数据用小写的x代表；例如：x*100</span></div>
+        </div>
+    </div>
+
+
+    <div>
+        <span>上传公式</span>
+        <div>
+            <mat-form-field class="example-full-width inputField">
+                <input matInput placeholder="请输入上传的标准计算公式" [(ngModel)]="UploadFormula">
+            </mat-form-field>
+            <div><span>如果是报警点此字段将被忽略。上传的标准计算公式, 数据用小写的x代表，支持加减乘除计算，符合此表达式的数据才上传；例如：x>100 或者 x*13/100.0 > 1</span></div>
+        </div>
+    </div>
+    <div>
+        <span>报警公式</span>
+        <div>
+            <mat-form-field class="example-full-width inputField">
+                <input matInput placeholder="请输入报警的标准计算公式" [(ngModel)]="AlertFormula">
+            </mat-form-field>
+            <div><span>如果是报警点此字段将被忽略。报警的标准计算公式, 数据用小写的x代表，符合此表达式的数据才进行报警；例如：x>100</span></div>
+        </div>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

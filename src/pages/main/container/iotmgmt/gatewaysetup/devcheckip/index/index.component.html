@@ -1,0 +1,101 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+    <div class="devcheckipSearchList">
+        <div>
+            <div>
+                <mat-form-field class="example-form-field">
+                    <input matInput type="text" placeholder="设备编号/测量变量" [(ngModel)]="searchName"
+                        (keyup.enter)="search()">
+                </mat-form-field>
+                <button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1;search()">搜索</button>
+            </div>
+
+            <div class="chooseList">
+                <div>
+                    <mat-form-field>
+                        <mat-label>请选择智联网关</mat-label>
+                        <mat-select [formControl]="SelectsmartGateway" (selectionChange)="smartGatewayChange($event)">
+                            <mat-option>无</mat-option>
+                            <mat-option *ngFor="let s of smartGatewayList" [value]="s.DeviceNo">
+                                {{s.DeviceNo}} - {{s.Model}} - {{s.DeviceName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <button mat-raised-button color="primary" class="loginBtn" (click)="gotoAdd()"
+                    [disabled]="!AddBottonDisabled">新增</button>
+            </div>
+        </div>
+        <div>
+            <button mat-stroked-button color="primary" (click)="downloadFile()">下载模板</button>
+            <button mat-stroked-button color="primary" (click)="fileBoxChange()">批量导入</button>
+        </div>
+    </div>
+
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="List" style="width: 100%;">
+            <ng-container matColumnDef="GatewayNo">
+                <th mat-header-cell *matHeaderCellDef> 网关编号 </th>
+                <td mat-cell *matCellDef="let element"> {{element.GatewayNo}} </td>
+            </ng-container>
+            <ng-container matColumnDef="DevNo">
+                <th mat-header-cell *matHeaderCellDef> 设备编号（名称） </th>
+                <td mat-cell *matCellDef="let element"> {{element.DevNo}} ({{element.DevName}}) </td>
+            </ng-container>
+            <ng-container matColumnDef="Ip">
+                <th mat-header-cell *matHeaderCellDef> IP </th>
+                <td mat-cell *matCellDef="let element"> {{element.Ip}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Port">
+                <th mat-header-cell *matHeaderCellDef> 端口 </th>
+                <td mat-cell *matCellDef="let element"> {{element.Port}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Id">
+                <th mat-header-cell *matHeaderCellDef> 服务 </th>
+                <td mat-cell *matCellDef="let element"> {{element.Id}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Other">
+                <th mat-header-cell *matHeaderCellDef> 操作 </th>
+                <td mat-cell *matCellDef="let element" class="Other">
+                    <span (click)="gotoInfo(element)">查看</span>
+                    <span *ngIf="customer === element.Customer" (click)="gotoEdit(element)">编辑</span>
+                    <span *ngIf="customer === element.Customer" class="deleteItem"
+                        (click)="showConfim(element.Seq)">删除</span>
+                    <span *ngIf="customer !== element.Customer" class="enable">不可操作</span>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+        </table>
+        <div style="background: white;">
+            <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+                [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+    <app-confim [confim]="setConfim" (setConfimResult)="tableConfimResult($event)"></app-confim>
+</div>
+
+<div class="fileUpload" [ngClass]="{'active': fileBoxShow}">
+    <div class="bg" (click)="fileCancel()"></div>
+    <div class="container">
+        <div class="header"><span class="title">文件上传</span></div>
+        <div class="main">
+            <div><span class="iconfont iconsave"></span></div>
+            <div><span>点击或拖放文件到此区域进行上传</span></div>
+            <div><span>选择含有测量点数据的xlsx文件</span></div>
+            <input class="files" name="excelInput" type="file" (change)="fileChange($event)" multiple="multiple"
+                accept=".xlsx">
+        </div>
+        <div class="main2">
+            <div *ngFor="let f of fileList, let fIndex = index"
+                [ngClass]="{ 'success': f.State === 1, 'error': f.State === 2 }">
+                <span>{{fIndex}} - {{f.name}}</span>
+                <span class="iconfont iconclose" (click)="deleteFile(fIndex)"></span>
+            </div>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="FileUpLoad()"><span class="iconfont iconsave"></span> 上传</button>
+            <button mat-button (click)="fileCancel()"><span class="iconfont iconpstep"></span>取消</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+  <div class="searchList">
+    <div>
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" [placeholder]="'Name' | wordTranslate" [(ngModel)]="searchName" (keyup.enter)="getList()">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1;getList()">搜索</button>
+    </div>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="list" style="width: 100%;">
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> {{'Name' | wordTranslate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.Name}}</td>
+      </ng-container>
+      <ng-container matColumnDef="BGName">
+        <th mat-header-cell *matHeaderCellDef> {{'BGName' | wordTranslate}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.BGName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="ProvinceCode">
+        <th mat-header-cell *matHeaderCellDef> 省份/城市/区县 </th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.ProvinceCode">{{element.ProvinceCode | codeTranslateProvince}}</span>
+          <span *ngIf="element.CityCode"> / {{element.CityCode | codeTranslateCity: element.ProvinceCode }}</span>
+          <span *ngIf="element.DistrictCode"> /
+            {{element.DistrictCode | codeTranslateDistrict: [element.ProvinceCode, element.CityCode]}}</span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Addr">
+        <th mat-header-cell *matHeaderCellDef> 地址 </th>
+        <td mat-cell *matCellDef="let element"> {{element.Addr}} </td>
+      </ng-container>
+      <ng-container matColumnDef="UName">
+        <th mat-header-cell *matHeaderCellDef> 负责人 </th>
+        <td mat-cell *matCellDef="let element"> {{element.UName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Other">
+        <th mat-header-cell *matHeaderCellDef> 操作 </th>
+        <td mat-cell *matCellDef="let element" class="Other">
+          <span style="display: block;" *ngIf="USeq === element.USeq" (click)="gotoEdit(element)">数据授权</span>
+          <span style="display: block;" *ngIf="USeq === element.USeq" (click)="changePersonLiable(element)"
+            class="deleteItem">转移/创建责任人</span>
+          <span *ngIf="USeq !== element.USeq" class="enable">不可操作</span>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+    </table>
+    <div style="background: white;">
+      <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+        [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+  <app-changemodal [setUsers]="Users" [buildChoose]="buildChoose" (updateData)="getList()"></app-changemodal>
+</div>

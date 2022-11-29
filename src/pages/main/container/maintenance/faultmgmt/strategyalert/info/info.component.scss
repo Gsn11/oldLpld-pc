@@ -1,0 +1,29 @@
+@import '../../../../../../common/utils/css/table.scss';
+
+.containerPadding {
+    .main{
+        background: #fff;
+        padding: 20px;
+        &>div{
+          p{width: 200px;}
+          display: flex;
+          align-items: center;
+        }
+      
+        .btn-g{
+          margin: 20px auto;
+          text-align: center;
+          justify-content: center;
+          button{
+            margin: 0 10px;
+          }
+        }
+        table{
+          margin: 10px 0;
+        }
+        tbody td{
+          padding: 5px;
+          text-align: center;
+        }
+    }
+}

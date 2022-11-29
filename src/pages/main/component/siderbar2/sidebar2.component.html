@@ -1,0 +1,43 @@
+<div class="sidebar2">
+    <div class="sidebar2Main">
+        <div class="logoList">
+            <div class="logo2" (click)="gotoUserinfo()">
+                <img *ngIf="avatar" [src]="avatar" alt="logo2Image">
+                <img *ngIf="!avatar" src="../../../../assets/all/logo2.png" alt="logo2Image">
+            </div>
+        </div>
+        <div class="sidebarBox">
+            <div class="sidebarList" *ngFor="let s of sidebarData,let dindex = index">
+                <div class="sidebarName" [ngClass]="{'activeSidebarList': sidebarIndex === dindex}">
+                    <span class="iconfont" (click)="toggleFirstIcon(s)" [class]="s.icon" [ngClass]="{'active': s.iconShow === 1}">
+                    </span>
+                    <div class="treeItem-out">
+                        <div class="sideItemList" *ngFor="let c of s.submenu,let cindex = index">
+                            <div class="sideItemName" (click)="toggle($event, c)">
+                                <div class="side-item" [ngClass]="{'widthAdd': s.id === 'iotmgmt'}">
+                                    <span class="side-itemName">
+                                        {{c.name}}
+                                        <span class="iconfont iconright" *ngIf="c.submenu.length !== 0"
+                                            [ngClass]="{'active': c.iconShow === 1}">
+                                        </span>
+                                    </span>
+                                    <div class="itemList">
+                                        <div class="item" *ngFor="let cc of c.submenu,let ccIndex = index" (click)="toggle($event, cc)">
+                                            <span class="item-Name">{{cc.name}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <span>inside</span>
+        <span class="word">BEM <span class="sup">IMS</span></span>
+        <span>{{version.Version}}</span>
+    </div>
+</div>

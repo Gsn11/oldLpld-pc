@@ -1,0 +1,52 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+	<div class="switch-out">
+		<div class="switchList allSwitch" (click)="allListSwitch()">
+			<div class="tree tree0" [ngClass]="{'active': allSwitchIsOpen === true}">
+				<span class="iconfont iconright" *ngIf="List"></span>
+				<span>所有部门（团队）树</span>
+			</div>
+		</div>
+		<app-tree class="treeList" showSeq="true" [List]="List" [allSwitchIsOpen]="allSwitchIsOpen"
+			(setTreeChange)="treeChange($event)"></app-tree>
+	</div>
+	<div class="inputInfo" style="height: 100%; align-items: start;">
+		<div style="height: 400px; margin-top: 200px;">
+			<div class="header">
+				<span>当前选择：</span>
+				<span>{{nowItemName}}</span>
+			</div>
+			<div class="newItem" *ngIf="!allSwitchIsOpen">
+				<button mat-button class="addBtn" (click)="addChildren()">新增下属部门分类</button>
+			</div>
+			<div class="main" *ngIf="allSwitchIsOpen">
+				<div class="toolsBtnList">
+					<div>
+						<button mat-button class="addBtn" (click)="addChildren()">新增下属部门分类</button>
+					</div>
+					<div *ngIf="TreeCustomerIsOwner">
+						<button mat-button class="deleteBtn" (click)="showConfim()">删除({{nowItemName}})</button>
+					</div>
+				</div>
+				<div class="infoList">
+					<div *ngIf="TreeCustomerIsOwner">
+						<mat-form-field class="example-full-width inputField">
+							<input matInput placeholder="当前部门分类名称" [formControl]="newChildrenItem" required>
+							<mat-error *ngIf="newChildrenItem.invalid">{{getnewChildrenItemErrorMessage()}}</mat-error>
+						</mat-form-field>
+					</div>
+					<div style="margin-right: auto;">
+						<mat-checkbox [(ngModel)]="serverStatistics">
+							服务统计
+						</mat-checkbox>
+					</div>
+				</div>
+				<div *ngIf="TreeCustomerIsOwner" class="btnList">
+					<button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="deleteCheck($event)"></app-confim>
+<app-modal (updateData)="getList()"></app-modal>

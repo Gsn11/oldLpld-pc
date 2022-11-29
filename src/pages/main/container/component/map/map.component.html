@@ -1,0 +1,28 @@
+<div class="mapList">
+    <div id='container' style='width:100%; height:200px;'></div>
+    <div class="goLocaltion" (click)="toLocaltion()"></div>
+    <div class="searchAddr">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入地址搜索" [(ngModel)]="searchItem" (keyup)="changeItem()" (focus)="showSearchList()">
+        </mat-form-field>
+        <div class="searchList" *ngIf="searchState === true">
+            <ng-container *ngFor="let s of searchList">
+                <div (click)="selectSearchItem(s)">
+                    <span>{{s.name}} </span>
+                    <span class="addressInfo"> {{s.address}}</span>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+    <div class="zoom-out">
+        <div><span class="iconfont iconright" (click)="changeZoom('up')" matTooltip="放大"></span></div>
+        <div><span class="iconfont iconright" (click)="changeZoom('down')" matTooltip="缩小"></span></div>
+    </div>
+    <div class="mapInfo">
+        <div>
+            <span>当前经纬度{{GdLng}}, {{GdLat}}</span>
+        </div>
+        <div><span>当前层级{{zoom}}</span></div>
+    </div>
+</div>
+<div class="searchBg" *ngIf="searchState" (click)="closeSearchList()"></div>

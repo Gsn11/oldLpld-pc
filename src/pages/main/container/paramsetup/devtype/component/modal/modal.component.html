@@ -1,0 +1,27 @@
+<div class="modal-out" [ngClass]="{'active': show}">
+    <div class="bg" (click)="switchModalBox()"></div>
+    <div class="container">
+        <div class="header"><span class="title">新增子设备类型</span></div>
+        <div class="main">
+            <div>
+                <span>所属父级：{{DTName}}</span>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width inputField">
+                    <input matInput placeholder="请输入子类型名称" [formControl]="newChildrenItem" required>
+                    <mat-error *ngIf="newChildrenItem.invalid">{{getnewChildrenItemErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- *ngIf="buildData.buildType != '联排联调'" -->
+            <div >
+                <mat-form-field class="example-full-width inputField">
+                    <input matInput placeholder="请输入编码" [formControl]="code">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+            <button mat-button (click)="goCancel()"><span class="iconfont iconpstep"></span>取消</button>
+        </div>
+    </div>
+</div>

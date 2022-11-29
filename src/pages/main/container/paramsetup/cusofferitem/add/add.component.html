@@ -1,0 +1,47 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span><span style="color: red;">*</span> 所属子系统</span>
+        <mat-form-field>
+            <mat-label>请选择子系统</mat-label>
+            <mat-select [formControl]="SelectSubSystems">
+                <mat-option *ngFor="let s of SubSystems" [value]="s.Seq">
+                    {{s.SName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 报价条目</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入报价条目" [formControl]="Item" required>
+            <mat-error *ngIf="Item.invalid">{{getItemErrorMessage()}}</mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 价格</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入价格" [formControl]="Price" required>
+            <mat-error *ngIf="Price.invalid">{{getPriceErrorMessage()}}</mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <span>费用类型</span>
+        <mat-form-field>
+            <mat-label>请选择费用类型</mat-label>
+            <mat-select [formControl]="SelectPriceType">
+                <mat-option *ngFor="let p of priceType" [value]="p">
+                    {{p | typeTranslate}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <span>涉及设备</span>
+        <span (click)="openDialog()">{{deviceName}}</span>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

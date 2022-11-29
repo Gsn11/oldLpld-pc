@@ -1,0 +1,71 @@
+:host ::ng-deep .mat-form-field{
+  width: 100%;
+}
+.add_bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  .date_time{
+    margin: 20px 0;
+    color: #999;
+  }
+  .demo-input{
+    border: none;
+    border-bottom: 1px solid #999999;
+    outline: none;
+    width: 100%;
+    padding-bottom: 5px;
+    margin-top: 10px;
+  }
+  .border{
+    border:2px solid  #666!important;
+  }
+  .btn{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    .download{
+      margin-left: 20px;;
+    }
+    .btno{
+      margin-left: 20px;
+    }
+  }
+  
+  .model {
+    width: 450px;
+    height: 600px;
+    background-color: #fff;
+    border-radius: 10px;
+
+    .model_box {
+      width: 90%;
+      height: 100%;
+      margin: auto;
+
+      .title {
+        width: 100%;
+        font-size: 16px;
+        margin-top: 20px;
+      }
+
+      .colors {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        .colorbox {
+          width: 90px;
+          height: 30px;
+          border: 2px solid #f5f5f5;
+        }
+      }
+    }
+  }
+}

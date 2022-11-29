@@ -1,0 +1,17 @@
+@import '../../../../../common/utils/css/table.scss';
+
+.search-bar{
+    padding: 10px;
+    background: #fff;
+    button{
+        margin: 0 10px;
+    }
+}
+
+.main{
+    padding: 20px;
+    background: #fff;
+    table{
+        border: 1px solid #eee;
+    }
+}

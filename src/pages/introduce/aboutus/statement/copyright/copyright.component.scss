@@ -1,0 +1,20 @@
+.wlyIntroduce {
+  background: #ffffff;
+  .main {
+    margin: 0 auto;
+    width: 910px;
+    .title {
+      padding: 30px 0;
+      text-align: center;
+      >span {
+        font-size: 32px;
+      }
+    }
+    .imageContainer {
+      text-align: center;
+    }
+    p {
+      color: rgb(100, 100, 100);
+    }
+  }
+}

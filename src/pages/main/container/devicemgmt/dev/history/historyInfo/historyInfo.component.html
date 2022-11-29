@@ -1,0 +1,126 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>派单名</span>
+        <span>{{bemInfoData.MSName}}</span>
+    </div>
+    <div>
+        <span>派单描述</span>
+        <span>{{bemInfoData.MSDesc}}</span>
+    </div>
+    <div>
+        <span>派单号</span>
+        <span>{{bemInfoData.OrderNo}}</span>
+    </div>
+    <div>
+        <span>派单状态</span>
+        <span>{{bemInfoData.State | stateTypeTranslate}}</span>
+    </div>
+    <div>
+        <span>派单时间</span>
+        <span>{{bemInfoData.OrderTime}}</span>
+    </div>
+    <div>
+        <span>维保描述</span>
+        <span>{{bemInfoData.Diagnose}}</span>
+    </div>
+    <div>
+        <span>维保结论</span>
+        <span>{{bemInfoData.Conclusion}}</span>
+    </div>
+    <div *ngIf="!isentver">
+        <span>上门费</span>
+        <span>{{bemInfoData.PriceVisit}} 元</span>
+    </div>
+    <div *ngIf="!isentver">
+        <span>派单总价</span>
+        <span>{{(bemInfoData.Price + bemInfoData.PriceVisit).toFixed(2)}} 元</span>
+    </div>
+    <div *ngIf="!isentver">
+        <span>派单价格明细</span>
+        <span style="font-size: 14px;">
+            <mat-card>
+                <div class="template">
+                    <div><span>报价条目</span></div>
+                    <div><span>价格</span></div>
+                    <div><span>所涉设备</span></div>
+                </div>
+            </mat-card>
+
+            <mat-card *ngFor="let i of PriceList">
+                <div class="template">
+                    <div><span>{{i.Item}}</span></div>
+                    <div><span>{{i.Price}}</span></div>
+                    <div><span>{{i.DeviceNo}}({{i.DeviceName}})</span></div>
+                </div>
+            </mat-card>
+        </span>
+    </div>
+    <div>
+        <span>派单状态变化</span>
+        <span style="font-size: 14px;">
+            <mat-card>
+                <div class="template">
+                    <div><span>状态</span></div>
+                    <div><span>状态时间</span></div>
+                    <div><span>关联行为</span></div>
+                </div>
+            </mat-card>
+
+            <mat-card *ngFor="let m of MaintenanceOrderHis">
+                <div class="template">
+                    <div><span>{{m.State | stateTypeTranslate}}</span></div>
+                    <div><span>{{m.OrderHisTime}}</span></div>
+                    <div><span>{{m.ActionName | activeNameTypeTranslate}}</span></div>
+                </div>
+            </mat-card>
+        </span>
+    </div>
+    <div>
+        <span>对派单的操作</span>
+        <span style="font-size: 14px;">
+            <mat-card>
+                <div class="template">
+                    <div><span>人员</span></div>
+                    <div><span>行为</span></div>
+                    <div><span>时间</span></div>
+                    <div><span>描述 / 图片</span></div>
+                </div>
+            </mat-card>
+
+            <mat-card *ngFor="let m of MaintenanceActions">
+                <div class="template">
+                    <div><span>{{m.UserName}}</span></div>
+                    <div><span>{{m.Action | activeNameTypeTranslate}}</span></div>
+                    <div><span>{{m.ActionTime}}</span></div>
+                    <div><span></span></div>
+                </div>
+            </mat-card>
+        </span>
+    </div>
+    <div>
+        <span>派单涉及设备条目</span>
+        <span style="font-size: 14px;">
+            <mat-card>
+                <div class="template">
+                    <div><span>设施位置</span></div>
+                    <div><span>设备</span></div>
+                    <div><span>条目</span></div>
+                    <div><span>条目值</span></div>
+                </div>
+            </mat-card>
+
+            <mat-card *ngFor="let i of MaintenanceScheItems">
+                <div class="template">
+                    <div><span class="wordBreakNormal">{{i.BuildingName || i.CName || i.Building }} - {{i.Floor}}层 - {{i.Zone}} - {{i.SpacePos}}</span></div>
+                    <div><span class="wordBreakNormal">{{i.DeviceNo}}({{i.DeviceName}})</span></div>
+                    <div><span>{{i.Item}}</span></div>
+                    <div><span>{{i.MoiValue}}</span></div>
+                </div>
+            </mat-card>
+        </span>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

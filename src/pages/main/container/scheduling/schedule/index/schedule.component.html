@@ -1,0 +1,100 @@
+<!-- <app-crumbs [crumbs]="crumbsList"></app-crumbs> -->
+<div class="containerPadding">
+    <div class="orderfixSearchList">
+        <div class="searchTools">
+            <div>
+                <!-- <mat-form-field class="example-form-field">
+                    <mat-select placeholder="请选择部门" [formControl]="TeamValue">
+                        <mat-option  [value]="0">
+                            无
+                         </mat-option>
+                        <mat-option *ngFor="let i of TeamsList" [value]="i.TSeq">
+                            {{i.TName}}
+                        </mat-option>
+                    </mat-select>
+                    
+
+                </mat-form-field> -->
+                <mat-label style="font-size: 16px;">请选择部门：</mat-label>
+                <nz-select
+                    [nzMaxTagCount]="3"
+                    [nzMaxTagPlaceholder]="tagPlaceHolder"
+                    nzMode="multiple"
+                    nzPlaceHolder="Please select"
+                    [(ngModel)]="TeamValue"
+                >
+                    <nz-option *ngFor="let item of TeamsList" [nzLabel]="item.TName" [nzValue]="item.TSeq"></nz-option>
+                </nz-select>
+                <input type="text" class="demo-input demoinput" placeholder="选择日期" id="SelectDate">
+                <!-- <span style="margin: 0 10px;"> - </span>
+                <app-calendar  title="结束日期"></app-calendar>
+                <span style="margin: 0 10px;"> </span> -->
+                <!-- <mat-form-field style="margin: 0 10px;">
+                    <mat-label>服务提供方</mat-label>
+                    <mat-select [formControl]="SelectServiceType">
+                        <mat-option>无</mat-option>
+                        <mat-option *ngFor="let s of ServiceType" [value]="s.value">
+                            {{s.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+                <button mat-raised-button color="primary" class="loginBtn" (click)="seach()">查询</button>
+                <!-- <button mat-raised-button style="margin-left: 20px;" color="primary" class="loginBtn" (click)="doubleSelect()">批量修改</button> -->
+            </div>
+            <div>
+                <button mat-stroked-button color="primary" class="download" (click)="downloadDeviceFile()">导出Excel</button>
+            </div>
+        </div>
+    </div>
+    <div class="mat-elevation-z8 table">
+        <table width="100%" align="center" cellpadding="0" cellspacing="0" style="table-layout:fixed">
+            <tr class="tr list1">
+               <td><div ><span>姓名</span></div> </td>
+                <td *ngFor="let s of data" class="border1" >
+                    
+                    <div [ngStyle]="{'color': s.week==='周日'||s.week==='周六'?'#F56C6C':''}"><span>{{s.week}}</span><span>{{s.date}}</span></div>
+                </td>
+            </tr>
+            <tr class="tr list" *ngFor="let s of ocrelist,let j = index">
+                <td>
+                    <div>
+                        <!-- <span class="name">{{s.department}}</span><span class="listname">{{s.date}}</span> -->
+                        <span class="listname">{{s.Name}}</span>
+                    </div>
+                </td>
+                <td *ngFor="let i of s.SchedulesList;"   class="border" >
+                    <div class="color"  >
+                        <div (mouseenter)='show(i,j,k)'(click)="selectWeek(i,j,k)" (mouseleave)=enshow() class="tab_chant"  *ngFor="let k of i.list,let k = index"  :[ngStyle]="{'background': k.workTimeColor,'height': i.list.length===1 ?'100%':''}">
+                            <div class="mode">{{k.workTimeAbbrName}}</div>
+                            <div class="seeWork" [ngStyle]="{'display': seeIndex===i&&JseeIndex===j&&KseeIndex===k?'flex':'none'}">
+                                <div class="Color">
+                                    <span class="round" [ngStyle]="{'background': k.workTimeColor}"></span>
+                                    <span >{{k.workName}}</span>
+                                </div>
+                               
+                                <span>{{k.workTimeAbbrName}}</span>
+                                <span>{{k.timeStart}}-{{k.timeEnd}}</span>
+                                <span>值班创建者：{{k.createUserName}}</span>
+                                <span>创建者电话：{{k.createUserTel}}</span>
+                            </div>
+                            <!-- <div class="e_box" [ngStyle]="{'display': editIndex===i&&JeditIndex===j&&KeditIndex===k?'flex':'none'}">
+                                <div class="ebox_body" *ngFor="let item of Blist" (click)="edit(item,k)">
+                                    <div class="round" [ngStyle]="{'background': item.Color}"></div>
+                                    <div class="round_text">{{item.Name}}</div>
+                                    <div class="date">{{item.WorkStart}}-{{item.WorkEnd}}</div>
+                                </div>
+                                444
+                            </div> -->
+                        </div>
+                        <div *ngIf="i.list==''" (click)="addSelectWeek(i,j,k)" style="width: 100%;">
+                            <div style="width: 100%;height: 100px;"></div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <!-- <app-confim [confim]="setConfim" [title]="confimTitle" (setConfimResult)="tableConfimResult($event)"></app-confim> -->
+</div>
+<app-modal (updateData)="seach()"></app-modal>
+<app-double (updateData)="seach()"></app-double>

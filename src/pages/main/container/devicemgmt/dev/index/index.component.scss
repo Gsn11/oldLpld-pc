@@ -1,0 +1,7 @@
+@import '../../../../../common/utils/css/table.scss';
+::ng-deep .ant-modal-body{
+  padding: 0;
+}
+::ng-deep .ant-modal{
+    top: 65px;
+}

@@ -1,0 +1,133 @@
+.people{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 40px 0;
+}
+tbody tr:first-child td:last-child button{
+  display: none;
+}
+.orderStaticReportContainer {
+  padding: 20px 15px;
+
+  .top-btn {
+    display: flex;
+    justify-content: flex-end;
+
+    button {
+      margin: 10px;
+    }
+
+    .btn-g{
+      margin-right: auto;
+      display: flex;
+    }
+  }
+
+  .con {
+    margin-top: 20px;
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px 20px;
+
+    .tit {
+      position: relative;
+      font-size: 18px;
+      text-align: center;
+
+      .mat-radio-group {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        margin-top: -10px;
+        display: block;
+        height: 20px;
+        font-size: 14px;
+        line-height: 20px;
+
+        .mat-radio-button {
+          margin: 0 10px;
+        }
+      }
+    }
+  }
+
+  .table-w {
+    margin-top: 50px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #DEE2EC;
+    border-radius: 10px;
+    overflow: hidden;
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    table thead th {
+      border-right: 1px solid #DEE2EC;
+      font-size: 14px;
+      color: #000;
+      font-weight: 400;
+
+      &:last-child {
+        border: none;
+      }
+
+      &.cross {
+        div {
+          position: relative;
+          padding: 0 10px;
+          overflow: hidden;
+          &::before{
+            position: absolute;
+            right: 0;
+            bottom: 0%;
+            width:200%;
+            height: 1px;
+            background: #DEE2EC;
+            display: block;
+            content: '';
+            transform: rotate(12deg);
+            transform-origin: right bottom;
+          }
+          p {
+            &:first-child {
+              text-align: right;
+            }
+
+            margin: 0;
+            padding: 5px;
+            text-align: left;
+          }
+        }
+      }
+    }
+
+
+
+    table tbody tr {
+      &:hover {
+        background: #F5F7FA;
+      }
+
+      border-collapse:collapse;
+      border-top: 1px solid #DEE2EC;
+    }
+
+    table tbody td {
+      border-right: 1px solid #DEE2EC;
+
+      &:last-child {
+        border: none;
+      }
+
+      cursor: pointer;
+      padding: 16px 5px;
+      font-size: 14px;
+      line-height: 14px;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,48 @@
+@import '../../../../../common/utils/css/table.scss';
+table {
+  width: 100%;
+}
+.mat-elevation-z8{
+  background: #FFFFFF;
+  padding-bottom: 20px;
+}
+.body_flex{
+  display: flex;
+  align-items: center;
+}
+.btn{
+  margin: 20px;
+  float: right;
+  position: absolute;
+  top: 5px;
+  right: 0;;
+}
+
+.title{
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 28px;
+  margin-top: 10px;
+  height: 80px;
+}
+.orderfixSearchList {
+    margin: 0 0 20px 0;
+    padding: 21px 38px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px 0px rgba(11, 7, 8, 0.1);
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    flex-flow: column;
+    .searchTools {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .download {
+            margin-right: 10px;
+        }
+    }
+}

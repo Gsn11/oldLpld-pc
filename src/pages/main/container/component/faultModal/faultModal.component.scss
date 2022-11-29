@@ -1,0 +1,220 @@
+
+.input_box{
+  margin-top: 20px;
+}
+  .add_bg {
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    top: 12%;
+    z-index: 9;
+    background: rgb(1, 27, 57, 0.98);
+   
+    >img {
+      width: 100%;
+    }
+
+   
+  }
+  .add_body {
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    right: 5%;
+
+    height: 88%;
+    // overflow: auto;
+
+    .add_bottom {
+      width: 100%;
+      height: 100%;
+
+      .add_scr {
+        width: 100%;
+        height: 40%;
+
+        .input_box {
+          color: #34E4FF;
+          display: flex;
+
+          flex-direction: column;
+          height: 100%;
+          overflow: auto;
+
+          .deList {
+            width: 100%;
+            height: 100%;
+
+            .input_List {
+              display: flex;
+              margin-top: 2px;
+              width: 100%;
+            }
+
+            .input_List>div {
+              width: 16%;
+              padding: 5px 0;
+              margin-right: 2px;
+              display: flex;
+               justify-content: space-around;
+              // text-align: center;
+              align-items: center;
+              font-size: 0.1vw;
+              word-break:break-all;
+              .info{
+                color: #00FF00!important;
+              }
+            }
+
+            .input_List:nth-child(2n+1) div {
+              background: rgba(11, 140, 203, 0.2);
+            }
+
+            .input_List:nth-child(2n) div {
+              background: rgba(15, 91, 128, 0.2);
+            }
+
+            .input_List:first-child div {
+              background: rgba(38, 138, 187, 0.5) !important;
+            }
+
+            .input_List:first-child {
+              margin-top: 20px;
+            }
+          }
+
+          .Width_text {
+            width: 8%;
+            margin-right: 2%;
+            text-align: justify;
+            text-align-last: justify;
+          }
+        }
+      }
+
+      .add_btn {
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+
+        .btnList {
+          width: 22%;
+          display: flex;
+          justify-content: space-around;
+
+          .mat-button {
+            border: 1px solid #34E4FF;
+            background: rgba($color: #81e8fe, $alpha: 0.1);
+            color: #34E4FF;
+            width: 40%;
+          }
+
+          .iconfont {
+            color: #34E4FF;
+          }
+        }
+
+      }
+
+      .other_pic {
+        width: 100%;
+
+        .input_box {
+          color: #34E4FF;
+          display: flex;
+          margin-top: 2%;
+
+          .Width_text {
+            width: 8%;
+            margin-right: 2%;
+            text-align: justify;
+            text-align-last: justify;
+          }
+        }
+      }
+
+      .add_plan {
+        width: 100%;
+
+        .input_box {
+          color: #34E4FF;
+          display: flex;
+          align-items: center;
+
+          .Width_text {
+            width: 8%;
+            margin-right: 2%;
+            text-align: justify;
+            text-align-last: justify;
+          }
+        }
+      }
+    }
+
+    .add_form {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+
+      >div {
+        display: flex;
+        flex-direction: column;
+        /* align-items: center; */
+        // justify-content: space-around;
+
+        // border: 1px solid red;
+        .input_box {
+          color: #34E4FF;
+          display: flex;
+          align-items: center;
+
+          .Width_text {
+            width: 32%;
+            text-align: justify;
+            text-align-last: justify;
+            margin-right: 4.5%;
+          }
+        }
+      }
+
+      .add_left {
+        width: 50%;
+      }
+
+      .add_center {
+        width: 25%;
+
+        .input_box {
+          color: #34E4FF;
+          display: flex;
+
+
+          .Width_text {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-right: 6%;
+          }
+        }
+      }
+
+      .add_right {
+        width: 25%;
+
+        .input_box {
+          color: #34E4FF;
+          display: flex;
+          align-items: center;
+
+          .Width_text {
+            width: 35%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            margin-right: 6%;
+          }
+        }
+      }
+    }
+  }

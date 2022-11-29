@@ -1,0 +1,13 @@
+<div class="sidebarList" *ngFor="let u of List,let uindex = index">
+    <div class="sidebarName" [ngClass]="{'activeSidebarList': u.switch === true}"
+        *ngIf="(isType === 'add' || isType === 'edit') || u.check === true">
+        <span class="iconfont iconright" *ngIf="u.children && u.children.length !== 0" (click)="toggle(uindex)"></span>
+        <mat-checkbox *ngIf="isType !== 'info'" class="example-margin" [(ngModel)]="u.check"
+            (change)="checkList($event, uindex, 'first')"></mat-checkbox>
+        <span class="name" (click)="toggle(uindex)">{{u.name}}</span>
+    </div>
+    <div *ngIf="u.children && u.switch"
+        [@firstSwitch]="u.children && u.switch ? 'open' : 'closed'">
+        <app-treecheckitem *ngIf="u.switch && u.children" [List]="u.children" [isType]="isType"></app-treecheckitem>
+    </div>
+</div>

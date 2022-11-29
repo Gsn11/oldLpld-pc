@@ -1,0 +1,54 @@
+<!-- <app-crumbs [crumbs]="crumbsList"></app-crumbs> -->
+<div class="containerPadding">
+	<div class="orderfixSearchList">
+		<div class="searchTools">
+			<div>
+				<mat-form-field>
+					<input matInput [matDatepicker]="dp" placeholder="请选择日期" [value]="date">
+					<mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+					<mat-datepicker #dp startView="multi-year" (monthSelected)="getGetDate($event, dp)"
+						panelClass="example-month-picker">
+					</mat-datepicker>
+				</mat-form-field> 
+				<!-- <app-calendar title="选择日期" [setCreateDate]="BeginTime" (getTime)="getGetDate($event)"></app-calendar> -->
+			</div>
+			<div>
+				<button mat-raised-button color="primary" class="loginBtn" (click)="getList()"
+					style="margin-right: 20px;">搜索</button>
+				<button mat-stroked-button color="primary" (click)="downloadDeviceFile()"
+					class="download">导出Excel</button>
+			</div>
+		</div>
+	</div>
+	<div class="mat-elevation-z8" style="padding: 0 20px;">
+		<p style="font-size: 20px; text-align: center; line-height: 40px;padding-top: 20px;"> 2021年10月制水厂设备考核明细表</p>
+		<div class="input_box" style="padding-bottom: 20px;">
+			<table mat-table [dataSource]="list" style="width: 100%;">
+				<ng-container matColumnDef="subSystem">
+					<th mat-header-cell *matHeaderCellDef> 子系统 </th>
+					<td mat-cell *matCellDef="let element"> {{element.SubsysName}} </td>
+				</ng-container>
+				<ng-container matColumnDef="category">
+					<th mat-header-cell *matHeaderCellDef> 设备类别 </th>
+					<td mat-cell *matCellDef="let element"> {{element.DevTypeName}} </td>
+				</ng-container>
+				<ng-container matColumnDef="assessmentHours">
+					<th mat-header-cell *matHeaderCellDef> 考核设备台时数 </th>
+					<td mat-cell *matCellDef="let element"> {{element.DevCount}} </td>
+				</ng-container>
+				<ng-container matColumnDef="goodHours">
+					<th mat-header-cell *matHeaderCellDef> 完好设备台时数 </th>
+					<td mat-cell *matCellDef="let element"> {{element.GoodHours}} </td>
+				</ng-container>
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+			</table>
+		</div>
+		<!-- <div class="footer">
+			<mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+				[pageSize]="pageSize" (page)="change($event)" showFirstLastButtons>
+			</mat-paginator>
+		</div> -->
+	</div>
+	<!-- <app-confim [confim]="setConfim" [title]="confimTitle" (setConfimResult)="tableConfimResult($event)"></app-confim> -->
+</div>

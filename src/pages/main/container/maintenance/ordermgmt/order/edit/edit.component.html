@@ -1,0 +1,36 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>派单名</span>
+        <span>{{bemInfoData.MSName}}</span>
+    </div>
+
+    <div>
+        <span>派单描述</span>
+        <span>{{bemInfoData.MSDesc}}</span>
+    </div>
+    <div>
+        <span>派单号</span>
+        <span>{{bemInfoData.OrderNo}}</span>
+    </div>
+    <div>
+        <span>派单状态</span>
+        <span>{{bemInfoData.State | stateTypeTranslate}}</span>
+    </div>
+    <div>
+        <span>派单时间</span>
+        <span>{{bemInfoData.OrderTime}}</span>
+    </div>
+    <div *ngIf="bemInfoData.ServiceType !== 0">
+        <span>派单总价</span>
+        <span>{{bemInfoData.Price}} 元</span>
+    </div>
+    <div *ngIf="bemInfoData.ServiceType !== 0">
+        <span>报价</span>
+        <app-price style="width: calc(100% - 220px);" [Items]="PriceList"></app-price>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

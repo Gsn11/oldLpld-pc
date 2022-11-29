@@ -1,0 +1,56 @@
+<!-- <app-crumbs [crumbs]="crumbsList"></app-crumbs> -->
+<div class="containerPadding">
+    <div class="orderfixSearchList">
+        <div class="searchTools">
+            <div>
+                <!-- <button mat-stroked-button color="primary" class="download">导出Excel</button> -->
+                <button mat-raised-button color="primary" class="loginBtn" (click)="showdiog()" >新增班次</button>
+            </div>
+        </div>
+    </div>
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="FrequencyList" class="mat-elevation-z8">
+
+            <!-- Checkbox Column -->
+            
+
+            <!-- Position Column -->
+            <!-- <ng-container matColumnDef="position">
+                <th mat-header-cell *matHeaderCellDef> 序号 </th>
+                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container> -->
+            <!-- Name Column -->
+            <ng-container matColumnDef="Name">
+                <th mat-header-cell *matHeaderCellDef> 班次名称 </th>
+                <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="AbbrName">
+                <th mat-header-cell *matHeaderCellDef> 班次简称 </th>
+                <td mat-cell *matCellDef="let element" ><div class="color_box"><div>{{element.AbbrName}}</div></div></td>
+            </ng-container>
+            <ng-container matColumnDef="Type">
+                <th mat-header-cell *matHeaderCellDef> 班次类别 </th>
+                <td mat-cell *matCellDef="let element" ><div class="color_box"><div>
+                    {{element.Type === 0?'工作班次':element.Type === 1?'休息班次':element.Type === 2?'调休':element.Type === 3?'年假':element.Type === 4?'病假':element.Type === 5?'事假':element.Type === 6?'产假':element.Type === 7?'哺乳假':element.Type === 8?'流产假':element.Type === 9?'婚假':element.Type === 10?'丧假':element.Type === 11?'护理假':element.Type === 12?'工伤假':'其它假'}}
+                </div></div></td>
+            </ng-container>
+            <ng-container matColumnDef="WorkStart">
+                <th mat-header-cell *matHeaderCellDef> 班次描述 </th>
+                <td mat-cell *matCellDef="let element" ><div class="color_box"><div>{{element.WorkStart}}-{{element.WorkEnd}}</div>  <div class="color" [ngStyle]="{'background': element.Color}"></div> </div></td>
+            </ng-container>
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="symbol">
+                <th mat-header-cell *matHeaderCellDef> 操作 </th>
+                <td mat-cell *matCellDef="let element"> <div class="operation"><mat-slide-toggle [checked]="element.State === 0" (toggleChange)="changeState(element.Seq, element.State)">启用</mat-slide-toggle><span class="edit" (click)="edit(element)">编辑</span> </div>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="selection.toggle(row)">
+            </tr>
+        </table>
+    </div>
+    
+    <app-schedulingshiftmodal [data]="schedulingshifDetail" (someEvent)="getList()"></app-schedulingshiftmodal>
+</div>

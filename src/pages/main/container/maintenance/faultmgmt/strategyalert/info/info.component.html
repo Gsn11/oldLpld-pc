@@ -1,0 +1,51 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+    <div class="main">
+        <div>
+            <p>派单类别</p>
+            <span>策略故障派单</span>
+        </div>
+        <div>
+            <p>故障时间</p>
+            <span>{{data.Time}}</span>
+        </div>
+        <div>
+            <p>故障位置</p>
+            <span>{{data.CName}}</span>
+        </div>
+        <div>
+            <p>故障内容</p>
+            <span>{{data.Name}} - {{data.Name}}</span>
+        </div>
+        <div>
+            <p>策略内容</p>
+            <table style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th>设备编号(名称)</th>
+                        <th>测量变量</th>
+                        <th>策略公式</th>
+                        <th>状态</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of strategyList">
+                        <td>{{item.Metric.DevName}}</td>
+                        <td>{{item.Metric.SmartDevName}}</td>
+                        <td>{{item.Formula}}</td>
+                        <td>{{item.Metric.StateName}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div>
+            <p>策略公式</p>
+            <span>{{data.Formula}}</span>
+        </div>
+    
+        <div class="btn-g">
+            <button mat-raised-button color="primary" (click)="distribute()">派单</button>
+            <button mat-raised-button color="primary" >返回</button>
+          </div>
+    </div>
+</div>

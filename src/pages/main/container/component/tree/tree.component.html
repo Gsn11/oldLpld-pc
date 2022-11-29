@@ -1,0 +1,18 @@
+<ng-container *ngIf="allSwitchIsOpen">
+    <div style="max-height: 570px; overflow: auto;">
+        <div class="sidebarList" *ngFor="let l of List,let lindex = index">
+            <ng-container *ngIf="l.display === true">
+                <div class="sidebarName" [ngClass]="{'activeSidebarList': l.switch === true}" (click)="toggle(lindex)">
+                    <span class="iconfont iconright" *ngIf="l.children && l.children.length !== 0"></span>
+                    <span class="name" [ngClass]="{'active': l.isChoose === true}">{{l.useId}} {{showSeq ? '(' + (l.DTSeq || l.BUCode || l.TSeq) + ')' : ''}}</span>
+                </div>
+                <div *ngIf="l.children && l.children.length !== 0 && l.switch"
+                    [@firstSwitch]="l.children && l.children.length !== 0 && l.switch ? 'open' : 'closed'">
+                    <app-tree [showSeq]="showSeq" *ngIf="l.children && l.switch && l.children.length !== 0" [List]="l.children"
+                        [allSwitchIsOpen]="allSwitchIsOpen" (setTreeChange)="treeChange($event)">
+                    </app-tree>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</ng-container>

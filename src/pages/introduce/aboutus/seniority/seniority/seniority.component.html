@@ -1,0 +1,16 @@
+<div class="wlyIntroduce">
+  <app-nav></app-nav>
+  <app-wall name="荣誉资信"></app-wall>
+  <div class="main">
+    <div class="title"><span>荣誉资信</span></div>
+    <div class="list">
+      <div class="item" *ngFor="let d of data">
+        <div><img [src]="d.url" alt="d.name"></div>
+        <div><span>{{d.name}}</span></div>
+      </div>
+    </div>
+    <mat-paginator [hidePageSize]="true" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+      [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+  </div>
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,107 @@
+<div class="userinfoContainer">
+  <div class="sideList">
+    <span [style.top]="sideMoveLineTop" class="rightMoveLine"></span>
+    <div *ngFor="let u of userinfo, let uIndex = index" [ngClass]="{'active': uIndex === barIndex}"
+      (click)="activeSwitchBar(uIndex)">
+      <span>{{u.name}}</span>
+    </div>
+  </div>
+  <div *ngIf="barIndex === 0" class="detailOut">
+    <div>
+      <span>登陆名：</span>
+      <div>{{loginId}}</div>
+    </div>
+    <div>
+      <span>超级管理员</span>
+      <div>{{isAdmin ? '是' : '否'}}</div>
+    </div>
+    <div>
+      <span>角色</span>
+      <div>
+        <span *ngFor="let r of RoleName">
+          <ng-container *ngIf="r">
+              {{r.RName}},
+          </ng-container>
+      </span>
+      </div>
+    </div>
+    <div>
+      <span>部门岗位</span>
+      <div>{{TeamJobName}}</div>
+    </div>
+
+    <div>
+      <span><span style="color: red;">*</span> 姓名</span>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="请输入姓名" [formControl]="userName" required>
+        <mat-error *ngIf="userName.invalid">{{getUserNameErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <span><span style="color: red;">*</span> 手机号</span>
+      <mat-form-field class="example-full-width">
+        <!-- <input matInput placeholder="请输入手机号" type="number" [(ngModel)]="userPhone"> -->
+        <input matInput placeholder="请输入手机号" type="number" [formControl]="userPhone" required>
+        <mat-error *ngIf="userPhone.invalid">{{getUserPhoneErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <span>Email</span>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="请输入邮箱地址" type="email" [(ngModel)]="userEmail">
+      </mat-form-field>
+    </div>
+
+    <div>
+      <span>性别</span>
+      <mat-form-field>
+        <mat-label>请选择状态</mat-label>
+        <mat-select [formControl]="sex">
+          <mat-option *ngFor="let s of sexList" [value]="s.state">{{s.value}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <span>成立日期</span>
+      <app-calendar *ngIf="this.bemUserInfo" [setCreateDate]="createDate"></app-calendar>
+    </div>
+    <div class="logoOut">
+      <span>头像</span>
+      <app-singlefile class="singleFileUpload" [setImgsrc]="imgsrc"></app-singlefile>
+      请上传100*100像素的图片，以免图片拉伸变形后模糊。
+    </div>
+
+    <div>
+      <span>其它图片</span>
+      <app-manyfile [setImgsrcData]="imgsrcData"></app-manyfile>
+    </div>
+
+    <div class="btnList">
+      <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+      <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>取消</button>
+    </div>
+  </div>
+  <div *ngIf="barIndex === 1" class="detailOut">
+    <div>
+      <span><span style="color: red;">*</span> 旧密码</span>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="请输入旧密码" type="password" [formControl]="userOldPwd" required>
+        <mat-error *ngIf="userOldPwd.invalid">{{getUserOldPwdErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div>
+      <span><span style="color: red;">*</span> 新密码</span>
+      <mat-form-field class="example-full-width">
+        <input matInput placeholder="请输入新密码" type="password" [formControl]="userNewPwd" required>
+        <mat-error *ngIf="userNewPwd.invalid">{{getUserNewPwdErrorMessage()}}</mat-error>
+      </mat-form-field>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="pwdSave()"><span class="iconfont iconsave"></span>确定</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>取消</button>
+      </div>
+  </div>
+</div>

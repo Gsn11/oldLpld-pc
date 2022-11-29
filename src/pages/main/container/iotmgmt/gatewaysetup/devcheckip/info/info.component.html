@@ -1,0 +1,29 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>智联网关</span>
+        <span>{{bemInfoData.GatewayNo}} ({{bemInfoData.GatewayName}})</span>
+    </div>
+    <div>
+        <span>被监控设备</span>
+        <span>{{bemInfoData.DevNo}} ({{bemInfoData.DevName}})</span>
+    </div>
+    <div>
+        <span>IP</span>
+        <span>{{bemInfoData.Ip}}</span>
+    </div>
+    <div>
+        <span>端口</span>
+        <span>{{bemInfoData.Port}}</span>
+    </div>
+    <div>
+        <span>服务名</span>
+        <span>{{bemInfoData.Id}}</span>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoEdit()" *ngIf="userPower"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()" *ngIf="userPower"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

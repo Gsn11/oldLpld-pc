@@ -1,0 +1,111 @@
+    <div class="add_bg" *ngIf="show">
+        <img src="../../../../../assets/inspection/add_bg.png" alt="">
+        <div class="add_body">
+            <div class="add_form">
+                <div class="add_left">
+                    <div class="input_box">
+                        <span class="Width_text"> 巡检名称</span>
+                        <span class="MSName">{{data.MSName}}</span>
+                    </div>
+                    <div class="input_box">
+                        <span class="Width_text"> 巡检时间</span>
+                        <span>{{data.BeginTime}}至{{data.EndTime}}</span>
+                    </div>
+                    
+                </div>
+                <div class="add_center">
+                    <div class="input_box">
+                        <span class="Width_text">任务周期</span>
+                        <span>{{data.TimeTypeName}}</span>
+                    </div>
+                    <div class="input_box">
+                        <span class="Width_text">巡检状态</span>
+                        <span *ngIf="data.State==1">失效</span>
+                        <span *ngIf="data.State==0">正常</span>
+                        <span *ngIf="data.State==2">已删除</span>
+                        <span *ngIf="data.State==3">超时失效</span>
+                    </div>
+                    
+                     
+                </div>
+                <div class="add_right">
+                    <div class="input_box">
+                        <span class="Width_text">负责人</span>
+                        <span>{{data.ChargerName}}</span>
+                    </div>
+                    <div class="input_box">
+                        <span class="Width_text">巡检描述</span>
+                        <span class="MSName">{{data.MSDesc}}</span>
+                    </div>
+                    <!-- <div class="input_box">
+                        <span class="Width_text">服务提供方</span>
+                       <span>{{data.ServiceType | serviceTypeTranslate}}</span>
+                    </div>
+                    <div class="input_box">
+                        <span class="Width_text"> 维修人员</span>
+                        <span>{{data.ChargerName}}</span>
+                    </div> -->
+                    <!-- <div>
+                        <span class="Width_text"> 固定服务商</span>
+                        <span>固定服务商</span>
+                    </div>
+                    <div>
+                        <span>报价</span>
+                        <span>报价</span>
+                    </div> -->
+                </div>
+               
+            </div>
+            <div class="add_bottom">
+                <!-- <div class="add_plan">
+                    <div class="input_box">
+                        <span class="Width_text">计划描述</span>
+                        <span>计划描述</span>
+                    </div>
+                </div> -->
+                <div class="add_scr">
+                    <div class="input_box">
+                        <span class="Width_text">计划条目</span>
+                        <!-- <span>1</span> -->
+                        <!-- <app-items *ngIf="MaintenanceTemplates && Builds" style="width: calc(90%);"
+                            [MaintenanceTemplates]="MaintenanceTemplates" [Builds]="Builds" [Items]="scheItem">
+                        </app-items> -->
+                        <div class="deList">
+                            <div class="input_List">
+                                <div>序号</div>
+                                <div>测量变量</div>
+                                <div>设备编号（名称）</div>
+                                <div>设备型号</div>
+                               
+                                <div>状态信息</div>
+                                <!-- <div>设施位置</div> -->
+                            </div>
+                            <div class="input_List" *ngFor="let item of data.Items; let i = index" >                            
+                                <div>{{i+1}}</div>
+                                <div>{{item.Metric.MetricsDesc}}({{item.Metric.Id}})</div>
+                                <div>{{item.DeviceNo}}({{item.DevName}})</div>
+                                <div>{{item.Metric.ModelName}}({{item.Metric.ModelId}})</div>
+                                <div>{{item.AlarmStatus===0?'异常':'正常'}} </div>
+                                <!-- <div>{{item.BuildingName}}{{item.Zone}}{{item.SpacePos}}</div> -->
+                            </div>
+                            
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="other_pic">
+                    <div class="input_box">
+                        <span class="Width_text">其它图片</span>
+                        <div class="Imglist">
+                            <img class="ImgE" *ngFor="let item of ImgList" src="{{item.ImgUrl}}" mode="widthFix" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="add_btn">
+                    <div class="btnList">
+                        <button mat-button (click)="show=false"><span class="iconfont iconpstep"></span>返回</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

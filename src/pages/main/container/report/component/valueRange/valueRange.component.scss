@@ -1,0 +1,24 @@
+@import '../../../../../common/utils/css/flex.css';
+
+.containerPadding > div{
+    width: 100%;
+}
+
+.input-w{
+    input{
+        flex: 1;
+        min-width: 0;
+        height: 40px;
+        text-align: center;
+        border: 1px solid #221e1e;
+        outline: none;
+    }
+    
+}
+
+.btn-w{
+    padding-top: 30px;
+    button{
+        margin: 0 10px;
+    }
+}

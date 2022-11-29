@@ -1,0 +1,113 @@
+.userinfoContainer {
+  margin: 20px 35px 50px;
+  padding: 25px;
+  background: white;
+  box-shadow: 0px 0px 10px 0px rgba(11, 7, 8, 0.1);
+  display: flex;
+  justify-content: flex-start;
+  .sideList {
+    top: 120px;
+    right: 65px;
+    margin-top: -9px;
+    // padding: 25px 0 25px 25px;
+    min-width: 100px;
+    width: 100px;
+    position: fixed;
+    .rightMoveLine {
+      top: 11px;
+      right: 0;
+      width: 2px;
+      height: 20px;
+      background: #1890ff;
+      border-radius: 2px;
+      display: block;
+      position: absolute;
+      opacity: 0.8;
+      transition: all ease-out 0.32s;
+    }
+    >div {
+      height: 40px;
+      font-size: 16px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all ease-in 0.32s;
+      &:hover {
+        color: #1890ff;
+      }
+      &.active {
+        color: #1890ff;
+      }
+    }
+  }
+  .detailOut {
+    margin-left: 10px;
+    // padding: 25px 25px 25px 0;
+    width: 100%;
+    >div {
+      margin-bottom: 30px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+  
+      >span {
+        font-size: 16px;
+  
+        &:first-child {
+          padding-right: 10px;
+          min-width: 140px;
+          color: #626262;
+        }
+  
+        &:last-child {
+          width: 100%;
+          color: #0152AD;
+        }
+      }
+  
+      &.logoOut {
+        color: #b2b2b2;
+        font-size: 14px;
+  
+        .singleFileUpload {
+          border: 1px dashed #626262;
+          min-width: 100px;
+          min-height: 100px;
+          width: 100px;
+          height: 100px;
+          border-radius: 5px;
+          position: relative;
+          overflow: hidden;
+          transition: border ease 0.24s;
+          cursor: pointer;
+        }
+      }
+    }
+  
+    .btnList {
+      justify-content: center;
+  
+      >button {
+        margin: 0 35px;
+  
+        .iconfont {
+          padding-right: 5px;
+        }
+  
+        &:nth-child(1) {
+          color: white;
+          background: #10A0F6;
+        }
+  
+        &:nth-child(2) {
+          background: #EEEEEE;
+        }
+      }
+    }
+  
+    .map-out {
+      width: 100%;
+    }
+  }  
+}

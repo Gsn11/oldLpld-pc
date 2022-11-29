@@ -1,0 +1,16 @@
+<div class="modal-out" [ngClass]="{'active': show}">
+    <div class="bg" (click)="switchModalBox()"></div>
+    <div class="container">
+        <div class="header"><span class="title">{{title}}</span></div>
+        <div class="main">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="岗位名称" [formControl]="JName" required>
+                <mat-error *ngIf="JName.invalid">{{getJNameErrorMessage()}}</mat-error>
+            </mat-form-field>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="goCancel()"><span class="iconfont iconpstep"></span>取消</button>
+            <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        </div>
+    </div>
+</div>

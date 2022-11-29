@@ -1,0 +1,202 @@
+@import '../../../../../common/utils/css/constantsColor.scss';
+
+.template {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  >div {
+    width: 25%;
+    word-break: break-all;
+  }
+
+  .editItem {
+    color: #006BE3;
+    cursor: pointer;
+  }
+
+  .deleteItem {
+    margin-left: 10px;
+    color: red;
+    cursor: pointer;
+  }
+}
+
+.Items-out {
+  .btn-list {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+
+    >button {
+      margin-left: 10px;
+    }
+  }
+}
+
+
+.deleteItem {
+  color: #FF0000;
+}
+
+.modal-out {
+  top: -100%;
+  left: 0;
+  width: 100%;
+  max-height: 0;
+  display: flex;
+  justify-content: center;
+  opacity: 0;
+  position: fixed;
+  overflow: hidden;
+  transition: all linear 0.14s;
+  z-index: 162;
+
+  &.active {
+    top: 0;
+    width: 100%;
+    max-height: 100%;
+    height: 100%;
+    opacity: 1;
+
+    .container {
+      top: 110px;
+    }
+  }
+
+  .bg {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.1);
+    position: absolute;
+    z-index: 10;
+  }
+
+  .container {
+    top: -110px;
+    left: calc(50% - 150px);
+    padding: 20px 40px 0;
+    width: 300px;
+    background: white;
+    border-radius: 5px;
+    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2), 0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+    position: absolute;
+    overflow: hidden;
+    transition: all ease 0.6s;
+    z-index: 11;
+
+    .header {
+      margin-bottom: 20px;
+
+      .title {
+        font-size: 20px;
+        font-weight: 600;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .iconclose {
+        cursor: pointer;
+      }
+    }
+
+    .space-main {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      .build-out {
+        width: 250px;
+        height: 500px;
+        overflow-y: scroll;
+
+        .build {
+          margin-bottom: 10px;
+
+          .iconfont {
+            margin-right: 5px;
+            display: inline-block;
+            transform: rotate(0);
+            transition: all linear 0.24s;
+          }
+
+          .name {
+            padding: 2px;
+            cursor: pointer;
+            transition: all ease 0.24s;
+
+            &.active {
+              background: #10a0f6;
+              color: white;
+              transition: all ease 0.24s;
+            }
+          }
+
+          &.active {
+            .iconfont {
+              transform: rotate(90deg);
+              transition: all linear 0.24s;
+            }
+          }
+
+          .space {
+            >span {
+              margin-left: 30px;
+              padding: 2px;
+              cursor: pointer;
+              transition: all ease 0.24s;
+
+              &.active {
+                background: #10a0f6;
+                color: white;
+                transition: all ease 0.24s;
+              }
+            }
+          }
+        }
+      }
+      .devices-out {
+        margin-left: 17px;
+        padding: 3px;
+        width: 100%;
+        height: 500px;
+        box-sizing: border-box;
+        overflow-y: scroll;
+      }
+    }
+
+    .footer {
+      margin: 20px 0;
+      padding: 10px 0;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+
+      >button {
+        margin-right: 10px;
+        height: 35px;
+        cursor: pointer;
+
+        .iconfont {
+          padding-right: 5px;
+        }
+
+        &:nth-child(2) {
+          color: white;
+          background: #10A0F6;
+        }
+
+        &:nth-child(1) {
+          background: #EEEEEE;
+        }
+      }
+    }
+  }
+}
+
+.chooseDeviceName {
+  margin: 10px 0;
+  color: #006BE3;
+  display: block;
+  cursor: pointer;
+}

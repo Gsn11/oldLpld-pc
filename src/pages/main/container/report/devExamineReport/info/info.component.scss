@@ -1,0 +1,45 @@
+
+.detailOut {
+    margin:20px 35px 50px;
+    padding: 25px;
+    background: white;
+    box-shadow:0px 0px 10px 0px rgba(11,7,8,0.1);
+    .header{
+        width: 100%;
+        margin-bottom: 20px;
+    }
+   .title{
+       width: 100%;
+       display: flex;
+       justify-content: space-around;
+       font-size: 20px;
+   }
+   .Order{
+       width: 100%;
+       display: flex;
+       justify-content: space-between;
+       margin-bottom: 20px;
+
+   }
+   .pro{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+   }
+   .type{
+       width: 100%;
+       margin-bottom: 20px;
+       .mat-elevation-z8{
+           width: 100%;
+       }
+   }
+   .btn{
+       width: 100%;
+       display: flex;
+       justify-content: space-around;
+   }
+   .edit{
+       background: primary;
+   }
+}

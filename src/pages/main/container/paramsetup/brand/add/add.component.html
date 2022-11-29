@@ -1,0 +1,70 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div class="logoOut">
+        <span>品牌图片</span>
+        <app-singlefile class="singleFileUpload" [setImgsrc]="imgsrc"></app-singlefile>
+         请上传100*100像素的图片，以免图片拉伸变形后模糊。
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> {{buildData.buildType === '联排联调' ? '品牌名称' : '制造厂家'}}</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入品牌名称" [(ngModel)]="BRName">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>品牌英文名称</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入英文名称" [(ngModel)]="BRLocalName">
+        </mat-form-field>
+    </div>
+    <div *ngIf="buildData.buildType === '联排联调'">
+        <span>所属厂商</span>
+        <span (click)="openDialog()">{{facturersName}}</span>
+    </div>
+    <div>
+        <span>申请人名称</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入申请人名称" [(ngModel)]="Proposer">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>申请人地址</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入申请人地址" [(ngModel)]="ProposerAddr">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>注册地</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入注册地" [(ngModel)]="RegisterZone">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>注册类型</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入注册类型" [(ngModel)]="RegisterType">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>注册号</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入注册号" [(ngModel)]="RegisterCode">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>申请日期</span>
+        <app-calendar #dateStart [setCreateDate]="RegisterDate"></app-calendar>
+    </div>
+    <div>
+        <span>失效日期</span>
+        <app-calendar #dateEnd [setCreateDate]="ExpireDate"></app-calendar>
+    </div>
+    <div>
+        <span>其它图片</span>
+        <app-manyfile [setImgsrcData]="imgsrcData"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+
+<div class="containerPadding">
+    <div class="main">
+        <div>
+            <p><span style="color: red;">*</span>编号</p>
+            <mat-form-field class="example-form-field">
+                <input matInput [(ngModel)]="deviceNo" type="text" placeholder="编号">
+            </mat-form-field>
+        </div>
+        <div>
+            <p><span style="color: red;">*</span>名称</p>
+            <mat-form-field class="example-form-field">
+                <input matInput [(ngModel)]="name" type="text" placeholder="名称">
+            </mat-form-field>
+        </div>
+        <div *ngIf="buildData.buildType == '联排联调'">
+            <p>物料型号</p>
+            <span (click)="openDeviceModelDialog()" style="color: #0152AD; cursor: pointer;">{{DeviceModelName ? DeviceModelName : '请点击选择物料型号'}}</span>
+        </div>
+        <div *ngIf="buildData.buildType != '联排联调'">
+            <p>物料分类</p>
+            <span (click)="openDeviceModelDialog()" style="color: #0152AD; cursor: pointer;">{{DeviceModelName ? DeviceModelName : '请点击选择物料分类'}}</span>
+        </div>
+        <div>
+            <p>规格</p>
+            <mat-form-field class="example-form-field">
+                <input matInput type="text" [(ngModel)]="remark" placeholder="规格">
+            </mat-form-field>
+        </div>
+        <div>
+            <p>单位</p>
+            <mat-form-field class="example-form-field">
+                <input matInput type="text" [(ngModel)]="unit" placeholder="单位">
+            </mat-form-field>
+        </div>
+        <div>
+            <p>所在地点</p>
+            <span (click)="openBuildDialog()" style="color: #0152AD; cursor: pointer;">{{buildName ? buildName : (buildData.buildType == '联排联调' ? '请点击选择水工建筑物' : '请点击选择建筑物')}}</span>
+        </div>
+        <div *ngIf="buildItem && buildItem.Floor">
+            <p>所在楼层</p>
+            <span>{{buildItem.Floor}}</span>
+        </div>
+        <div *ngIf="buildItem && buildItem.Zone">
+            <p>所在楼层的区域/房间</p>
+            <span>{{buildItem.Zone}}</span>
+        </div>
+        <div *ngIf="buildItem && buildItem.SpacePos">
+            <p>所在区域/房间的空间位置</p>
+            <span>{{buildItem.SpacePos}}</span>
+        </div>
+        <div>
+            <p>库存报警通知</p>
+            <mat-form-field class="example-form-field">
+                <input matInput type="number" [(ngModel)]="threshold" placeholder="报警阈值">
+            </mat-form-field>
+            <span (click)="openMsgDialog()" style="color: #0152AD; cursor: pointer;">{{msgName ? msgName : '选择信息接收用户'}}</span>
+        </div>
+        <div>
+            <p>图片</p>
+            <app-manyfile [maxLength]="1" [setImgsrcData]="imgsrcData"></app-manyfile>
+            <!-- <p>图片文档</p>
+            <app-manyfile [setImgsrcData]="imgsrcData" [docList]="docListData"></app-manyfile> -->
+        </div>
+        <div class="btn-g">
+            <button mat-raised-button color="primary" class="loginBtn" (click)="goBack()">取消</button>
+            <button mat-raised-button color="primary" class="loginBtn" (click)="addMateriel()">保存</button>
+        </div>
+    </div>
+</div>

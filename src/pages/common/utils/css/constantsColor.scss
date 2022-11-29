@@ -1,0 +1,9 @@
+// 主题色值，16进制 *美工说的
+$color16: #3972e5;
+
+// 同上，rgba色值
+$colorRgba: rgba(61,103,222,1);
+
+// hover时 轻微偏蓝色高亮hsla色值
+// 尽量选在有白色做底色的元素变换的情况下使用
+$fontHoverLightColor: hsla(240,100%,99%,1);

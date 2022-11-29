@@ -1,0 +1,760 @@
+<!-- <app-crumbs [crumbs]="crumbsList"></app-crumbs> -->
+<div class="containerPadding">
+	<!-- <app-valuerange [value]="[1, 2]" [showValuerange]="showValuerange" (confirm)="valueRangeConfirm($event)"></app-valuerange> -->
+	<div class="mat-elevation-z8" style="margin: 20px; background-color: #fff; padding: 20px">
+		<app-calendar [setCreateDate]="selectDataVal" (getTime)="getBeginTime($event)" title="选择日期"></app-calendar>
+
+		<p class="tit">二泵1</p>
+		<div class="Box" style="width: 100%; overflow-x: scroll;height:660px">
+			<div style="width: 7000px;" flex="dir:top" class="table">
+				<div class="table-hd parent-row" flex>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">时间</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">开机时间</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">关机时间</div>
+					</div>
+					<div style="flex: 13;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">1号机 250kW cosφ=0.84</div>
+						<div style="flex: 4;" flex class="parent-row">
+							<div style="flex: 1;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">电流</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">(A)<br/>≤470*1.1</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">轴温</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">电机（℃）<br/>≤110</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">水泵（℃）<br/>≤100</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">压力</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">泵前(MPa)<br/>≤0.037</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">泵后(MPa)<br/>≤0.3</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">变频</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">频率<br/>≤50HZ</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">时间</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">电表</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">实用(kwh)<br/>≤298*1.1</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">泵后流量</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">流量（m³）<br/>≤3000*1.1</div>
+								</div>
+							</div>
+							<div style="flex: 1;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">水泵电耗</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">（kWh/kt)<br/>≤99</div>
+								</div>
+							</div>
+							<div style="flex: 1;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">效率</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">（%）</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">开机时间</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">关机时间</div>
+					</div>
+					<div style="flex: 13;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">2号机 630kW cosφ=0.81</div>
+						<div style="flex: 4;" flex class="parent-row">
+							<div style="flex: 1;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">电流</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">(A)<br/>≤47*1.1</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">轴温</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">电机（℃）<br/>≤110</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">水泵（℃）<br/>≤100</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">压力</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">泵前(MPa)<br/>≤0.037</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">泵后(MPa)<br/>≤0.3</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">变频</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">频率<br/>≤50HZ</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">时间</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">电表</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">实用(kwh)<br/>≤778*1.1</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">泵后流量</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">流量（m³）<br/>≤5100*1.1</div>
+								</div>
+							</div>
+							<div style="flex: 1;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">水泵电耗</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">（kWh/kt)<br/>≤153</div>
+								</div>
+							</div>
+							<div style="flex: 1;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">效率</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">（%）</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">开机时间</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">关机时间</div>
+					</div>
+					<div style="flex: 13;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">3号机 630kW cosφ=0.81</div>
+						<div style="flex: 4;" flex class="parent-row">
+							<div style="flex: 1;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">电流</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">(A)<br/>≤47*1.1</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">轴温</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">电机（℃）<br/>≤110</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">水泵（℃）<br/>≤100</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">压力</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">泵前(MPa)<br/>≤0.037</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">泵后(MPa)<br/>≤0.3</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">变频</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">频率<br/>≤50HZ</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">时间</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">电表</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">实用(kwh)<br/>≤778*1.1</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">泵后流量</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">流量（m³）<br/>≤5100*1.1</div>
+								</div>
+							</div>
+							<div style="flex: 1;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">水泵电耗</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">（kWh/kt)<br/>≤153</div>
+								</div>
+							</div>
+							<div style="flex: 1;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">效率</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">（%）</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">开机时间</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">关机时间</div>
+					</div>
+					<div style="flex: 13;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">4号机 400kW cosφ=0.80</div>
+						<div style="flex: 4;" flex class="parent-row">
+							<div style="flex: 1;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">电流</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">(A)<br/>≤700*1.1</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">轴温</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">电机（℃）<br/>≤110</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">水泵（℃）<br/>≤100</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">压力</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">泵前(MPa)<br/>≤0.037</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">泵后(MPa)<br/>≤0.3</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">变频</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">频率<br/>≤50HZ</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">时间</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">电表</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">实用(kwh)<br/>≤500*1.1</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">泵后流量</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">读数</div>
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">流量（m³）<br/>≤3200*1.1</div>
+								</div>
+							</div>
+							<div style="flex: 1;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">水泵电耗</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">（kWh/kt)<br/>≤156</div>
+								</div>
+							</div>
+							<div style="flex: 1;" flex="dir:top" class="parent-column">
+								<div style="flex: 1;" flex class="parent-row">
+									<div style="flex: 1;padding: 5px;" flex="cross:center main:center">效率</div>
+								</div>
+								<div style="flex: 3;" flex class="parent-row">
+									<div style="flex: 1; padding: 5px;" flex="cross:center main:center">（%）</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">二泵扬程<br/>(m)<br/>≤27.7</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">单位电耗<br/>(kW·h/kt)<br/>≤156</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">配水单耗<br/>(kW·h/<br/>kt·MPa)</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center;">二泵效率<br/>(%)</div>
+					</div>
+				</div>
+				<div [ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff'}" *ngFor="let item of list;let i = index"  class="table-c parent-row" flex (mouseover)="blurChangeOver(i)" (mouseleave)="blurChangeLeave()">
+					<div style="flex: 1;">
+						<p>{{(i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 )? '小计' : i == 27 ? '总计' : ( i > 8 && i < 18  ) ? i-1 :  ( i > 17  ) ? i-2 : i }}</p>
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.startUpTimeOne,'1号机250kWcosφ=0.84-开机时间')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.startUpTimeOne == null?'#000':item.startUpTimeOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.startUpTimeOne == null ? '0' : item.startUpTimeOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.shutDownTimeOne,'1号机250kWcosφ=0.84-关机时间')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.shutDownTimeOne == null?'#000':item.shutDownTimeOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.shutDownTimeOne == null ? '0' : item.shutDownTimeOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.electricOne,'1号机250kWcosφ=0.84-电流((A)≤470*1.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.electricOne == null?'#000':item.electricOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.electricOne == null ? '0' : item.electricOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.motorTemOne,'1号机250kWcosφ=0.84-轴温(电机（℃）≤110)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.motorTemOne == null?'#000':item.motorTemOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.motorTemOne == null ? '0' : item.motorTemOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pumpTemOne,'1号机250kWcosφ=0.84-轴温(水泵（℃）≤100)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pumpTemOne == null?'#000':item.pumpTemOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pumpTemOne == null ? '0' : item.pumpTemOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.inPressOne,'1号机250kWcosφ=0.84-压力(泵前(MPa)≤0.037)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.inPressOne == null?'#000':item.inPressOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.inPressOne == null ? '0' : item.inPressOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.outPressOne,'1号机250kWcosφ=0.84-压力(泵后(MPa)≤0.3)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.outPressOne == null?'#000':item.outPressOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.outPressOne == null ? '0' : item.outPressOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.hzPvFreOne,'1号机250kWcosφ=0.84-变频(频率≤50HZ)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.hzPvFreOne == null?'#000':item.hzPvFreOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.hzPvFreOne == null ? '0' : item.hzPvFreOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.hzPvTimeOne,'1号机250kWcosφ=0.84-变频(时间)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.hzPvTimeOne == null?'#000':item.hzPvTimeOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.hzPvTimeOne == null ? '0' : item.hzPvTimeOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.whmReadOne,'1号机250kWcosφ=0.84-电表(读数)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.whmReadOne == null?'#000':item.whmReadOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.whmReadOne == null ? '0' : item.whmReadOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.whmActualOne,'1号机250kWcosφ=0.84-电表(实用(kwh)≤298*1.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.whmActualOne == null?'#000':item.whmActualOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.whmActualOne == null ? '0' : item.whmActualOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.outFlowReadOne,'1号机250kWcosφ=0.84-泵后流量(读数)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.outFlowReadOne == null?'#000':item.outFlowReadOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.outFlowReadOne == null ? '0' : item.outFlowReadOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.outFlowActualOne,'1号机250kWcosφ=0.84-泵后流量(流量（m³）≤3000*1.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.outFlowActualOne == null?'#000':item.outFlowActualOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.outFlowActualOne == null ? '0' : item.outFlowActualOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pumpPowConOne,'1号机250kWcosφ=0.84-水泵电耗((kWh/kt)≤99)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pumpPowConOne == null?'#000':item.pumpPowConOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pumpPowConOne == null ? '0' : item.pumpPowConOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.efficiencyOne,'1号机250kWcosφ=0.84-效率(（%）)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.efficiencyOne == null?'#000':item.efficiencyOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.efficiencyOne == null ? '0' : item.efficiencyOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.startUpTimeTwo,'2号机630kWcosφ=0.81-开机时间')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.startUpTimeTwo == null?'#000':item.startUpTimeTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.startUpTimeTwo == null ? '0' : item.startUpTimeTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.shutDownTimeTwo,'2号机630kWcosφ=0.81-关机时间')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.shutDownTimeTwo == null?'#000':item.shutDownTimeTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.shutDownTimeTwo == null ? '0' : item.shutDownTimeTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.electricTwo,'2号机630kW cosφ=0.81-电流((A)≤47*1.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.electricTwo == null?'#000':item.electricTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.electricTwo == null ? '0' : item.electricTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.motorTemTwo,'2号机630kW cosφ=0.81-轴温(电机（℃）≤110)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.motorTemTwo == null?'#000':item.motorTemTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.motorTemTwo == null ? '0' : item.motorTemTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pumpTemTwo,'2号机630kW cosφ=0.81-轴温(水泵（℃）≤100)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pumpTemTwo == null?'#000':item.pumpTemTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pumpTemTwo == null ? '0' : item.pumpTemTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.inPressTwo,'2号机630kW cosφ=0.81-压力(泵前(MPa)≤0.037)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.inPressTwo == null?'#000':item.inPressTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.inPressTwo == null ? '0' : item.inPressTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.outPressTwo,'2号机630kW cosφ=0.81-压力(泵后(MPa)≤0.3)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.outPressTwo == null?'#000':item.outPressTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.outPressTwo == null ? '0' : item.outPressTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.hzPvFreTwo,'2号机630kW cosφ=0.81-变频(频率≤50HZ)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.hzPvFreTwo == null?'#000':item.hzPvFreTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.hzPvFreTwo == null ? '0' : item.hzPvFreTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.hzPvTimeTwo,'2号机630kW cosφ=0.81-变频(时间)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.hzPvTimeTwo == null?'#000':item.hzPvTimeTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.hzPvTimeTwo == null ? '0' : item.hzPvTimeTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.whmReadTwo,'2号机630kW cosφ=0.81-电表(读数)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.whmReadTwo == null?'#000':item.whmReadTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.whmReadTwo == null ? '0' : item.whmReadTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.whmActualTwo,'2号机630kW cosφ=0.81-电表(实用(kwh)≤298*1.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.whmActualTwo == null?'#000':item.whmActualTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.whmActualTwo == null ? '0' : item.whmActualTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.outFlowReadTwo,'2号机630kW cosφ=0.81-泵后流量(读数)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.outFlowReadTwo == null?'#000':item.outFlowReadTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.outFlowReadTwo == null ? '0' : item.outFlowReadTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.outFlowActualTwo,'2号机630kW cosφ=0.81-泵后流量(流量（m³）≤5100*1.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.outFlowActualTwo == null?'#000':item.outFlowActualTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.outFlowActualTwo == null ? '0' : item.outFlowActualTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pumpPowConTwo,'2号机630kW cosφ=0.81-水泵电耗((kWh/kt)≤153)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pumpPowConTwo == null?'#000':item.pumpPowConTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pumpPowConTwo == null ? '0' : item.pumpPowConTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.efficiencyTwo,'2号机630kW cosφ=0.81-效率(（%）)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.efficiencyTwo == null?'#000':item.efficiencyTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.efficiencyTwo == null ? '0' : item.efficiencyTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.startUpTimeThree,'3号机630kWcosφ=0.81-开机时间')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.startUpTimeThree == null?'#000':item.startUpTimeThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.startUpTimeThree == null ? '0' : item.startUpTimeThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.shutDownTimeThree,'3号机630kWcosφ=0.81-关机时间')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.shutDownTimeThree == null?'#000':item.shutDownTimeThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.shutDownTimeThree == null ? '0' : item.shutDownTimeThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.electricThree,'3号机630kW cosφ=0.81-电流((A)≤47*1.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.electricThree == null?'#000':item.electricThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.electricThree == null ? '0' : item.electricThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.motorTemThree,'3号机630kW cosφ=0.81-轴温(电机（℃）≤110)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.motorTemThree == null?'#000':item.motorTemThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.motorTemThree == null ? '0' : item.motorTemThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pumpTemThree,'3号机630kW cosφ=0.81-轴温(水泵（℃）≤100)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pumpTemThree == null?'#000':item.pumpTemThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pumpTemThree == null ? '0' : item.pumpTemThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.inPressThree,'3号机630kW cosφ=0.81-压力(泵前(MPa)≤0.037)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.inPressThree == null?'#000':item.inPressThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.inPressThree == null ? '0' : item.inPressThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.outPressThree,'3号机630kW cosφ=0.81-压力(泵后(MPa)≤0.3)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.outPressThree == null?'#000':item.outPressThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.outPressThree == null ? '0' : item.outPressThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.hzPvFreThree,'3号机630kW cosφ=0.81-变频(频率≤50HZ)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.hzPvFreThree == null?'#000':item.hzPvFreThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.hzPvFreThree == null ? '0' : item.hzPvFreThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.hzPvTimeThree,'3号机630kW cosφ=0.81-变频(时间)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.hzPvTimeThree == null?'#000':item.hzPvTimeThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.hzPvTimeThree == null ? '0' : item.hzPvTimeThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.whmReadThree,'3号机630kW cosφ=0.81-电表(读数)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.whmReadThree == null?'#000':item.whmReadThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.whmReadThree == null ? '0' : item.whmReadThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.whmActualThree,'3号机630kW cosφ=0.81-电表(实用(kwh)≤298*1.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.whmActualThree == null?'#000':item.whmActualThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.whmActualThree == null ? '0' : item.whmActualThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.outFlowReadThree,'3号机630kW cosφ=0.81-泵后流量(读数)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.outFlowReadThree == null?'#000':item.outFlowReadThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.outFlowReadThree == null ? '0' : item.outFlowReadThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.outFlowActualThree,'3号机630kW cosφ=0.81-泵后流量(流量（m³）≤5100*1.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.outFlowActualThree == null?'#000':item.outFlowActualThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.outFlowActualThree == null ? '0' : item.outFlowActualThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pumpPowConThree,'3号机630kW cosφ=0.81-水泵电耗((kWh/kt)≤153)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pumpPowConThree == null?'#000':item.pumpPowConThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pumpPowConThree == null ? '0' : item.pumpPowConThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.efficiencyThree,'3号机630kW cosφ=0.81-效率(（%）)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.efficiencyThree == null?'#000':item.efficiencyThree.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.efficiencyThree == null ? '0' : item.efficiencyThree.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.startUpTimeFour,'4号机400kWcosφ=0.80-开机时间')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.startUpTimeFour == null?'#000':item.startUpTimeFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.startUpTimeFour == null ? '0' : item.startUpTimeFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.shutDownTimeFour,'4号机400kWcosφ=0.80-关机时间')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.shutDownTimeFour == null?'#000':item.shutDownTimeFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.shutDownTimeFour == null ? '0' : item.shutDownTimeFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.electricFour,'4号机400kW cosφ=0.80-电流((A)≤700*1.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.electricFour == null?'#000':item.electricFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.electricFour == null ? '0' : item.electricFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.motorTemFour,'4号机 400kW cosφ=0.80-轴温(电机（℃）≤110)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.motorTemFour == null?'#000':item.motorTemFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.motorTemFour == null ? '0' : item.motorTemFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pumpTemFour,'4号机 400kW cosφ=0.80-轴温(水泵（℃）≤100)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pumpTemFour == null?'#000':item.pumpTemFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pumpTemFour == null ? '0' : item.pumpTemFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.inPressFour,'4号机 400kW cosφ=0.80-压力(泵前(MPa)≤0.037)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.inPressFour == null?'#000':item.inPressFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.inPressFour == null ? '0' : item.inPressFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.outPressFour,'4号机 400kW cosφ=0.80-压力(泵后(MPa)≤0.3)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.outPressFour == null?'#000':item.outPressFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.outPressFour == null ? '0' : item.outPressFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.hzPvFreFour,'4号机 400kW cosφ=0.80-变频(频率≤50HZ)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.hzPvFreFour == null?'#000':item.hzPvFreFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.hzPvFreFour == null ? '0' : item.hzPvFreFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.hzPvTimeFour,'4号机 400kW cosφ=0.80-变频(时间)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.hzPvTimeFour == null?'#000':item.hzPvTimeFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.hzPvTimeFour == null ? '0' : item.hzPvTimeFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.whmReadFour,'4号机 400kW cosφ=0.80-电表(读数)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.whmReadFour == null?'#000':item.whmReadFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.whmReadFour == null ? '0' : item.whmReadFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.whmActualFour,'4号机 400kW cosφ=0.80-电表(实用(kwh)≤500*1.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.whmActualFour == null?'#000':item.whmActualFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.whmActualFour == null ? '0' : item.whmActualFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.outFlowReadFour,'4号机 400kW cosφ=0.80-泵后流量(读数)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.outFlowReadFour == null?'#000':item.outFlowReadFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.outFlowReadFour == null ? '0' : item.outFlowReadFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.outFlowActualFour,'4号机 400kW cosφ=0.80-泵后流量(流量（m³）≤3200*1.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.outFlowActualFour == null?'#000':item.outFlowActualFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.outFlowActualFour == null ? '0' : item.outFlowActualFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pumpPowConFour,'4号机 400kW cosφ=0.80-水泵电耗((kWh/kt)≤156)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pumpPowConFour == null?'#000':item.pumpPowConFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pumpPowConFour == null ? '0' : item.pumpPowConFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.efficiencyFour,'4号机 400kW cosφ=0.80-效率(（%）)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.efficiencyFour == null?'#000':item.efficiencyFour.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.efficiencyFour == null ? '0' : item.efficiencyFour.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pumpHead,'二泵扬程(m)≤27.7')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pumpHead == null?'#000':item.pumpHead.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pumpHead == null ? '0' : item.pumpHead.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.unitPowCon,'单位电耗(kW·h/kt)≤156')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.unitPowCon == null?'#000':item.unitPowCon.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.unitPowCon == null ? '0' : item.unitPowCon.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.waterPowCon,'配水单耗(kW·h/kt·MPa)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.waterPowCon == null?'#000':item.waterPowCon.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.waterPowCon == null ? '0' : item.waterPowCon.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pumpEfficiency,'二泵效率(%)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pumpEfficiency == null?'#000':item.pumpEfficiency.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pumpEfficiency == null ? '0' : item.pumpEfficiency.value">
+					</div>
+				</div>
+				<div class="other parent-row" flex style="height: 250px;">
+					<div style="flex: 1;" class="parent-column" flex="dir:top">
+						<div style="flex: 1;" flex="cross:center main:center"><p>早班</p></div>
+						<div style="flex: 1;" flex="cross:center main:center"><p>中班</p></div>
+						<div style="flex: 1;" flex="cross:center main:center"><p>晚班</p></div>
+					</div>
+					<div style="flex: 2;" class="parent-column" flex="dir:top" *ngIf= " signOrExamine ">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center" >
+							<div *ngIf= " signOrExamine.signMorning != null ">
+								<div >签到人：{{signOrExamine == null ? '': signOrExamine.signMorning == null ? '': signOrExamine.signMorning}}</div>
+								<div >时间：{{signOrExamine == null ? '': signOrExamine.signMorningTime}}</div>
+							</div>
+							<button *ngIf= "signOrExamine.signMorning === null " nz-button nzType="primary" (click)="signButton('早','1')">签到</button>
+						</div>
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">
+							<div *ngIf= "signOrExamine.signAfternoon != null ">
+								<div >签到人：{{signOrExamine.signAfternoon}}</div>
+								<div >时间：{{signOrExamine.signAfternoonTime}}</div>
+							</div>
+							<button *ngIf= "signOrExamine.signAfternoon === null " nz-button  nzType="primary" (click)="signButton('中','1')">签到</button>
+						</div>
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">
+							<div *ngIf= "signOrExamine.signEvening != null ">
+								<div >签到人：{{signOrExamine.signEvening}}</div>
+								<div >时间：{{signOrExamine.signEveningTime}}</div>
+							</div>
+							<button *ngIf= "signOrExamine.signEvening === null " nz-button  nzType="primary" (click)="signButton('晚','1')">签到</button>
+						</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:center">
+						<div style="flex: 1;"><p>审核人</p></div>
+					</div>
+					<div style="flex: 1;" class="parent-column" flex="dir:top">
+						<div flex="dir:top" style="flex: 2;" class="parent-column" *ngIf= "signOrExamine">
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">
+								<div *ngIf= "signOrExamine.examineMorning != null ">{{signOrExamine.examineMorning}}</div>
+								<button *ngIf= "signOrExamine.examineMorning === null " nz-button nzType="primary" (click)="signButton('早','2')">审核</button>
+							</div>
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">
+								<div *ngIf= "signOrExamine.examineAfternoon != null ">{{signOrExamine.examineAfternoon}}</div>
+								<button *ngIf= "signOrExamine.examineAfternoon === null " nz-button nzType="primary" (click)="signButton('中','2')">审核</button>
+							</div>
+							<div style="flex: 1; padding: 5px;" flex="cross:center main:center">
+								<div *ngIf= "signOrExamine.examineEvening != null ">{{signOrExamine.examineEvening}}</div>
+								<button *ngIf= "signOrExamine.examineEvening === null " nz-button nzType="primary" (click)="signButton('晚','2')">审核</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+			<div style="margin-top: 20px;" *ngIf ="record != undefined">
+				<nz-table #middleTable [nzTitle]="'历史记录表'"  nzBordered nzSize="small" [nzData]="record">
+					<thead>
+						<tr>
+							<th>序号</th>
+							<th>修改字段</th>
+							<th>修改时间</th>
+							<th>修改前数据</th>
+							<th>修改后数据</th>
+							<th>修改人</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let data of middleTable.data;let i = index">
+							<td>{{ i + 1 }}</td>
+							<td>{{ data.updateField }}</td>
+							<td>{{ data.updateTime }}</td>
+							<td>{{ data.updateFrontData }}</td>
+							<td>{{ data.updateAfterData }}</td>
+							<td>{{ data.updateName }}</td>
+						</tr>
+					</tbody>
+				</nz-table>
+			</div>
+		</div>
+	</div>
+	<div class="windowBox" *ngIf="amendFlag">
+		<div class="window">
+			<div class="windowPadd">
+				<div>
+					修改值：<input type="text" [(ngModel)]="amendInfo">
+				</div>
+				<button nz-button nzType="primary" (click)="amendButton(1)">保存</button>
+			  <button nz-button nzType="text" (click)="amendButton(2)">取消</button>
+			</div>
+		</div>
+	</div>
+</div>

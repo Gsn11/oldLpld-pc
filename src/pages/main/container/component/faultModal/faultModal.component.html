@@ -1,0 +1,92 @@
+<div class="add_bg" *ngIf="faultshow">
+    <img src="../../../../../assets/inspection/add_bg.png" alt="">
+    <div class="add_body">
+        <div class="add_form">
+            <div class="searchList">
+                <div>
+                    <mat-form-field>
+                        <mat-select placeholder="子系统" [formControl]="SystemSelect">
+                            <mat-option [value]="''">无</mat-option>
+                            <mat-option *ngFor="let s of SystemList" [value]="s.SName">{{s.SName}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field class="example-form-field" style="margin-left: 10px;">
+                        <input matInput type="text" placeholder="设备" [(ngModel)]="searchName">
+                    </mat-form-field>
+                    <button mat-raised-button color="primary" class="loginBtn" (click)="applyFilter()">搜索</button>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="add_bottom">
+            <!-- <div class="add_plan">
+                <div class="input_box">
+                    <span class="Width_text">计划描述</span>
+                    <span>计划描述</span>
+                </div>
+            </div> -->
+            <div class="add_scr">
+                <div class="input_box">
+                    
+                   
+                    <div class="deList">
+                        <div class="input_List">
+                            <div>报警时间</div>
+                            <div>报警位置</div>
+                            <div>编号设备（名称）</div>
+                            <div>设备型号</div>
+                           
+                            <!-- <div>设备编码</div> -->
+                            <div>报警等级</div>
+                            <div>报警内容</div>
+                            <!-- <div>所属系统</div>
+                            <div>持续时间</div> -->
+                            <div>处理状态</div>
+                            <div>操作</div>
+
+                        </div>
+                        <div class="input_List" *ngFor="let element of AlertList">
+                            <div>{{element.DevAlertInfo.timeStr}}</div>
+                            <div> 
+                                <span>{{element.DevAlertInfo.building}}
+                              - {{element.DevAlertInfo.floor}}
+                                 - {{element.DevAlertInfo.zone}}
+                                 - {{element.DevAlertInfo.spacePos}}</span>
+                            </div>
+                            <div>{{element.DevAlertInfo.devName}}-{{element.DevAlertInfo.device}}</div>
+                            <div>{{element.DevAlertInfo.model}}</div>
+                           
+                            <!-- <div>{{element.device}}</div> -->
+                            <div>{{element.DevAlertInfo.levelName}}</div>
+                            <div>{{element.DevAlertInfo.metricDesc}},{{element.DevAlertInfo.msg}}</div>
+                            <!-- <div>{{element.subsys}}</div>
+                            <div>{{getTime(element.duration)}}</div> -->
+                            <div>{{element.DevAlertInfo.orderState | stateTypeTranslate}} </div>
+                            <div> 
+                                 <!-- <span *ngIf="element.orderState === -1" (click)="gotoInfo(element)" class="info">确定</span> -->
+                                <span *ngIf="element.DevAlertInfo.orderState === -1" (click)="gotoAdd(element.DevAlertInfo)">派单</span>
+                            </div>
+                        </div>
+                        <!-- <div class="input_List" *ngFor="let item of data.Items; let i = index">
+                            <div>{{i}}</div>
+                            <div>{{item.MSName}}</div>
+                            <div>{{item.DeviceNo}}</div>
+                            <div>{{item.Schedule}}</div>
+                            <div>状态信息</div>
+                            <div>{{item.BuildingName}}{{item.Zone}}{{item.SpacePos}}</div>
+                        </div> -->
+                        
+                        
+                    </div>
+                </div>
+            </div>
+           
+            <div class="add_btn">
+                <div class="btnList">
+                    <button mat-button (click)="faultshow=false"><span class="iconfont iconpstep"></span>返回</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

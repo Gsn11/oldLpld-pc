@@ -1,0 +1,56 @@
+.detailOut {
+  margin: 20px 35px 50px;
+  padding: 25px;
+  background: white;
+  box-shadow: 0px 0px 10px 0px rgba(11, 7, 8, 0.1);
+
+  .rechargeChoose {
+    .defaultInfo {
+      font-size: 14px;
+
+      >div {
+        margin-bottom: 30px;
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+    }
+
+    .chooseOut {
+      margin-bottom: 30px;
+      padding-top :20px;
+      border-top: 1px solid #dedddd;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+
+      .title {
+        min-width: 160px;
+      }
+
+      .chooseItem {
+        >div {
+          margin-right: 12px;
+          border: 1px solid #dedddd;
+          width: 113px;
+          height: 36px;
+          line-height: 34px;
+          text-align: center;
+          font-size: 14px;
+          color: #221e1f;
+          vertical-align: middle;
+          display: inline-block;
+          position: relative;
+          cursor: pointer;
+
+          &.active {
+            border: 1px solid #fbb161;
+            color: #e5004f;
+            background: url('../../../../../../../assets/usermgmt/cusfinance/check.png') right bottom no-repeat;
+          }
+        }
+      }
+    }
+  }
+}

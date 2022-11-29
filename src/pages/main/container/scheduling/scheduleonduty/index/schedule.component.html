@@ -1,0 +1,67 @@
+<!-- <app-crumbs [crumbs]="crumbsList"></app-crumbs> -->
+<div class="containerPadding">
+    <div class="orderfixSearchList">
+        <div class="searchTools">
+            <div>
+                <mat-label style="font-size: 16px;">请选择部门：</mat-label>
+                <nz-select
+                    [nzMaxTagCount]="3"
+                    [nzMaxTagPlaceholder]="tagPlaceHolder"
+                    nzMode="multiple"
+                    nzPlaceHolder="请选择部门"
+                    [(ngModel)]="TeamValue"
+                >
+                    <nz-option *ngFor="let item of TeamsList" [nzLabel]="item.TName" [nzValue]="item.TSeq"></nz-option>
+                </nz-select>
+                <input type="text" class="demo-input demoinput" placeholder="选择日期" id="SelectDate">
+                <button mat-raised-button color="primary" class="loginBtn" (click)="seach()">查询</button>
+            </div>
+            <div>
+                <button mat-stroked-button color="primary" class="download" (click)="downloadDeviceFile()">导出Excel</button>
+            </div>
+        </div>
+    </div>
+    <div class="mat-elevation-z8 table">
+        <table width="100%" align="center" cellpadding="0" cellspacing="0" style="table-layout:fixed">
+            <tr class="tr list1">
+               <td><div ><span>姓名</span></div> </td>
+                <td *ngFor="let s of data" class="border1" >
+                    
+                    <div [ngStyle]="{'color': s.week==='周日'||s.week==='周六'?'#F56C6C':''}"><span>{{s.week}}</span><span>{{s.date}}</span></div>
+                </td>
+            </tr>
+            <tr class="tr list" *ngFor="let s of ocrelist,let j = index">
+                <td>
+                    <div>
+                        <span class="listname">{{s.Name}}</span>
+                        <span class="listname">{{s.Tel}}</span>
+                    </div>
+                </td>
+                <td *ngFor="let i of s.SchedulesList,let i = index"   class="border" >
+                    <div class="color"  >
+                        <!-- <span>{{i}}</span> -->
+                        <div (mouseenter)='show(i,j,k)'(click)="selectWeek(i,j,k)" (mouseleave)=enshow() class="tab_chant"  *ngFor="let k of i.list,let k = index"  :[ngStyle]="{'background': k.workTimeColor,'height': i.list.length===1 ?'100%':''}">
+                            <div class="mode">{{k.workTimeAbbrName}}</div>
+                            <div class="seeWork" [ngStyle]="{'display': seeIndex===i&&JseeIndex===j&&KseeIndex===k?'flex':'none'}">
+                                <div class="Color">
+                                    <span class="round" [ngStyle]="{'background': k.workTimeColor}"></span>
+                                    <span >{{k.workName}}</span>
+                                </div>
+                               
+                                <span>{{k.workTimeAbbrName}}</span>
+                                <span>{{k.timeStart}}-{{k.timeEnd}}</span>
+                                <span>值班创建者：{{k.createUserName}}</span>
+                                <span>创建者电话：{{k.createUserTel}}</span>
+                            </div>
+                        
+                        </div>
+                     
+                       
+                    </div>
+                   
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<!-- <app-modal (updateData)="seach()"></app-modal> -->

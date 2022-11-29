@@ -1,0 +1,133 @@
+.detailOut {
+  margin: 20px 35px 50px;
+  padding: 25px;
+  background: white;
+  box-shadow: 0px 0px 10px 0px rgba(11, 7, 8, 0.1);
+
+  >div {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    >span {
+      font-size: 16px;
+
+      &:first-child {
+        padding-right: 10px;
+        min-width: 140px;
+        color: #626262;
+      }
+
+      &:last-child {
+        width: 100%;
+        color: #0152AD;
+      }
+    }
+
+    .colorGrey {
+      color: #a2a2a2;
+    }
+  }
+
+  .tree-out {
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    user-select: none;
+    >div {
+      padding: 8px;
+      // border: 1px solid rgba(62, 62, 62, 0.3);
+      width: 33%;
+      height: 500px;
+      border-radius: 5px;
+      box-shadow:  0 0 5px rgba(0, 0, 0, 0.3);
+      box-sizing: border-box;
+      overflow-x: hidden;
+      overflow-y: scroll;
+      >.title {
+        margin-left: 10px;
+        padding-bottom: 10px;
+        font-size: 16px;
+        color: #aaaaaa;
+        position: relative;
+      }
+      .allCheckItem {
+        margin-left: 30px;
+        color: #aaaaaa;
+      }
+      &:first-child {
+        margin-right: 10px;
+      }
+      &:last-child {
+        margin-left: 10px;
+      }
+    }
+  }
+
+  .btnList {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    >button {
+      margin: 0 35px;
+
+      .iconfont {
+        padding-right: 5px;
+      }
+
+      &:nth-child(1) {
+        color: white;
+        background: #10A0F6;
+      }
+
+      &:nth-child(2) {
+        background: #EEEEEE;
+      }
+    }
+  }
+}
+
+.sidebarList {
+  position: relative;
+
+  // 一级菜单
+  .sidebarName {
+    padding: 10px 0 10px 30px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    .iconfont {
+        margin-right: 5px;
+        display: inline-block;
+        transform: rotate(0);
+        transition: all linear 0.24s;
+    }
+
+    .name {
+      margin: 2.5px 0 0 5px;
+      padding: 0 5px;
+      width: 160px;
+      display: block; 
+      box-sizing: border-box;
+      transition: all ease 0.24s;
+    }
+
+    &.activeSidebarList {
+        .iconfont {
+            transform: rotate(90deg);
+            transition: all linear 0.24s;
+        }
+    }
+
+    &:hover {
+      .name {
+        color: #FFFFFF;
+        background: #10A0F6;
+      }
+    }
+  }
+}

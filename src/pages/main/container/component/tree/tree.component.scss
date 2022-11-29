@@ -1,0 +1,47 @@
+.sidebarList {
+  position: relative;
+
+  // 一级菜单
+  .sidebarName {
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    .iconfont {
+        margin-right: 5px;
+        display: inline-block;
+        transform: rotate(0);
+        transition: all linear 0.24s;
+    }
+
+    .name {
+      margin: 2.5px 0 0 5px;
+      padding: 0 5px;
+      width: 140px;
+      display: block; 
+      box-sizing: border-box;
+      transition: all ease 0.24s;
+
+      &.active {
+        color: #FFFFFF;
+        background: #10A0F6;
+      }
+    }
+
+    &.activeSidebarList {
+        .iconfont {
+            transform: rotate(90deg);
+            transition: all linear 0.24s;
+        }
+    }
+
+    &:hover {
+      .name {
+        color: #FFFFFF;
+        background: #10A0F6;
+      }
+    }
+  }
+}

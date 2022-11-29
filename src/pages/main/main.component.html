@@ -1,0 +1,35 @@
+<div class="plantMain">
+    <app-tools class="titleTools" (meunSwitch)="swtichMeun($event)"></app-tools>
+    <div class="main">
+        <app-sidebar class="sidebar" [ngClass]="{'active': meunSwitch }" [meunState]="meunSwitch"></app-sidebar>
+        <app-sidebar2 class="sidebar2" [ngClass]="{'active': !meunSwitch }" [meunState]="!meunSwitch"></app-sidebar2>
+        <div class="container" [ngClass]="{'active': meunSwitch }">
+            <router-outlet></router-outlet>
+            <app-footer *ngIf="!Isentver" class="footer" [ngClass]="{'active': meunSwitch}"></app-footer>
+        </div>
+    </div>
+
+    <audio id="AudioErr" muted controls src="../../assets/err.mp3">
+        您的系统暂不支持语音播放。
+    </audio>
+
+    <div style="
+        width: 300px;
+        background: #fff;
+        position: absolute;
+        right: 100px;
+        top: 110px;
+        border-radius: 10px;
+        border: 1px solid #eee;
+        z-index: 999;"
+        *ngIf="isShowWar"
+    >
+        <dl>
+            <dt style="text-align: center; font-size: 22px;margin-bottom: 10px;color: red;">设备报警</dt>
+            <dd *ngFor="let item of data" style="padding: 0 20px;border-bottom: 1px solid #eee;">
+                <div><span style="font-size: 16px;min-width: 80px;display: inline-block;">报警设备:</span> {{item.devName}}</div>
+            </dd>
+            <dd style="text-align: center;"><button mat-raised-button color="primary"  (click)="jumpDia()">确认</button></dd>
+        </dl>
+    </div>
+</div>

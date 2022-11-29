@@ -1,0 +1,19 @@
+<div mat-dialog-title>
+    <div style="text-align: center;">
+        <span>请使用微信扫码支付</span>
+    </div>
+</div>
+<div mat-dialog-content>
+    <div class="orderId" style="margin-bottom: 15px; text-align: center;">
+        <span>订单号：</span>
+        <span>{{data.orderId}}</span>
+    </div>
+    <div class="codeBox">
+        <qr-code *ngIf="data.qrCode" [value]="data.qrCode" [size]="150"></qr-code>
+    </div>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btnCancel" (click)="onNoClick()">取消</button>
+    <!-- [mat-dialog-close]="item" -->
+    <button mat-button class="btnPrimise" [mat-dialog-close]="''">确定</button>
+</div>

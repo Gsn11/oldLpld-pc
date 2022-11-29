@@ -1,0 +1,202 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div *ngIf="buildData.buildType === '联排联调'">
+        <span><span style="color: red;">*</span> {{'Name' | detailsTranslate}}</span>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput [placeholder]="'请输入' + ('Name' | detailsTranslate)" [(ngModel)]="Name">
+        </mat-form-field>
+    </div>
+    <div *ngIf="buildData.buildType === '东南水厂'">
+        <span><span style="color: red;">*</span> 功能位置</span>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput [placeholder]="'请输入功能位置'" [(ngModel)]="Name">
+        </mat-form-field>
+    </div>
+    <div *ngIf="buildData.buidType != '联排联调'">
+        <span> 编码 </span>
+        <mat-form-field>
+            <input type="text" matInput placeholder="请输入编码" [(ngModel)]="code">
+        </mat-form-field>
+    </div>
+    <div class="tree-out" *ngIf="buildData.buildType === '联排联调'">
+        <span>{{'BUDesc' | detailsTranslate}}</span>
+        <div class="treeName" (click)="openTree()">
+            <span>{{selectName}}</span>
+            <span class="iconfont iconright"></span>
+        </div>
+        <div class="tree" [ngClass]="{'active': isTreeOpen}" *ngIf="BuildUsages">
+            <app-tree class="treeList" [List]="BuildUsages" [allSwitchIsOpen]="allSwitchIsOpen"
+                (setTreeChange)="treeChange($event)"></app-tree>
+            <div class="btnList">
+                <button mat-button (click)="checkTreeChildren()"><span class="iconfont iconsave"></span>确定</button>
+                <button mat-button (click)="closeTree()"><span class="iconfont iconpstep"></span>取消</button>
+            </div>
+        </div>
+    </div>
+    <div class="tree-out" *ngIf="buildData.buildType === '东南水厂'">
+        <span>车间分类</span>
+        <div class="treeName" (click)="openTree()">
+            <span>{{selectName}}</span>
+            <span class="iconfont iconright"></span>
+        </div>
+        <div class="tree" [ngClass]="{'active': isTreeOpen}" *ngIf="BuildUsages">
+            <app-tree class="treeList" [List]="BuildUsages" [allSwitchIsOpen]="allSwitchIsOpen"
+                (setTreeChange)="treeChange($event)"></app-tree>
+            <div class="btnList">
+                <button mat-button (click)="checkTreeChildren()"><span class="iconfont iconsave"></span>确定</button>
+                <button mat-button (click)="closeTree()"><span class="iconfont iconpstep"></span>取消</button>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="buildData.buildType === '联排联调'">
+        <span>{{'BuildGroups' | detailsTranslate}}</span>
+        <mat-form-field>
+            <mat-label>请选择{{'BuildGroups' | detailsTranslate}}</mat-label>
+            <mat-select [formControl]="SelectBuildGroups">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let b of BuildGroups" [value]="b.BGSeq">
+                    {{b.BGName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="buildData.buildType === '东南水厂'">
+        <span>归属厂区</span>
+        <mat-form-field>
+            <mat-label>请选择归属厂区</mat-label>
+            <mat-select [formControl]="SelectBuildGroups">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let b of BuildGroups" [value]="b.BGSeq">
+                    {{b.BGName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <span>归属区域</span>
+        <mat-form-field>
+            <mat-label>请选择归属区域</mat-label>
+            <mat-select [formControl]="SelectSubjections">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let s of Subjections" [value]="s.Seq">
+                    {{s.SubjectionId}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <span>联系电话</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入联系电话" [(ngModel)]="Tel">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>现场负责人电话</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入现场负责人电话" [(ngModel)]="FinanceTel">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>省份/城市/区县</span>
+        <app-editregion [setProvince]="Province" [setCity]="City" [setDistrict]="District"></app-editregion>
+    </div>
+    <div>
+        <span>地址</span>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput placeholder="请输入地址" [(ngModel)]="Addr">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>地上层数</span>
+        <mat-form-field class="example-full-width">
+            <input matInput type="number" placeholder="请输入地上层数" [(ngModel)]="UpFloor">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>地下层数</span>
+        <mat-form-field class="example-full-width">
+            <input matInput type="number" placeholder="请输入地下层数" [(ngModel)]="DownFloors">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>高度（米）</span>
+        <mat-form-field class="example-full-width">
+            <input matInput type="number" placeholder="请输入高度（米）" [(ngModel)]="Hight">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>总投资（万元）</span>
+        <mat-form-field class="example-full-width">
+            <input matInput type="number" placeholder="请输入总投资（万元）" [(ngModel)]="InvestCapital">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>面积（平方米）</span>
+        <mat-form-field class="example-full-width">
+            <input matInput type="number" placeholder="请输入面积（平方米）" [(ngModel)]="FloorArea">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>开工日期</span>
+        <app-calendar [setCreateDate]="BuildingTime" (getTime)="getBuildingTime($event)"></app-calendar>
+    </div>
+    <div>
+        <span>完工日期</span>
+        <app-calendar [setCreateDate]="BuildEnd" (getTime)="getBuildEnd($event)"></app-calendar>
+    </div>
+    <div>
+        <span>保修截止日期</span>
+        <app-calendar [setCreateDate]="WarrantyEnd" (getTime)="getWarrantyEnd($event)"></app-calendar>
+    </div>
+    <div>
+        <span>建设方</span>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput placeholder="请输入建设方" [(ngModel)]="ConstructCompany">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>施工方</span>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput placeholder="请输入施工方" [(ngModel)]="BuildCompany">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>监理方</span>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput placeholder="请输入监理方" [(ngModel)]="SuperVisor">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>设计方</span>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput placeholder="请输入设计方" [(ngModel)]="DesignCompany">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>{{'BDesc' | detailsTranslate}}</span>
+        <mat-form-field class="example-full-width descInput">
+            <textarea matInput [placeholder]="'请输入' + ('BDesc' | detailsTranslate)" [(ngModel)]="BDesc"></textarea>
+        </mat-form-field>
+    </div>
+    <div>
+        <span>经纬度选择</span>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput placeholder="经度" [(ngModel)]="GdLng">
+        </mat-form-field>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput placeholder="维度" [(ngModel)]="GdLat">
+        </mat-form-field>
+    </div>
+    <!-- <div>
+        <app-map class="map-out" [setGdLng]="GdLng" [setGdLat]="GdLat"></app-map>
+    </div> -->
+    <div>
+        <span>其它图片</span>
+        <app-manyfile [setImgsrcData]="imgsrcData"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

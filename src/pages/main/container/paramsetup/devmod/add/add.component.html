@@ -1,0 +1,107 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span><span style="color: red;">*</span> 设备主分类</span>
+        <mat-form-field>
+            <mat-label>请选择设备类型</mat-label>
+            <mat-select [formControl]="deviceMainTypeSelect">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let d of deviceMainType" [value]="d">
+                   {{d | deviceMainTypeTranslate}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="tree-out">
+        <span>设备分类</span>
+        <div class="treeName" (click)="openTree()">
+            <span>{{selectName}}</span>
+            <span class="iconfont iconright"></span>
+        </div>
+        <div class="tree" [ngClass]="{'active': isTreeOpen}">
+            <div>
+                <app-tree class="treeList" [List]="List" [allSwitchIsOpen]="allSwitchIsOpen"
+                    (setTreeChange)="treeChange($event)"></app-tree>
+            </div>
+            <div class="btnList">
+                <button mat-button (click)="checkTreeChildren()"><span class="iconfont iconsave"></span>确定</button>
+                <button mat-button (click)="closeTree()"><span class="iconfont iconpstep"></span>取消</button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <span>编号</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入编号" [(ngModel)]="code">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>制造厂家</span>
+        <span (click)="openDialog()">{{brandName}}</span>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 型号id </span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入型号id" [(ngModel)]="Id">
+        </mat-form-field>
+    </div>
+    <div>
+        <span> 型号名称 </span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入型号名称" [(ngModel)]="Name">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>阈值</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入设备阈值" [(ngModel)]="threshold">
+        </mat-form-field>
+        <span (click)="openMsgDialog()" style="color: #0152AD; cursor: pointer;">{{msgName ? msgName : '选择信息接收用户'}}</span>
+    </div>
+    <div>
+        <span>设备尺寸</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入设备尺寸" [(ngModel)]="Size">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>设备重量(KG)</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入设备重量(KG)" [(ngModel)]="Weight">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>设备功率(瓦)</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入设备功率(瓦)" [(ngModel)]="Power">
+        </mat-form-field>
+    </div>
+
+    <div>
+        <span>产品认证</span>
+        <mat-form-field class="example-full-width" style="width: 400px;">
+            <input matInput [placeholder]="'请输入产品认证'" [(ngModel)]="Certificate">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>设备说明</span>
+        <mat-form-field class="example-full-width" style="width: 400px;">
+            <textarea matInput [placeholder]="'请输入设备说明'" [(ngModel)]="Desc"></textarea>
+        </mat-form-field>
+    </div>
+    <div>
+        <span>常见问题</span>
+        <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="请输入常见问题" [(ngModel)]="Prob"></textarea>
+        </mat-form-field>
+    </div>
+    <div>
+        <span>其它图片</span>
+        <app-manyfile [setImgsrcData]="imgsrcData"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<div class="click-close-bg" *ngIf="isTreeOpen" (click)="closeTree()"></div>

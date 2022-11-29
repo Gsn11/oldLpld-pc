@@ -1,0 +1,181 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span><span style="color: red;">*</span> 智联网关</span>
+        <mat-form-field>
+            <mat-label>请选择智联网关</mat-label>
+            <mat-select [formControl]="SelectDevices">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let d of Devices" [value]="d.Seq">
+                    {{d.DeviceNo}} - {{d.Model}} - {{d.DeviceName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 协议类型</span>
+        <mat-form-field>
+            <mat-label>请选择协议类型</mat-label>
+            <mat-select [formControl]="SelectProtocol" (selectionChange)="protocolChange()">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let p of Protocol" [value]="p.id">
+                    {{p.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <!-- SelectProtocol 响应模块 -->
+
+    <!-- 1.BACENT -->
+    <div *ngIf="SelectProtocol.value === '0'">
+        <span><span style="color: red;">*</span> 网关在Bacnet中的设备Id</span>
+        <div>
+            <mat-form-field>
+                <mat-label>请选择协议类型</mat-label>
+                <mat-select [formControl]="SelectBacnetObjects">
+                    <mat-option>无</mat-option>
+                    <mat-option *ngFor="let b of BacnetObjects" [value]="b.BOCode">
+                        {{b.BOCode}} ({{b.BODesc}})
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="请输入网关在Bacnet中的设备Id" [(ngModel)]="ObjectId">
+            </mat-form-field>
+        </div>
+    </div>
+    <!-- 2.MODBUS -->
+    <div *ngIf="SelectProtocol.value === '1'">
+        <span><span style="color: red;">*</span> Modbus路由</span>
+        <mat-form-field>
+            <mat-label>请选择Modbus路由</mat-label>
+            <mat-select [formControl]="SelectModbus">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let m of Modbus" [value]="m.Seq">
+                    {{m.DeviceNo}} - {{m.Model}} - {{m.DeviceName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectProtocol.value === '1'">
+        <span><span style="color: red;">*</span> Modbus路由地址（id）</span>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input type="number" matInput placeholder="请输入Modbus路由地址（id）" [(ngModel)]="ObjectId">
+            </mat-form-field>
+            <span style="display: block;">必须是1~247的数字</span>
+        </div>
+    </div>
+
+    <!-- 3.OPC DA -->
+    <div *ngIf="SelectProtocol.value === '2'">
+        <span><span style="color: red;">*</span> 服务clsid</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入服务clsid" [(ngModel)]="ObjectId">
+        </mat-form-field>
+    </div>
+
+    <!-- 3.OPC UA -->
+    <div *ngIf="SelectProtocol.value === '3'">
+        <span><span style="color: red;">*</span> 服务endpoint url</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入服务endpoint url" [(ngModel)]="ObjectId">
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="SelectProtocol.value === '3'">
+        <span><span style="color: red;">*</span> 用户审核模式</span>
+        <mat-form-field>
+            <mat-label>请选择用户审核模式</mat-label>
+            <mat-select [formControl]="SelectAuthType">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let a of AuthType" [value]="a.id">
+                    {{a.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectProtocol.value === '3'">
+        <span><span style="color: red;">*</span> 安全模式(SecurityMode)</span>
+        <mat-form-field>
+            <mat-label>请选择安全模式</mat-label>
+            <mat-select [formControl]="SelectSecurityMode">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let s of SecurityMode" [value]="s.id">
+                    {{s.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectProtocol.value === '3'">
+        <span><span style="color: red;">*</span> 安全策略(SecurityPolicy)</span>
+        <mat-form-field>
+            <mat-label>请选择安全策略(SecurityPolicy)</mat-label>
+            <mat-select [formControl]="SelectAgreementType">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let a of AgreementType" [value]="a.id">
+                    {{a.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <!-- 4.OBIX -->
+    <div *ngIf="SelectProtocol.value === '4'">
+        <span>服务的根url</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="/obix/config/Drivers" [(ngModel)]="ObjectId">
+        </mat-form-field>
+    </div>
+    <!-- 5.BEM -->
+    <div *ngIf="SelectProtocol.value === '5'">
+        <span><span style="color: red;">*</span> 项目ID</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入项目ID" [(ngModel)]="ObjectId">
+        </mat-form-field>
+    </div>
+    <!-- 6.MQTT -->
+    <div *ngIf="SelectProtocol.value === '6'">
+        <span>Qos</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入Qos" [(ngModel)]="Qos">
+        </mat-form-field>
+    </div>
+
+    <!-- 响应模块 END -->
+    <div>
+        <span><span style="color: red;">*</span> 对应协议主机IP或url</span>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="请输入对应协议主机IP或url" [(ngModel)]="AgreementIPOrURL">
+            </mat-form-field>
+            <span
+                style="display: block;">若是MODBUS协议，则为modbus转换器的ip地址；若是BACNET协议，则为bacnet路由的ip；若为OPC协议，则为OPC服务器的ip；若为OBIX协议，则为OBIX服务器的url(例如：http://192.168.1.1)；若为BEM协议则为上位机IP</span>
+        </div>
+    </div>
+
+    <div>
+        <span>对应协议主机端口</span>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput type="number" placeholder="请输入对应协议主机端口" [(ngModel)]="AgreementPort">
+            </mat-form-field>
+            <span style="display: block;">若是MODBUS协议，则为modbus转换器的ip端口；若是BACNET协议，则为bacnet路由的端口（如果为空，则默认使用0xBAC0（47808）端口）；若为OPC协议，则为OPC服务器的端口；若为OBIX协议，则为OBIX服务器的端口（如果为空，则默认使用80端口）；若为BEM协议，则为UDP端口，如果为空，则默认使用26689端口</span>
+        </div>
+    </div>
+    <div>
+        <span>对应协议用户名</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入对应协议用户名" [(ngModel)]="AgreementUserName">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>对应协议密码</span>
+        <mat-form-field class="example-full-width">
+            <input matInput type="password" placeholder="请输入对应协议密码" [(ngModel)]="AgreementPwd">
+        </mat-form-field>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

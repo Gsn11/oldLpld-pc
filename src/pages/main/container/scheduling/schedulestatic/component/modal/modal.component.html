@@ -1,0 +1,56 @@
+<div class="modal-out" [ngClass]="{'active': show}">
+    <div class="bg" (click)="switchModalBox()"></div>
+    <div class="container">
+        <i nz-icon [nzType]="'close'" (click)="goCancel()" style="position: absolute;top: 10px;right: 10px;cursor: pointer;width: 30px;height: 30px;"></i>
+        <div class="header"><span class="title">{{title}}</span></div>
+        <div class="main">
+            <div class="titleName">
+                <div>{{list.LoginId}}</div>
+                <div>{{list.Name}}</div>
+            </div>
+            <div  *ngIf=" type == 'duty'|| type == 'leaveEs' ">
+                <div class="mainInfo"  *ngFor="let i of list.WorkList ;let item = index;">
+                    <div class="mainInfoPadding">
+                        <div class="classes">
+                            <div class="title">{{i.TeamTimeName}}({{i.WorkStart}}~{{i.WorkEnd}})</div>
+                            <div class="info">
+                                <span>{{i.Dates.length}}天</span>
+                                <span (click)="unfold(item)">展开</span>
+                            </div>
+                        </div>
+                        <div *ngIf = "unfoldId == item">
+                            <div class="classesInfo"  *ngFor="let j of i.Dates">
+                                <span>{{j}}</span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div  *ngIf=" type == 'leave' ">
+                <div class="mainInfo"  *ngFor="let i of list.RestList ;let item = index;">
+                    <div class="mainInfoPadding">
+                        <div class="classes">
+                            <div class="title">
+                                {{i.TeamTimeType == 0?'工作班次':i.TeamTimeType == 1?'休息班次':i.TeamTimeType ==2?'调休':i.TeamTimeType ==3?'年假':i.TeamTimeType == 4?'病假':i.TeamTimeType == 5?'事假':i.TeamTimeType == 6?'产假':i.TeamTimeType == 7?'哺乳假':i.TeamTimeType == 8?'流产假':i.TeamTimeType == 9?'婚假':i.TeamTimeType == 10?'丧假':i.TeamTimeType == 11?'护理假':i.TeamTimeType == 12?'工伤假':'其它假'}}
+                            </div>
+                            <div class="info">
+                                <span>{{i.Dates.length}}天</span>
+                                <span (click)="unfold(item)">展开</span>
+                            </div>
+                        </div>
+                        <div *ngIf = "unfoldId == item">
+                            <div class="classesInfo"  *ngFor="let j of i.Dates">
+                                <span>{{j.WorkDate}} {{j.WorkStart}} ~ {{j.WorkEnd}}</span>
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="goCancel()"><span class="iconfont iconpstep"></span>取消</button>
+        </div>
+    </div>
+</div>

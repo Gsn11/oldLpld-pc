@@ -1,0 +1,81 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+	<div style="background: #fff;">
+		<div class="searchList">
+			<div>
+				<mat-form-field class="example-form-field">
+					<mat-label>请选择报警等级</mat-label>
+					<mat-select [formControl]="buildingType">
+						  <mat-option [value]="">无</mat-option>
+							<mat-option *ngFor="let i of gradeList" [value]="i.Seq">
+									{{i.AlertLevelName}}
+							</mat-option>
+					</mat-select>
+			  </mat-form-field>
+				<mat-form-field>
+          <input matInput placeholder="请输入用户名称或报警名称" [(ngModel)]="CommonSearch">
+        </mat-form-field>
+				<app-calendar [setCreateDate]="BeginTime" (getTime)="getBeginTime($event)" title="开始日期"></app-calendar>
+				<span style="margin: 0 10px;"> - </span>
+				<app-calendar [setCreateDate]="EndTime" (getTime)="getEndTime($event)" title="结束日期"></app-calendar>
+			</div>
+			<button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1;getList()">搜索</button>
+		</div>
+	</div>
+
+	<div>
+		<div class="mat-elevation-z8">
+			<!-- <div class="radioButton">
+				<mat-radio-group value="1" (change)="radioChange($event)">
+					<mat-radio-button value=1 style="margin-right: 20px;">自动报警</mat-radio-button>
+					<mat-radio-button value=2>手动报警</mat-radio-button>
+				</mat-radio-group>
+			</div> -->
+			<table mat-table [dataSource]="list" style="width: 100%;">
+				<ng-container matColumnDef="materiel">
+					<th mat-header-cell *matHeaderCellDef> 序号 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> {{i+1}} </td>
+				</ng-container>
+				<ng-container matColumnDef="inOut">
+					<th mat-header-cell *matHeaderCellDef> 发送报警时间 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> {{element.Time}} </td>
+				</ng-container>
+				<ng-container matColumnDef="num">
+					<th mat-header-cell *matHeaderCellDef> 发送人员 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> {{element.names}} </td>
+				</ng-container>
+				<ng-container matColumnDef="unitPrice">
+					<th mat-header-cell *matHeaderCellDef> 报警名称 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> {{element.Name}} </td>
+				</ng-container>
+				<ng-container matColumnDef="operate">
+					<th mat-header-cell *matHeaderCellDef> 操作 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> 
+						<span  style="color: #2196f3; cursor: pointer;" (click)="lookInfo(element)">查看</span>
+					</td>
+				</ng-container>
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+			</table>
+			<div style="background: white;">
+				<mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+					[pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+			</div>
+		</div>
+	</div>
+	<div class="dialog-window" (click)="alarmInfo = false" *ngIf="alarmInfo">
+		<div class="dialog" style="position: relative;">
+			<i nz-icon [nzType]="'close'" (click)="alarmInfo = false" style="position: absolute;top: 10px;right: 10px;cursor: pointer;width: 30px;height: 30px;"></i>
+			<div class="dialog-padding">
+				<div class="dialog-title">报警内容详情</div>
+				<div class="dialog-info">
+						<div><span>报警等级：{{elementInfo.LevelName === null ? '无' : elementInfo.LevelName}}</span></div>
+						<div><span>警报名称：{{elementInfo.Name}}</span></div>
+						<div><span>报警内容：{{elementInfo.Content}}</span></div>
+						<div><span>报警铃声：{{elementInfo.Ring === 1 ? '火警铃声' : elementInfo.Ring === 2 ? '水警铃声' : '无铃声'}}</span></div>
+					<div><span>送达用户：{{elementInfo.names}}</span></div>
+				</div>
+			</div>	
+		</div>
+	</div>
+</div>

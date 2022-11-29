@@ -1,0 +1,119 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+	<div class="orderfixSearchList">
+		<div class="searchTools">
+			<div>
+				<app-calendar [setCreateDate]="BeginTime" (getTime)="getBeginTime($event)" title="开始日期"></app-calendar>
+				<span style="margin: 0 10px;"> - </span>
+				<app-calendar [setCreateDate]="EndTime" (getTime)="getEndTime($event)" title="结束日期"></app-calendar>
+				<span style="margin: 0 10px;"> </span>
+				<mat-form-field class="example-form-field">
+					<input matInput type="text" placeholder="派单名称/派单号" [(ngModel)]="searchName"
+						(keyup.enter)="getList()">
+				</mat-form-field>
+
+				<mat-form-field style="margin: 0 10px;">
+					<mat-label>服务提供方</mat-label>
+					<mat-select [formControl]="SelectServiceType">
+						<mat-option [value]="'0,3'">无</mat-option>
+						<mat-option *ngFor="let s of ServiceType" [value]="s.value">
+							{{s.name}}
+						</mat-option>
+					</mat-select>
+				</mat-form-field>
+
+				<button mat-raised-button color="primary" class="loginBtn"
+					(click)="getList([SelectTabIndex])">搜索</button>
+			</div>
+
+			<div>
+				<button mat-stroked-button color="primary" class="download"
+					(click)="downloadOrderFile()">导出Excel</button>
+				<button mat-raised-button color="primary" class="loginBtn" (click)="gotoAdd()"
+					*ngIf="OrderType === 'orderfix'">新增</button>
+			</div>
+		</div>
+	</div>
+	<div class="mat-elevation-z8">
+		<mat-tab-group [selectedIndex]="SelectTabIndex" (selectedTabChange)="tabGroupChange($event)"
+			style="background: white;">
+			<mat-tab *ngFor="let s of StateList, let sIndex = index" [label]="s.label">
+				<table mat-table [dataSource]="s.list" style="width: 100%;">
+					<ng-container matColumnDef="OrderNo">
+						<th mat-header-cell *matHeaderCellDef> 派单编号 </th>
+						<td mat-cell *matCellDef="let element"> {{element.OrderNo}} </td>
+					</ng-container>
+					<ng-container matColumnDef="MSName">
+						<th mat-header-cell *matHeaderCellDef> 派单名称 </th>
+						<td mat-cell *matCellDef="let element"> {{element.MSName}} ({{element.MSDesc}}) </td>
+					</ng-container>
+					<ng-container matColumnDef="Type">
+						<th mat-header-cell *matHeaderCellDef> 模式 </th>
+						<td mat-cell *matCellDef="let element"> {{element.Type | orderTypeTranslate}} </td>
+					</ng-container>
+					<ng-container matColumnDef="State">
+						<th mat-header-cell *matHeaderCellDef> {{OrderType | worklabelstateTranslate }} </th>
+						<!-- <td mat-cell *matCellDef="let element"> {{sIndex === 8 ? (element.OverTime === 1 ? '反馈超时' : '正常') : element.State  | workstateTranslate}} </td> -->
+						<td mat-cell *matCellDef="let element">{{ showValue(element.OverTime,element.Exception)}} </td>
+						<!-- {{element.OverTime === 1 ? '反馈超时' : '正常'}}{{element.Exception === 1 ? '位置异常' : '正常'}} -->
+					</ng-container>
+					<ng-container matColumnDef="OrderTime">
+						<th mat-header-cell *matHeaderCellDef> 派单时间 </th>
+						<td mat-cell *matCellDef="let element"> {{element.OrderTime}} </td>
+					</ng-container>
+					<ng-container matColumnDef="Other">
+						<th mat-header-cell *matHeaderCellDef> 操作 </th>
+						<td mat-cell *matCellDef="let element" class="Other">
+							<span *ngIf="element.State === 9||element.State === 73" (click)="score(element)">待评价</span>
+
+							<ng-container *ngIf="sIndex === 5">
+								<!-- <span *ngIf="element.Exception === 1||element.OverTime === 1" (click)="error(element)">确认</span>               -->
+							</ng-container>
+							<ng-container *ngIf="sIndex === 0">
+								<span *ngIf="element.State === 7 && !element.isSubchargers"
+									(click)="OrderReview(element.MOSeq)" style="color: red;">请整改</span>
+								<span *ngIf="element.State === 7 && !element.isSubchargers"
+									(click)="verifyOk(element.MOSeq, 'market')">审核通过</span>
+								<span *ngIf="element.State === 70 && !element.isSubchargers"
+									(click)="checkOk(element.MOSeq)">审核通过</span>
+								<span *ngIf="element.State === 72 && !element.isSubchargers"
+									(click)="verifyOk(element.MOSeq, 'inside')">审核通过</span>
+
+
+							</ng-container>
+							<ng-container class="tools">
+								<span *ngIf="sIndex === 7 && !element.isSubchargers"
+									(click)="gotoPayOrder(element.OrderNo, element.MOSeq)">支付</span>
+								<span (click)="gotoInfo(element)">查看</span>
+							</ng-container>
+							<ng-container class="tools">
+								<span *ngIf="element.Videos" (click)="lookVideo(element)">查看视频</span>
+							</ng-container>
+
+							<span *ngIf="element.ServiceType !== 0 && !element.isSubchargers"
+								(click)="gotoEdit(element)">编辑</span>
+							<!-- <span *ngIf="element.Exception === 2||element.OverTime === 2">已确认</span> -->
+
+							<span *ngIf="sIndex === 0 || sIndex === 1 || sIndex === 2" class="tools">
+								<!-- <span (click)="gotoInfo(element)">查看</span> -->
+								<span
+									*ngIf="(element.State < 6 || element.State > 70 && element.State !== 73) && !element.isSubchargers"
+									class="deleteItem" (click)="showConfim(element.MOSeq)">取消派单</span>
+							</span>
+
+						</td>
+					</ng-container>
+					<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+					<tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+				</table>
+				<div style="background: white;">
+					<mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="s.paginatorTotal"
+						[pageIndex]="s.PageIndex - 1" [pageSize]="s.PageSize" (page)="change($event)"
+						showFirstLastButtons></mat-paginator>
+				</div>
+			</mat-tab>
+		</mat-tab-group>
+	</div>
+	<app-confim [confim]="setConfim" [title]="confimTitle" (setConfimResult)="tableConfimResult($event)"></app-confim>
+</div>
+<app-coremodal [data]="orderMany"></app-coremodal>

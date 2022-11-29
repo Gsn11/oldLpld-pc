@@ -1,0 +1,48 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+   <div class="main">
+      <div>
+         <p>运维名称</p>
+         <span>{{data.Name}}</span>
+      </div>
+      <div>
+         <p>计划生效时间</p>
+         <span>{{data.BeginTime}} - {{data.EndTime}}</span>
+      </div>
+      <div>
+         <p>策略内容</p>
+         <div style="flex: 1">
+            <table mat-table [dataSource]="strategyList" style="width: 100%; border: 1px solid #eee;">
+               <ng-container matColumnDef="serialNumber">
+                  <th mat-header-cell *matHeaderCellDef> 序号 </th>
+                  <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
+               </ng-container>
+               <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef> 策略名称 </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+               </ng-container>
+               <ng-container matColumnDef="operate">
+                  <th mat-header-cell *matHeaderCellDef> 操作 </th>
+                  <td mat-cell *matCellDef="let element; let i = index" class="Other">
+                     <span (click)="lookStrategy(i)">查看</span>
+                  </td>
+               </ng-container>
+               <tr mat-header-row *matHeaderRowDef="columns"></tr>
+               <tr mat-row *matRowDef="let row; columns: columns;" class="example-element-row"></tr>
+            </table>
+         </div>
+      </div>
+      <div>
+         <p>备注</p>
+         <span>{{data.Remark}}</span>
+      </div>
+      <div>
+          <p>相关信息</p>
+          <app-manyfile [setImgsrcData]="imgsrcData" [docList]="docListData" type="info"></app-manyfile>
+      </div>
+    
+      <div class="btn-g">
+         <button mat-raised-button color="primary" onclick="window.history.back()">返回</button>
+        </div>
+   </div>
+</div>

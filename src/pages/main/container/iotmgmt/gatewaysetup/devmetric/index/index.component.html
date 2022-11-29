@@ -1,0 +1,92 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+    <div class="gatewaysetupSearchList">
+        <div>
+            <div>
+                <mat-form-field class="example-form-field">
+                    <input matInput type="text" [placeholder]="'设备编号/测量变量' + SearchInformation" [(ngModel)]="searchName"
+                        (keyup.enter)="search()">
+                </mat-form-field>
+                <button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1;search()">搜索</button>
+            </div>
+
+            <div class="chooseList">
+                <div>
+                    <mat-form-field>
+                        <mat-label>请选择智联网关</mat-label>
+                        <mat-select [formControl]="SelectsmartGateway" (selectionChange)="smartGatewayChange($event)">
+                            <mat-option>无</mat-option>
+                            <mat-option *ngFor="let s of smartGatewayList" [value]="s.Seq">
+                                {{s.DeviceNo}} - {{s.Model}} - {{s.DeviceName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field>
+                        <mat-label>请选择协议类型</mat-label>
+                        <mat-select [formControl]="SelectProtocol" (selectionChange)="protocolChange($event)">
+                            <mat-option>无</mat-option>
+                            <mat-option *ngFor="let p of protocolList" [value]="p.Protocol">
+                                {{p.Protocol | procotolTranslate}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <button mat-raised-button color="primary" class="loginBtn" (click)="gotoAdd()"
+                    [disabled]="!AddBottonDisabled">新增</button>
+            </div>
+        </div>
+        <div>
+            <button mat-stroked-button color="primary" (click)="downloadFile()">下载模板</button>
+            <button mat-stroked-button color="primary" (click)="fileBoxChange()">批量导入</button>
+            <button mat-stroked-button color="primary" class="download" (click)="downloadDeviceFile()">导出Excel</button>
+
+        </div>
+    </div>
+
+    <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="List" style="width: 100%;">
+            <ng-container matColumnDef="DeviceNo">
+                <th mat-header-cell *matHeaderCellDef> 设备编号(名称) </th>
+                <td mat-cell *matCellDef="let element"> {{element.DeviceNo}}({{element.DevName}}) </td>
+            </ng-container>
+            <ng-container matColumnDef="SmartDevNo">
+                <th mat-header-cell *matHeaderCellDef> 对接的智能设备 </th>
+                <td mat-cell *matCellDef="let element"> {{element.SmartDevNo}}({{element.SmartDevName}}) </td>
+            </ng-container>
+            <ng-container matColumnDef="Protocol">
+                <th mat-header-cell *matHeaderCellDef> 协议类型 </th>
+                <td mat-cell *matCellDef="let element"> {{element.Protocol}} </td>
+            </ng-container>
+            <ng-container matColumnDef="MetricsDesc">
+                <th mat-header-cell *matHeaderCellDef> 测量变量 </th>
+                <!-- - {{element.DMBDesc}}
+                - {{element.BacnetObjectId}} -->
+                <td mat-cell *matCellDef="let element"> {{element.MetricsDesc }} ({{element.Id}})</td>
+            </ng-container>
+            <ng-container matColumnDef="IsAlert">
+                <th mat-header-cell *matHeaderCellDef> 报警点/数据点 </th>
+                <td mat-cell *matCellDef="let element"> {{element.IsAlert === 0 ? '数据点' : '报警点'}} </td>
+            </ng-container>
+            <ng-container matColumnDef="Other">
+                <th mat-header-cell *matHeaderCellDef> 操作 </th>
+                <td mat-cell *matCellDef="let element" class="Other">
+                    <span (click)="gotoInfo(element)">查看</span>
+                    <span *ngIf="customer === element.Customer" (click)="gotoEdit(element)">编辑</span>
+                    <span *ngIf="customer === element.Customer" class="deleteItem"
+                        (click)="showConfim(element)">删除</span>
+                    <span *ngIf="customer !== element.Customer" class="enable">不可操作</span>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+        </table>
+        <div style="background: white;">
+            <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+                [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+        </div>
+    </div>
+    <app-confim [confim]="setConfim" (setConfimResult)="tableConfimResult($event)"></app-confim>
+</div>
+<app-excelupload [url]="UploadAddr" (getList)="getList()" [info]="downloadInfo"></app-excelupload>

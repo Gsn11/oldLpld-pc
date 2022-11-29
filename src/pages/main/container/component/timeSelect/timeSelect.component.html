@@ -1,0 +1,10 @@
+<mat-form-field>
+    <mat-select placeholder="请选择时间" [formControl]="SelectHH" (selectionChange)="hourChange($event)">
+        <mat-option *ngFor="let h of HH" [value]="h">{{h}}</mat-option>
+    </mat-select>
+</mat-form-field>
+<mat-form-field>
+    <mat-select placeholder="请选择分钟" [formControl]="SelectMM" (selectionChange)="minuteChange($event)">
+        <mat-option *ngFor="let m of MM" [value]="m">{{m}}</mat-option>
+    </mat-select>
+</mat-form-field>

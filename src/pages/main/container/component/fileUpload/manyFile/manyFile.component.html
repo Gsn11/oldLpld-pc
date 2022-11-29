@@ -1,0 +1,43 @@
+<div class="file-box">
+    <div class="photo-out" *ngIf="setImgsrcData">
+        <div class="photo-list" *ngFor="let i of setImgsrcData, let iIndex = index">            
+            <div class="photo">
+                <img *ngIf="i.ImgUrl" [src]="domSanitizer.bypassSecurityTrustUrl(i.ImgUrl)" alt="img">
+                <img *ngIf="i.DocUrl" [src]="domSanitizer.bypassSecurityTrustUrl(i.DocUrl)" alt="img">
+            </div>
+            <div *ngIf="isState && this.type != 'info'" class="tools">
+                <div class="info" *ngIf="i.ImgUrl">
+                     <a target="blank" [href]="domSanitizer.bypassSecurityTrustUrl(i.ImgUrl)"></a> 查看
+                </div>
+                <div class="info" *ngIf="i.DocUrl">
+                     <a target="blank" [href]="domSanitizer.bypassSecurityTrustUrl(i.DocUrl)"></a> 查看
+                </div>
+                <div class="delete" (click)="deletePhoto(iIndex)">删除</div>
+            </div>
+            <div *ngIf="!isState" class="tools"><a target="blank" [href]="domSanitizer.bypassSecurityTrustUrl(i.ImgUrl)"></a></div>
+        </div>
+    </div>
+    <div *ngIf="((isState && !docList) || setImgsrcData) && this.type != 'info'" class="photo-upload">
+        <div class="bg">
+            <span class="iconfont iconadd"></span>
+            <span>上传图片</span>
+        </div>
+        <input class="files" type="file" name="FImg" (change)="fileChange($event)" accept="image/gif,image/jpeg,image/png">
+    </div>
+</div>
+<div class="doc-box" *ngIf="docList">
+    <div class="items" *ngFor="let d of docList,let dIndex = index">
+        <span><a [href]="d.DocUrl" target="blank">{{d.DocDesc}}</a></span>
+        &nbsp;&nbsp;
+        <span class="delete" *ngIf="this.type != 'info'" (click)="deletePhoto(dIndex, 'doc')">删除</span>
+    </div>
+    <div class="doc-upload" *ngIf="this.type != 'info'">
+        <div class="bg">
+            <span class="iconfont iconadd"></span>
+            <span>上传文档</span>
+        </div>
+        <input class="files" type="file" name="doc" (change)="fileChange($event, 'doc')" accept="*">
+    </div>
+</div>
+
+<!-- <app-confim [confim]="setPhotoConfim" (setConfimResult)="photoConfimResult($event)"></app-confim> -->

@@ -1,0 +1,49 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>发布时间</span>
+        <span>{{bemInfoData.time}}</span>
+    </div>
+    <div>
+        <span>发件人</span>
+        <span>{{bemInfoData.senderCust}}-{{bemInfoData.sender}}({{bemInfoData.senderTel}})</span>
+    </div>
+    <div>
+        <span>收件人</span>
+        <span>{{bemInfoData.receiverCust}}-{{bemInfoData.receiver}}({{bemInfoData.receiverTel}})</span>
+    </div>
+    <div>
+        <span>标题</span>
+        <span>{{bemInfoData.title}}</span>
+    </div>
+    <div>
+        <span>消息</span>
+        <span>{{bemInfoData.msg}}</span>
+    </div>
+    <div>
+        <span>备注</span>
+        <span>
+            <span style="display: block;"
+                *ngIf="bemInfoData.orderNo && bemInfoData.orderSeq && bemInfoData.orderSeq > 0">订单号：{{bemInfoData.orderNo}}</span>
+            <span style="display: block;"
+                *ngIf="(bemInfoData.orderNo && bemInfoData.orderSeq && bemInfoData.orderSeq > 0) && bemInfoData.action >= 0">执行动作：{{bemInfoData.action | actionTranslate}}</span>
+            <span>{{bemInfoData.memo}}</span>
+        </span>
+    </div>
+    <div>
+        <span>其它图片</span>
+        <app-manyfile [setImgsrcData]="imgsrcData" [setType]="'info'"></app-manyfile>
+    </div>
+    <div>
+        <span>附件</span>
+        <span class="doc">
+            <ng-container *ngFor="let d of attach">
+                <a *ngIf="d.DocUrl" target="blank" [href]="d.DocUrl">{{d.DocDesc ? d.DocDesc : '无名称'}}</a>
+                <a *ngIf="d.ImgUrl" target="blank" [href]="d.DocUrl">{{d.ImgDesc ? d.ImgDesc : '无名称'}}</a>
+            </ng-container>
+        </span>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

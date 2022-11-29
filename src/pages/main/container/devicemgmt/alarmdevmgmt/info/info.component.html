@@ -1,0 +1,99 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>设备编号</span>
+        <span>{{bemInfoData.DeviceNo}}</span>
+    </div>
+    <div>
+        <span>设备名称</span>
+        <span>{{bemInfoData.DeviceName}}</span>
+    </div>
+    <div>
+        <span>所属子系统</span>
+        <span>{{bemInfoData.SubSys}}</span>
+    </div>
+    <div>
+        <span>设备型号</span>
+        <span>{{bemInfoData.Model}}</span>
+    </div>
+    <div>
+        <span>厂商</span>
+        <span>{{bemInfoData.Facturer}}</span>
+    </div>
+    <div>
+        <span>品牌</span>
+        <span>{{bemInfoData.Brand}}</span>
+    </div>
+    <div>
+        <span>状态</span>
+        <span>{{bemInfoData.Stat | typeTranslate}}</span>
+    </div>
+    <div>
+        <span>报警级别</span>
+        <span>{{bemInfoData.AlertLevelName}}</span>
+    </div>
+    <div>
+        <span>价格</span>
+        <span>{{bemInfoData.Price}}</span>
+    </div>
+    <div>
+        <span>购买日期</span>
+        <span>{{bemInfoData.BuyDate}}</span>
+    </div>
+    <div>
+        <span>出厂日期</span>
+        <span>{{bemInfoData.ManuDate}}</span>
+    </div>
+    <div>
+        <span>安装日期</span>
+        <span>{{bemInfoData.InstallDate}}</span>
+    </div>
+    <div>
+        <span>保修截止日期</span>
+        <span>{{bemInfoData.WarrantyExpire}} </span>
+    </div>
+    <div>
+        <span>{{'Building' | wordTranslate}}</span>
+        <span>{{bemInfoData.Building}}</span>
+    </div>
+    <div>
+        <span>所在楼层</span>
+        <span>{{bemInfoData.Floor}}</span>
+    </div>
+    <div>
+        <span>所在楼层的区域/房间</span>
+        <span>{{bemInfoData.Zone}}</span>
+    </div>
+    <div>
+        <span>所在区域/房间的空间位置</span>
+        <span>{{bemInfoData.SpacePos}}</span>
+    </div>
+    <div>
+        <span>上次保养时间</span>
+        <span>{{bemInfoData.LastMaintainDate}}</span>
+    </div>
+    <div>
+        <span>下次保养时间</span>
+        <span>{{bemInfoData.NextMaintainDate}}</span>
+    </div>
+    <div>
+        <span>保养周期</span>
+        <span>{{bemInfoData.MaintainPeriod}} 天</span>
+    </div>
+    <div>
+        <span>维保超时</span>
+        <span>{{bemInfoData.OverMaintainDate}} 天</span>
+    </div>
+    <div>
+        <span>设备寿命</span>
+        <span>{{bemInfoData.ServiceLife}} 年</span>
+    </div>
+    <div>
+        <span>其它图片</span>
+        <app-manyfile [setImgsrcData]="imgsrcData" [setType]="manyFileUseType"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoOrderKeep()" *ngIf="userPower">新增保养计划</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+<div mat-dialog-title>
+    <div class="deviceTitle">
+        <span style="font-size: 1em;">{{title}}</span>
+        <mat-form-field class="example-form-field" style="margin-left: 10px; font-size: 12px;">
+            <input matInput type="text" placeholder="排班规则名称" [(ngModel)]="searchName" (keyup.enter)="PageIndex = 1;getList()">
+        </mat-form-field>
+
+
+
+
+        <button mat-raised-button color="primary" (click)="getList()" style="font-size: 12px; height: 35px;">搜索</button>
+    </div>
+    <div *ngIf="item">
+        当前选中：
+        <span>{{item.Name}}</span>
+    </div>
+</div>
+<div mat-dialog-content>
+    <table mat-table [dataSource]="list" style="width: 100%;">
+        <ng-container matColumnDef="Name">
+            <th mat-header-cell *matHeaderCellDef> 排班规则名称 </th>
+            <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+        </ng-container>
+        <ng-container matColumnDef="TeamTime">
+            <th mat-header-cell *matHeaderCellDef style="padding: 0 10px;"> 班次规则 </th>
+            <td mat-cell *matCellDef="let element" style="padding: 0 10px;">
+                <div class="Rule_container" (mouseenter)="state=element.Name" (mouseleave)="state=''">
+                    <div class="Sflex" *ngIf="element.Type===0">
+                        <div class="SeColor" [ngStyle]="{'background':element.TeamTime[0].Color}"></div>
+                        <p>{{element.TeamTime[0].AbbrName}}/工作班次：{{showConfim(element.TeamTime)}}【{{element.TeamTime[0].WorkStart}}-{{element.TeamTime[0].WorkEnd}}】
+                        </p>
+                    </div>
+                    <div *ngIf="element.Type===1">
+                        <div *ngFor="let i of element.TeamTime" class="Sflex">
+                            <div class="SeColor" [ngStyle]="{'background':i.Color}"></div>
+                            {{i.Name}}/工作班次：{{i.Days}}天【{{i.WorkStart}}-{{i.WorkEnd}}】
+                        </div>
+                    </div>
+                    <div class="User_container" [ngStyle]="{'display': state===element.Name?'block':'none'}">
+                        <div class="userall">
+                            <div>姓名</div>
+                            <div>级别</div>
+                        </div>
+                        <div class="userall" *ngFor="let item of element.Members,let i=index">
+                            <div>{{item.Name}}</div>
+                            <div>{{item.Level===1?'主班':'副班'}}</div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Type">
+            <th mat-header-cell *matHeaderCellDef> 类型 </th>
+            <td mat-cell *matCellDef="let element"> {{element.Type === 1?'连续排班':'单次排班'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="ValidStart">
+            <th mat-header-cell *matHeaderCellDef> 生效日 </th>
+            <td mat-cell *matCellDef="let element"> {{element.ValidStart}}/{{element.ValidEnd}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row" (click)="choose(row)"
+            [ngClass]="{'active': selectSeq === row.Seq }"></tr>
+    </table>
+</div>
+<div style="background: white;">
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [length]="paginatorTotal" [pageIndex]="PageIndex - 1"
+        [pageSize]="PageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btnCancel" (click)="onNoClick()">取消</button>
+    <button mat-button [mat-dialog-close]="item" class="btnPrimise">确定</button>
+</div>

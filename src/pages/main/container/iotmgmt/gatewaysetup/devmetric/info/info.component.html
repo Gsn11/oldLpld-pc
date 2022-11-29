@@ -1,0 +1,115 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>智联网关</span>
+        <span>{{bemInfoData.GatewayName}} ({{bemInfoData.Gateway}})</span>
+    </div>
+    <div>
+        <span>对接的智能设备</span>
+        <span>{{bemInfoData.SmartDevName}} ({{bemInfoData.SmartDevNo}})</span>
+    </div>
+    <div>
+        <span>协议类型</span>
+        <span>{{bemInfoData.Protocol}}</span>
+    </div>
+    <div>
+        <span>设备编号（名称）</span>
+        <span>{{bemInfoData.DevName}} ({{bemInfoData.DeviceNo}})</span>
+    </div>
+    <div>
+        <span>归属箱/柜编号（名称）</span>
+        <span>{{bemInfoData.BoxDevNo}} ({{bemInfoData.BoxDevName}})</span>
+    </div>
+    <div>
+        <span>测量变量</span>
+        <span>{{bemInfoData.MetricsDesc}} ({{bemInfoData.Id}})</span>
+    </div>
+    <div>
+        <span>报警点 / 数据点</span>
+        <span>{{bemInfoData.IsAlert === 0 ? '数据点' : '报警点'}}</span>
+    </div>
+    <div>
+        <span>计算公式</span>
+        <span>{{bemInfoData.Formula}}</span>
+    </div>
+    <div>
+        <span>上传公式</span>
+        <span>{{bemInfoData.UploadFormula}}</span>
+    </div>
+    <div>
+        <span>报警公式</span>
+        <span>{{bemInfoData.AlertFormula}}</span>
+    </div>
+    <div>
+        <span>测量点说明</span>
+        <span>{{bemInfoData.DMOBDesc}}</span>
+    </div>
+    <ng-container *ngIf="bemInfoData.Protocol==='BACNET'">
+        <div>
+            <span>BACNET协议中的device id</span>
+            <span>{{bemInfoData.BacnetDevId}}</span>
+        </div>
+        <div>
+            <span>BACNET协议中的测量点object id</span>
+            <span>{{bemInfoData.BacnetObjectId}}</span>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="bemInfoData.Protocol==='MODBUS'">
+        <div>
+            <span>从站id</span>
+            <span>{{bemInfoData.SlaveId}}</span>
+        </div>
+        <div>
+            <span>寄存器类型</span>
+            <span>{{bemInfoData.Register | registerTranslate}}</span>
+        </div>
+        <div>
+            <span>起始地址</span>
+            <span>{{bemInfoData.StartAddr}}</span>
+        </div>
+        <div>
+            <span>字数量（word quantity）</span>
+            <span>{{bemInfoData.Quantity}}</span>
+        </div>
+        <div>
+            <span>大端模式</span>
+            <span>{{bemInfoData.BigEndian | bigEndianTranslate}}</span>
+        </div>
+    </ng-container>
+    <ng-container *ngIf="bemInfoData.Protocol==='OPC'">
+        <div>
+            <span>OPC协议版本</span>
+            <span>{{bemInfoData.ProtocolVer | protocolVerTranslate}}</span>
+        </div>
+        <div>
+            <span>条目（item）</span>
+            <span>{{bemInfoData.Item}}</span>
+        </div>
+        <div>
+            <span>OPC服务器ip</span>
+            <span>{{bemInfoData.Ip}}</span>
+        </div>
+        <div>
+            <span>OPC服务器端口</span>
+            <span>{{bemInfoData.Port}}</span>
+        </div>
+        <div>
+            <span>ClsId / Endpoint Url</span>
+            <span>{{bemInfoData.ClsId}}</span>
+        </div>
+    </ng-container>
+    <div *ngIf="bemInfoData.Protocol==='OBIX'">
+        <span>点路径url</span>
+        <span>{{bemInfoData.Item}}</span>
+    </div>
+    <div *ngIf="bemInfoData.Protocol==='Bem'">
+        <span>点路径ord</span>
+        <span>{{bemInfoData.Item}}</span>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoEdit()" *ngIf="userPower"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()" *ngIf="userPower"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

@@ -1,0 +1,253 @@
+<!-- <app-crumbs [crumbs]="crumbsList"></app-crumbs> -->
+<div class="containerPadding">
+	<!-- <app-valuerange [value]="[1, 2]" [showValuerange]="showValuerange" (confirm)="valueRangeConfirm($event)"></app-valuerange> -->
+	<div class="mat-elevation-z8" style="margin: 20px; background-color: #fff; padding: 20px">
+		<app-calendar [setCreateDate]="selectDataVal" (getTime)="getBeginTime($event)" title="选择日期"></app-calendar>
+		
+		<p class="tit">东南区水厂调度日报表</p>
+		<div flex="dir:top" class="table">
+			<div class="table-hd parent-row" flex>
+				<div style="flex: 1;" flex="cross:center main:justify">
+					<div style="flex: 1; text-align: center;">时间</div>
+				</div>
+				<div style="flex: 1;" flex="dir:top" class="parent-column">
+					<div style="flex: 1; padding: 5px;" flex="cross:center main:center">原水</div>
+					<div style="flex: 5;" flex class="parent-row">
+						<div style="flex: 5; padding: 5px;" flex="cross:center main:center">原水量<br/>(m3)<br/>≤<br/>150000*1.1</div>
+					</div>
+				</div>
+				<div style="flex: 6;" flex="dir:top" class="parent-column">
+					<div style="flex: 1; padding: 5px;" flex="cross:center main:center">二级泵房</div>
+					<div style="flex: 5;" flex class="parent-row">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">清水位<br/>(m)<br/>≤5.8</div>
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">出厂压力<br/>(MPa)<br/>≤0.3</div>
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">出水量<br/>(m3)<br/>≤<br/>150000*1.1</div>
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">10kV排尾变<br/>二期扩建工程<br/>（kWh）<br/>1AH1</div>
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">10kV<br/>亚峰变<br/>（kWh）2AH1</div>
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">二泵电耗<br/>(kWh/kt)</div>
+					</div>
+				</div>
+				<div style="flex: 3;" flex="dir:top" class="parent-column">
+					<div style="flex: 1; padding: 5px;" flex="cross:center main:center">水质</div>
+					<div style="flex: 5;" flex class="parent-row">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">原水浊度<br/>(NTU)</div>
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">出厂水浊度<br/>(NTU)<br/>≤0.13</div>
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">出厂水余氯<br/>（mg/L）<br/>0.8-1.1</div>
+					</div>
+				</div>
+				<div style="flex: 3;" flex="dir:top" class="parent-column">
+					<div style="flex: 1; padding: 5px;" flex="cross:center main:center">药耗(kg/kt)</div>
+					<div style="flex: 5;" flex class="parent-row">
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">矾耗<br/>≤7.5</div>
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">高分子耗<br/>≤0.05</div>
+						<div style="flex: 1; padding: 5px;" flex="cross:center main:center">次钠耗<br/>≤20</div>
+					</div>
+				</div>
+			</div>
+			<div [ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff'}" *ngFor="let item of list;let i = index" class="table-c parent-row" flex (mouseover)="blurChangeOver(i)" (mouseleave)="blurChangeLeave()">
+				<div style="flex: 1;" >
+					<p>{{(i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 )? '小计' : i == 27 ? '总计' : ( i > 8 && i < 18  ) ? i-1 :  ( i > 17  ) ? i-2 : i }}</p>
+				</div>
+				<div style="flex: 1;">
+					<input type="text" readonly (click)="blurChange(i+1,item.rawWater,'原水量(m3)≤150000*1.1')"
+					[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.rawWater == null?'#000':item.rawWater.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+					[value]="item.rawWater == null ? '0' : item.rawWater.value">
+				</div>
+				<div style="flex: 1;">
+					<input type="text" readonly (click)="blurChange(i+1,item.clearWaterLevel,'清水位(m)≤5.8')"
+					[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.clearWaterLevel == null?'#000':item.clearWaterLevel.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+					[value]="item.clearWaterLevel == null ? '0' : item.clearWaterLevel.value">
+				</div>
+				<div style="flex: 1;">
+					<input type="text" readonly (click)="blurChange(i+1,item.outPress,'出厂压力(MPa)≤0.3')"
+					[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.outPress == null?'#000':item.outPress.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+					[value]="item.outPress == null ? '0' : item.outPress.value">
+				</div>
+				<div style="flex: 1;">
+					<input type="text" readonly (click)="blurChange(i+1,item.waterYield,'出水量(m3)≤150000*1.1')"
+					[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.waterYield == null?'#000':item.waterYield.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+					[value]="item.waterYield == null ? '0' : item.waterYield.value">
+				</div>
+				<div style="flex: 1;">
+					<input type="text" readonly (click)="blurChange(i+1,item.exPanProject,'10kV排尾变二期扩建工程（kWh）1AH1')"
+					[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.exPanProject == null?'#000':item.exPanProject.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+					[value]="item.exPanProject == null ? '0' : item.exPanProject.value">
+				</div>
+				<div style="flex: 1;">
+					<input type="text" readonly (click)="blurChange(i+1,item.subPeakChange,'10kV亚峰变（kWh）2AH1')"
+					[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.subPeakChange == null?'#000':item.subPeakChange.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+					[value]="item.subPeakChange == null ? '0' : item.subPeakChange.value">
+				</div>
+				<div style="flex: 1;">
+					<input type="text" readonly (click)="blurChange(i+1,item.pumpTwoPower,'二泵电耗(kWh/kt)')"
+					[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pumpTwoPower == null?'#000':item.pumpTwoPower.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+					[value]="item.pumpTwoPower == null ? '0' : item.pumpTwoPower.value">
+				</div>
+				<div style="flex: 1;">
+					<input type="text" readonly (click)="blurChange(i+1,item.rawWaterTurbidity,'原水浊度(NTU)')"
+					[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.rawWaterTurbidity == null?'#000':item.rawWaterTurbidity.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+					[value]="item.rawWaterTurbidity == null ? '0' : item.rawWaterTurbidity.value">
+				</div>
+				<div style="flex: 1;">
+					<input type="text" readonly (click)="blurChange(i+1,item.facWaterTurbidity
+					,'出厂水浊度(NTU)≤0.13')" [ngClass]=" i === inputI ? 'inputClass':''"
+					[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.facWaterTurbidity
+					== null?'#000':item.facWaterTurbidity.flag ==true?'red':'#000'}"[value]="item.facWaterTurbidity== null ? '0' : item.facWaterTurbidity.value">
+				</div>
+				<div style="flex: 1;">
+					<input type="text" readonly (click)="blurChange(i+1,item.facWaterChlorine,'出厂水余氯（mg/L）0.8-1.1')"
+					[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.facWaterChlorine == null?'#000':item.facWaterChlorine.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+					[value]="item.facWaterChlorine == null ? '0' : item.facWaterChlorine.value">
+				</div>
+				<div style="flex: 1;">
+					<input type="text" readonly (click)="blurChange(i+1,item.pacUnitConClearWater,'矾耗≤7.5')"
+					[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pacUnitConClearWater == null?'#000':item.pacUnitConClearWater.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+					[value]="item.pacUnitConClearWater == null ? '0' : item.pacUnitConClearWater.value">
+				</div>
+				<div style="flex: 1;">
+					<input type="text" readonly (click)="blurChange(i+1,item.pamUnitConClearWater,'高分子耗≤0.05')"
+					[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pamUnitConClearWater == null?'#000':item.pamUnitConClearWater.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+					[value]="item.pamUnitConClearWater == null ? '0' : item.pamUnitConClearWater.value">
+				</div>
+				<div style="flex: 1;">
+					<input type="text" readonly (click)="blurChange(i+1,item.naCloUnitConClearWater,'次钠耗≤20')"
+					[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.naCloUnitConClearWater == null?'#000':item.naCloUnitConClearWater.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+					[value]="item.naCloUnitConClearWater == null ? '0' : item.naCloUnitConClearWater.value">
+				</div>
+			</div>
+			<div class="other parent-row" flex style="height: 250px;">
+				<div style="flex: 1;" class="parent-column" flex="dir:top">
+					<div style="flex: 1;" flex="cross:center main:center"><p>早班</p></div>
+					<div style="flex: 1;" flex="cross:center main:center"><p>中班</p></div>
+					<div style="flex: 1;" flex="cross:center main:center"><p>晚班</p></div>
+				</div>
+				<div style="flex: 2;" class="parent-column" flex="dir:top" *ngIf= " signOrExamine ">
+					<div style="flex: 1;display: flex;flex-direction: column; align-items: center;justify-content: center;" >
+						<div *ngIf= " signOrExamine.signMorning != null ">
+							<div >签到人：{{signOrExamine == null ? '': signOrExamine.signMorning == null ? '': signOrExamine.signMorning}}</div>
+							<div >时间：{{signOrExamine == null ? '': signOrExamine.signMorningTime}}</div>
+						</div>
+						<button *ngIf= "signOrExamine.signMorning === null " nz-button nzType="primary" (click)="signButton('早','1')">签到</button>
+					</div>
+					<div style="flex: 1;display: flex;flex-direction: column; align-items: center;justify-content: center;">
+						<div *ngIf= "signOrExamine.signAfternoon != null ">
+							<div >签到人：{{signOrExamine.signAfternoon}}</div>
+							<div >时间：{{signOrExamine.signAfternoonTime}}</div>
+						</div>
+						<button *ngIf= "signOrExamine.signAfternoon === null " nz-button  nzType="primary" (click)="signButton('中','1')">签到</button>
+					</div>
+					<div style="flex: 1;display: flex;flex-direction: column; align-items: center;justify-content: center;">
+						<div *ngIf= "signOrExamine.signEvening != null ">
+							<div >签到人：{{signOrExamine.signEvening}}</div>
+							<div >时间：{{signOrExamine.signEveningTime}}</div>
+						</div>
+						<button *ngIf= "signOrExamine.signEvening === null " nz-button  nzType="primary" (click)="signButton('晚','1')">签到</button>
+					</div>
+				</div>
+				<div style="flex: 1;" flex="cross:center main:center">
+					<div style="flex: 1;"><p>审核人</p></div>
+				</div>
+				<div style="flex: 2;" class="parent-column" flex="dir:top" *ngIf= " signOrExamine ">
+					<div style="flex: 1;display: flex;flex-direction: column; align-items: center;justify-content: center;">
+						<div *ngIf= "signOrExamine.examineMorning != null ">{{signOrExamine.examineMorning}}</div>
+						<button *ngIf= "signOrExamine.examineMorning === null " nz-button nzType="primary" (click)="signButton('早','2')">审核</button>
+					</div>
+					<div style="flex: 1;display: flex;flex-direction: column; align-items: center;justify-content: center;">
+						<div *ngIf= "signOrExamine.examineAfternoon != null ">{{signOrExamine.examineAfternoon}}</div>
+						<button *ngIf= "signOrExamine.examineAfternoon === null " nz-button nzType="primary" (click)="signButton('中','2')">审核</button>
+					</div>
+					<div style="flex: 1;display: flex;flex-direction: column; align-items: center;justify-content: center;">
+						<div *ngIf= "signOrExamine.examineEvening != null ">{{signOrExamine.examineEvening}}</div>
+						<button *ngIf= "signOrExamine.examineEvening === null " nz-button nzType="primary" (click)="signButton('晚','2')">审核</button>
+					</div>
+				</div>
+				<div style="flex: 1;" flex="cross:center main:center">
+					<div style="flex: 1;"><p>安全生产技术交底</p></div>
+				</div>
+				<div style="flex: 3;" class="parent-column" flex="dir:top">
+					<div style="flex: 1;" flex="cross:center main:center">
+						<button (click)="showEnterBox = true;shiftType=1;">录入</button>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:center">
+						<button (click)="showEnterBox = true;shiftType=2;">录入</button>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:center">
+						<button (click)="showEnterBox = true;shiftType=3;">录入</button>
+					</div>
+				</div>
+				<div style="flex: 5;" class="parent-column" flex="dir:top">
+					<div style="flex: 1;" flex="cross:center main:center"><p>运行参数</p></div>
+					<div style="flex: 1;" class="parent-row" flex>
+						<div style="flex: 1;" class="parent-row"><p>机泵效率<br/>(%)</p></div>
+						<div style="flex: 1;" class="parent-row"><p>制水电单耗<br/>(kwh/kt)</p></div>
+						<div style="flex: 1;" class="parent-row"><p>综合单位电耗<br/>(kwh/kt·Mpa)</p></div>
+						<div style="flex: 1;" class="parent-row"><p>制水损耗率<br/>(%)</p></div>
+						<div style="flex: 1;" class="parent-row"><p>总/分表比</p></div>
+					</div>
+					<div style="flex: 1;" class="parent-row" flex>
+						<div style="flex: 1;" class="parent-row"><p>1</p></div>
+						<div style="flex: 1;" class="parent-row"><p>1</p></div>
+						<div style="flex: 1;" class="parent-row"><p>1</p></div>
+						<div style="flex: 1;" class="parent-row"><p>1</p></div>
+						<div style="flex: 1;" class="parent-row"><p>1</p></div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="margin-top: 20px;" *ngIf ="record != undefined">
+			<nz-table #middleTable [nzTitle]="'历史记录表'"  nzBordered nzSize="small" [nzData]="record">
+				<thead>
+					<tr>
+						<th>序号</th>
+						<th>修改字段</th>
+						<th>修改时间</th>
+						<th>修改前数据</th>
+						<th>修改后数据</th>
+						<th>修改人</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr *ngFor="let data of middleTable.data;let i = index">
+						<td>{{ i + 1 }}</td>
+						<td>{{ data.updateField }}</td>
+						<td>{{ data.updateTime }}</td>
+						<td>{{ data.updateFrontData }}</td>
+						<td>{{ data.updateAfterData }}</td>
+						<td>{{ data.updateName }}</td>
+					</tr>
+				</tbody>
+			</nz-table>
+		</div>
+	</div>
+	<div *ngIf="showEnterBox" class="enter-box" flex="cross:center main:center">
+		<div flex="dir:top" style="position: relative;">
+			<i nz-icon [nzType]="'close'" (click)="showEnterBox = false;" style="position: absolute;top: 10px;right: 10px;cursor: pointer;width: 30px;height: 30px;"></i>
+			<div style="flex: 1; overflow-y: auto;">
+				<p class="tit">历史录入</p>
+				<ul>
+					<li flex="cross:center main:center" *ngFor="let item of sourtheastHis;let i = index" >
+						<span>{{item.content}}</span>
+						<span>{{item.name}}</span>
+					</li>
+				</ul>
+			</div>
+			<!-- <div class="input-w" flex>
+				<textarea [(ngModel)]="entering"></textarea>
+				<button (click)="enteringSave()">确认</button>
+				<button (click)="showEnterBox = false;entering = '';">取消</button>
+			</div> -->
+		</div>
+	</div>
+	<!-- <app-confim [confim]="setConfim" [title]="confimTitle" (setConfimResult)="tableConfimResult($event)"></app-confim> -->
+</div>
+<div class="windowBox" *ngIf="amendFlag">
+	<div class="window">
+		<div class="windowPadd">
+			<div>
+				修改值：<input type="text" [(ngModel)]="amendInfo">
+			</div>
+			<button nz-button nzType="primary" (click)="amendButton(1)">保存</button>
+			<button nz-button nzType="text" (click)="amendButton(2)">取消</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,59 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>品牌LOGO</span>
+        <span>
+            <img *ngIf="bemInfoData.Img" style="width: 100px; height: 50px;" [src]="bemInfoData.Img" alt="companyLogo">
+        </span>
+    </div>
+    <div>
+        <span>品牌名称</span>
+        <span>{{bemInfoData.BRName}}</span>
+    </div>
+    <div>
+        <span>品牌英文名称</span>
+        <span>{{bemInfoData.BRLocalName}}</span>
+    </div>
+    <div *ngIf="buildData.buildType === '联排联调'">
+        <span>所属厂商</span>
+        <span>{{BRFacturer}}</span>
+    </div>
+    <div>
+        <span>申请人名称</span>
+        <span>{{bemInfoData.Proposer}} </span>
+    </div>
+    <div>
+        <span>申请人地址</span>
+        <span>{{bemInfoData.ProposerAddr}}</span>
+    </div>
+    <div>
+        <span>注册地</span>
+        <span>{{bemInfoData.RegisterZone}}</span>
+    </div>
+    <div>
+        <span>注册类型</span>
+        <span>{{bemInfoData.RegisterType}}</span>
+    </div>
+    <div>
+        <span>注册号</span>
+        <span>{{bemInfoData.RegisterCode}}</span>
+    </div>
+    <div>
+        <span>申请日期</span>
+        <span>{{bemInfoData.RegisterDate}}</span>
+    </div>
+    <div>
+        <span>失效日期</span>
+        <span>{{bemInfoData.ExpireDate}}</span>
+    </div>
+    <div>
+        <span>其它图片</span>
+        <app-manyfile [setImgsrcData]="imgsrcData" [setType]="manyFileUseType"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoEdit()" *ngIf="userPower"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()" *ngIf="userPower"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

@@ -1,0 +1,62 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+
+<div class="orderStaticReportContainer">
+    
+    <div class="top-btn">
+        <div class="btn-g">
+            <button (click)="goChart('all')" mat-flat-button color="primary">派单总图</button>
+            <button (click)="goChart('type')" mat-flat-button color="primary">类型图</button>
+            <button (click)="goChart('status')" mat-flat-button color="primary">状态图</button>
+            <button (click)="goChart('person')" mat-flat-button color="primary">人员统计图</button>
+        </div>
+        <mat-form-field>
+            <input matInput [matDatepicker]="dp" placeholder="请选择日期" [value]="date">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp startView="multi-year" (monthSelected)="getBeginTime($event, dp)"
+                panelClass="example-month-picker">
+            </mat-datepicker>
+        </mat-form-field>  
+        <button mat-flat-button color="primary" (click)="downloadDeviceFile()">导出excel</button>
+    </div>
+
+    <div class="con">
+        <div class="tit">
+            {{date}}运维质量统计报表
+            <!-- <mat-radio-group [(ngModel)]="dateCheck">
+                <mat-radio-button [value]="'今日'">今日</mat-radio-button>
+                <mat-radio-button [value]="'本周'">本周</mat-radio-button>
+                <mat-radio-button [value]="'本月'">本月</mat-radio-button>
+            </mat-radio-group> -->
+        </div>
+        <div class="table-w">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 250px;" class="cross">
+                            <div style="text-align: center;font-weight: bold;">
+                                <p>质量</p>
+                                <p>部门</p>
+                                <div></div>
+                            </div>
+                        </th>
+                        <th style="text-align: center;font-weight: bold;">服务分</th>
+                        <th style="text-align: center;font-weight: bold;">及时率</th>
+                        <th style="text-align: center;font-weight: bold;">完成率</th>
+                        <th style="text-align: center;font-weight: bold;">操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of dataCheckList">
+                        <td>{{item.TeamName}}</td>
+                        <td>{{item.Score}}</td>
+                        <td>{{item.InTimePer}}</td>
+                        <td>{{item.FinishPer}}</td>
+                        <td>
+                            <button (click)="gotoInfo(item.Seq,item.TeamName)" mat-flat-button color="primary">查看详情</button>
+                        </td>
+                    </tr>
+                </tbody>
+                </table>            
+        </div>
+    </div>
+</div>

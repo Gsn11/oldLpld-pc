@@ -1,0 +1,87 @@
+<div mat-dialog-content class="dialog-wrap">
+    <div class="search-bar">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入策略名称" [(ngModel)]="searchName">
+        </mat-form-field>
+        <button mat-button style="background: #10A0F6; color: #fff; margin-left: 10px;" (click)="PageIndex = 1;search()">搜索</button>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <!-- <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入策略公式" [(ngModel)]="formula">
+        </mat-form-field> -->
+    </div>
+    <p class="tit">已选择监测点</p>
+    <div style="max-height: 200px; overflow:auto; margin-bottom: 20px;">
+        <table mat-table [dataSource]="selectList" style="width: 100%;">
+            <ng-container matColumnDef="name">
+                <th mat-header-cell *matHeaderCellDef>  设备编号(名称)  </th>
+                <td mat-cell *matCellDef="let element"> {{element.DeviceNo}}({{element.DevName}}) </td>
+            </ng-container>
+            <ng-container matColumnDef="variable">
+                <th mat-header-cell *matHeaderCellDef style="padding: 0 10px;"> 测量变量  </th>
+                <td mat-cell *matCellDef="let element" style="padding: 0 10px;"> {{element.MetricsDesc }} ({{element.Id}}) </td>
+            </ng-container>
+            <ng-container matColumnDef="formula">
+                <th mat-header-cell *matHeaderCellDef> 策略公式 </th>
+                <td mat-cell *matCellDef="let element"> {{element.AlertFormula}} </td>
+            </ng-container>
+            <ng-container matColumnDef="operate">
+                <th mat-header-cell *matHeaderCellDef> 操作 </th>
+                <td mat-cell *matCellDef="let element; let i = index;">
+                    <span style="color: #0152AD" (click)="del(i)">删除</span>
+                </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+        </table>
+    </div>
+    <div style="display: flex;">
+        <p class="tit">监测点信息</p>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <mat-form-field>
+            <mat-label>请选择智联网关</mat-label>
+            <mat-select (selectionChange)="smartGatewayChange($event)">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let s of smartGatewayList" [value]="s.Seq">
+                    {{s.DeviceNo}} - {{s.Model}} - {{s.DeviceName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <table mat-table [dataSource]="list" style="width: 100%;">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> 设备编号(名称)  </th>
+            <td mat-cell *matCellDef="let element"> {{element.DeviceNo}}({{element.DevName}}) </td>
+        </ng-container>
+        <ng-container matColumnDef="dev">
+            <th mat-header-cell *matHeaderCellDef style="padding: 0 10px;"> 对接的智能设备 </th>
+            <td mat-cell *matCellDef="let element" style="padding: 0 10px;"> {{element.SmartDevNo}}({{element.SmartDevName}}) </td>
+        </ng-container>
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef> 协议类型 </th>
+            <td mat-cell *matCellDef="let element"> {{element.Protocol}} </td>
+        </ng-container>
+        <ng-container matColumnDef="variable">
+            <th mat-header-cell *matHeaderCellDef> 测量变量 </th>
+            <td mat-cell *matCellDef="let element"> {{element.MetricsDesc }} ({{element.Id}}) </td>
+        </ng-container>
+        <ng-container matColumnDef="spot">
+            <th mat-header-cell *matHeaderCellDef> 报警点/数据点 </th>
+            <td mat-cell *matCellDef="let element"> {{element.IsAlert === 0 ? '数据点' : '报警点'}} </td>
+        </ng-container>
+        <ng-container matColumnDef="formula">
+            <th mat-header-cell *matHeaderCellDef> 策略公式 </th>
+            <td mat-cell *matCellDef="let element"> {{element.AlertFormula}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns2"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns2;" class="example-element-row" (click)="choose(row)"
+        [ngClass]="{'active': selectSeq === row.Seq }"></tr>
+    </table>
+</div>
+<div style="background: white;">
+    <mat-paginator [pageSizeOptions]="[5]" [length]="paginatorTotal" [pageIndex]="PageIndex - 1"
+        [pageSize]="5" (page)="change($event)" showFirstLastButtons></mat-paginator>
+</div>
+<div class="btn-g">
+    <button mat-button class="btnCancel" (click)="onNoClick()">取消</button>
+    <button mat-button (click)="confirm()" class="btnPrimise">确定</button>
+</div>

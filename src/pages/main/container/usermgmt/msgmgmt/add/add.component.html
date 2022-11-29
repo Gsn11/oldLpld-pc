@@ -1,0 +1,57 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>收件人类别</span>
+        <mat-form-field>
+            <mat-select [formControl]="SelectRecvType">
+                <mat-option *ngFor="let r of recvType" [value]="r.value">
+                    {{r.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectRecvType.value === 0">
+        <span><span style="color: red;">*</span> 收件人</span>
+        <span (click)="openUserManyDialog()">{{SelectUserName}}</span>
+    </div>
+    <div *ngIf="SelectRecvType.value === 1">
+        <span><span style="color: red;">*</span> 收件部门</span>
+        <mat-form-field>
+            <mat-select [formControl]="SelectTeams">
+                <mat-option *ngFor="let t of Teams" [value]="t.TSeq">
+                    {{t.TName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <span>标题</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入标题" [(ngModel)]="title">
+        </mat-form-field>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 消息</span>
+        <mat-form-field class="example-full-width inputField">
+            <textarea matInput placeholder="请输入消息" [(ngModel)]="msg"></textarea>
+        </mat-form-field>
+    </div>
+    <div>
+        <span>备注</span>
+        <mat-form-field class="example-full-width inputField">
+            <textarea matInput placeholder="请输入备注" [(ngModel)]="memo"></textarea>
+        </mat-form-field>
+    </div>
+    <div>
+        <span>图片</span>
+        <app-manyfile #imageSrcData [setImgsrcData]="imgsrcData"></app-manyfile>
+    </div>
+    <div>
+        <span>附件：</span>
+        <app-manyfile #documentData [docList]="docList"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

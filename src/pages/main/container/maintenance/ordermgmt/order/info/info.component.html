@@ -1,0 +1,169 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>派单名</span>
+        <span>{{bemInfoData.MSName}}</span>
+    </div>
+    <div>
+        <span>是否开启二维码扫描</span>
+        <span>{{!bemInfoData.NeedQrcode || bemInfoData.NeedQrcode === 0 ? '否' : '是'}}</span>
+    </div>
+    <div>
+        <span>高德纬度</span>
+        <span>{{bemInfoData.GdLat}}</span>
+    </div>
+    <div>
+        <span>高德经度</span>
+        <span>{{bemInfoData.GdLng}}</span>
+    </div>
+    <div>
+        <span>派单描述</span>
+        <span>{{bemInfoData.MSDesc}}</span>
+    </div>
+    <div>
+        <span>派单号</span>
+        <span>{{bemInfoData.OrderNo}}</span>
+    </div>
+    <div>
+        <span>派单状态</span>
+        <span>{{bemInfoData.State | stateTypeTranslate}}</span>
+    </div>
+    <div>
+        <span>派单时间</span>
+        <span>{{bemInfoData.OrderTime}}</span>
+    </div>
+    <div>
+        <span>处理反馈时限（小时）</span>
+        <span>{{bemInfoData.WorkExpire}}</span>
+    </div>
+    <div *ngIf="bemInfoData.ServiceType !== 0">
+        <span>上门费</span>
+        <span>{{bemInfoData.PriceVisit}} 元</span>
+    </div>
+    <div *ngIf="!Isentver">
+        <span>派单总价</span>
+        <span>{{(bemInfoData.Price + (bemInfoData.ServiceType !== 0 ? 0 : bemInfoData.PriceVisit)).toFixed(2)}} 元</span>
+    </div>
+    <div *ngIf="!Isentver">
+        <span>派单价格明细</span>
+        <span style="font-size: 14px;">
+            <mat-card>
+                <div class="template">
+                    <div><span>报价条目</span></div>
+                    <div><span>价格</span></div>
+                    <div><span>所涉设备</span></div>
+                </div>
+            </mat-card>
+
+            <mat-card *ngFor="let i of PriceList">
+                <div class="template">
+                    <div><span>{{i.Item}}</span></div>
+                    <div><span>{{i.Price}}</span></div>
+                    <div><span>{{i.DeviceNo}}({{i.DeviceName}})</span></div>
+                </div>
+            </mat-card>
+        </span>
+    </div>
+    <div>
+        <span>派单状态变化</span>
+        <span style="font-size: 14px;">
+            <mat-card>
+                <div class="template">
+                    <div><span>状态</span></div>
+                    <div><span>状态时间</span></div>
+                    <div><span>关联行为</span></div>
+                </div>
+            </mat-card>
+
+            <mat-card *ngFor="let m of MaintenanceOrderHis">
+                <div class="template">
+                    <div><span>{{m.State | stateTypeTranslate}}</span></div>
+                    <div><span>{{m.OrderHisTime}}</span></div>
+                    <div><span>{{m.State | activeNameTypeTranslate}}</span></div>
+                </div>
+            </mat-card>
+        </span>
+    </div>
+    <div>
+        <span>对派单的操作</span>
+        <span style="font-size: 14px;">
+            <mat-card>
+                <div class="template">
+                    <div><span>人员</span></div>
+                    <div><span>行为</span></div>
+                    <div><span>时间</span></div>
+                    <div><span>描述 / 图片</span></div>
+                </div>
+            </mat-card>
+
+            <mat-card *ngFor="let m of MaintenanceActions">
+                <div class="template">
+                    <!-- m.Action === '71' || m.Action === 71 ? bemInfoData.CreatorName :  -->
+                    <div><span>{{m.UserName}}</span></div>
+                    <div><span>{{m.Action | activeNameTypeTranslate}}</span></div>
+                    <div><span>{{m.ActionTime}}</span></div>
+                    <div class="templateDesc">
+                        <span>{{m.ActionDesc}}</span>
+                        <span *ngFor="let p of m.Pics">
+                            <img (click)="openImage(p.ImgUrl)" [src]="p.ImgUrl" [alt]="p.ImgDesc">
+                        </span>
+                    </div>
+                </div>
+            </mat-card>
+        </span>
+    </div>
+    <div>
+        <span>派单涉及设备条目</span>
+        <span style="font-size: 14px;">
+            <mat-card>
+                <div class="template">
+                    <div style="text-align: center;"><span>设施位置</span></div>
+                    <div style="text-align: center;"><span>设备</span></div>
+                    <div style="text-align: center;"><span>条目</span></div>
+                    <div style="text-align: center;"><span>条目值</span></div>
+                    <div style="text-align: center;"><span>图片</span></div>
+                    <div style="text-align: center;"><span>备注</span></div>
+                </div>
+            </mat-card>
+
+            <mat-card *ngFor="let i of MaintenanceScheItems">
+                <div class="template">
+                    <div style="padding: 0 20px;"><span class="wordBreakNormal">{{i.BuildingName || i.CName || i.Building }} - {{i.Floor}}层 - {{i.Zone}} - {{i.SpacePos}}</span></div>
+                    <div style="padding: 0 20px;"><span class="wordBreakNormal">{{i.DeviceNo}}({{i.DeviceName}})</span></div>
+                    <div style="padding: 0 20px;"><span>{{i.Item}}</span></div>
+                    <div style="padding: 0 20px;"> <span>{{i.MoiValue}}</span></div>
+                    <div style="padding: 0 20px;">
+                        <div *ngIf="i.Images && i.Images.length > 0 && i.Images[0] != null">
+                            <img style="width: 100px;" *ngFor="let item of i.Images" (click)="imgBig(item.ImgUrl)" [src]="item.ImgUrl" />
+                        </div>
+                    </div>
+                    <div style="padding: 0 20px;">
+                        <div *ngIf="i.Images && i.Images.length > 0 && i.Images[0] != null">
+                            {{i.Images[0].MoiiDesc}}
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+            <nz-modal [(nzVisible)]="isVisible" nzWidth="500px" nzTitle="图片放大" (nzOnCancel)="isVisible = false" (nzOnOk)="isVisible = false">
+                <img style="width: 100%;height:500px" [src]="ImgUrlBig" />
+            </nz-modal>
+        </span>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoEdit()" *ngIf="userPower && !IsSuccess && bemInfoData.ServiceType !== 0 && !Isentver" class="edit"><span class="iconfont iconedit"></span>编辑价格</button>
+        
+        <button mat-button (click)="showConfim()" *ngIf="userPower && !IsSuccess && (bemInfoData.State < 6 || bemInfoData.State > 69)&& bemInfoData.State!=73" class="delete"><span class="iconfont icondelete"></span>取消派单</button>
+        <button mat-button (click)="ReSetOrder()" *ngIf="IsReOrder" class="reset"><span>重新派单</span></button>
+
+        <ng-container *ngIf="userPower && bemInfoData.MSType === '2' && bemInfoData.State === 7">
+            <button mat-button (click)="verifyOk()" class="edit">审核通过</button>
+            <button mat-button (click)="OrderReview()" class="delete">请整改</button>
+        </ng-container>
+        
+        <ng-container *ngIf="userPower && bemInfoData.MSType !== '2' && bemInfoData.State === 70">
+            <button mat-button (click)="checkOk()" class="edit">审核通过</button>
+        </ng-container>
+        <button mat-button (click)="goback()" class="back"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" [title]="'确认取消派单吗？'" (setConfimResult)="infoConfimResult($event)"></app-confim>

@@ -1,0 +1,30 @@
+<div class="fileUpload" [ngClass]="{'active': fileBoxShow}">
+    <div class="bg" (click)="fileCancel()"></div>
+    <div class="container">
+        <div class="header"><span class="title">文件上传</span></div>
+        <div class="main">
+            <div><span class="iconfont iconsave"></span></div>
+            <div><span>点击或拖放文件到此区域进行上传</span></div>
+            <div><span>选择含有测量点数据的xlsx文件</span></div>
+            <input class="files" name="excelInput" type="file" (change)="fileChange($event)" accept=".xlsx">
+        </div>
+        <div class="main2">
+            <div *ngFor="let f of fileList, let fIndex = index"
+                [ngClass]="{ 'success': f.State === 1, 'error': f.State === 2 }">
+                <span>{{f.name}}</span>
+                <span class="iconfont iconclose" (click)="deleteFile()"></span>
+            </div>
+        </div>
+        <div class="serviceMsg" *ngIf="FileInfo">
+            <div>有部分文件上传失败，具体详情请点击下方链接</div>
+            <div><a [href]="FailUrl" target="_blank">{{info ? info : '请下载'}}</a></div>
+        </div>
+        <div class="serviceMsg" *ngIf="showDownLoadSrc && showSrc && !FileInfo">
+            <div><a [href]="FailUrl" target="_blank">{{info}}</a></div>
+        </div>
+        <div class="footer">
+            <button [ngClass]="{'gColor': BtnDisabled === true}" mat-button (click)="FileUpLoad()" [disabled]="BtnDisabled"><span class="iconfont iconsave"></span> 上传</button>
+            <button mat-button (click)="fileCancel()"><span class="iconfont iconpstep"></span>取消</button>
+        </div>
+    </div>
+</div>

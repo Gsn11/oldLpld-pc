@@ -1,0 +1,55 @@
+.wlyIntroduce {
+  background: #ffffff;
+
+  .main {
+    margin: 0 auto;
+    width: 1180px;
+
+    .title {
+      padding: 30px 0;
+      text-align: center;
+
+      >span {
+        font-size: 32px;
+        position: relative;
+        &::before {
+          left: 25%;
+          bottom: -20px;
+          width: 50%;
+          height: 4px;
+          background: #0168b7;
+          content: '';
+          position: absolute;
+        }
+      }
+    }
+
+    .list {
+      width: 100%;
+      display: flex;
+      flex-flow: row wrap;
+
+      .item {
+        margin-top: 50px;
+        width: 33%;
+        height: 367px;
+        text-align: center;
+
+        img {
+          width: 270px;
+          height: 270px;
+        }
+
+        &:nth-child(3n+2) {
+          margin: 50px 0.5% 0;
+        }
+
+        span {
+          padding: 25px;
+          font-size: 24px;
+          display: block;
+        }
+      }
+    }
+  }
+}

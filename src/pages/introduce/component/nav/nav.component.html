@@ -1,0 +1,66 @@
+<div class="nav">
+  <div class="nav-left">
+    <img class="logo" src="../../../assets/introduce/home/logo.png" alt="logo">
+    <img class="sublogo" src="../../../assets/introduce/home/sublogo.png" alt="sublogo">
+  </div>
+  <div class="nav-right">
+    <div class="nav-item" (click)="gotoIntroduce()"><span>万楼云</span></div>
+    <div class="nav-item nav-joinus">
+      <span>加入我们</span>
+      <div class="joinus-list">
+        <div (click)="toDetailes('partners')"><span>合作伙伴</span></div>
+        <div (click)="toDetailes('maintainer')"><span>维客</span></div>
+      </div>
+    </div>
+    <div class="nav-item nav-joinus">
+      <span>关于我们</span>
+      <div class="joinus-list">
+        <div>
+          <span>企业档案
+            <span class="iconfont iconright"></span>
+          </span>
+          <div class="list-item">
+            <div (click)="toDetailes('synopsis')"><span>简介</span></div>
+            <div (click)="toDetailes('formation')"><span>组织架构</span></div>
+          </div>
+        </div>
+        <div>
+          <span>企业文化
+            <span class="iconfont iconright"></span>
+          </span>
+          <div class="list-item">
+            <div (click)="toDetailes('creed')"><span>企业信条</span></div>
+            <div (click)="toDetailes('belief')"><span>发展信念</span></div>
+            <div (click)="toDetailes('manage')"><span>人才理念</span></div>
+          </div>
+        </div>
+        <div>
+          <span>
+            荣誉资信
+            <span class="iconfont iconright"></span>
+          </span>
+          <div class="list-item">
+            <div (click)="toDetailes('seniority')"><span>荣誉资信</span></div>
+            <div (click)="toDetailes('patent')"><span>版权专利</span></div>
+          </div>
+        </div>
+        <div>
+          <span>
+            相关声明
+            <span class="iconfont iconright"></span>
+          </span>
+          <div class="list-item">
+            <div (click)="toDetailes('copyright')"><span>版权政策</span></div>
+            <div (click)="toDetailes('article')"><span>使用条款</span></div>
+            <div (click)="toDetailes('privacy')"><span>隐私声明</span></div>
+          </div>
+        </div>
+        <div (click)="toDetailes('contact')"><span>联系我们</span></div>
+      </div>
+    </div>
+    <!-- <div class="nav-item nav-logo"><span></span></div> -->
+    <div class="nav-register" (click)="gotologin()"><span>登录</span></div>
+  </div>
+</div>
+
+<app-float></app-float>

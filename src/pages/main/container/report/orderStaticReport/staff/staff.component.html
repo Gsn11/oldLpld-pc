@@ -1,0 +1,116 @@
+<!-- <app-crumbs [crumbs]="crumbsList"></app-crumbs> -->
+<div class="containerPadding">
+  <div class="orderfixSearchList">
+      <div class="searchTools">
+          <div class="body_flex">
+            <mat-form-field style="margin: 0 10px;">
+                <mat-label>{{name}}</mat-label>
+                <mat-select [(value)]="selected">
+                  <mat-option *ngFor="let item of custerList" value="{{item.Seq}}" >{{item.Name}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field style="margin: 0 10px;">
+              <mat-label>月报表</mat-label>
+              <mat-select [(value)]="selectedType"  (selectionChange)='setDetail()'>
+                  <mat-option value="1">月报表</mat-option>
+                  <mat-option value="2">年报表</mat-option>
+              </mat-select>
+          </mat-form-field>
+          
+          <div style="margin: 0 10px;" *ngIf="selectedType === '1'">
+            <input type="text" class="demo-input demoinput" placeholder="选择月份" id="test1">
+          </div>
+          <div style="margin: 0 10px;" *ngIf="selectedType === '2'">
+            <input type="text" class="demo-input demoinput" placeholder="选择年份" id="test2">
+          </div>
+              <button mat-raised-button color="primary" (click)="search()" class="loginBtn">搜索</button>
+          </div>
+
+          <div>
+              <button mat-stroked-button color="primary" class="download" (click)="downloadDeviceFile()">导出Excel</button>
+          </div>
+      </div>
+  </div>
+  <div class="mat-elevation-z8 bg">
+      
+    <div class="title">{{date}}{{name}}维保任务情况统计表</div>
+    <div class="table">
+    <table mat-table [dataSource]="dataCheckList" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+            The actual rendered columns are set as a property on the row definition" -->
+    
+      <!-- Position Column -->
+      <ng-container matColumnDef="Date">
+        <th mat-header-cell *matHeaderCellDef> {{timeType}} </th>
+        <td mat-cell *matCellDef="let element"> {{element.Date}} </td>
+      </ng-container>
+    
+      <!-- Name Column -->
+      <ng-container matColumnDef="OverTimeTotal">
+        <th mat-header-cell *matHeaderCellDef> 超时 </th>
+        <td mat-cell *matCellDef="let element"> {{element.OverTimeTotal}} </td>
+      </ng-container>
+    
+      <!-- Weight Column -->
+      <ng-container matColumnDef="ExceptionTotal">
+        <th mat-header-cell *matHeaderCellDef> 异常 </th>
+        <td mat-cell *matCellDef="let element"> {{element.ExceptionTotal}} </td>
+      </ng-container>
+    
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="UncheckTotal">
+        <th mat-header-cell *matHeaderCellDef> 待确认 </th>
+        <td mat-cell *matCellDef="let element"> {{element.UncheckTotal}} </td>
+      </ng-container>
+     <!-- Symbol Column -->
+     <ng-container matColumnDef="HandleTotal">
+      <th mat-header-cell *matHeaderCellDef> 处理中 </th>
+      <td mat-cell *matCellDef="let element"> {{element.HandleTotal}} </td>
+    </ng-container>
+    <ng-container matColumnDef="UnVerifyTotal">
+      <th mat-header-cell *matHeaderCellDef> 待审核 </th>
+      <td mat-cell *matCellDef="let element"> {{element.UnVerifyTotal}} </td>
+    </ng-container>
+    <ng-container matColumnDef="FinishTotal">
+      <th mat-header-cell *matHeaderCellDef> 已完成 </th>
+      <td mat-cell *matCellDef="let element"> {{element.FinishTotal}} </td>
+    </ng-container>
+    <ng-container matColumnDef="InspectTotal">
+      <th mat-header-cell *matHeaderCellDef> 巡检单 </th>
+      <td mat-cell *matCellDef="let element"> {{element.InspectTotal}} </td>
+    </ng-container>
+    <ng-container matColumnDef="MaintainTotal">
+      <th mat-header-cell *matHeaderCellDef> 保养单 </th>
+      <td mat-cell *matCellDef="let element"> {{element.MaintainTotal}} </td>
+    </ng-container>
+    <ng-container matColumnDef="RepairTotal">
+      <th mat-header-cell *matHeaderCellDef> 维修单 </th>
+      <td mat-cell *matCellDef="let element"> {{element.RepairTotal}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Total">
+      <th mat-header-cell *matHeaderCellDef> 派单总数 </th>
+      <td mat-cell *matCellDef="let element"> {{element.Total}} </td>
+    </ng-container>
+    <ng-container matColumnDef="FinishPer">
+      <th mat-header-cell *matHeaderCellDef> 完成率 </th>
+      <td mat-cell *matCellDef="let element"> {{element.FinishPer}} </td>
+    </ng-container>
+    <ng-container matColumnDef="InTimePer">
+      <th mat-header-cell *matHeaderCellDef> 及时率 </th>
+      <td mat-cell *matCellDef="let element"> {{element.InTimePer}} </td>
+    </ng-container>
+    <ng-container matColumnDef="Score">
+      <th mat-header-cell *matHeaderCellDef> 服务分 </th>
+      <td mat-cell *matCellDef="let element"> {{element.Score}} </td>
+    </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+    <div class="btn"> <button mat-raised-button   class="back" (click)="gotoInfo()"><span class="iconfont iconpstep" ></span>返回</button> </div>
+
+</div>
+ 
+  <!-- <app-confim [confim]="setConfim" [title]="confimTitle" (setConfimResult)="tableConfimResult($event)"></app-confim> -->
+</div>

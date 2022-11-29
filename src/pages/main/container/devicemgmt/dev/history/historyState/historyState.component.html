@@ -1,0 +1,23 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <span style="font-size: 14px;">
+        <mat-card>
+            <div class="template">
+                <div><span>修改时间</span></div>
+                <div><span>操作记录</span></div>
+                <div><span>设备状态</span></div>
+            </div>
+        </mat-card>
+
+        <mat-card *ngFor="let d of DeviceStatusHiss">
+            <div class="template">
+                <div><span>{{d.dsh_time}}</span></div>
+                <div><span>{{d.dsh_remark==null?'无':d.dsh_remark}}</span></div>
+                <div><span>{{d.device_status | typeTranslate}}</span></div>
+            </div>
+        </mat-card>
+    </span>
+    <div class="btnList">
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

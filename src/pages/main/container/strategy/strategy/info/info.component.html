@@ -1,0 +1,53 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="page-wrap">
+   <div class="main">
+      <div>
+         <span>策略名称</span>
+         <mat-form-field class="example-full-width">
+               <input matInput readonly placeholder="策略名称" [(ngModel)]="name">
+         </mat-form-field>
+      </div>
+      <div>
+         <span>策略公式</span>
+         <mat-form-field class="example-full-width">
+               <input matInput readonly placeholder="策略公式" [(ngModel)]="formula">
+         </mat-form-field>
+      </div>
+      <div>
+         <span>监测点</span>
+         <div style="width: 100%; margin: 10px; margin-left: 150px; border: 1px solid #f1f1f1;">
+            <table mat-table [dataSource]="list" style="width: 100%;">
+               <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef> 设备编号(名称) </th>
+                  <td mat-cell *matCellDef="let element"> {{element.DeviceNo}}({{element.DevName}}) </td>
+               </ng-container>
+               <ng-container matColumnDef="variable">
+                  <th mat-header-cell *matHeaderCellDef>  测量变量  </th>
+                  <td mat-cell *matCellDef="let element"> {{element.MetricsDesc }} ({{element.Id}}) </td>
+               </ng-container>
+               <ng-container matColumnDef="var">
+                  <th mat-header-cell *matHeaderCellDef>  变量 </th>
+                  <td mat-cell *matCellDef="let element"> 
+                     <mat-form-field class="example-full-width">
+                        <input matInput placeholder="" readonly [(ngModel)]="element.var">
+                     </mat-form-field>
+                  </td>
+               </ng-container>
+               <ng-container matColumnDef="formula">
+                  <th mat-header-cell *matHeaderCellDef> 公式 </th>
+                  <td mat-cell *matCellDef="let element"> 
+                     <mat-form-field class="example-full-width">
+                        <input matInput placeholder="" readonly [(ngModel)]="element.AlertFormula">
+                     </mat-form-field>
+                  </td>
+               </ng-container>
+               <tr mat-header-row *matHeaderRowDef="columns"></tr>
+               <tr mat-row *matRowDef="let row; columns: columns;" class="example-element-row"></tr>
+         </table>
+         </div>
+      </div>
+      <div style="display: flex; justify-content: center;">
+         <button mat-raised-button color="primary" onclick="window.history.back()">返回</button>
+      </div>
+   </div>
+</div>

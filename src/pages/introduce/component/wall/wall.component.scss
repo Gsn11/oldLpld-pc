@@ -1,0 +1,15 @@
+.wall {
+  top: 70px;
+  margin-bottom: 70px;
+  position: relative;
+  >img {
+    width: 100%;
+  }
+  >span {
+    top: 50px;
+    left: 70px;
+    font-size: 70px;
+    font-weight: bold;
+    position: absolute;
+  }
+}

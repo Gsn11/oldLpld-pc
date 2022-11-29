@@ -1,0 +1,39 @@
+@import '../utils/css/constantsColor.scss';
+
+.bar {
+  padding: 15px 35px;
+  font-size: 14px;
+  position: relative;
+
+  span {
+    &::after {
+      margin: 0 5px;
+      content: '/';
+    }
+
+    &:last-child {
+      &::after {
+        margin: 0;
+        content: '';
+      }
+    }
+
+    &.isClick {
+      cursor: pointer;
+
+      &:hover {
+        color: $color16;
+      }
+    }
+  }
+
+  &::after {
+    bottom: 0;
+    left: 35px;
+    width: calc(100% - 35px);
+    height: 1px;
+    background: #B6B6B6;
+    content: '';
+    position: absolute;
+  }
+}

@@ -1,0 +1,13 @@
+@import '../../../../../common/utils/css/info.scss';
+
+.doc {
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-flow: wrap column;
+
+    a {
+        margin-bottom: 10px;
+        color: rgb(56, 129, 189);
+    }
+}

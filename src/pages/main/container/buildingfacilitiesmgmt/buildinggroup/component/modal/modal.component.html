@@ -1,0 +1,34 @@
+<div class="modal-out" [ngClass]="{'active': show}">
+    <div class="bg" (click)="goCancel()"></div>
+    <div class="container">
+        <div class="header"><span class="title">{{title}}</span></div>
+        <div class="main">
+            <mat-form-field class="example-full-width">
+                <input matInput [placeholder]="'BGName' | wordTranslate" [formControl]="BGName" required>
+                <mat-error *ngIf="BGName.invalid">{{getBGNameErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+                <input matInput [placeholder]="'Addr' | wordTranslate" [formControl]="Addr" required>
+                <mat-error *ngIf="Addr.invalid">{{getAddrErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <div>
+                <mat-form-field>
+                    <mat-label>请选择类型</mat-label>
+                    <mat-select [formControl]="stateSelectType">
+                        <mat-option>无</mat-option>
+                        <mat-option *ngFor="let s of stateTypeList" [value]="s.state">
+                            {{s.state | BuildingGroupTypeTranslate}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <mat-form-field *ngIf="buildData.buildType != '联排联调'" class="example-full-width">
+                <input matInput type="text" placeholder="编码" [formControl]="code">
+            </mat-form-field>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="goCancel()"><span class="iconfont iconpstep"></span>取消</button>
+            <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        </div>
+    </div>
+</div>

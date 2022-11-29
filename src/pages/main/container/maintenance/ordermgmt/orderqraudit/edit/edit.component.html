@@ -1,0 +1,109 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span><span style="color: red;">*</span> 派单名称</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入派单名称" [(ngModel)]="MSName">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>是否开启二维码扫描</span>
+        <div>
+            <mat-slide-toggle [checked]="NeedQrcode === 1" (toggleChange)="changeCodeOpen()">开启</mat-slide-toggle>
+        </div>
+    </div>
+    <div>
+        <span>派单条目</span>
+        <app-items *ngIf="MaintenanceTemplates && Builds && scheItem" style="width: calc(100% - 220px);" [MaintenanceTemplates]="MaintenanceTemplates"
+            [Builds]="Builds" (checkPrice)="checkPrice($event)" [Items]="scheItem"></app-items>
+    </div>
+    <div>
+        <span>派单描述</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入派单描述" [(ngModel)]="MSDesc">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>开始时间</span>
+        <app-calendar [setCreateDate]="OrderTime" (getTime)="getOrderTime($event)"></app-calendar>
+        
+        <mat-form-field>
+            <mat-select placeholder="请选择小时" [formControl]="SelectHH">
+                <mat-option *ngFor="let h of HH" [value]="h">{{h}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-select placeholder="请选择分钟" [formControl]="SelectMM">
+                <mat-option *ngFor="let m of MM" [value]="m">{{m}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectServiceType.value !== '0'">
+        <span>接单时限（小时）</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入接单时限（小时）" [(ngModel)]="OrderTimeOut" maxlength="4">
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectServiceType.value !== '0'">
+        <span>抵达时限（小时）</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入抵达时限（小时）" [(ngModel)]="ArriveExpire" maxlength="4">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>处理反馈时限（小时）</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入处理反馈时限（小时）" [(ngModel)]="WorkExpire" maxlength="4">
+        </mat-form-field>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> {{'Users' | wordTranslate}}</span>
+        <span (click)="openUserModelDialog(1)" class="chooseName">
+            {{ChooseServiceName ? ChooseServiceName : 'LebalUsers' | wordTranslate}}
+        </span>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 服务提供方</span>
+        <mat-form-field>
+            <mat-label>请选择服务提供方</mat-label>
+            <mat-select [formControl]="SelectServiceType">
+                <mat-option *ngFor="let s of ServiceType" [value]="s.state">
+                    {{s.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectServiceType.value !== '0'">
+        <span>上门费（元）</span>
+        <div>
+            <span *ngIf="MaintenanceTemplates && Builds">{{ServiceFee}}</span>
+        </div>
+    </div>
+    <div *ngIf="SelectServiceType.value === '0'">
+        <span><span style="color: red;">*</span> 工作人员</span>
+        <span (click)="openUserModelDialog(0)" class="chooseName">
+            {{ChooseWorkerName ? ChooseWorkerName : 'LebalWorker' | wordTranslate }}
+        </span>
+    </div>
+    <div *ngIf="SelectServiceType.value === '1'">
+        <span><span style="color: red;">*</span> 固定服务商</span>
+        <mat-form-field>
+            <mat-label>请选择固定服务商</mat-label>
+            <mat-select [formControl]="SelectServiceProviders">
+                <mat-option *ngFor="let s of ServiceProviders" [value]="s.Seq">
+                    {{s.SPName}} ({{s.Contact}}) - {{s.Tel}} {{s.BusiDomain}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectServiceType.value === '1' || SelectServiceType.value === '2'">
+        <span>报价</span>
+        <app-price style="width: calc(100% - 220px);" [Items]="priceList"></app-price>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()">确定派单</button>
+        <button mat-button (click)="showConfim()"><span class="iconfont icondelete"></span> 取消派单</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" [title]="'确认取消派单吗?'" (setConfimResult)="orderDelectConfimResult($event)"></app-confim>

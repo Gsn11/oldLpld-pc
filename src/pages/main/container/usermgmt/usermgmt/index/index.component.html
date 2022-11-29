@@ -1,0 +1,85 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+  <div class="searchList">
+    <div>
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" placeholder="登录名/姓名/手机号/Email" [(ngModel)]="searchName" (keyup.enter)="getList()">
+      </mat-form-field>
+      <mat-form-field class="example-form-field" style="margin-left: 10px; font-size: 12px;">
+        <mat-label>请选择部门</mat-label>
+        <mat-select [formControl]="SelectTeams">
+            <mat-option>无</mat-option>
+            <mat-option *ngFor="let t of Teams" [value]="t.TSeq">
+                {{t.TName}}
+            </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1; getList()">搜索</button>
+    </div>
+
+    <button mat-raised-button color="primary" class="loginBtn" (click)="gotoAdd()">新增</button>
+    <div>
+      <!-- <button *ngIf="buildData.buidType != '联排联调'" mat-stroked-button color="primary" class="download" (click)="downLoadTemplate()">批量导入模板下载</button> -->
+      <button *ngIf="buildData.buidType != '联排联调'" mat-stroked-button color="primary" class="download" (click)="fileBoxChange()">人员信息导入</button>
+      <button mat-stroked-button color="primary" class="download" (click)="downloadDeviceFile()">导出Excel</button>
+    </div>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="list" style="width: 100%;">
+      <ng-container matColumnDef="LoginId">
+        <th mat-header-cell *matHeaderCellDef> 登录名 </th>
+        <td mat-cell *matCellDef="let element"> {{element.LoginId}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Name">
+        <th mat-header-cell *matHeaderCellDef> 姓名 </th>
+        <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+      </ng-container>
+      <ng-container matColumnDef="UserTel">
+        <th mat-header-cell *matHeaderCellDef> 手机号 </th>
+        <td mat-cell *matCellDef="let element"> {{element.UserTel}} </td>
+      </ng-container>
+      <ng-container matColumnDef="IsEngineer">
+        <th mat-header-cell *matHeaderCellDef> 维客 </th>
+        <td mat-cell *matCellDef="let element"> {{element.IsEngineer === false ? '否' : '是' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="IsAdmin">
+        <th mat-header-cell *matHeaderCellDef> 超级管理员 </th>
+        <td mat-cell *matCellDef="let element"> {{element.IsAdmin === false ? '否' : '是' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="State">
+        <th mat-header-cell *matHeaderCellDef> 状态 </th>
+        <td mat-cell *matCellDef="let element"> {{element.State | stateTranslate }} </td>
+      </ng-container>
+      <ng-container matColumnDef="Other">
+        <th mat-header-cell *matHeaderCellDef> 操作 </th>
+        <td mat-cell *matCellDef="let element" class="Other">
+          <span (click)="gotoInfo(element)">查看</span>
+          <span *ngIf="customer === element.Customer" (click)="gotoEdit(element)">编辑</span>
+          <span *ngIf="customer === element.Customer" class="deleteItem"
+            (click)="showConfim('del', element.Seq, element.Name)">删除</span>
+          <span *ngIf="customer !== element.Customer" class="enable">不可操作</span>
+          <span class="activeRow">
+            <mat-slide-toggle [checked]="element.State === 0" (toggleChange)="changeState(element.Seq, element.State)">
+              启用</mat-slide-toggle>
+          </span>
+          <span class="activeRow" (click)="showConfim('change', element.Seq, element.Name, element.UserTel)">
+            重置密码
+          </span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> id </th>
+        <td mat-cell *matCellDef="let element"> {{element.Seq}} </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+    </table>
+    <div style="background: white;">
+      <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+        [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+  <app-confim [confim]="setConfim" [title]="confimTitle" (setConfimResult)="tableConfimResult($event)"></app-confim>
+  <app-excelupload [url]="'ent/user/1009'" (getList)="getList()"></app-excelupload>
+</div>

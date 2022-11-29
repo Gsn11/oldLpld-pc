@@ -1,0 +1,80 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+  <app-photoswipe></app-photoswipe>
+  <div class="searchList">
+    <div>
+      <mat-form-field>
+        <mat-label>服务提供方</mat-label>
+        <mat-select [formControl]="SelectServiceType">
+          <mat-option [value]="'0,3'">无</mat-option>
+          <mat-option *ngFor="let s of ServiceType" [value]="s.value">
+            {{s.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      &nbsp;
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" placeholder="计划名称" [(ngModel)]="searchName" (keyup.enter)="getList()">
+      </mat-form-field>
+      &nbsp;
+      <button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1;getList()">搜索</button>
+    </div>
+
+    <div>
+      <button mat-stroked-button *ngIf="ScheduleType === 'schedulepatrol' || ScheduleType === 'schedulekeep'|| ScheduleType === 'inspectionschedule'"
+      color="primary"
+      class="download"
+      (click)="downloadScheduleFile()">导出Excel</button>
+      <button mat-raised-button *ngIf="ScheduleType === 'schedulepatrol' || ScheduleType === 'schedulekeep'" color="primary" class="loginBtn" (click)="gotoAdd()">新增</button>
+    </div>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="List" style="width: 100%;">
+      <ng-container matColumnDef="MSName">
+        <th mat-header-cell *matHeaderCellDef> {{ TableTitle1 }} </th>
+        <td mat-cell *matCellDef="let element"> {{element.MSName}}({{element.MSDesc}}) </td>
+      </ng-container>
+      <ng-container matColumnDef="TimeType">
+        <th mat-header-cell *matHeaderCellDef> {{ TableTitle2 }} </th>
+        <td mat-cell *matCellDef="let element"> {{element.TimeType | timeTypeTranslate}} ({{element.BeginTime}} - {{element.EndTime}}) </td>
+      </ng-container>
+      <ng-container matColumnDef="State">
+        <th mat-header-cell *matHeaderCellDef> 状态 </th>
+        <td mat-cell *matCellDef="let element"> {{StateType(element.State)}} </td>
+      </ng-container>
+      <ng-container matColumnDef="NeedQrcode">
+        <th mat-header-cell *matHeaderCellDef style="text-align: center;"> 是否开启二维码 </th>
+        <td mat-cell *matCellDef="let element" style="text-align: center;"> {{element.NeedQrcode === 1 ? '是' : '否'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="ChargerName">
+        <th mat-header-cell *matHeaderCellDef> 负责人 </th>
+        <td mat-cell *matCellDef="let element"> {{element.ChargerName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Other">
+        <th mat-header-cell *matHeaderCellDef> 操作 </th>
+        <td mat-cell *matCellDef="let element" class="Other">
+          <span (click)="gotoInfo(element)">查看</span>
+          <span *ngIf="ScheduleType !== 'inspectionschedule'&&customer === element.Customer" (click)="gotoEdit(element)">编辑</span>
+          <span *ngIf="customer === element.Customer" class="deleteItem" (click)="showConfim(element.MSSeq)">删除</span>
+          <span *ngIf="customer !== element.Customer" class="enable">不可操作</span>
+          <span (click)="lookImg(element)">指引</span>
+          <span *ngIf="element.url" (click)="gotovr(element.url)"><img src="../../../../../../../assets/all/vr.png" alt=""></span>
+          <!-- <span style="display: block;" *ngIf="element.State !== 3&&ScheduleType!=='inspectionschedule'">
+            <mat-slide-toggle [checked]="element.State === 0" (toggleChange)="changeState(element.MSSeq, element.State)">启用</mat-slide-toggle>
+          </span> -->
+          <span style="display: block;" *ngIf="ScheduleType!=='inspectionschedule'">
+            <mat-slide-toggle [checked]="element.State === 0" (toggleChange)="changeState(element.MSSeq, element.State)">启用</mat-slide-toggle>
+          </span>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+    </table>
+    <div style="background: white;">
+      <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+        [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+  <app-confim [confim]="setConfim" [title]="confimTitle" (setConfimResult)="tableConfimResult($event)"></app-confim>
+</div>

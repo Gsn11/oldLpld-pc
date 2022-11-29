@@ -1,0 +1,93 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>头像</span>
+        <span>
+            <img *ngIf="bemInfoData.Avatar" style="width: 100px; height: 50px;" [src]="bemInfoData.Avatar"
+                alt="userImage">
+        </span>
+    </div>
+    <div>
+        <span>是否超级管理员</span>
+        <span>{{bemInfoData.IsAdmin === true ? '是' : '否'}}</span>
+    </div>
+    <div>
+        <span>是否维客</span>
+        <span>{{bemInfoData.IsEngineer === true ? '是' : '否'}}</span>
+    </div>
+    <div>
+        <span>登录名</span>
+        <span>{{bemInfoData.LoginId}}</span>
+    </div>
+    <div>
+        <span>姓名</span>
+        <span>{{bemInfoData.Name}} </span>
+    </div>
+    <!-- <div>
+        <span>昵称</span>
+        <span>{{bemInfoData.Name}}</span>
+    </div> -->
+    <div>
+        <span>性别</span>
+        <span>{{bemInfoData.Sex === 0 ? '女' : '男'}}</span>
+    </div>
+    <div>
+        <span>出生日期</span>
+        <span>{{bemInfoData.Birthday}}</span>
+    </div>
+    <div>
+        <span>手机号</span>
+        <span>{{bemInfoData.UserTel}}</span>
+    </div>
+    <div>
+        <span>紧急联系人</span>
+        <span>{{bemInfoData.EmergencyContact}}</span>
+    </div>
+    <div>
+        <span>紧急联系电话</span>
+        <span>{{bemInfoData.EmergencyContactTelephone}}</span>
+    </div>
+    <div>
+        <span>Email</span>
+        <span>{{bemInfoData.UserEmail}}</span>
+    </div>
+    <!-- <div>
+        <span>状态</span>
+        <span>{{bemInfoData.State | stateTranslate}}</span>
+    </div> -->
+    <div>
+        <span>注册时间</span>
+        <span>{{bemInfoData.CreateTime}}</span>
+    </div>
+    <div>
+        <span>状态</span>
+        <span>{{bemInfoData.State | stateTranslate}}</span>
+    </div>
+    <div>
+        <span>角色</span>
+        <span>
+            <span *ngFor="let u of UserRoles">
+                <ng-container *ngIf="u">
+                    {{u.RName}},
+                </ng-container>
+            </span>
+        </span>
+    </div>
+    <div>
+        <span>部门岗位</span>
+        <span>
+            <span *ngFor="let u of UserTeamJobs" 
+                style="margin-bottom: 5px; display: block;">{{u.TName}} - {{u.JName}}</span>
+        </span>
+    </div>
+    <div>
+        <span>其它图片</span>
+        <app-manyfile [setImgsrcData]="imgsrcData" [setType]="manyFileUseType"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoEdit()" *ngIf="userPower"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()" *ngIf="userPower"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

@@ -1,0 +1,9 @@
+<div class="file-out">
+    <div *ngIf="!Timg" class="bg">
+        <span class="iconfont iconadd"></span>
+        <span>上传图片</span>
+    </div>
+    <img  [src]="domSanitizer.bypassSecurityTrustUrl(setImgsrc)" alt="companyLogo">
+    <div class="choose"></div>
+    <input class="files" name="FImg" type="file" (change)="fileChange($event)" accept="image/gif,image/jpeg,image/png">
+</div>

@@ -1,0 +1,27 @@
+<div mat-dialog-title>
+    <div class="deviceTitle">
+        策略内容 {{pageData.Formula}}
+    </div>
+</div>
+<div mat-dialog-content>
+    <table mat-table [dataSource]="pageData.group" style="width: 100%;">
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef> 设备编号(名称) </th>
+            <td mat-cell *matCellDef="let element"> {{element.Metric.DevName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="variable">
+            <th mat-header-cell *matHeaderCellDef style="padding: 0 10px;"> 测量变量 </th>
+            <td mat-cell *matCellDef="let element" style="padding: 0 10px;"> {{element.Metric.SmartDevName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="formula">
+            <th mat-header-cell *matHeaderCellDef> 策略公式 </th>
+            <td mat-cell *matCellDef="let element"> {{element.Formula}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+    </table>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btnCancel" (click)="onNoClick()">返回</button>
+    <button mat-button class="btnPrimise" (click)="onNoClick()">确定</button>
+</div>

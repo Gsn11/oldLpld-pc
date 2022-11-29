@@ -1,0 +1,61 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span><span style="color: red;">*</span> 固定服务商</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入固定服务商" [(ngModel)]="SPName">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>联系人</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入联系人" [(ngModel)]="Contact">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>电话</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入电话" [(ngModel)]="Tel">
+        </mat-form-field>
+    </div>
+    <div class="service-out">
+        <span>服务范围</span>
+        <div>
+            <div class="checkServiceBtn">
+                <span (click)="chooseService()">选择服务范围</span>
+            </div>
+            <div class="item" *ngIf="regionChooseList">
+                <div *ngFor="let r of regionChooseList, let rIndex = index">
+                    {{r.region}}
+                    <span class="iconfont iconclose" (click)="deleteItem(rIndex)"></span>
+                </div>
+            </div>
+        </div>
+        <div class="service-container" *ngIf="checkServiceZoom">
+            <div class="tree-out">
+                <mat-checkbox class="example-margin allCheckItem" (change)="checkAll($event)">所有地区
+                </mat-checkbox>
+                <app-treecheckitem [List]="region" [isType]="isType"></app-treecheckitem>
+            </div>
+            <div class="btnList">
+                <button mat-button (click)="checkOk()"><span class="iconfont iconsave"></span>确定</button>
+                <button mat-button (click)="closeChoosePlant()"><span class="iconfont iconpstep"></span>取消</button>
+            </div>
+        </div>
+    </div>
+    <div>
+        <span>擅长行业</span>
+        <mat-form-field class="select-out">
+            <!-- (openedChange)="selectClose($event)" -->
+            <mat-select placeholder="请输入擅长行业" [formControl]="selectBusiDomains" multiple>
+                <mat-option *ngFor="let b of BusiDomains" [value]="b.BDName">{{b.BDName}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<div class="bg" *ngIf="checkServiceZoom" (click)="closeChoosePlant()"></div>
+<app-confim [confim]="setRegionConfim" (setConfimResult)="regionConfimResult($event)"></app-confim>

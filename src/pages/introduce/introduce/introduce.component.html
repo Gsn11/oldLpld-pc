@@ -1,0 +1,49 @@
+<div class="wlyIntroduce">
+  <app-nav></app-nav>
+  <div class="introduce">
+    <img src="../../assets/introduce/home/photo/banner1.jpg" alt="introduce1">
+    <img src="../../assets/introduce/home/photo/banner2.jpg" alt="introduce2">
+    <img src="../../assets/introduce/home/photo/banner3.jpg" alt="introduce3">
+    <img src="../../assets/introduce/home/photo/banner4.jpg" alt="introduce4">
+  </div>
+  <div class="choose">
+    <div class="choose-item">
+      <div class="item-left">
+        <span>应用行业</span>
+      </div>
+      <div class="item">
+        <div [ngClass]="{'active': index === 1}" (mouseover)="over(1)">
+          <img src="../../assets/introduce/home/choose/b_1.png" alt="buildicon">
+          <img src="../../assets/introduce/home/choose/b_2.png" alt="buildicon">
+        </div>
+        <div [ngClass]="{'active': index === 2}" (mouseover)="over(2)">
+          <img src="../../assets/introduce/home/choose/s_1.png" alt="subwayicon">
+          <img src="../../assets/introduce/home/choose/s_2.png" alt="subwayicon">
+        </div>
+        <div [ngClass]="{'active': index === 3}" (mouseover)="over(3)">
+          <img src="../../assets/introduce/home/choose/h_1.png" alt="hospitalicon">
+          <img src="../../assets/introduce/home/choose/h_2.png" alt="hospitalicon">
+        </div>
+        <div [ngClass]="{'active': index === 4}" (mouseover)="over(4)">
+          <img src="../../assets/introduce/home/choose/t_1.png" alt="hotelicon">
+          <img src="../../assets/introduce/home/choose/t_2.png" alt="hotelicon">
+        </div>
+        <div [ngClass]="{'active': index === 5}" (mouseover)="over(5)">
+          <img src="../../assets/introduce/home/choose/w_1.png" alt="watericon">
+          <img src="../../assets/introduce/home/choose/w_2.png" alt="watericon">
+        </div>
+      </div>
+    </div>
+    <div class="choose-container" [ngStyle]="{'transform': translate }">
+      <img src="../../assets/introduce/home/choose/b.jpg" alt="build">
+      <img src="../../assets/introduce/home/choose/s.jpg" alt="subway">
+      <img src="../../assets/introduce/home/choose/h.jpg" alt="hospital">
+      <img src="../../assets/introduce/home/choose/t.jpg" alt="hotel">
+      <img src="../../assets/introduce/home/choose/w.jpg" alt="water">
+    </div>
+  </div>
+  <div class="friends">
+    <img src="../../assets/introduce/home/friends.jpg" alt="friedns">
+  </div>
+  <app-footer></app-footer>
+</div>

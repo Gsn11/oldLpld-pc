@@ -1,0 +1,16 @@
+<div class="confimBox" [ngClass]="{'active': confim}">
+    <div class="bg" (click)="closeConfimBox()"></div>
+    <div class="confimContainer">
+        <div class="header">
+            <div class="title">
+                <span>提示</span>
+                <span (click)="closeConfimBox()"><span class="iconfont iconclose"></span></span>
+            </div>
+        </div>
+        <div class="main">{{title ? title : '确定删除吗？'}}</div>
+        <div class="footer">
+            <button mat-raised-button color="defalut" (click)="closeConfimBox()">取消</button>
+            <button mat-raised-button color="primary" (click)="okCallBack()">确认</button>
+        </div>
+    </div>
+</div>

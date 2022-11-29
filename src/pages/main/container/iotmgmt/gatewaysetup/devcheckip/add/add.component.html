@@ -1,0 +1,47 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span><span style="color: red;">*</span> 智联网关</span>
+        <div>
+            <mat-form-field>
+                <mat-label>请选择智联网关</mat-label>
+                <mat-select [formControl]="SelectDevices">
+                    <mat-option>无</mat-option>
+                    <mat-option *ngFor="let d of Devices" [value]="d.DeviceNo">
+                        {{d.DeviceNo}} ({{d.Model}}) - {{d.DeviceName}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 被监控设备</span>
+        <span (click)="openDialog()">{{deviceName}}</span>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> Ip</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入Ip" [(ngModel)]="Ip">
+        </mat-form-field>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 端口</span>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input type="number" matInput placeholder="请输入端口" [(ngModel)]="Port">
+            </mat-form-field>
+        </div>
+    </div>
+    <div>
+        <span>服务（http, ftp, ...）</span>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="请输入服务" [(ngModel)]="Id">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

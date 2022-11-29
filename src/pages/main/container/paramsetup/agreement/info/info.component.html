@@ -1,0 +1,25 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>协议类别</span>
+        <span>{{bemInfoData.Type | agreementTypeTranslate}}</span>
+    </div>
+    <div>
+        <span>协议标题</span>
+        <span>{{bemInfoData.Title}}</span>
+    </div>
+    <div>
+        <span>更新时间</span>
+        <span>{{bemInfoData.Time}}</span>
+    </div>
+    <div>
+        <span>协议正文</span>
+        <div class="htmlContent" [innerHTML]="bemInfoData.Text | translateHtml"></div>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoEdit()" *ngIf="userPower"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()" *ngIf="userPower"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

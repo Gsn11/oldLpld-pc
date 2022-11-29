@@ -1,0 +1,78 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+  <div class="searchList">
+    <div>
+      <!-- <input matInput type="text" placeholder="设备" [(ngModel)]="searchName" (keyup.enter)="applyFilter()"> -->
+      <input nz-input  type="text"  placeholder="请输入设备"  [(ngModel)]="searchName" (keyup.enter)="applyFilter()" />
+      <button mat-raised-button color="primary" style="margin-right: 20px;" class="loginBtn" (click)="pageIndex = 1;applyFilter()">搜索</button>
+      <mat-form-field>
+        <mat-select placeholder="子系统" [formControl]="SystemSelect" (selectionChange)="selectClose($event)">
+            <mat-option [value]="''">无</mat-option>
+          <mat-option *ngFor="let s of SystemList" [value]="s.SName">{{s.SName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field style="margin-left: 10px;">
+        <mat-select [placeholder]="buildData.buildType == '联排联调' ? '水工建筑物' : '建筑物'" [formControl]="SystemSelect" (selectionChange)="selectBuild($event)">
+            <mat-option [value]="''">无</mat-option>
+          <mat-option *ngFor="let s of buildList" [value]="s.Name">{{s.Name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div>
+      <button mat-stroked-button color="primary" class="download" (click)="downloadDeviceFile()">导出Excel</button>
+    </div>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table matSort mat-table [dataSource]="initialCompanyList" style="width: 100%;">
+      <ng-container matColumnDef="timeStr">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> 采集时间 </th>
+        <td mat-cell *matCellDef="let element"> {{element.timeStr}} </td>
+      </ng-container>
+      <ng-container matColumnDef="building">
+        <th mat-header-cell *matHeaderCellDef> 位置 </th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.building">{{element.building}}</span>
+          <span *ngIf="element.floor"> - {{element.floor}}</span>
+          <span *ngIf="element.zone"> - {{element.zone}}</span>
+          <span *ngIf="element.spacePos"> - {{element.spacePos}}</span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="devName">
+        <th mat-header-cell *matHeaderCellDef> 设备名称 </th>
+        <td mat-cell *matCellDef="let element"> {{element.devName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="levelName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> 重要等级 </th>
+        <td mat-cell *matCellDef="let element"> {{element.levelName }} </td>
+      </ng-container>
+      <ng-container matColumnDef="metricDesc">
+        <th mat-header-cell *matHeaderCellDef> 智能诊断 </th>
+        <!-- <td mat-cell *matCellDef="let element"> {{metricDescInit(element.metricDesc)}} </td> -->
+        <td mat-cell *matCellDef="let element"> {{element.metricDesc}} </td>
+      </ng-container>
+      <ng-container matColumnDef="value">
+        <th mat-header-cell *matHeaderCellDef> 监测值 </th>
+        <!-- <td mat-cell *matCellDef="let element" [style.color]="element.value === '故障' ? 'red' : '#000'">
+          {{valueInit(element.metric, element.value)}} </td> -->
+          <td mat-cell *matCellDef="let element" [style.color]="element.value === '故障' ? 'red' : '#000'">
+            <!-- {{element.value === false?'正常': element.value}} -->
+            {{valueInit(element.value)}}
+           </td>
+      </ng-container>
+      <ng-container matColumnDef="Other">
+        <th mat-header-cell *matHeaderCellDef> 操作 </th>
+        <td mat-cell *matCellDef="let element" class="Other">
+          <span (click)="gotoInfo(element)">查看</span>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+        [ngClass]="{ 'drangerDevice': row.alertType !== null && row.alertType !== '' && row.alertType >= 0 }"></tr>
+    </table>
+    <div style="background: white;">
+      <mat-paginator #MatPaginator [pageSizeOptions]="[5, 10, 20, 50]" (page)="change($event)" [pageIndex]="pageIndex - 1" [pageSize]="10" showFirstLastButtons>
+      </mat-paginator>
+    </div>
+  </div>
+</div>

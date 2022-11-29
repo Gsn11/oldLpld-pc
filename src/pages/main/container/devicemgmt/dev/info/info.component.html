@@ -1,0 +1,141 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>设备编号</span>
+        <span>{{bemInfoData.DeviceNo}}</span>
+    </div>
+    <!-- <div>
+        <span>自动编号</span>
+        <span>{{bemInfoData.Code}}</span>
+    </div> -->
+    <div>
+        <span>设备名称</span>
+        <span>{{bemInfoData.DeviceName}}</span>
+    </div>
+    <div *ngIf="buildData.buildType != '联排联调'">
+        <span>固定资产编号</span>
+        <span>{{bemInfoData.AssetsNo}}</span>
+    </div>
+    <div *ngIf="buildData.buildType != '联排联调'">
+        <span>固定资产名称</span>
+        <span>{{bemInfoData.AssetsName}}</span>
+    </div>
+    <div *ngIf="buildData.buildType != '联排联调'">
+        <span>{{buildData.buildType === '联排联调' ? '设备标识符' : '设备常用名'}}</span>
+        <span>{{bemInfoData.DeviceExtno}}</span>
+    </div>
+    <div>
+        <span>{{buildData.buildType === '联排联调' ? '所属子系统' : '系统分类'}}</span>
+        <span>{{bemInfoData.SubSys}}</span>
+    </div>
+    <div>
+        <span>设备型号</span>
+        <span>{{bemInfoData.Model}}</span>
+    </div>
+    <div>
+        <span>出厂编号</span>
+        <span>{{bemInfoData.FactoryNo}}</span>
+    </div>
+    <div>
+        <span>设备分类</span>
+        <span>{{buildData.buildType === '联排联调' ? bemInfoData.TypeName : bemInfoData.ModelName }}</span>
+    </div>
+    <div>
+        <span>规格型号</span>
+        <span>{{bemInfoData.DeviceName}}</span>
+    </div>
+    <div>
+        <span>设备参数</span>
+        <span>{{bemInfoData.Certificate}}</span>
+    </div>
+    <div>
+        <span>备注</span>
+        <span>{{bemInfoData.ModelDesc}}</span>
+    </div>
+    <div>
+        <span>常见问题</span>
+        <span>{{bemInfoData.ModelProb}}</span>
+    </div>
+    <div *ngIf="buildData.buildType === '联排联调'">
+        <span>厂商</span>
+        <span>{{bemInfoData.Facturer}}</span>
+    </div>
+    <div>
+        <span>{{buildData.buildType === '联排联调' ? '品牌' : '制造厂家'}}</span>
+        <span>{{bemInfoData.Brand}}</span>
+    </div>
+    <div>
+        <span>状态</span>
+        <span>{{bemInfoData.Stat | typeTranslate}}</span>
+    </div>
+    <div>
+        <span>{{buildData.buildType === '联排联调' ? '报警级别' : 'ABC分类'}}</span>
+        <span>{{bemInfoData.AlertLevelName}}</span>
+    </div>
+    <div>
+        <span>{{buildData.buildType === '联排联调' ? '价格' : '单价'}}</span>
+        <span>{{bemInfoData.Price}}</span>
+    </div>
+    <div>
+        <span>购买日期</span>
+        <span>{{bemInfoData.BuyDate}}</span>
+    </div>
+    <div>
+        <span>出厂日期</span>
+        <span>{{bemInfoData.ManuDate}}</span>
+    </div>
+    <div>
+        <span>安装日期</span>
+        <span>{{bemInfoData.InstallDate}}</span>
+    </div>
+    <div>
+        <span>保修截止日期</span>
+        <span>{{bemInfoData.WarrantyExpire}} </span>
+    </div>
+    <div *ngIf="buildData.buildType == '联排联调'">
+        <span>{{'Building' | wordTranslate}}</span>
+        <span>{{bemInfoData.Building}}</span>
+    </div>
+    <div *ngIf="buildData.buildType != '联排联调'">
+        <span>功能位置</span>
+        <span>{{bemInfoData.Building}}</span>
+    </div>
+    <div *ngIf="buildData.buildType == '联排联调'">
+        <span>所在楼层</span>
+        <span>{{bemInfoData.Floor}}</span>
+    </div>
+    <div>
+        <span>{{buildData.buildType === '联排联调' ? '所在楼层的区域/房间' : '所在位置'}}</span>
+        <span>{{bemInfoData.Zone}}</span>
+    </div>
+    <div *ngIf="buildData.buildType == '联排联调'">
+        <span>所在区域/房间的空间位置</span>
+        <span>{{bemInfoData.SpacePos}}</span>
+    </div>
+    <div>
+        <span>上次保养时间</span>
+        <span>{{bemInfoData.LastMaintainDate}}</span>
+    </div>
+    <div>
+        <span>下次保养时间</span>
+        <span>{{bemInfoData.NextMaintainDate}}</span>
+    </div>
+    <div>
+        <span>保养周期</span>
+        <span>{{bemInfoData.MaintainPeriod}} 天</span>
+    </div>
+    <div>
+        <span>{{buildData.buildType === '联排联调' ? '设备寿命' : '使用年限'}}</span>
+        <span>{{bemInfoData.ServiceLife}} 年</span>
+    </div>
+    <div>
+        <span>其它图片和文档</span>
+        <app-manyfile [setImgsrcData]="imgsrcData" [docList]="docListData" [type]="'info'"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoEdit()" *ngIf="userPower"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()" *ngIf="userPower"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

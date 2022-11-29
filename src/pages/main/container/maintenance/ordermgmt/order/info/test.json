@@ -1,0 +1,510 @@
+[
+    {
+        "id": "1001",
+        "name": "八一水库::坝前",
+        "url": "rtsp://admin:wuwei12345@10.0.37.72:554/Streaming/Channels/101"
+    },
+    {
+        "id": "1002",
+        "name": "八一水库::坝中",
+        "url": "rtsp://admin:wuwei12345@10.0.37.68:554/Streaming/Channels/101"
+    },
+    {
+        "id": "1003",
+        "name": "八一水库::坝尾",
+        "url": "rtsp://admin:wuwei12345@10.0.37.69:554/Streaming/Channels/101"
+    },
+    {
+        "id": "1004",
+        "name": "八一水库::泄洪道",
+        "url": "rtsp://admin:wuwei12345@10.0.37.70:554/Streaming/Channels/101"
+    },
+    {
+        "id": "1005",
+        "name": "八一水库::仓库",
+        "url": "rtsp://admin:wuwei12345@10.0.37.71:554/Streaming/Channels/101"
+    },
+	
+	{
+        "id": "1006",
+        "name": "八一水库::坡道",
+        "url": "rtsp://admin:wuwei12345@10.0.37.66:554/Streaming/Channels/101"
+    },
+	{
+        "id": "1006",
+        "name": "八一水库::坡道",
+        "url": "rtsp://admin:wuwei12345@10.0.37.66:554/Streaming/Channels/101"
+    },
+	{
+        "id": "1007",
+        "name": "八一水库::湖面",
+        "url": "rtsp://admin:1234567q@10.0.37.171:554/Streaming/Channels/101"
+    },
+	{
+        "id": "1008",
+        "name": "八一水库::3号闸",
+        "url": "rtsp://admin:1234567q@10.0.37.172:554/Streaming/Channels/101"
+    },
+	{
+        "id": "1009",
+        "name": "八一水库::主控室",
+        "url": "rtsp://admin:1234567q@10.0.37.173:554/Streaming/Channels/101"
+    },
+	{
+        "id": "1010",
+        "name": "八一水库::泄洪闸",
+        "url": "rtsp://admin:1234567q@10.0.37.174:554/Streaming/Channels/101"
+    },
+	{
+        "id": "1011",
+        "name": "八一水库::启闭机房",
+        "url": "rtsp://admin:1234567q@10.0.37.175:554/Streaming/Channels/101"
+    },
+	{
+        "id": "1012",
+        "name": "八一水库::发电机房",
+        "url": "rtsp://admin:1234567q@10.0.37.176:554/Streaming/Channels/101"
+    },
+	{
+        "id": "1013",
+        "name": "八一水库::2号闸",
+        "url": "rtsp://admin:1234567q@10.0.37.177:554/Streaming/Channels/101"
+    },
+	{
+        "id": "1014",
+        "name": "八一水库::4号闸",
+        "url": "rtsp://admin:1234567q@10.0.37.178:554/Streaming/Channels/101"
+    },
+	{
+        "id": "1015",
+        "name": "八一水库::1号闸",
+        "url": "rtsp://admin:1234567q@10.0.37.179:554/Streaming/Channels/101"
+    },
+	{
+        "id": "1016",
+        "name": "八一水库::溢洪道",
+        "url": "rtsp://admin:1234567q@10.0.37.180:554/Streaming/Channels/101"
+    },
+    {
+        "id": "2001",
+        "name": "登云水库::草坪",
+        "url": "rtsp://admin:wuwei12345@10.0.32.49:554/Streaming/Channels/101"
+    },
+    {
+        "id": "2002",
+        "name": "登云水库::溢洪道",
+        "url": "rtsp://admin:wuwei12345@10.0.32.50:554/Streaming/Channels/101"
+    },
+    {
+        "id": "2003",
+        "name": "登云水库::坝前",
+        "url": "rtsp://admin:wuwei12345@10.0.32.51:554/Streaming/Channels/101"
+    },
+    {
+        "id": "2004",
+        "name": "登云水库::保安室",
+        "url": "rtsp://admin:wuwei12345@10.0.32.52:554/Streaming/Channels/101"
+    },
+    {
+        "id": "2005",
+        "name": "登云水库::闸门",
+        "url": "rtsp://admin:wuwei12345@10.0.32.53:554/Streaming/Channels/101"
+    },
+    {
+        "id": "2006",
+        "name": "登云水库::放水洞",
+        "url": "rtsp://admin:wuwei12345@10.0.32.54:554/Streaming/Channels/101"
+    },
+    {
+        "id": "2007",
+        "name": "登云水库::监控室",
+        "url": "rtsp://admin:wuwei12345@10.0.32.55:554/Streaming/Channels/101"
+    },
+    {
+        "id": "2008",
+        "name": "登云水库::泄洪室",
+        "url": "rtsp://admin:wuwei12345@10.0.32.56:554/Streaming/Channels/101"
+    },
+	
+	{
+        "id": "2009",
+        "name": "登云水库::闸门2",
+        "url": "rtsp://admin:wuwei12345@10.0.32.48:554/Streaming/Channels/101"
+    },
+	{
+        "id": "2010",
+        "name": "登云水库::闸门1",
+        "url": "rtsp://admin:wuwei12345@10.0.32.61:554/Streaming/Channels/101"
+    },
+	
+	
+	
+	
+    {
+        "id": "3001",
+        "name": "过溪水库::坝前",
+        "url": "rtsp://admin:wuwei12345@10.0.37.152:554/Streaming/Channels/101"
+    },
+    {
+        "id": "3002",
+        "name": "过溪水库::放水洞",
+        "url": "rtsp://admin:wuwei12345@10.0.37.153:554/Streaming/Channels/101"
+    },
+    {
+        "id": "3003",
+        "name": "过溪水库::闸门",
+        "url": "rtsp://admin:wuwei12345@10.0.37.154:554/Streaming/Channels/101"
+    },
+    {
+        "id": "3004",
+        "name": "过溪水库::泄洪道",
+        "url": "rtsp://admin:wuwei12345@10.0.37.155:554/Streaming/Channels/101"
+    },
+    {
+        "id": "3005",
+        "name": "过溪水库::闸门1",
+        "url": "rtsp://admin:wuwei12345@10.0.37.156:554/Streaming/Channels/101"
+    },
+	{
+        "id": "3006",
+        "name": "过溪水库::监控室",
+        "url": "rtsp://admin:wuwei12345@10.0.37.157:554/Streaming/Channels/101"
+    },
+	{
+        "id": "3007",
+        "name": "过溪水库::门口",
+        "url": "rtsp://admin:wuwei12345@10.0.37.158:554/Streaming/Channels/101"
+    },
+	{
+        "id": "3008",
+        "name": "过溪水库::草坪",
+        "url": "rtsp://admin:wuwei12345@10.0.37.159:554/Streaming/Channels/101"
+    },
+	
+	{
+        "id": "3009",
+        "name": "过溪水库::闸门2",
+        "url": "rtsp://admin:wuwei12345@10.0.37.166:554/Streaming/Channels/101"
+    },
+	
+	
+	
+    {
+        "id": "4001",
+        "name": "万寿水闸::内河视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.16:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4002",
+        "name": "万寿水闸::外河视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.17:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4003",
+        "name": "万寿水闸::室内视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.18:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4004",
+        "name": "万寿水闸::柴油机视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.21:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4010",
+        "name": "三捷水闸::内河视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.32:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4011",
+        "name": "三捷水闸::外河视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.33:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4012",
+        "name": "三捷水闸::室内视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.34:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4013",
+        "name": "三捷水闸::柴油机视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.40:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4020",
+        "name": "铜盘水闸::室内视频",
+        "url": "rtsp://admin:lpld2020@10.0.35.107:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4021",
+        "name": "铜盘水闸::楼下室内视频",
+        "url": "rtsp://admin:lpld2020@10.0.35.108:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4030",
+        "name": "铜盘河水闸::室内视频",
+        "url": "rtsp://admin:lpld2020@10.0.35.75:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4031",
+        "name": "铜盘河水闸::上游视频",
+        "url": "rtsp://admin:lpld2020@10.0.35.76:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4032",
+        "name": "铜盘河水闸::下游视频",
+        "url": "rtsp://admin:lpld2020@10.0.35.77:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4040",
+        "name": "左海水闸::室内视频",
+        "url": "rtsp://admin:lpld20200@10.0.35.123:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4041",
+        "name": "左海水闸::闸门室视频",
+        "url": "rtsp://admin:lpld2020@10.0.35.124:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4042",
+        "name": "左海水闸::下游视频",
+        "url": "rtsp://admin:lpld2020@10.0.35.125:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4050",
+        "name": "86师水闸::室内视频",
+        "url": "rtsp://admin:lpld2020@10.0.35.91:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4051",
+        "name": "86师水闸::启闭机房视频",
+        "url": "rtsp://admin:lpld2020@10.0.35.92:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4052",
+        "name": "86师水闸::屏西摄像头",
+        "url": "rtsp://admin:lpld2020@10.0.35.94:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4060",
+        "name": "彬德水闸::室内视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.48:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4061",
+        "name": "彬德水闸::上游视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.49:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4062",
+        "name": "彬德水闸::下游视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.50:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4070",
+        "name": "白马河水闸::室外视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.81:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4071",
+        "name": "白马河水闸::左侧启闭机室视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.82:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4072",
+        "name": "白马河水闸::右侧启闭机视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.83:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4073",
+        "name": "白马河水闸::控制室视频",
+        "url": "rtsp://admin:lpld2020@10.0.44.84:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4080",
+        "name": "文山里泵站::集水井视频",
+        "url": "rtsp://admin:lpld2020@10.0.33.22:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4081",
+        "name": "文山里泵站::上游视频",
+        "url": "rtsp://admin:lpld2020@10.0.33.23:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4082",
+        "name": "文山里泵站::下游视频",
+        "url": "rtsp://admin:lpld2020@10.0.33.24:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4083",
+        "name": "文山里泵站::2#泵视屏",
+        "url": "rtsp://admin:lpld2020@10.0.33.25:554/Streaming/Channels/101"
+    },
+    {
+        "id": "4084",
+        "name": "文山里泵站::4#泵视屏",
+        "url": "rtsp://admin:lpld2020@10.0.33.26:554/Streaming/Channels/101"
+    },
+	
+	
+	
+    {
+        "id": "5001",
+        "name": "五四泵站::入水口",
+        "url": "rtsp://admin:admin12345@10.0.35.60:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5002",
+        "name": "五四泵站::发电机房",
+        "url": "rtsp://admin:admin12345@10.0.35.61:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5003",
+        "name": "五四泵站::生产区",
+        "url": "rtsp://admin:admin12345@10.0.35.62:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5004",
+        "name": "五四泵站::生产区",
+        "url": "rtsp://admin:admin12345@10.0.35.63:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5005",
+        "name": "五四泵站::生产区",
+        "url": "rtsp://admin:admin12345@10.0.35.64:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5006",
+        "name": "五四泵站::大门",
+        "url": "rtsp://admin:admin12345@10.0.35.65:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5007",
+        "name": "五四泵站::格栅",
+        "url": "rtsp://admin:admin12345@10.0.35.66:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5008",
+        "name": "五四泵站::出水口",
+        "url": "rtsp://admin:admin12345@10.0.35.67:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5009",
+        "name": "五四泵站::入水口",
+        "url": "rtsp://admin:admin12345@10.0.35.69:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5010",
+        "name": "五四泵站",
+        "url": "rtsp://admin:admin12345@10.0.35.70:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5101",
+        "name": "安泰水闸",
+        "url": "rtsp://admin:Admin12345@10.0.24.54:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5102",
+        "name": "安泰水闸::下游",
+        "url": "rtsp://admin:Admin12345@10.0.24.55:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5103",
+        "name": "安泰水闸::室内",
+        "url": "rtsp://admin:Admin12345@10.0.24.56:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5104",
+        "name": "安泰水闸::上游",
+        "url": "rtsp://admin:Admin12345@10.0.24.57:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5201",
+        "name": "龙峰水闸",
+        "url": "rtsp://admin:Admin12345@10.0.35.43:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5202",
+        "name": "龙峰水闸::室内",
+        "url": "rtsp://admin:Admin12345@10.0.35.44:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5203",
+        "name": "龙峰水闸::上游",
+        "url": "rtsp://admin:Admin12345@10.0.35.45:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5204",
+        "name": "龙峰水闸::下游",
+        "url": "rtsp://admin:Admin12345@10.0.35.46:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5301",
+        "name": "树兜水闸",
+        "url": "rtsp://admin:Admin12345@10.0.35.27:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5302",
+        "name": "树兜水闸::上游",
+        "url": "rtsp://admin:Admin12345@10.0.35.28:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5303",
+        "name": "树兜水闸::下游",
+        "url": "rtsp://admin:Admin12345@10.0.35.29:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5304",
+        "name": "树兜水闸::室内",
+        "url": "rtsp://admin:Admin12345@10.0.35.30:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5401",
+        "name": "江四水闸",
+        "url": "rtsp://admin:Admin12345@10.0.31.102:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5402",
+        "name": "江四水闸::下游",
+        "url": "rtsp://admin:Admin12345@10.0.31.103:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5403",
+        "name": "江四水闸::上游",
+        "url": "rtsp://admin:Admin12345@10.0.31.104:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5404",
+        "name": "江四水闸::室内",
+        "url": "rtsp://admin:Admin12345@10.0.31.105:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5501",
+        "name": "旧树兜水闸",
+        "url": "rtsp://admin:Admin12345@10.0.35.139:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5502",
+        "name": "旧树兜水闸::上游",
+        "url": "rtsp://admin:Admin12345@10.0.35.140:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5503",
+        "name": "旧树兜水闸::下游",
+        "url": "rtsp://admin:Admin12345@10.0.35.141:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5504",
+        "name": "旧树兜水闸::室内",
+        "url": "rtsp://admin:Admin12345@10.0.35.142:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5601",
+        "name": "魁岐水闸::1#",
+        "url": "rtsp://admin:Admin12345@10.0.31.55:554/Streaming/Channels/101"
+    },
+    {
+        "id": "5602",
+        "name": "魁岐水闸::2#",
+        "url": "rtsp://admin:Admin12345@10.0.31.60:554/Streaming/Channels/101"
+    }
+]

@@ -1,0 +1,25 @@
+<div class="modal-out" [ngClass]="{'active': show}">
+    <div class="bg" (click)="switchModalBox()"></div>
+    <div class="container">
+        <i nz-icon [nzType]="'close'" (click)="goCancel()" style="position: absolute;top: 10px;right: 10px;cursor: pointer;width: 30px;height: 30px;"></i>
+        <div class="header"><span class="title">{{title}}</span></div>
+        <div class="main">
+            <div style="text-align: center;">
+                {{userName}} {{dateStr}} {{week}}
+            </div>
+            <div style="text-align: center;">
+                {{workTimeAbbrName}} {{timeStart}}~{{timeEnd}}
+            </div>
+            <mat-radio-group aria-labelledby="example-radio-group-label" class="example-radio-group" [(ngModel)]='nameSeq'>
+                <mat-radio-button class=example-radio-button *ngFor="let i of List" [value]='i.Seq'>
+                    {{i.AbbrName}}({{i.WorkStart}}~{{i.WorkEnd}})
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="goCancel()"><span class="iconfont iconpstep"></span>取消</button>
+            <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+            <button mat-button *ngIf=" type == 'edit' " (click)="del()"><span class="iconfont iconsave"></span>删除</button>
+        </div>
+    </div>
+</div>

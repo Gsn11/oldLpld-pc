@@ -1,0 +1,38 @@
+<div class="modal-out" [ngClass]="{'active': treeModalShow }">
+    <div (click)="treeCancel()"></div>
+    <div class="container tree-container">
+        <div class="header"><span class="title">模板查找</span></div>
+        <div class="main">
+            <mat-card>
+                <div class="template">
+                    <div style="width: 60px;"></div>
+                    <div><span>模版</span></div>
+                    <div><span>条目</span></div>
+                </div>
+            </mat-card>
+            <mat-card *ngFor="let i of MaintenanceTemplates, let iIndex = index" (click)="radioChange(i.MTSeq)">
+                <div class="template">
+                    <mat-radio-group style="margin-left: 20px; width: 100%;" aria-labelledby="example-radio-group-label"
+                        class="example-radio-group" [(ngModel)]="radioValue">
+                        <mat-radio-button [value]="i.MTSeq" style="width: 100%;">
+                            <span>{{i.MTName}}</span>
+                        </mat-radio-button>
+                    </mat-radio-group>
+                    <div>
+                        <div *ngFor="let ii of i.Items">
+                            <span>{{ii.BuildingName}} - </span>
+                            <span>{{ii.Floor}}层 - </span>
+                            <span>{{ii.Zone}} - </span>
+                            <span>{{ii.MTName}} - </span>
+                            <span>{{ii.FeedbackType | feedbacktypeTranslate}}</span>
+                        </div>
+                    </div>
+                </div>
+            </mat-card>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="treeCancel()">取消</button>
+            <button mat-button (click)="templateSave()">确认</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<div class="add_bg" *ngIf="show">
+   <div class="container_add">
+   <div>派单评价</div>
+   <div class="order_title"><span>派单编号：{{data.OrderNo}}</span><span>派单名称：{{data.MSName}}</span></div>
+   <div class="order_title"><span>派单时间: {{data.OrderTime}}</span><span>维客名称: {{data.WorkerInfo[0].WorkerName}}</span></div>
+   <div class="order_index"> <span>服务评分:</span>
+      <div class="core_img">
+         <div *ngFor="let s of StateList,let sIndex = index" (click)="selectPic(sIndex)"> <img class="Pic" src="{{s.src}}" alt="" mode="widthFix" ></div>
+      </div>
+   </div>
+   <div class="core_input"> 
+      <textarea [(ngModel)]="name" (keyup)="getValue()" name="" id="" cols="30" rows="10" class="texttarea" placeholder="服务态度评价"></textarea>
+   </div>
+   <div class="core_pro">
+      <div>1颗星代表完全不满意，工作拖拉；</div>
+      <div>3颗星代表基本满意，完成工作任务</div>
+      <div> 5颗星代表非常满意，认真完成工作</div>
+   </div>
+   <div class="addPic">
+      <div>其它图片</div>
+      <app-manyfile [setImgsrcData]="imgsrcData"></app-manyfile>
+   </div>
+   <div class="btn"> <button mat-raised-button   class="back" (click)="show=false"><span class="iconfont iconpstep"></span>返回</button> <button (click)="ScoreSub(data.MOSeq)" color="primary" mat-raised-button  class="edit" >保存</button></div>
+</div>
+</div>

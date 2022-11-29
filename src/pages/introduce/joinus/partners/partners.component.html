@@ -1,0 +1,35 @@
+<div class="wlyIntroduce">
+  <app-nav></app-nav>
+  <div class="partners">
+    <img src="../../assets/introduce/partners/banner1.jpg" alt="introduce1">
+    <img src="../../assets/introduce/partners/banner2.jpg" alt="introduce2">
+    <img style="cursor: pointer;" (click)="showJoinMode()" src="../../assets/introduce/partners/banner3.jpg"
+      alt="introduce3">
+  </div>
+
+  <div class="joinMode" [ngClass]="{'active': !show }">
+    <div class="mask" (click)="closeMode()"></div>
+    <div class="regsiterBox">
+      <div class="example-container">
+        <mat-form-field>
+          <input matInput placeholder="请输入企业名称" [(ngModel)]="Name" required>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="请输入企业地址" [(ngModel)]="Addr" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="请输入联系人" [(ngModel)]="LegalPerson" required>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="联系电话" [(ngModel)]="Tel" maxlength="11" required>
+        </mat-form-field>
+        <div class="regsiterInfo">
+          <span>请完整填写本表格，我司客服人员将在5个工作日与您联系</span>
+        </div>
+      </div>
+      <button mat-raised-button color="primary" class="regsiterBtn"
+        (click)="register()">确认提交</button>
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

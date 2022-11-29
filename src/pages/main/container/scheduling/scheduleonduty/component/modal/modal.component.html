@@ -1,0 +1,26 @@
+<div class="modal-out" [ngClass]="{'active': show}">
+    <div class="bg" (click)="switchModalBox()"></div>
+    <div class="container">
+        <div class="header"><span class="title">{{title}}</span></div>
+        <div class="main">
+            
+            <mat-form-field class="example-full-width">
+                <select matNativeControl [(ngModel)]="typeName">
+                    <option value="0">设备故障</option>
+                    <option value="1">防汛防台风</option>
+                    <option value="2">次氯酸钠泄漏事故</option>
+                    <option value="3">水源水质突发事件</option>
+                    <option value="4">制水生产水质突发事件</option>
+                    <option value="5">反恐怖防范</option>
+                    <option value="6">火灾事故</option>
+                    <option value="7">供水设备故障突发事件</option>
+                    <option value="8">有限空间作业事故</option>
+                </select>
+            </mat-form-field>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="goCancel()"><span class="iconfont iconpstep"></span>取消</button>
+            <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        </div>
+    </div>
+</div>

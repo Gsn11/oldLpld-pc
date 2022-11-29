@@ -1,0 +1,33 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>模板名称</span>
+        <span>{{bemInfoData.MTName}}</span>
+    </div>
+
+    <div>
+        <span>模板条目</span>
+        <span></span>
+    </div>
+    <mat-card>
+        <div class="template">
+            <div><span>设施位置</span></div>
+            <div><span>条目</span></div>
+            <div><span>反馈类型</span></div>
+        </div>
+    </mat-card>
+
+    <mat-card *ngFor="let i of bemInfoData.Items, let iIndex = index">
+        <div class="template">
+            <div><span>{{i.CName}} ({{i.BuildingName}}) - {{i.Zone}} - {{i.SpacePos}}</span></div>
+            <div><span>{{i.Item}}</span></div>
+            <div><span>{{i.FeedbackType | feedbacktypeTranslate}}</span></div>
+        </div>
+    </mat-card>
+    <div class="btnList">
+        <button mat-button (click)="gotoEdit()" *ngIf="userPower"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()" *ngIf="userPower"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

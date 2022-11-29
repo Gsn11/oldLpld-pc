@@ -1,0 +1,83 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <mat-tab-group>
+        <mat-tab label="子系统人员授权">
+            <div class="tabOut">
+                <div class="title">
+                    <span>{{bemInfoData.CustomerName}}  ({{bemInfoData.Name}})</span>
+                    <span class="btnList">
+                        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+                    </span>
+                </div>
+                <div class="system">
+                    <mat-card *ngFor="let s of SubsysAudits, let sIndex = index">
+                        <div class="systemItem">
+                            <div class="itemTitle">
+                                <span>{{s.SubsysName}}</span>
+                                <span><button mat-raised-button color="primary"
+                                        (click)="addSystem(sIndex)">新增</button></span>
+                            </div>
+                            <div class="itemList">
+                                <span>读</span>
+                                <span>
+                                    <ng-container *ngFor="let u of s.Users">
+                                        <span class="writeItem" *ngIf="u.AuditWrite === true && u.UName">{{u.UName}}</span>
+                                    </ng-container>
+                                </span>
+                            </div>
+                            <div class="itemList">
+                                <span>写</span>
+                                <span>
+                                    <ng-container *ngFor="let u of s.Users">
+                                        <span class="readItem" *ngIf="u.AuditRead === true && u.UName">{{u.UName}}</span>
+                                    </ng-container>
+                                </span>
+                            </div>
+                        </div>
+                    </mat-card>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="人员子系统授权">
+            <div class="detailContainer">
+                <div class="searchList">
+                    <span>{{bemInfoData.CustomerName}}  ({{bemInfoData.Name}})</span>
+                    <div>
+                        <mat-form-field class="example-form-field">
+                            <input matInput type="text" placeholder="登录名/姓名/手机号/Email" [(ngModel)]="searchName"
+                                (keyup.enter)="search()">
+                        </mat-form-field>
+                        <button mat-raised-button color="primary" class="loginBtn" (click)="search()">搜索</button>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="itemTitle">
+                        <div *ngFor="let d of displayedColumns">
+                            <span>{{d}}</span>
+                        </div>
+                    </div>
+                    <div class="item" [ngClass]="{'active': activeChoose === uIndex}"
+                        *ngFor="let u of useList,let uIndex = index" (click)="radioChange(uIndex)">
+                        <div class="name">
+                            <span>{{u.Name}}</span>
+                            <span>{{u.LoginId}}</span>
+                            <span>{{u.IsAdmin === true ? '是' : '否'}}</span>
+                            <span>{{u.State | stateTranslate}}</span>
+                            <span>{{u.UserTel}}</span>
+                            <span>{{u.UserEmail}}</span>
+                            <span class="tools">
+                                <span *ngIf="customer === u.Customer" (click)="addUserSystem(uIndex)">子系统授权</span>
+                                <span *ngIf="customer !== u.Customer" class="enable">不可操作</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal"
+                            [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+<app-modal [setUsers]="SubsysUsers" [title]="modalTitle" [type]="type" (updateData)="getList()"></app-modal>

@@ -1,0 +1,25 @@
+<div class="modal-out" [ngClass]="{'active': show}">
+    <div class="bg" (click)="goCancel()"></div>
+    <div class="container">
+        <div class="header"><span class="title">{{systemTitle}}</span></div>
+        <div class="main">
+            <!-- <span><span style="color: red;">*</span> </span> -->
+            <div class="systemPhoto">
+                <span>子系统图片:</span>
+                <app-singlefile class="singleFileUpload" [setImgsrc]="modalSrc"></app-singlefile>
+            </div>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="子系统名称" [formControl]="SName" required>
+                <mat-error *ngIf="SName.invalid">{{getSNameErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <!-- *ngIf="buildData.buildType != '联排联调'" -->
+            <mat-form-field class="example-full-width" >
+                <input matInput type="text" placeholder="编码" [formControl]="code">
+            </mat-form-field>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+            <button mat-button (click)="goCancel()"><span class="iconfont iconpstep"></span>取消</button>
+        </div>
+    </div>
+</div>

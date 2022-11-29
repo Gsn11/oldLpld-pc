@@ -1,0 +1,49 @@
+.float-box {
+  top: 153px;
+  right: 80px;
+  position: fixed;
+  z-index: 50;
+  .ctrl {
+    width: 70px;
+    border-radius: 35px;
+    overflow: hidden;
+    &:hover {
+      width: 500px;
+     .phoneNumber {
+      //  display: block;
+       transform: translate(0, 0);
+       transition: transform 0.3s linear;
+     } 
+    }
+  }
+  img {
+    width: 70px;
+    height: 70px;
+    float: right;
+    position: relative;
+    cursor: pointer;
+    z-index: 2;
+  }
+  .phoneNumber {
+    padding: 20px 0;
+    width: 500px;
+    height: 70px;
+    text-align: center;
+    background:rgba(25,145,221,0.7);
+    border-radius: 35px;
+    box-sizing: border-box;
+    // display: none;
+    transform: translate(100%, 0);
+    transition: transform 0.4s ease;
+    span {
+      color: #ffffff;
+      font-size: 24px;
+      font-family: 'Microsoft YaHei';
+      word-break: keep-all;
+      &.icon {
+        margin: 0 20px;
+        display: inline-block;
+      }
+    }
+  }
+}

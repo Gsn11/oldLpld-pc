@@ -1,0 +1,41 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+   <div class="search-bar">
+      <mat-form-field class="example-form-field" style="margin-left: 10px;">
+        <input matInput type="text" placeholder="运维名称" [(ngModel)]="name">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1;search()">搜索</button>
+      <div style="float: right;margin-top: 9px;">
+         <button mat-raised-button color="primary" class="loginBtn">导出</button>
+         <button mat-raised-button color="primary" class="loginBtn" (click)="goAdd()">新增</button>
+      </div>
+    </div>
+
+    <div class="main">
+         <table mat-table [dataSource]="list" style="width: 100%;">
+            <ng-container matColumnDef="name">
+               <th mat-header-cell *matHeaderCellDef> 运维名称 </th>
+               <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+            </ng-container>
+            <ng-container matColumnDef="date">
+               <th mat-header-cell *matHeaderCellDef> 生效日期 </th>
+               <td mat-cell *matCellDef="let element"> ({{element.BeginTime}} - {{element.EndTime}}) </td>
+            </ng-container>
+            <ng-container matColumnDef="operate">
+               <th mat-header-cell *matHeaderCellDef> 操作 </th>
+               <td mat-cell *matCellDef="let element" class="Other">
+                  <span (click)="goInfo(element)">查看</span>
+                  <span (click)="goEdit(element)">编辑</span>
+                  <span (click)="checkSeq = element.Seq;showConfirmBox = true">删除</span>
+               </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columns"></tr>
+            <tr mat-row *matRowDef="let row; columns: columns;" class="example-element-row"></tr>
+         </table>
+         <div style="background: rgb(141, 141, 141);">
+               <mat-paginator #MatPaginator [pageSizeOptions]="[5, 10, 20]" (page)="change($event)" [pageIndex]="pageIndex - 1" [pageSize]="10" [length]="total" showFirstLastButtons></mat-paginator>
+         </div>
+    </div>
+    
+    <app-confim [confim]="showConfirmBox" (setConfimResult)="del($event)"></app-confim>
+</div>

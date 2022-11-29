@@ -1,0 +1,39 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>所属企业</span>
+        <span>{{bemInfoData.Customer}}</span>
+    </div>
+    <div>
+        <span>固定服务商</span>
+        <span>{{bemInfoData.SPName}}</span>
+    </div>
+    <div>
+        <span>联系人</span>
+        <span>{{bemInfoData.Contact}}</span>
+    </div>
+    <div>
+        <span>电话</span>
+        <span>{{bemInfoData.Tel}} </span>
+    </div>
+    <div>
+        <span>服务范围</span>
+        <span>
+            <span *ngIf="bemInfoData.ServiceZone">
+                <ng-container *ngFor="let s of bemInfoData.ServiceZone">
+                    {{s | codeTranslateToAddress}}, 
+                </ng-container>
+            </span>
+        </span>
+    </div>
+    <div>
+        <span>擅长行业</span>
+        <span>{{bemInfoData.BusiDomain}}</span>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoEdit()" *ngIf="userPower"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()" *ngIf="userPower"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

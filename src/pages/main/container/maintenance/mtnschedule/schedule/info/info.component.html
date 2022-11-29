@@ -1,0 +1,176 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>计划名称</span>
+        <span>{{bemInfoData.MSName}}</span>
+    </div>
+    <div *ngIf="ScheduleType!=='inspectionschedule'">
+        <span>是否开启二维码扫描</span>
+        <span>{{!bemInfoData.NeedQrcode || bemInfoData.NeedQrcode === 0 ? '否' : '是'}}</span>
+    </div>
+    <div>
+        <span>计划开始时间</span>
+        <span>{{bemInfoData.BeginTime}}</span>
+    </div>
+    <div>
+        <span>计划终止时间</span>
+        <span>{{bemInfoData.EndTime}}</span>
+    </div>
+    <div>
+        <span>任务周期</span>
+        <span>{{bemInfoData.TimeType | timeTypeTranslate}}</span>
+    </div>
+    
+    <div *ngIf="bemInfoData.Day">
+        <span>{{bemInfoData.TimeType | timeTypeTranslate}}哪一天</span>
+        <!-- <span>哪一天</span> -->
+        <span *ngIf="bemInfoData.TimeType === 2">
+            <span *ngFor="let d of Day">{{d | DayTranslate}} ,</span>
+        </span>
+        <span *ngIf="bemInfoData.TimeType !== 2">
+            <span *ngFor="let d of Day">{{d}}号 ,</span>
+        </span>
+    </div>
+
+    <!-- <div *ngIf="bemInfoData.Day">
+        <span>每月的哪一天</span>
+        <span>{{bemInfoData.Day}}</span>
+    </div> -->
+    <div *ngIf="bemInfoData.Time">
+        <span>工作开始时间</span>
+        <span>{{bemInfoData.Time}}</span>
+    </div>
+    <div *ngIf="ScheduleType!=='inspectionschedule'">
+        <span>模板条目</span>
+        <span style="font-size: 14px;">
+            <mat-card>
+                <div class="template">
+                    <div><span>设施位置</span></div>
+                    <div><span>设备</span></div>
+                    <div><span>条目</span></div>
+                    <div><span>反馈类型</span></div>
+                </div>
+            </mat-card>
+
+            <mat-card *ngFor="let i of bemInfoData.Items">
+                <div class="template">
+                    <div><span class="wordBreakNormal">{{i.BuildingName || i.CName || i.Building }} - {{i.Floor}}层 - {{i.Zone}} - {{i.SpacePos}}</span></div>
+                    <div><span class="wordBreakNormal">{{i.DeviceNo}}({{i.DeviceName}})</span></div>
+                    <div><span class="wordBreakNormal">{{i.Item}}</span></div>
+                    <div><span class="wordBreakNormal">{{i.FeedbackType | feedbacktypeTranslate}}</span></div>
+                </div>
+            </mat-card>
+        </span>
+    </div>
+    <div *ngIf="ScheduleType==='inspectionschedule'">
+        <span>模板条目</span>
+        <span style="font-size: 14px;">
+            <mat-card>
+                <div class="template">
+                    <div><span>序号</span></div>
+                    <div><span>设备编号(名称)</span></div>
+                    <div><span>测量变量</span></div>
+                    <div><span>报警点/数据点</span></div>
+                </div>
+            </mat-card>
+
+            <mat-card *ngFor="let i of bemInfoData.Items,let j = index">
+                <div class="template">
+                    <div><span class="wordBreakNormal">{{j+1}}</span></div>
+                    <div><span class="wordBreakNormal">{{i.DeviceNo}}({{i.DeviceName}})</span></div>
+                    <div><span class="wordBreakNormal">{{i.Metric.MetricsDesc}}({{i.Metric.Id}})</span></div>
+                    <div><span class="wordBreakNormal">{{i.IsAlert===0?'报警点':'数据点'}}</span></div>
+                </div>
+            </mat-card>
+        </span>
+    </div>
+    <div>
+        <span>计划描述</span>
+        <span>{{bemInfoData.MSDesc}}</span>
+    </div>
+    <div *ngIf="ScheduleType!=='inspectionschedule'">
+        <span>接单时限（小时）</span>
+        <span>{{bemInfoData.OrderExpire}}</span>
+    </div>
+    <div *ngIf="ScheduleType!=='inspectionschedule'">
+        <span>抵达时限（小时）</span>
+        <span>{{bemInfoData.ArriveExpire}}</span>
+    </div>
+    <div *ngIf="ScheduleType!=='inspectionschedule'">
+        <span>处理反馈时限（小时）</span>
+        <span>{{bemInfoData.WorkExpire}}</span>
+    </div>
+    <div >
+        <span>{{'Users' | wordTranslate}}</span>
+        <span>{{bemInfoData.ChargerName}}</span>
+    </div>
+    <div *ngIf="ScheduleType!=='inspectionschedule'">
+        <span>服务提供方</span>
+        <span>{{bemInfoData.ServiceType | serviceTypeTranslate}}</span>
+    </div>
+    
+    <div *ngIf="ScheduleType!=='inspectionschedule'">
+        <span> 次级负责人</span>
+        <span  class="chooseName" >
+           <span *ngIf="!SubList">请选择次级工作人员</span> 
+           <span *ngFor="let i of SubList">【{{i.Name}}】</span>
+        </span>
+    </div>
+    <div *ngIf="bemInfoData.ServiceType !== 0">
+        <span>固定服务商</span>
+        <span>{{bemInfoData.SPName}}</span>
+    </div>
+    <div *ngIf="ScheduleType!=='inspectionschedule'">
+        <span><span style="color: red;">*</span> 工作人员</span>
+        <span class="chooseName">
+            {{ChooseWorkerName?ChooseWorkerName:'未选择工作人员'}}
+        </span>
+    </div>
+    <div *ngIf="ScheduleType!=='inspectionschedule'">
+        <span> 排班</span>
+        <span class="chooseName" >
+           <span *ngIf="!SubcharList">未选择排班</span> 
+           <span *ngIf="SubcharList">{{SubcharList.Name}}</span>
+        </span>
+    </div>  
+    <div *ngIf="ScheduleType!=='inspectionschedule'">
+        <span>排序数值</span>
+        <mat-form-field class="example-user-input">
+            <input matInput placeholder="排序数值"
+                   type="number"
+                   [(ngModel)]="Zindex"
+                   aria-label="Adds a delay between hovering over the button and displaying the tooltip">
+                  
+          </mat-form-field> 
+    </div>    
+    <div *ngIf="bemInfoData.ServiceType !== 0&&ScheduleType!=='inspectionschedule'">
+        <span>报价</span>
+        <span style="font-size: 14px;">
+            <mat-card>
+                <div class="template">
+                    <div><span>报价条目</span></div>
+                    <div><span>价格</span></div>
+                    <div><span>所涉设备</span></div>
+                </div>
+            </mat-card>
+
+            <mat-card *ngFor="let i of PriceList">
+                <div class="template">
+                    <div><span>{{i.Item}}</span></div>
+                    <div><span>{{i.Price}}</span></div>
+                    <div><span>{{i.DeviceNo}}({{i.DeviceName}})</span></div>
+                </div>
+            </mat-card>
+        </span>
+    </div>
+    <div>
+        <span>其它图片</span>
+        <app-manyfile [setImgsrcData]="imgsrcData" [setType]="manyFileUseType"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button  mat-button (click)="gotoEdit()" *ngIf="userPower&&ScheduleType!=='inspectionschedule'"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()" *ngIf="userPower"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

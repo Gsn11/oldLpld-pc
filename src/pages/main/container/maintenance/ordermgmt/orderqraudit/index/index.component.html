@@ -1,0 +1,48 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+  <div class="searchList">
+    <div>
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" placeholder="派单名称/派单号" [(ngModel)]="searchName" (keyup.enter)="getList()">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="pageIndex = 1;getList()">搜索</button>
+    </div>
+  </div>
+  
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="list" style="width: 100%;">
+      <ng-container matColumnDef="OrderNo">
+        <th mat-header-cell *matHeaderCellDef> 派单编号-名称 </th>
+        <td mat-cell *matCellDef="let element"> {{element.OrderNo}}({{element.MSName}}) </td>
+      </ng-container>
+      <ng-container matColumnDef="DeclaratTelephone">
+        <th mat-header-cell *matHeaderCellDef> 报单人 </th>
+        <td mat-cell *matCellDef="let element"> {{element.DeclaratTelephone}}({{element.DeclaratName}}) </td>
+      </ng-container>
+      <ng-container matColumnDef="Type">
+        <th mat-header-cell *matHeaderCellDef> 模式 </th>
+        <td mat-cell *matCellDef="let element"> {{element.Type | orderTypeTranslate}} </td>
+      </ng-container>
+      <ng-container matColumnDef="OrderTime">
+        <th mat-header-cell *matHeaderCellDef> 派单时间 </th>
+        <td mat-cell *matCellDef="let element"> {{element.OrderTime}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Other">
+        <th mat-header-cell *matHeaderCellDef> 操作 </th>
+        <td mat-cell *matCellDef="let element" class="Other">
+          <span *ngIf="customer === element.Customer" (click)="gotoEdit(element)">编辑</span>
+          <span *ngIf="customer === element.Customer" class="deleteItem" (click)="showConfim(element.MOSeq)">取消派单</span>
+          <span *ngIf="customer !== element.Customer" class="enable">不可操作</span>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"
+      class="example-element-row"></tr>
+    </table>
+    <div style="background: white;">
+      <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+        [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+  <app-confim [confim]="setConfim" [title]="confimTitle" (setConfimResult)="tableConfimResult($event)"></app-confim>
+</div>

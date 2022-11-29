@@ -1,0 +1,32 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>所属子系统</span>
+        <span>{{bemInfoData.SystemName}}</span>
+    </div>
+    <div>
+        <span>报价条目</span>
+        <span>{{bemInfoData.ItemName}}</span>
+    </div>
+    <div>
+        <span>价格</span>
+        <span>{{bemInfoData.Price}}</span>
+    </div>
+    <div>
+        <span>费用类型</span>
+        <span>{{bemInfoData.Type | typeTranslate}}</span>
+    </div>
+    <div>
+        <span>所涉设备</span>
+        <span>
+            <span *ngIf="bemInfoData.DeviceName">{{bemInfoData.DeviceName}}</span> - 
+            <span *ngIf="bemInfoData.DeviceNo">{{bemInfoData.DeviceNo}}</span>
+        </span>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoEdit()" *ngIf="userPower"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()" *ngIf="userPower"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

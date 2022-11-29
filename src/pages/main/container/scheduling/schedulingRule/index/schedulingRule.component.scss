@@ -1,0 +1,110 @@
+@import '../../../../../common/utils/css/table.scss';
+.demo-input {
+  margin-top: 20px;
+}
+.SeColor{
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 20px;
+  
+  
+}
+.Sflex{
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+table {
+  width: 100%;
+  .Rule_container{
+    position: relative;
+    .User_container{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 200px;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid #ddd;
+      color: #fff;
+      z-index: 10000000;
+      .userall{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        min-height: 25px;
+         > div{
+         flex: 1; 
+        }
+      }
+    }
+    .User_container::before{
+    position: absolute;
+    top: 20px;
+    left: -10px;
+    border-top: 20px solid transparent;
+    content: " ";
+    width: 0px;
+    height: 0px;
+    border-right: 0px solid transparent;
+    border-top: 10px solid rgba(0, 0, 0, 0.7);
+    border-left: 10px solid transparent;
+    }
+  }
+  .color{
+    width: 60px;
+    height: 20px;
+    border-radius: 3px;
+    background: #BCE1AA;
+    margin-left: 20px;
+  }
+  img{
+    width: 15px;
+    height: 15px;
+    margin-left: 20px;
+  }
+  .operation{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .edit{
+    color: #006BE3;
+    margin-left: 20px;
+  }
+  .delete{
+    color:#Ff0000;
+    margin-left: 20px;
+  }
+  .color_box{
+    display: flex;
+   
+  }
+}
+.mat-elevation-z8{
+  background: #FFFFFF;
+}
+.btn{
+  margin: 20px;
+}
+
+.orderfixSearchList {
+    margin: 0 0 20px 0;
+    padding: 21px 38px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px 0px rgba(11, 7, 8, 0.1);
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    flex-flow: column;
+    .searchTools {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .download {
+            margin-right: 10px;
+        }
+    }
+}

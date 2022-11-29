@@ -1,0 +1,49 @@
+.containerPadding{
+    background: #fff;
+    height: 100%;
+}
+
+.orderfixSearchList {
+    margin: 0 0 20px 0;
+    padding: 21px 38px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px 0px rgba(11, 7, 8, 0.1);
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    flex-flow: column;
+
+    .searchTools{
+        display: flex;
+
+        .btn-g{
+            margin-left: auto;
+        }
+    }
+
+    button{
+        margin-left: 20px;
+    }
+}
+
+.con{
+    padding: 0px 40px 20px;
+
+    .con-tit{font-size: 24px;text-align: center;}
+
+    .box{
+        flex-wrap: wrap;
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        .name{
+            position: absolute;
+            color: #333;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 999;
+            margin: 0;
+        }
+    }
+}

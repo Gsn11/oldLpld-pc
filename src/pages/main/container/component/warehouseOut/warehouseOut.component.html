@@ -1,0 +1,28 @@
+<div class="add_bg">
+  <div class='main'>
+    <!-- <div class="title">出库</div> -->
+    <!-- 定义DOM元素，用于在该DOM元素中显示模型或图纸 -->
+    <div mat-dialog-actions class="btn_left">
+     
+      <div><span>状态</span>:
+        <mat-form-field class="text_span">
+          <mat-select [formControl]="stateSelect">
+            <mat-option *ngFor="let s of stateList" [value]="s.state"> {{s.state | typeTranslate}}</mat-option>
+           
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div><span>操作记录</span>:
+        <mat-form-field  class="text_span">
+          <textarea matInput placeholder="操作记录" [(ngModel)]="Remark"></textarea>
+        </mat-form-field>
+      </div>
+      <div class="btn_box">
+      <button mat-raised-button class="btnCancel" (click)="save()" color="primary">确定</button>
+      <button mat-raised-button  (click)="onNoClick()">取消</button>
+    </div>
+
+
+    </div>
+  </div>
+</div>

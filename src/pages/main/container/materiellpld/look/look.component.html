@@ -1,0 +1,68 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+
+<div class="containerPadding">
+    <div class="main">
+        <div>
+            <p>编号</p>
+            <mat-form-field class="example-form-field">
+                <input readonly [(ngModel)]="materielItem.DeviceNo" matInput type="text" placeholder="编号">
+            </mat-form-field>
+        </div>
+        <div>
+            <p>名称</p>
+            <mat-form-field class="example-form-field">
+                <input readonly [(ngModel)]="materielItem.DeviceName" matInput type="text" placeholder="名称">
+            </mat-form-field>
+        </div>
+        <div *ngIf="buildData.buildType == '联排联调'">
+            <p>物料型号</p>
+            <span style="color: #0152AD; cursor: pointer;">{{materielItem.Model}}</span>
+        </div>
+        <div *ngIf="buildData.buildType != '联排联调'">
+            <p>物料分类</p>
+            <span style="color: #0152AD; cursor: pointer;">{{materielItem.Model}}</span>
+        </div>
+        <div>
+            <p>规格</p>
+            <mat-form-field class="example-form-field">
+                <input readonly  [(ngModel)]="materielItem.Remark" matInput type="text" placeholder="规格">
+            </mat-form-field>
+        </div>
+        <div>
+            <p>单位</p>
+            <mat-form-field class="example-form-field">
+                <input readonly [(ngModel)]="materielItem.Unit" matInput type="text" placeholder="单位">
+            </mat-form-field>
+        </div>
+        <div>
+            <p>所在地点</p>
+            <span style="color: #0152AD; cursor: pointer;">{{materielItem.Building}}</span>
+        </div>
+        <div *ngIf="materielItem.Floor">
+            <p>所在楼层</p>
+            <span>{{materielItem.Floor}}</span>
+        </div>
+        <div *ngIf="materielItem.Zone">
+            <p>所在楼层的区域/房间</p>
+            <span>{{materielItem.Zone}}</span>
+        </div>
+        <div *ngIf="materielItem.SpacePos">
+            <p>所在区域/房间的空间位置</p>
+            <span>{{materielItem.SpacePos}}</span>
+        </div>
+        <div>
+            <p>库存报警通知</p>
+            <span style="padding-right: 10px;">{{materielItem.Thresholds}}</span>
+            <span style="color: #0152AD; cursor: pointer;">{{materielItem.Mobile}}</span>
+        </div>
+        <div>
+            <p>图片</p>
+            <app-manyfile type="info" [setImgsrcData]="materielItem.Avatar"></app-manyfile>
+            <!-- <p>图片文档</p>
+            <app-manyfile type="info" [setImgsrcData]="imgsrcData" [docList]="docListData"></app-manyfile> -->
+        </div>
+        <div class="btn-g">
+            <button mat-raised-button color="primary" class="loginBtn" (click)="goBack()">取消</button>
+        </div>
+    </div>
+</div>

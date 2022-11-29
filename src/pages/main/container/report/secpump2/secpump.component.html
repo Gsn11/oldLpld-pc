@@ -1,0 +1,299 @@
+<!-- <app-crumbs [crumbs]="crumbsList"></app-crumbs> -->
+<div class="containerPadding">
+	<!-- <app-valuerange [value]="[1, 2]" [showValuerange]="showValuerange" (confirm)="valueRangeConfirm($event)"></app-valuerange> -->
+	<div class="mat-elevation-z8" style="margin: 20px; background-color: #fff; padding: 20px">
+		<mat-form-field>
+			<mat-label>日期</mat-label>
+			<mat-select [formControl]="selectDate" (selectionChange)="changeDate($event)">
+				<mat-option *ngFor="let s of ['今日', '昨日']" [value]="s">
+					{{s}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+		<p>{{selectDataVal}}</p>
+
+		<p class="tit">二泵2</p>
+		<div>
+			<div flex="dir:top" class="table">
+				<div class="table-hd parent-row" flex>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center; padding: 5px;">时间</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center; padding: 5px;">东清水池液位<br/>(m)<br/>≤5.8</div>
+					</div>
+					<div style="flex: 1;" flex="cross:center main:justify">
+						<div style="flex: 1; text-align: center; padding: 5px;">西清水池液位<br/>(m)<br/>≤5.8</div>
+					</div>
+					<div style="flex: 2;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; text-align: center; padding: 5px;">吸水井水位</div>
+						<div style="flex: 4;" flex class="parent-row">
+							<div flex="cross:center main:center" style="flex: 1; text-align: center; padding: 5px;">东<br/>(m)<br/>≤6.1</div>
+							<div flex="cross:center main:center" style="flex: 1; text-align: center; padding: 5px;">西<br/>(m)<br/>≤6.1</div>
+						</div>
+					</div>
+					<div style="flex: 2;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; text-align: center; padding: 5px;">出水压力</div>
+						<div style="flex: 4;" flex class="parent-row">
+							<div flex="cross:center main:center" style="flex: 1; text-align: center; padding: 5px;">排尾路<br/>(MPa)<br/>≤0.3</div>
+							<div flex="cross:center main:center" style="flex: 1; text-align: center; padding: 5px;">连江路<br/>(MPa)<br/>≤0.3</div>
+						</div>
+					</div>
+					<div style="flex: 7;" flex="dir:top" class="parent-column">
+						<div style="flex: 1; text-align: center; padding: 5px;">出厂流量</div>
+						<div style="flex: 4;" flex class="parent-row">
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1; text-align: center; padding: 5px;">排尾路</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1; text-align: center; padding: 5px;">读数</div>
+									<div style="flex: 1; text-align: center; padding: 5px;">流量<br/>(m3)</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1; text-align: center; padding: 5px;">连江路</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1; text-align: center; padding: 5px;">读数</div>
+									<div style="flex: 1; text-align: center; padding: 5px;">流量<br/>(m3)</div>
+								</div>
+							</div>
+							<div style="flex: 2;" flex="dir:top" class="parent-column">
+								<div style="flex: 1; text-align: center; padding: 5px;">连江路（倒转）</div>
+								<div style="flex: 4;" flex class="parent-row">
+									<div style="flex: 1; text-align: center; padding: 5px;">读数</div>
+									<div style="flex: 1; text-align: center; padding: 5px;">流量<br/>(m3)</div>
+								</div>
+							</div>
+							<div style="flex: 1;" flex="cross:center main:center">
+								<div style="flex: 1; text-align: center; padding: 5px;">总流量<br/>(m3)<br/>≤6250*1.1</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div [ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff'}" *ngFor="let item of list;let i = index" class="table-c parent-row" flex (mouseover)="blurChangeOver(i)" (mouseleave)="blurChangeLeave()">
+					<div style="flex: 1;">
+						<p>{{(i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 )? '小计' : i == 27 ? '总计' : ( i > 8 && i < 18  ) ? i-1 :  ( i > 17  ) ? i-2 : i }}</p>
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.qscLevelTwo,'东清水池液位(m)≤5.8')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.qscLevelTwo == null?'#000':item.qscLevelTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.qscLevelTwo == null ? '0' : item.qscLevelTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.qscLevelOne,'西清水池液位(m)≤5.8')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.qscLevelOne == null?'#000':item.qscLevelOne.flag ==true?'red':'#000'}"  [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.qscLevelOne == null ? '0' : item.qscLevelOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.xsjLevelTwo,'吸水井水位(东(m)≤6.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.xsjLevelTwo == null?'#000':item.xsjLevelTwo.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.xsjLevelTwo == null ? '0' : item.xsjLevelTwo.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.xsjLevelOne,'吸水井水位(西(m)≤6.1)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.xsjLevelOne == null?'#000':item.xsjLevelOne.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.xsjLevelOne == null ? '0' : item.xsjLevelOne.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.ccsPress,'出水压力(排尾路(MPa)≤0.3)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.ccsPress == null?'#000':item.ccsPress.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.ccsPress == null ? '0' : item.ccsPress.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.mpaPress,'出水压力(连江路(MPa)≤0.3)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.mpaPress == null?'#000':item.mpaPress.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.mpaPress == null ? '0' : item.mpaPress.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pwCcsFlowRead,'出厂流量-排尾路(读数)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pwCcsFlowRead == null?'#000':item.pwCcsFlowRead.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pwCcsFlowRead == null ? '0' : item.pwCcsFlowRead.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.pwCcsFlow,'出厂流量-排尾路(流量(m3))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.pwCcsFlow == null?'#000':item.pwCcsFlow.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.pwCcsFlow == null ? '0' : item.pwCcsFlow.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.ljcsFlowRead,'出厂流量-连江路(读数)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.ljcsFlowRead == null?'#000':item.ljcsFlowRead.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.ljcsFlowRead == null ? '0' : item.ljcsFlowRead.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.ljcsFlow,'出厂流量-连江路(流量(m3))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.ljcsFlow == null?'#000':item.ljcsFlow.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.ljcsFlow == null ? '0' : item.ljcsFlow.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.revFlowRead,'出厂流量-连江路（倒转）(读数)')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.revFlowRead == null?'#000':item.revFlowRead.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.revFlowRead == null ? '0' : item.revFlowRead.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.revFlow,'出厂流量-连江路（倒转）(流量(m3))')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.revFlow == null?'#000':item.revFlow.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.revFlow == null ? '0' : item.revFlow.value">
+					</div>
+					<div style="flex: 1;">
+						<input type="text" readonly (click)="blurChange(i+1,item.flowTotal,'总流量(m3)≤6250*1.1')"
+						[ngStyle]="{'background': (i/8 == 1 || (i-1)/8 == 2 || (i-2)/8 == 3 ) ||  i==27 ? '#C3C3B4' : '#fff','color':item.flowTotal == null?'#000':item.flowTotal.flag ==true?'red':'#000'}" [ngClass]=" i === inputI ? 'inputClass':''"
+						[value]="item.flowTotal == null ? '0' : item.flowTotal.value">
+					</div>
+				</div>
+				<div style="height: 300px;" class="table-hd parent-row" flex>
+					<div style="flex: 1" class="parent-column" flex="dir:top">
+						<div flex="cross:center main:center" style="flex: 2;">时间</div>
+						<div flex="cross:center main:center" style="flex: 1;">0:00:00</div>
+						<div flex="cross:center main:center" style="flex: 1;">8:00:00</div>
+						<div flex="cross:center main:center" style="flex: 1;">16:00:00</div>
+						<div flex="cross:center main:center" style="flex: 1;">24:00</div>
+						<div flex="cross:center main:center" style="flex: 1;">总计</div>
+					</div>
+					<div style="flex: 2" class="parent-column" flex="dir:top">
+						<div style="flex: 2;" flex="dir:top" class="parent-column">
+							<div style="flex: 1; text-align: center; padding: 5px;">出水压力</div>
+							<div style="flex: 2;" flex class="parent-row">
+								<div flex="cross:center main:center" style="flex: 1; text-align: center; padding: 5px;">读数</div>
+								<div flex="cross:center main:center" style="flex: 1; text-align: center; padding: 5px;">实用<br/>(kW·h)</div>
+							</div>
+						</div>
+						<div flex="cross:center main:center" style="flex: 1;">0:00:00</div>
+						<div flex="cross:center main:center" style="flex: 1;">8:00:00</div>
+						<div flex="cross:center main:center" style="flex: 1;">16:00:00</div>
+						<div flex="cross:center main:center" style="flex: 1;">24:00</div>
+						<div flex="cross:center main:center" style="flex: 1;">总计</div>
+					</div>
+					<div style="flex: 7;" class="parent-column" flex="dir:top">
+						<div style="flex: 2;" flex="dir:top" class="parent-column">
+							<div flex="cross:center main:center" style="flex: 1; text-align: center; padding: 5px;">生产记事栏</div>
+						</div>
+						<div style="flex: 5;">
+							<div flex="cross:center main:center" style="flex: 1; height: 100%; width: 100%; padding: 5px;overflow-y: scroll;">
+								<div style="height: 100%; width: 100%;display: flex;flex-direction: column;">
+									<div><button nz-button nzType="primary" (click)="keepFlag = true;slot=1;">添加记录</button></div>
+									<nz-table #middleTable  nzBordered nzSize="small" [nzData]="pumpTwoNotes" style="margin-top: 10px;">
+										<thead>
+											<tr>
+												<th [nzWidth]="'60px'" [nzAlign]="'center'">序号</th>
+												<th [nzAlign]="'center'">记录内容</th>
+												<th [nzWidth]="'100px'" [nzAlign]="'center'">记录人</th>
+												<th [nzWidth]="'100px'" [nzAlign]="'center'">操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr *ngFor="let data of middleTable.data;let i = index">
+												<td [nzAlign]="'center'">{{ i + 1 }}</td>
+												<td [nzAlign]="'center'">{{ data.content }}</td>
+												<td [nzAlign]="'center'">{{ data.name }}</td>
+												<td [nzAlign]="'center'"><button nz-button nzType="primary" (click)="keep=data.content;slot=2;pumpTwoNotesId=data.id;keepFlag = true">修改</button></td>
+											</tr>
+										</tbody>
+									</nz-table>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="flex: 3;" class="parent-column" flex="dir:top">
+						<div style="flex: 2;" flex="dir:top" class="parent-column">
+							<div flex="cross:center main:center" style="flex: 1; text-align: center; padding: 5px;">值班表</div>
+						</div>
+						<div class="parent-row" flex style="flex: 5;">
+							<div flex="dir:top" style="flex: 1;" class="parent-column">
+								<div style="flex: 1;" flex="cross:center main:center">早班</div>
+								<div style="flex: 1;" flex="cross:center main:center">中班</div>
+								<div style="flex: 1;" flex="cross:center main:center">晚班</div>
+							</div>
+							<div flex="dir:top" style="flex: 2;" class="parent-column" *ngIf= " signOrExamine ">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center" >
+									<div *ngIf= " signOrExamine.signMorning != null ">
+										<div >签到人：{{signOrExamine == null ? '': signOrExamine.signMorning == null ? '': signOrExamine.signMorning}}</div>
+										<div >时间：{{signOrExamine == null ? '': signOrExamine.signMorningTime}}</div>
+									</div>
+									<button *ngIf= "signOrExamine.signMorning === null " nz-button nzType="primary" (click)="signButton('早','1')">签到</button>
+								</div>
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">
+									<div *ngIf= "signOrExamine.signAfternoon != null ">
+										<div >签到人：{{signOrExamine.signAfternoon}}</div>
+										<div >时间：{{signOrExamine.signAfternoonTime}}</div>
+									</div>
+									<button *ngIf= "signOrExamine.signAfternoon === null " nz-button  nzType="primary" (click)="signButton('中','1')">签到</button>
+								</div>
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">
+									<div *ngIf= "signOrExamine.signEvening != null ">
+										<div >签到人：{{signOrExamine.signEvening}}</div>
+										<div >时间：{{signOrExamine.signEveningTime}}</div>
+									</div>
+									<button *ngIf= "signOrExamine.signEvening === null " nz-button  nzType="primary" (click)="signButton('晚','1')">签到</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div style="flex: 1;" class="parent-column" flex="dir:top">
+						<div style="flex: 2;" flex="dir:top" class="parent-column">
+							<div flex="cross:center main:center" style="flex: 1; text-align: center; padding: 5px;">审核人</div>
+						</div>
+						<div class="parent-row" flex style="flex: 5;">
+							<div flex="dir:top" style="flex: 2;" class="parent-column" *ngIf= "signOrExamine">
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">
+									<div *ngIf= "signOrExamine.examineMorning != null ">{{signOrExamine.examineMorning}}</div>
+						      <button *ngIf= "signOrExamine.examineMorning === null " nz-button nzType="primary" (click)="signButton('早','2')">审核</button>
+								</div>
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">
+									<div *ngIf= "signOrExamine.examineAfternoon != null ">{{signOrExamine.examineAfternoon}}</div>
+						      <button *ngIf= "signOrExamine.examineAfternoon === null " nz-button nzType="primary" (click)="signButton('中','2')">审核</button>
+								</div>
+								<div style="flex: 1; padding: 5px;" flex="cross:center main:center">
+									<div *ngIf= "signOrExamine.examineEvening != null ">{{signOrExamine.examineEvening}}</div>
+						      <button *ngIf= "signOrExamine.examineEvening === null " nz-button nzType="primary" (click)="signButton('晚','2')">审核</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div style="margin-top: 20px;" *ngIf ="record != undefined">
+					<nz-table #middleTable [nzTitle]="'历史记录表'"  nzBordered nzSize="small" [nzData]="record">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>修改字段</th>
+								<th>修改时间</th>
+								<th>修改前数据</th>
+								<th>修改后数据</th>
+								<th>修改人</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr *ngFor="let data of middleTable.data;let i = index">
+								<td>{{ i + 1 }}</td>
+								<td>{{ data.updateField }}</td>
+								<td>{{ data.updateTime }}</td>
+								<td>{{ data.updateFrontData }}</td>
+								<td>{{ data.updateAfterData }}</td>
+								<td>{{ data.updateName }}</td>
+							</tr>
+						</tbody>
+					</nz-table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="windowBox" *ngIf="amendFlag">
+		<div class="window">
+			<div class="windowPadd">
+				<div>
+					修改值：<input type="text" [(ngModel)]="amendInfo">
+				</div>
+				<button nz-button nzType="primary" (click)="amendButton(1)">保存</button>
+			  <button nz-button nzType="text" (click)="amendButton(2)">取消</button>
+			</div>
+		</div>
+	</div>
+	<div class="windowBox" *ngIf="keepFlag">
+		<div class="window">
+			<div class="windowPadd">
+				<textarea style="width: 100%;height: 47px;resize: none;" placeholder="请输入记事描述" [(ngModel)]="keep"></textarea>
+				<button nz-button nzType="primary" (click)="keepSave()">保存</button>
+			  <button nz-button nzType="text" (click)="keepFlag=false;keep=''">取消</button>
+			</div>
+		</div>
+	</div>
+</div>

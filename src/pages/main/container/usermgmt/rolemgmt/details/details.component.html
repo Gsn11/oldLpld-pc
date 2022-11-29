@@ -1,0 +1,91 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span><span style="color: red;">*</span> 角色名称</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入角色名称" [formControl]="RoleName" required>
+            <mat-error *ngIf="RoleName.invalid">{{getRoleNameErrorMessage()}}</mat-error>
+        </mat-form-field>
+    </div>
+    <div>
+        <span>角色说明</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入角色说明" [(ngModel)]="RoleDesc">
+        </mat-form-field>
+    </div>
+    <div>* 菜单没有选项被选中时，默认选中所有项权限</div>
+    <div class="tree-out">
+        <div>
+            <div class="title">角色功能</div>
+            <mat-checkbox class="example-margin allCheckItem" (change)="checkAll($event, 'functions')">所有功能
+            </mat-checkbox>
+            <div class="sidebarList" *ngFor="let u of userPowerList,let uindex = index">
+                <div class="sidebarName" [ngClass]="{'activeSidebarList': u.switch === true}">
+                    <span class="iconfont iconright" *ngIf="u.children && u.children.length !== 0"
+                        (click)="toggle(u, uindex, 'fun')"></span>
+                    <mat-checkbox class="example-margin" [(ngModel)]="u.check" (change)="checkList($event, uindex)"
+                        [(indeterminate)]="u.indeterminate"></mat-checkbox>
+                    <span class="name" (click)="toggle(u, uindex, 'fun')">{{u.name}}</span>
+                </div>
+
+                <div [@firstSwitch]="u.children && u.switch ? 'open' : 'closed'"
+                    *ngFor="let c of u.children,let cindex = index">
+                    <div class="sidebarName" [ngClass]="{'activeSidebarList': u.switch === true}">
+                        <mat-checkbox class="example-margin" [(ngModel)]="c.check" (change)="checkItem()">
+                        </mat-checkbox>
+                        <span class="name">{{c.name}}</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div>
+            <div class="title">角色菜单</div>
+            <mat-checkbox class="example-margin allCheckItem" (change)="checkAll($event, 'submenu')">所有菜单
+            </mat-checkbox>
+            <div class="sidebarList" *ngFor="let u of userMenuList,let uindex = index">
+                <div class="sidebarName" [ngClass]="{'activeSidebarList': u.switch === true}">
+                    <span class="iconfont iconright" *ngIf="u.children && u.children.length !== 0"
+                        (click)="toggle(u, uindex, 'menu', 'One')"></span>
+                    <mat-checkbox class="example-margin" [(ngModel)]="u.check" (change)="checkMenuOne($event, uindex)"
+                        [(indeterminate)]="u.indeterminate"></mat-checkbox>
+                    <span class="name" (click)="toggle(u, uindex, 'menu', 'One')">{{u.name}}</span>
+                </div>
+                <div [@firstSwitch]="u.children && u.switch ? 'open' : 'closed'"
+                    *ngFor="let c of u.children,let cindex = index">
+                    <div class="sidebarName" [ngClass]="{'activeSidebarList': c.switch === true}">
+                        <span class="iconfont iconright" *ngIf="c.children && c.children.length !== 0"
+                            (click)="toggle(c, cindex, 'menu', 'Two')"></span>
+                        <mat-checkbox class="example-margin" [(ngModel)]="c.check"
+                            (change)="checkMenuTwo($event, cindex)" [(indeterminate)]="c.indeterminate">
+                        </mat-checkbox>
+                        <span class="name" (click)="toggle(c, cindex, 'menu', 'Two')">{{c.name}}</span>
+                    </div>
+                    <div [@firstSwitch]="c.children && c.switch ? 'open' : 'closed'"
+                        *ngFor="let cc of c.children,let ccindex = index">
+                        <div class="sidebarName" [ngClass]="{'activeSidebarList': cc.switch === true}">
+                            <mat-checkbox class="example-margin" [(ngModel)]="cc.check"
+                                (change)="checkMenuThree($event)">
+                            </mat-checkbox>
+                            <span class="name"
+                                (click)="toggle(cc, ccindex, 'menu', 'checkMenuThree')">{{cc.name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="title">移动端权限</div>
+            <div class="sidebarList" *ngFor="let p of powerList,let pindex = index">
+                <div class="sidebarName">
+                    <mat-checkbox class="example-margin" [(ngModel)]="p.check">
+                        {{p.name}}</mat-checkbox>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

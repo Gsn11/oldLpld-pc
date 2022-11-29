@@ -1,0 +1,49 @@
+<div mat-dialog-title>
+    <div class="deviceTitle">
+        <span style="font-size: 1em;">{{'chooseBuilding' | wordTranslate}}</span>
+        <mat-form-field class="example-form-field" style="margin-left: 10px; font-size: 12px;">
+          <input matInput type="text" [placeholder]="'BuildingName' | wordTranslate" [(ngModel)]="searchName" (keyup.enter)="getList()">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="PageIndex = 1;getList()" style="font-size: 12px; height: 35px;">搜索</button>
+    </div>
+    <div *ngIf="item">
+        当前选中：
+        <span>{{item.BuildingName}} - </span>
+        <span>{{item.Floor}} - {{item.Zone}} - {{item.SpacePos==null?'':item.SpacePos}}</span>
+    </div>
+</div>
+<div mat-dialog-content>
+    <table mat-table [dataSource]="list" style="width: 100%;">
+        <ng-container matColumnDef="BuildingName" *ngIf="buildData.buildType === '联排联调'">
+            <th mat-header-cell *matHeaderCellDef> {{'BuildingName' | wordTranslate}} </th>
+            <td mat-cell *matCellDef="let element"> {{element.BuildingName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="BuildingName"  *ngIf="buildData.buildType === '东南水厂'">
+            <th mat-header-cell *matHeaderCellDef> 功能位置</th>
+            <td mat-cell *matCellDef="let element"> {{element.BuildingName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Floor"*ngIf="buildData.buildType === '联排联调'">
+            <th mat-header-cell *matHeaderCellDef style="padding: 0 10px;"> 楼层 </th>
+            <td mat-cell *matCellDef="let element" style="padding: 0 10px;"> {{element.Floor}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Zone">
+            <th mat-header-cell *matHeaderCellDef> {{buildData.buildType === '联排联调' ? '区域 ' : '安装位置'}}</th>
+            <td mat-cell *matCellDef="let element"> {{element.Zone}} </td>
+        </ng-container>
+        <ng-container matColumnDef="SpacePos" *ngIf="buildData.buildType === '联排联调'">
+            <th mat-header-cell *matHeaderCellDef> 	空间位置 </th>
+            <td mat-cell *matCellDef="let element"> {{element.SpacePos}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row" (click)="choose(row)"
+        [ngClass]="{'active': selectSeq === row.BSSeq }"></tr>
+    </table>
+</div>
+<div style="background: white;">
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [length]="paginatorTotal" [pageIndex]="PageIndex - 1"
+        [pageSize]="PageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btnCancel" (click)="onNoClick()">取消</button>
+    <button mat-button [mat-dialog-close]="item" class="btnPrimise">确定</button>
+</div>

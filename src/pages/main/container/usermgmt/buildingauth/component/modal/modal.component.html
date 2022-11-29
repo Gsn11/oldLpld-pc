@@ -1,0 +1,39 @@
+<div class="modal-out" [ngClass]="{'active': show}">
+    <div class="bg" (click)="switchModalBox()"></div>
+    <div class="container">
+        <div class="header"><span class="title">{{title}}</span></div>
+        <div class="main">
+            <div>
+                <div>
+                    <span>全部</span>
+                </div>
+                <div>
+                    <mat-checkbox class="example-margin checkItem" [(ngModel)]="writeAllCheck"
+                        (change)="checkAll($event, 'w')">读
+                    </mat-checkbox>
+                    <mat-checkbox class="example-margin checkItem" [(ngModel)]="readAllCheck"
+                        (change)="checkAll($event, 'r')">写
+                    </mat-checkbox>
+                </div>
+            </div>
+            <div *ngFor="let s of setUsers, let sIndex = index">
+                <div>
+                    <span *ngIf="s.UName">{{s.UName}} - {{s.UTel}}({{s.UEmail}})</span>
+                    <span *ngIf="s.SName">{{s.SName}}</span>
+                </div>
+                <div>
+                    <mat-checkbox class="example-margin checkItem" [(ngModel)]="s.AuditWrite"
+                        (change)="checkItem($event, 'w', sIndex)">读
+                    </mat-checkbox>
+                    <mat-checkbox class="example-margin checkItem" [(ngModel)]="s.AuditRead"
+                        (change)="checkItem($event, 'r', sIndex)">写
+                    </mat-checkbox>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="goCancel()"><span class="iconfont iconpstep"></span>取消</button>
+            <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        </div>
+    </div>
+</div>

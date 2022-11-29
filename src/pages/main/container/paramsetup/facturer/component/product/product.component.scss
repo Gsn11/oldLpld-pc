@@ -1,0 +1,33 @@
+.productList {
+  .item {
+
+    >div {
+      margin: 0 10px 10px 0;
+      padding: 2px 10px;
+      border: 1px solid #626262;
+      border-radius: 5px;
+      float: left;
+
+      >span {
+        margin:4px 0 0 10px;
+        font-size: 14px;
+        float: right;
+        transition: color linear 0.24s;
+        cursor: pointer;
+
+        &:hover {
+          color: #FF0000;
+          transition: color linear 0.35s;
+        }
+      }
+    }
+  }
+
+  .addBtn {
+    padding: 2px 10px;
+    border: 1px dashed #626262;
+    border-radius: 5px;
+    width: auto;
+    float: left;
+  }
+}

@@ -1,0 +1,50 @@
+.add_bg{
+  width: 100%;
+}
+  
+.btn_box{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+  .main {
+
+    height: 100%;
+    width: 100%;
+  }
+  #domId {
+    width: 100%;
+    height:480px;
+  }
+  .text_box{
+    margin-bottom: 30px;
+  }
+  .text_span{
+    margin-left: 50px;
+  }
+  .btn_left{
+    width: 100%;
+    div{
+      display: flex;
+      align-items: center;
+      
+      span:first-child{
+        width: 60px;
+        text-align: justify;
+        text-align-last:justify;
+      }
+    }
+  }
+  // .btn_left button{
+  //   float: right;
+  //   margin-left: 20px;
+  //   margin-top: 20px;
+  // }
+  .btnPrimise{
+    float: right;
+    margin-top: 10px;
+  }
+.title{
+  margin-bottom: 10px;
+}

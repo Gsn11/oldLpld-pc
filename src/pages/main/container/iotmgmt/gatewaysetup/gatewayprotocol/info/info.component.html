@@ -1,0 +1,51 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>智联网关</span>
+        <span>{{bemInfoData.DeviceNo}}</span>
+    </div>
+    <div>
+        <span>对接的智能设备</span>
+        <span>{{bemInfoData.SmartDevNo}} ({{bemInfoData.SmartDevName}})</span>
+    </div>
+    <div>
+        <span>协议类型</span>
+        <span>{{bemInfoData.Protocol | typeTranslate}}</span>
+    </div>
+    <div *ngIf="bemInfoData.Protocol === 3">
+        <span>审核类型</span>
+        <span>{{this.AuthType[bemInfoData.AuthType]}}</span>
+    </div>
+    <div *ngIf="bemInfoData.Protocol === 3">
+        <span>安全模式</span>
+        <span>{{this.SecurityMode[bemInfoData.SecurityMode]}}</span>
+    </div>
+    <div *ngIf="bemInfoData.Protocol === 3">
+        <span>安全策略</span>
+        <span>{{this.AgreementType[bemInfoData.SecurityPolicy]}}</span>
+    </div>
+    <div>
+        <span>协议对象ID</span>
+        <span>{{bemInfoData.ObjectId}}</span>
+    </div>
+    <div>
+        <span>对应协议主机IP</span>
+        <span>{{bemInfoData.Ip}}</span>
+    </div>
+    <div>
+        <span>对应协议主机端口</span>
+        <span>{{bemInfoData.Port}}</span>
+    </div>
+    <div>
+        <span>对应协议用户名</span>
+        <span>{{bemInfoData.User}}</span>
+    </div>
+    <div class="btnList">
+            <!-- *ngIf="userPower" -->
+            <!-- 权限尚未明 -->
+        <button mat-button (click)="gotoEdit()"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

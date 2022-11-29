@@ -1,0 +1,404 @@
+<div class="Container">
+
+    <img class="po" src="../../../../../assets/home/echart.jpg" alt="" mode="widthFix">
+
+    <div class="Dashboard">
+        <div class="top">
+            <div class="top_bg">
+                <img src="../../../../../assets/home/TOP.png" alt="" mode="widthFix">
+            </div>
+        </div>
+        <div class="top_left">
+            <div class="round">
+                <div class="state">
+                    <div class="font">{{deviceTotalData.TotalDevices}}</div>
+                    <div class="text">设备总数</div>
+                </div>
+                <div class="round_state" (click)="goPage('dev')">
+
+                </div>
+            </div>
+            <!-- 在线故障 -->
+            <div class="echart_online">
+                <div (click)="goPage('monitor')" echarts [options]="online" style="height:100%; width:100% "></div>
+            </div>
+            <div class="echart_online">
+                <div (click)="goPage('repair')" echarts [options]="errorline" style="height:100%; width:100% "></div>
+            </div>
+        </div>
+        <div class="middle_left">
+            <div class="title">
+                派单状态
+            </div>
+            <div class="chart_middle">
+                <!-- (click)="goPage('repair')" -->
+                <div class="chart_container">
+                    <div class="chart_img">
+                        <img src="../../../../../assets/home/SH.png" alt="">
+                    </div>
+                    <div class="chart_text">
+                        <div class="chart_font">
+                            <span class="font_text">待审核</span><span class="font_num">{{orderStateData.UnVerifyTotal}}</span>
+                        </div>
+                        <div class="chart_show">
+                            <div class="pirit_box">
+                                <div echarts [options]="pirit" style="height:80%; width: 98%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- (click)="goPage('repair')" -->
+                <div class="chart_container">
+                    <div class="chart_img">
+                        <img src="../../../../../assets/home/YC.png" alt="">
+                    </div>
+                    <div class="chart_text">
+                        <div class="chart_font">
+                            <span class="font_text">异常</span><span class="font_num">{{orderStateData.ExceptionTotal}}</span>
+                        </div>
+                        <div class="chart_show">
+                            <div class="pirit_box">
+                                <div echarts [options]="pirit1" style="height:80%; width: 98%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="middle_right">
+            <div class="title">
+                <!-- 联排联调 -->
+                及时率
+                <!-- 东南水厂 -->
+                <!-- 及时率 -->
+            </div>
+            <div class="chart_middle" style="overflow-x: auto;display: block;">
+                <div [ngStyle]="{'width': barBottom ? barBottom.series[0].data.length * 75 + 'px' : ''}">
+                    <div echarts [options]="barBottom" style="height:100%; width:100%"></div>
+                </div>
+            </div>
+        </div>
+        <div class="top_right">
+            <div class="round1">
+                <div class="state">
+                    <div class="font">{{alarmTotalData.AlertTotal}}</div>
+                    <div class="text">报警总数</div>
+                </div>
+                <div class="round_state" (click)="goPage('warn')">
+
+                </div>
+            </div>
+            <div class="text_num text_level">
+                <div class="level_b">
+                    <div class="level_text" *ngFor="let item of alarmTotalData.AlertListByType;let i = index">
+                        <span>{{item.LevelName}}</span><span class="level_num">{{item.total}}</span>
+                    </div>
+                    <!-- <div class="level_text bgo">
+                        <span class="one">Ⅰ级</span><span class="level_num">0</span>
+                    </div>
+                    <div class="level_text bgt">
+                        <span class="two">Ⅱ级</span><span class="level_num">0</span>
+                    </div>
+                    <div class="level_text bgs">
+                        <span class="three">Ⅲ级</span><span class="level_num">0</span>
+                    </div> -->
+                </div>
+                <div class="level_b ">
+
+                    <div class="level_chart" (click)="goPage('warn')">
+                        <!-- <div></div> <div echarts [options]="onechart" style="height: 100% ; width: 100%"></div> -->
+                        <div class="level_font">处理中</div>
+                        <div class="level_show">
+                            <div class="level_show_chart">
+                                <div echarts [options]="onechart" style="height:80%; width:98%"></div>
+                            </div>
+                        </div>
+                        <div class="level_num">
+                            {{alarmTotalData.FinishTotal}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="bottom" style="height: calc(32.33% - 13.33px);">
+            <div class="bottom_left">
+                <div class="pie2">
+                    <!--  -->
+                    <div class="tab">
+                        <div (click)="timeb(1)" [ngClass]="{'colorInd':timeIndex === 1}">今日</div>
+                        <div (click)="timeb(7)" [ngClass]="{'colorInd':timeIndex === 7}">近七天</div>
+                    </div>
+                    <div class="tab_pro">
+                        <div class="serve">
+                            <div class="serve_icon icon_o"></div>
+                            <div class="serve_text ">处理中</div>
+                        </div>
+                        <div class="serve">
+                            <div class="serve_icon icon_t"></div>
+                            <div class="serve_text">完成</div>
+                        </div>
+                        <div class="serve">
+                            <div class="serve_icon"></div>
+                            <div class="serve_text">待确认</div>
+                        </div>
+                    </div>
+                    <div class="title">派单统计</div>
+                    <div class="pie2_chart">
+                        <div class="pie2_box" (click)="goPage('repair')">
+                            <div echarts [options]="pieTopMiddle" style="height:100%; width:100% "></div>
+                        </div>
+                        <div class="pie2_box" (click)="goPage('xj')">
+                            <div echarts [options]="pieTopMiddle1" style="height:100%; width:100%"></div>
+                        </div>
+                        <div class="pie2_box" (click)="goPage('by')">
+                            <div echarts [options]="pieTopMiddle2" style="height:100%; width: 100%"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="bottom_right">
+                <div class="bottomCharts" style="height:100%;">
+                    <div echarts [options]="barBottomline" style="height:100%; width: 100%"></div>
+                    <div class="title">设备状态</div>
+                    <div class="tab">
+                        <div (click)="timebetwin(1)" [ngClass]="{'colorInd':colorIndex === 1}">周</div>
+                        <div [ngClass]="{'colorInd':colorIndex === 2}" (click)="timebetwin(2)">月</div>
+                        <div (click)="timebetwin(3)" [ngClass]="{'colorInd':colorIndex === 3}">季</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="map3d">
+            <!-- <div echarts [options]="geo3DData" style="height:100%; width:100%"></div> -->
+            <div *ngIf="siteTab == 1" class="img">
+                <ng-container *ngFor="let item of taggingList, let i = index">
+                    <div *ngIf="item.BName == '红星排涝站'" class="tagging-box">
+                        <div class="box" *ngIf="item.showData">
+                            <p class="tit">{{item.BName}}</p>
+                            <div class="con">
+                                <div>
+                                    <p class="txt">{{item.List[1].Total}}</p>
+                                    <div class="icon-w">
+                                        <img class="tagging" src="../../../../../assets/home/icon-xj.png" />
+                                        <p>巡检</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="txt">{{item.List[2].Total}}</p>
+                                    <div class="icon-w">
+                                        <img class="tagging" src="../../../../../assets/home/icon-by.png" />
+                                        <p>保养</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <p class="txt">{{item.List[0].Total}}</p>
+                                    <div class="icon-w">
+                                        <img class="tagging" src="../../../../../assets/home/icon-wx.png" />
+                                        <p>维修</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <img *ngIf="i != 5" (click)="item.showData = !item.showData" class="tagging" src="../../../../../assets/home/tagging.png" />
+                        <img *ngIf="i == 5" (click)="item.showData = !item.showData" class="tagging" src="../../../../../assets/home/tagging-red.png" />
+                        <div (click)="openVr()" class="vr-btn">vr</div>
+                    </div>
+                </ng-container>
+                <img src="../../../../../assets/home/map.png" alt="">
+            </div>
+
+            <div *ngIf="siteTab == 2"  class="sunburst">
+                <div echarts [options]="sunburst" (chartClick)="onChartSunburstClick($event)" style="height:100%; width:100%;"></div>
+            </div>
+            <!-- <div class="site-tab">
+                <div (click)="siteTab = 1" [ngClass]="{'on': siteTab == 1}">地图</div>
+                <div (click)="siteTab = 2" [ngClass]="{'on': siteTab == 2}">图表</div>
+            </div> -->
+        </div>
+
+        <!--  <div class="homeBtn" (click)="gotoHome()"><span>返回</span></div> -->
+        <!-- 背景 -->
+
+        <!-- <div class="topCharts" style="height: calc(33.33% - 13.33px);">
+            <div class="pie1"> -->
+        <!-- <div echarts [options]="pieTopLeft" style="height: 100% ; width: calc(100% - 40px)"></div> -->
+        <!-- <div class="pie1_container">
+                    <div class="pie1_num">
+                        <div class="title">
+                            设备监测
+                        </div>
+                        <div class="num_body">
+                            <div class="all_device">
+                                <div class="device_text">
+                                    <span class="Name">设备</span>
+                                    <span class="Name">总数</span>
+                                </div>
+                                <div class="text_num">
+                                    8888
+                                    <div class="text_real">
+                                        88
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="all_chart"> -->
+        <!-- <div class="device_text">
+                                    <span class="Name">在线</span>
+                                    <span class="Name">故障</span>
+                                </div> -->
+        <!-- <div class="text_num">
+                                    <div echarts [options]="allchart" style="height: 100% ; width: 100%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="pie1_container">
+                    <div class="pie1_num">
+                        <div class="title">
+                            诊断报警
+                        </div>
+                        <div class="num_body">
+                            <div class="all_device">
+                                <div class="device_text">
+                                    <span class="Name">报警</span>
+                                    <span class="Name">总数</span>
+                                </div>
+                                <div class="text_num">
+                                    8888
+                                    <div class="text_real text_color">
+                                        88
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="all_chart"> -->
+        <!-- <div class="device_text">
+                                    <span class="Name">在线</span>
+                                    <span class="Name">故障</span>
+                                </div> -->
+        <!-- <div class="text_num text_level">
+                                    <div class="level_b">
+                                        <div class="level_text bgo">
+                                            <span>Ⅰ级</span><span class="level_num">20</span>
+                                        </div>
+                                        <div class="level_text bgt">
+                                            <span>Ⅱ级</span><span class="level_num">20</span>
+                                        </div>
+                                        <div class="level_text bgs">
+                                            <span>Ⅲ级</span><span class="level_num">20</span>
+                                        </div>
+                                    </div>
+                                    <div class="level_b ">
+
+                                        <div class="level_chart">
+                                            <div echarts [options]="onechart" style="height: 100% ; width: 100%"></div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+        <!-- <div class="pie1_chart">
+                        <div class="title">
+                            及时率
+                        </div>
+                        <div class="pie1_chart_body">
+                            <div class="pie1_chart_box">
+                                <div class="pie1_c">28</div>
+                                <div class="pie1_t">待审核</div>
+                            </div>
+                            <div class="line"></div>
+                            <div class="pie1_chart_box">
+                                <div class="pie1_c error">23</div>
+                                <div class="pie1_t">异常</div>
+                            </div>
+                        </div>
+                    </div> -->
+        <!-- </div>
+            </div>
+            <div class="pie4">
+                <div class="pie1_chart">
+                    <div class="title">
+                        诊断报警
+                    </div>
+                    <div class="pie1_chart_body">
+                        <div class="pie1_chart_box">
+                            <div class="pie1_c">28</div>
+                            <div class="pie1_t">待审核</div>
+                        </div>
+                        <div class="line"></div>
+                        <div class="pie1_chart_box">
+                            <div class="pie1_c error">23</div>
+                            <div class="pie1_t">异常</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="pie1_chart">
+                    <div echarts [options]="pieTopLeft" style="height:100%; width:100% "></div>
+                </div>
+            </div>
+            <div class="pie2"> -->
+        <!--  -->
+        <!-- <div class="tab">
+                    <div (click)="timeb(1)" [ngClass]="{'colorInd':timeIndex === 1}">今日</div>
+                    <div (click)="timeb(2)" [ngClass]="{'colorInd':timeIndex === 2}">近七天</div>
+                </div>
+                <div class="tab_pro">
+                    <div class="serve">
+                        <div class="serve_icon icon_o"></div>
+                        <div class="serve_text ">处理中</div>
+                    </div>
+                    <div class="serve">
+                        <div class="serve_icon icon_t"></div>
+                        <div class="serve_text">完成</div>
+                    </div>
+                    <div class="serve">
+                        <div class="serve_icon"></div>
+                        <div class="serve_text">待确认</div>
+                    </div>
+                </div>
+                <div class="title">派单统计</div>
+                <div class="pie2_chart">
+                    <div class="pie2_box">
+                        <div echarts [options]="pieTopMiddle" style="height:100%; width:100% "></div>
+                    </div>
+                    <div class="pie2_box">
+                        <div echarts [options]="pieTopMiddle1" style="height:100%; width:100%"></div>
+                    </div>
+                    <div class="pie2_box">
+                        <div echarts [options]="pieTopMiddle2" style="height:100%; width: 100%"></div>
+                    </div>
+                </div>
+
+            </div> -->
+        <!-- <div class="pie3" >
+                <div echarts [options]="pieTopRight" style="height:100%; width: calc(100% - 40px)"></div>
+            </div> -->
+        <!-- </div>
+        <div class="middleCharts" style="height: calc(33.33% - 13.33px);">
+            <div class="middle-left"> -->
+        <!-- <div echarts [options]="barMiddleLeft" style="height:100%; width: calc(100% - 40px);background: #fff">
+                </div> -->
+        <!-- <div echarts [options]="barBottom" style="height:100%; width: calc(100% - 40px)"></div> -->
+        <!-- <div class="title">及时率</div>
+            </div>
+            <div class="middle-right"> -->
+        <!-- <div echarts [options]="lineMiddleRight" style="height:100%; width: calc(100% - 40px)"></div> -->
+        <!-- <div echarts [options]="bar" style="height:100%; width: calc(100% - 40px)"></div>
+                <div class="title">完成率</div>
+            </div>
+        </div>
+        <div class="bottomCharts" style="height: calc(33.33% - 13.33px);">
+            <div echarts [options]="barBottomline" style="height:100%; width: 100%"></div>
+            <div class="title">派单统计</div>
+            <div class="tab">
+                <div (click)="timebetwin(1)" [ngClass]="{'colorInd':colorIndex === 1}">周</div>
+                <div [ngClass]="{'colorInd':colorIndex === 2}" (click)="timebetwin(2)">月</div>
+                <div (click)="timebetwin(3)" [ngClass]="{'colorInd':colorIndex === 3}">季</div>
+            </div>
+        </div>
+    </div> -->
+    </div>

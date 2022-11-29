@@ -1,0 +1,26 @@
+<mat-form-field>
+    <mat-label>省份</mat-label>
+    <mat-select [formControl]="provinceSelect" (selectionChange)="firstSelectChange()">
+        <mat-option>请选择</mat-option>
+        <mat-option *ngFor="let r of region" [value]="r.region">{{r.region}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="provinceSelect.hasError('required')">请选择省份</mat-error>
+</mat-form-field>
+
+<mat-form-field *ngIf="cityState">
+    <mat-label>城市</mat-label>
+    <mat-select [formControl]="citySelect" (selectionChange)="secondSelectChange()">
+        <mat-option>请选择</mat-option>
+        <mat-option *ngFor="let c of cityRegion" [value]="c.region">{{c.region}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="citySelect.hasError('required')">请选择城市</mat-error>
+</mat-form-field>
+
+<mat-form-field *ngIf="districtState">
+    <mat-label>地区</mat-label>
+    <mat-select [formControl]="districtSelect" (selectionChange)="thirdSelectChange()">
+        <mat-option>请选择</mat-option>
+        <mat-option *ngFor="let d of districtRegion" [value]="d.region">{{d.region}}</mat-option>
+    </mat-select>
+    <mat-error *ngIf="districtSelect.hasError('required')">请选择地区</mat-error>
+</mat-form-field>

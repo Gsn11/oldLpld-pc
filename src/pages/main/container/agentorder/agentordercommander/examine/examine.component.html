@@ -1,0 +1,144 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+	<div class="main detailOut" style="background-color: #fff;">
+		<div>
+			<span>维修工单名称</span>
+			<span>{{info.MSName}}</span>
+		</div>
+		<div>
+			<span>维修设备</span>
+			<span class="chooseName">
+				<div class="" style="border: 1px solid #f1f1f1;">
+					<table mat-table [dataSource]="MaintenanceScheItems" style="width: 100%;">
+						<ng-container matColumnDef="posi">
+							<th mat-header-cell *matHeaderCellDef> 设施位置 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> {{element.BuildingName || element.CName || element.Building }} - {{element.Floor}}层 - {{element.Zone}} - {{element.SpacePos}} </td>
+						</ng-container>
+						<ng-container matColumnDef="dev">
+							<th mat-header-cell *matHeaderCellDef> 设备 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> {{element.DeviceNo}}({{element.DeviceName}}) </td>
+						</ng-container>
+						<!-- <ng-container matColumnDef="item">
+							<th mat-header-cell *matHeaderCellDef> 条目 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> {{element.Item}} </td>
+						</ng-container>
+						<ng-container matColumnDef="feedback">
+							<th mat-header-cell *matHeaderCellDef> 反馈类型 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> {{element.MoiValue}} </td>
+						</ng-container>
+						<ng-container matColumnDef="des">
+							<th mat-header-cell *matHeaderCellDef> 描述 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> {{element.Images && element.Images.length > 0 ? element.Images[0].MoiiDesc : ''}} </td>
+						</ng-container> -->
+						<ng-container matColumnDef="img">
+							<th mat-header-cell *matHeaderCellDef> 图片 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> 
+								<div *ngIf="element.Images && element.Images.length > 0 && element.Images[0] != null">
+									<img style="width: 100px;" *ngFor="let item of element.Images" [src]="item.ImgUrl" />
+								</div>
+							</td>
+						</ng-container>
+						<tr mat-header-row *matHeaderRowDef="deviceColumns"></tr>
+						<tr mat-row *matRowDef="let row; columns: deviceColumns;" class="example-element-row"></tr>
+					</table>
+				</div>
+			</span>
+		</div>
+		<div>
+			<span>故障描述</span>
+			<span>{{info.MSDesc}}</span>
+		</div>
+		<div>
+			<span>派单状态变化</span>
+			<span class="chooseName">
+				<div class="" style="border: 1px solid #f1f1f1;">
+					<table mat-table [dataSource]="MaintenanceOrderHis" style="width: 100%;">
+						<ng-container matColumnDef="state">
+							<th mat-header-cell *matHeaderCellDef> 状态 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> {{element.State | stateTypeTranslate}} </td>
+						</ng-container>
+						<ng-container matColumnDef="time">
+							<th mat-header-cell *matHeaderCellDef> 状态时间 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> {{element.OrderHisTime}} </td>
+						</ng-container>
+						<ng-container matColumnDef="behavior">
+							<th mat-header-cell *matHeaderCellDef> 关联行为 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> {{element.ActionName === 100? '派单成功' : element.ActionName | activeNameTypeTranslate}} </td>
+						</ng-container>
+						<tr mat-header-row *matHeaderRowDef="orderStateColumns"></tr>
+						<tr mat-row *matRowDef="let row; columns: orderStateColumns;" class="example-element-row"></tr>
+					</table>
+				</div>
+			</span>
+		</div>
+		<div>
+			<span>对派单的操作</span>
+			<span class="chooseName">
+				<div class="" style="border: 1px solid #f1f1f1;">
+					<table mat-table [dataSource]="MaintenanceActions" style="width: 100%;">
+						<ng-container matColumnDef="person">
+							<th mat-header-cell *matHeaderCellDef> 人员 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> {{element.UserName}} </td>
+						</ng-container>
+						<ng-container matColumnDef="behavior">
+							<th mat-header-cell *matHeaderCellDef> 行为 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> {{element.Action === 103? '厂领导审核' : element.Action | activeNameTypeTranslate}} </td>
+						</ng-container>
+						<ng-container matColumnDef="time">
+							<th mat-header-cell *matHeaderCellDef> 时间 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> {{element.ActionTime}} </td>
+						</ng-container>
+						<ng-container matColumnDef="des">
+							<th mat-header-cell *matHeaderCellDef> 描述 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> {{element.ActionDesc}} </td>
+						</ng-container>
+						<ng-container matColumnDef="img">
+							<th mat-header-cell *matHeaderCellDef> 图片 </th>
+							<td mat-cell *matCellDef="let element; let i = index"> 
+								<span *ngFor="let p of element.Pics">
+									<img (click)="openImage(p.ImgUrl)" [src]="p.ImgUrl" [alt]="p.ImgDesc">
+								</span>
+							</td>
+						</ng-container>
+						<tr mat-header-row *matHeaderRowDef="orderOperateColumns"></tr>
+						<tr mat-row *matRowDef="let row; columns: orderOperateColumns;" class="example-element-row"></tr>
+					</table>
+				</div>
+			</span>
+		</div>
+		<div>
+			<span><span style="color: red;">*</span> 维修人员</span>
+			<span (click)="openUserModelDialog(0)" class="chooseName" *ngIf="repairPersonList.length == 0">
+				请选择维修人员
+			</span>
+			<span (click)="openUserModelDialog(0)" class="chooseName" *ngIf="repairPersonList.length > 0">
+				<span *ngFor="let item of repairPersonList; let i = index">
+					{{item.Name}}{{i === repairPersonList.length - 1 ? '' : '、'}}
+				</span>
+			</span>
+		</div>
+		<div>
+			<span><span style="color: red;">*</span> 验收审核人员</span>
+			<span (click)="openUserModelDialog(1)" class="chooseName" *ngIf="acceptPersonList.length == 0">
+				请选择验收审核人员
+			</span>
+			<span (click)="openUserModelDialog(1)" class="chooseName" *ngIf="acceptPersonList.length > 0">
+				<span *ngFor="let item of acceptPersonList; let i = index">
+					{{item.Name}}{{i === acceptPersonList.length - 1 ? '' : '、'}}
+				</span>
+			</span>
+		</div>
+		<div>
+			<span>处理反馈时限</span>
+			<mat-form-field class="example-form-field">
+				<input matInput [(ngModel)]="hour" type="text" placeholder="处理反馈时限" [(ngModel)]="workExpire">
+			</mat-form-field>
+			<span>小时</span>
+		</div>
+		
+		<div class="btnList">
+			<button mat-raised-button class="back" (click)="goback()">返回</button> 
+			<button color="primary" mat-raised-button  class="edit" (click)="confirm()">派单</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,12 @@
+@import '../../../../../common/utils/css/table.scss';
+
+.searchList {
+  >div:first-child {
+    display: flex;
+    align-items: center;
+
+    >div {
+      margin: 0 10px;
+    }
+  }
+}

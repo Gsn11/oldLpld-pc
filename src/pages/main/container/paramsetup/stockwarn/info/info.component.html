@@ -1,0 +1,57 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>设备主分类</span>
+        <span>{{bemInfoData.MainType | deviceMainTypeTranslate}}</span>
+    </div>
+    <div>
+        <span>设备分类</span>
+        <span>{{bemInfoData.DTName}}</span>
+    </div>
+    <div>
+        <span>厂商品牌</span>
+        <span>{{bemInfoData.BRName}}</span>
+    </div>
+    <div>
+        <span>设备型号</span>
+        <span>{{bemInfoData.Id}}</span>
+    </div>
+    <div>
+        <span>设备名称</span>
+        <span>{{bemInfoData.DMName}}</span>
+    </div>
+    <div>
+        <span>设备尺寸</span>
+        <span>{{bemInfoData.Size}}</span>
+    </div>
+    <div>
+        <span>设备重量(KG)</span>
+        <span>{{bemInfoData.Weight}}</span>
+    </div>
+    <div>
+        <span>设备功率(瓦)</span>
+        <span>{{bemInfoData.Power}}</span>
+    </div>
+    <div>
+        <span>产品认证</span>
+        <span>{{bemInfoData.Certificate}}</span>
+    </div>
+    <div>
+        <span>设备说明</span>
+        <span>{{bemInfoData.DMDesc}}</span>
+    </div>
+    <div>
+        <span>常见问题</span>
+        <span>{{bemInfoData.Prob}}</span>
+    </div>
+    <div>
+        <span>其它图片</span>
+        <app-manyfile [setImgsrcData]="imgsrcData" [setType]="manyFileUseType"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <!-- <button mat-button (click)="gotoEdit()" *ngIf="userPower"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()" *ngIf="userPower"><span class="iconfont icondelete"></span>删除</button> -->
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

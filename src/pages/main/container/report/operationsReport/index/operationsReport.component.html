@@ -1,0 +1,63 @@
+<!-- <app-crumbs [crumbs]="crumbsList"></app-crumbs> -->
+<div class="containerPadding">
+	<div class="orderfixSearchList">
+		<div class="searchTools">
+			<div>
+				<app-calendar title="开始日期" [setCreateDate]="BeginTime" (getTime)="getBeginTime($event)"></app-calendar>
+				<span style="margin: 0 10px;"> - </span>
+				<app-calendar title="结束日期" [setCreateDate]="EndTime" (getTime)="getEndTime($event)"></app-calendar>
+				<span style="margin: 0 10px;"> </span>
+				<mat-form-field class="example-form-field">
+					<input matInput type="text" placeholder="派单名称/派单号" [(ngModel)]="searchName">
+				</mat-form-field>
+				<button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1;seach()">搜索</button>
+			</div>
+
+			<div>
+				<button mat-stroked-button color="primary" (click)="downloadDeviceFile()"
+					class="download">导出Excel</button>
+			</div>
+		</div>
+	</div>
+	<div class="mat-elevation-z8" style="padding: 0 20px">
+		<button class="btn" [ngClass]="{'btnSlect': Btnindex===2 ? 'btnSlect':''}" (click)="Type(2)"> 维修记录报表 </button>
+		<button class="btn" [ngClass]="{'btnSlect': Btnindex===1 ? 'btnSlect':''}" (click)="Type(1)"> 保养记录报表</button>
+		<button class="btn" [ngClass]="{'btnSlect': Btnindex===0 ? 'btnSlect':''}" (click)="Type(0)"> 巡检记录报表 </button>
+		<div class="input_box">
+			<mat-card>
+				<div class="template title">
+					<div class="WidCss">
+						<mat-checkbox class="example-margin allCheckItem" [disabled]="!dataCheckList"
+							(change)="checkAll($event)" [(ngModel)]="allIsCheck" [(indeterminate)]="indeterminate">
+							全选
+						</mat-checkbox>
+					</div>
+					<div style="margin-left: 10px;"><span>派单编号</span></div>
+					<div><span>派单名称</span></div>
+					<div><span>派单时间</span></div>
+					<div><span>水工建筑物</span></div>
+					<div><span>操作</span></div>
+				</div>
+			</mat-card>
+			<mat-card *ngFor="let d of dataCheckList, let dIndex = index">
+				<div class="template body_con">
+					<div class="WidCss">
+						<mat-checkbox class="example-margin allCheckItem" (change)="checkItem()" [(ngModel)]="d.uCheck">
+						</mat-checkbox>
+					</div>
+					<div style="margin-left: 10px;"><span>{{d.OrderNo}}</span></div>
+					<div><span>{{d.MSName}}</span></div>
+					<div><span>{{d.OrderTime}}</span></div>
+					<div><span>{{d.BuildingName}}</span></div>
+					<div><div style="padding: 8px 14px;background-color: #2196f3;color:#fff;border-radius: 4px;text-align: center;" (click)="gotoInfo(d)">查看</div></div>
+				</div>
+			</mat-card>
+		</div>
+		<div class="footer">
+			<mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+				[pageSize]="pageSize" (page)="change($event)" showFirstLastButtons>
+			</mat-paginator>
+		</div>
+	</div>
+	<!-- <app-confim [confim]="setConfim" [title]="confimTitle" (setConfimResult)="tableConfimResult($event)"></app-confim> -->
+</div>

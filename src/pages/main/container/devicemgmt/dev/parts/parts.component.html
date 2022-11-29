@@ -1,0 +1,48 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+    <div>
+      <button mat-raised-button color="primary" class="add-parts" (click)="showDevPop = true">新增设备</button>
+    </div>
+    <table mat-table [dataSource]="list" style="width: 100%;">
+        <ng-container matColumnDef="DeviceNo">
+            <th mat-header-cell *matHeaderCellDef> 设备编号 </th>
+            <td mat-cell *matCellDef="let element"> {{element.DeviceNo}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Model">
+            <th mat-header-cell *matHeaderCellDef> 设备型号 </th>
+            <td mat-cell *matCellDef="let element"> {{element.Model}} </td>
+        </ng-container>
+        <ng-container matColumnDef="DeviceName">
+            <th mat-header-cell *matHeaderCellDef> 设备名称 </th>
+            <td mat-cell *matCellDef="let element"> {{element.DeviceName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="Stat">
+            <th mat-header-cell *matHeaderCellDef> 状态 </th>
+            <td mat-cell *matCellDef="let element"> {{element.Stat | typeTranslate }} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+    </table>
+
+
+    <div class="dev-pop" *ngIf="showDevPop">
+        <div class="main">
+            <button mat-raised-button color="" class="add-parts" (click)="openDialog()">添加设备</button>
+            <div class="dev-list">
+                <ul>
+                    <li *ngFor="let item of addDeviceListCopy, let i = index">
+                        <p title="{{'对对对'}}">{{item.DeviceName}}</p>
+                        <span class="iconfont iconclose" (click)="addDeviceListCopy.splice(i, 1)"></span>
+                    </li>
+                </ul>
+            </div>
+            <div class="btn-g">
+                <button mat-raised-button style="background: #EEEEEE;" class="add-parts" (click)="cancel()">取消</button>
+                <button mat-raised-button color="primary" class="add-parts" (click)="addDev()">确定</button>
+            </div>
+        </div>
+    </div>
+    <!-- <div style="background: white;">
+        <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1" [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+    </div> -->
+</div>

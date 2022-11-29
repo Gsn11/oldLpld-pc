@@ -1,0 +1,36 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+
+<div class="container">
+	<div class="top-bar">
+		<p class="name">{{buildData.buildType == '联排联调' ? '水工建筑物' : '建筑物'}}</p>
+		<mat-form-field>
+			<select matNativeControl (change)="getDataList()" required [(ngModel)]="checkType">
+				<option value="">请选择</option>
+				<option *ngFor="let item of buildingList" value="{{item.Seq}}">{{item.Name}}</option>
+			</select>
+		</mat-form-field>
+		<div class="status">
+			<div class="no-complate">未完成</div>
+			<div class="complate">完成</div>
+		</div>
+	</div>
+
+	<div class="list" *ngFor="let item of dataList, let i = index">
+		<p class="name">{{item.OrderNo}}&nbsp;&nbsp;&nbsp;&nbsp;{{item.MSName}}</p>
+		<div class="c-list">
+			<div [ngClass]="{'c1': item.list[key][0] && item.list[key][0].OrderItemTotal == item.list[key][0].FinishOrderItemTotal, 'c2': item.list[key][0] && item.list[key][0].OrderItemTotal != item.list[key][0].FinishOrderItemTotal}"
+				*ngFor="let key of objectKeys(item.list)" style="cursor: pointer;">
+				{{item.list[key][0].DeviceName == 'null' ? '' : item.list[key][0].DeviceName}}
+				<span [innerHTML]="item.list[key][0].DeviceName == 'null' ? '' : '<br/>'"></span>
+				{{item.list[key][0] ? item.list[key][0].Position : ''}}
+				<span [innerHTML]="item.list[key][0] && item.list[key][0].Position ? '<br/>' : ''"></span>
+				{{key == 'null' || item.list[key][0].DeviceNo == 'null' ? '' : key}}
+				<div class="popup-list">
+					<ul>
+						<li *ngFor="let item2 of item.list[key]">{{item2.Item}}：{{item2.MoiValue}}</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

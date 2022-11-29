@@ -1,0 +1,16 @@
+<div class="containerPadding">
+	<div>
+		<div class="input-w" flex="cross:center main:center" *ngIf="flagName === undefined">
+				<input matInput type="text" placeholder="最小值" [(ngModel)]="minimum">
+			<span style="padding: 0 10px;">-</span>
+				<input matInput type="text" placeholder="最大值" [(ngModel)]="maximum">
+		</div>
+		<div class="input-w" flex="cross:center main:center" *ngIf="flagName === 'fixation'">
+			<input matInput type="text" placeholder="固定值" [(ngModel)]="inputValue">
+	  </div>
+		<div class="btn-w" flex="cross:center main:center">
+			<button mat-raised-button color="primary" (click)="confirmFn(true)">确定</button>
+			<button mat-raised-button color="primary" (click)="confirmFn(false)">取消</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,115 @@
+<!-- <app-crumbs [crumbs]="crumbsList"></app-crumbs> -->
+<div class="containerPadding">
+	<div class="orderfixSearchList">
+		<div class="searchTools">
+			<div>
+				<!-- <button mat-stroked-button color="primary" class="download">导出Excel</button> -->
+				<button mat-raised-button color="primary" class="loginBtn" (click)="showdiog()">单次排班</button><button
+					mat-raised-button color="primary" class="loginBtn" style="margin-left: 20px;"
+					(click)="showdiogone()">连续排班</button>
+			</div>
+			<!-- <div style="padding-left: 10px;">
+				状态：
+				<mat-form-field class="flex">
+					<select (change)="getList()" matNativeControl [(ngModel)]="stateCheck">
+						<option *ngFor="let item of ['启用', '全部', '关闭']" [value]="item">{{item}}</option>
+					</select>
+				</mat-form-field>
+			</div> -->
+		</div>
+	</div>
+	<div class="mat-elevation-z8">
+		<table mat-table [dataSource]="RuleList" class="mat-elevation-z8">
+
+			<!-- Checkbox Column -->
+
+
+			<!-- Position Column -->
+			<ng-container matColumnDef="Name">
+				<th mat-header-cell *matHeaderCellDef> 班次规则名称 </th>
+				<td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+			</ng-container>
+
+			<!-- Name Column -->
+			<ng-container matColumnDef="TeamTime">
+				<th mat-header-cell *matHeaderCellDef> 班次规则 </th>
+				<td mat-cell *matCellDef="let element">
+					<div class="Rule_container" (mouseenter)="state=element.Name" (mouseleave)="state=''">
+						<div class="Sflex" *ngIf="element.Type===0">
+							<div class="SeColor" [ngStyle]="{'background':element.TeamTime[0].Color}"></div>
+							<p>{{element.TeamTime[0].AbbrName}}/工作班次：{{showConfim(element.TeamTime)}}【{{element.TeamTime[0].WorkStart}}-{{element.TeamTime[0].WorkEnd}}】
+							</p>
+						</div>
+						<div *ngIf="element.Type===1">
+							<div *ngFor="let i of element.TeamTime" class="Sflex">
+								<div class="SeColor" [ngStyle]="{'background':i.Color}"></div>
+								{{i.Name}}/工作班次：{{i.Days}}天【{{i.WorkStart}}-{{i.WorkEnd}}】
+							</div>
+						</div>
+						<div class="User_container" [ngStyle]="{'display': state===element.Name?'block':'none'}">
+							<div class="userall">
+								<div>姓名</div>
+								<div>级别</div>
+							</div>
+							<div class="userall" *ngFor="let item of element.Members,let i=index">
+								<div>{{item.Name}}</div>
+								<div>{{item.Level===1?'主班':'副班'}}</div>
+							</div>
+						</div>
+						<div class="User_container" [ngStyle]="{'display': UserId===element.Id?'block':'none'}">
+							<div class="userall">
+								<div>排班规则使用中，请先关闭或更改关联巡检计划</div>
+							</div>
+							<div class="userall">
+								<div>序号</div>
+								<div>巡检名称</div>
+								<div>巡检周期(生效时间段)</div>
+								<div>计划描述</div>
+							</div>
+							<div class="userall" *ngFor="let item of Schedules,let i=index">
+								<div>序号</div>
+								<div>巡检名称</div>
+								<div>巡检周期(生效时间段)</div>
+								<div>计划描述</div>
+							</div>
+						</div>
+					</div>
+				</td>
+			</ng-container>
+
+			<!-- Weight Column -->
+			<ng-container matColumnDef="Type">
+				<th mat-header-cell *matHeaderCellDef> 类型 </th>
+				<td mat-cell *matCellDef="let element">{{element.Type===0?'单次排班':'连续排班'}}</td>
+			</ng-container>
+			<ng-container matColumnDef="applyType">
+				<th mat-header-cell *matHeaderCellDef> 应用类型 </th>
+				<td mat-cell *matCellDef="let element">{{element.ApplyType===1?'值班':'排班'}}</td>
+			</ng-container>
+			<ng-container matColumnDef="ValidEnd">
+				<th mat-header-cell *matHeaderCellDef> 生效时间 </th>
+				<td mat-cell *matCellDef="let element">{{element.ValidStart}}/{{element.ValidEnd}}</td>
+			</ng-container>
+
+			<!-- Symbol Column -->
+			<ng-container matColumnDef="ValidStart">
+				<th mat-header-cell *matHeaderCellDef> 操作 </th>
+				<td mat-cell *matCellDef="let element">
+					<div class="operation">
+						<!-- *ngIf="element.State === 0" -->
+						<mat-slide-toggle [checked]="element.State === 0" (toggleChange)="showConfimBoxFn(element)">启用</mat-slide-toggle>
+						<!-- <mat-slide-toggle  [checked]="element.State === 0"
+							(toggleChange)="showConfimBoxFn(element)">启用</mat-slide-toggle> -->
+						<span class="edit" (click)="edit(element,0)">编辑</span>
+						<span class="edit" (click)="edit(element,1)">复制</span>
+					</div>
+			</ng-container>
+
+			<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+			<tr mat-row *matRowDef="let row; columns: displayedColumns;" >
+			</tr>
+		</table>
+	</div>
+	<app-schedulingRulemodal (someEvent)="getList()"></app-schedulingRulemodal>
+	<!-- <app-confim [confim]="showConfimBox" [title]="state == '1'?'确定关闭吗？':'确定开启吗？'" (setConfimResult)="confimResult($event)"></app-confim> -->
+</div>

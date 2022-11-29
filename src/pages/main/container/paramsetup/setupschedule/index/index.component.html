@@ -1,0 +1,36 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>到达时限（小时）</span>
+        <mat-form-field>
+            <input placeholder="到达时限" matInput [(ngModel)]="ArriveExpire" maxlength="4">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>反馈时限（小时）</span>
+        <mat-form-field>
+            <input placeholder="反馈时限" matInput [(ngModel)]="WorkExpire" maxlength="4">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>接单超时（小时）</span>
+        <mat-form-field>
+            <input placeholder="接单超时" matInput [(ngModel)]="OrderTimeOut" maxlength="4">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>发送确认短信金额（元）</span>
+        <mat-form-field>
+            <input placeholder="短信确认金额" matInput [(ngModel)]="SmsLimit" maxlength="8">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>派单限制距离（米）</span>
+        <mat-form-field>
+            <input placeholder="派单限制距离" matInput [(ngModel)]="DistanceLimit" maxlength="10">
+        </mat-form-field>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+    </div>
+</div>

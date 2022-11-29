@@ -1,0 +1,47 @@
+<div mat-dialog-title>
+    <div class="deviceTitle">
+        <span style="font-size: 1em;">品牌选择</span>
+        <mat-form-field class="example-form-field" style="margin-left: 10px; font-size: 12px;">
+            <input matInput type="text" placeholder="品牌名称/申请人" [(ngModel)]="searchName" (keyup.enter)="getList()">
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="PageIndex = 1;getList()"
+            style="margin-left: 10px; font-size: 12px;">搜索</button>
+    </div>
+    <div *ngIf="item">
+        当前选中：
+        <span>{{item.BRName}} </span>
+        <span>({{item.BRLocalName}})</span>
+    </div>
+</div>
+<div mat-dialog-content>
+    <table mat-table [dataSource]="list" style="width: 100%;">
+        <ng-container matColumnDef="BRName">
+            <th mat-header-cell *matHeaderCellDef> 品牌名称 </th>
+            <td mat-cell *matCellDef="let element"> {{element.BRName}}({{element.BRLocalName}}) </td>
+        </ng-container>
+        <ng-container matColumnDef="Img">
+            <th mat-header-cell *matHeaderCellDef> 品牌图标 </th>
+            <td mat-cell *matCellDef="let element">
+                <a *ngIf="element.Img" [href]="element.Img" target="_blank">
+                    <img [src]="element.Img" alt="品牌图标" style="width: 100px; height: 50px;">
+                </a>
+                <span *ngIf="!element.Img">图标缺失</span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="Proposer">
+            <th mat-header-cell *matHeaderCellDef> 申请人 </th>
+            <td mat-cell *matCellDef="let element"> {{element.Proposer}} </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+            [ngClass]="{'active': selectSeq === row.BRSeq }" (click)="choose(row)"></tr>
+    </table>
+</div>
+<div style="background: white;">
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]" [length]="paginatorTotal" [pageIndex]="PageIndex - 1"
+        [pageSize]="PageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+</div>
+<div mat-dialog-actions>
+    <button mat-button class="btnCancel" (click)="onNoClick()">取消</button>
+    <button mat-button [mat-dialog-close]="item" class="btnPrimise">确定</button>
+</div>

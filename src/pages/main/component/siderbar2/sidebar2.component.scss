@@ -1,0 +1,201 @@
+.sidebar2 {
+  min-height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  .sidebar2Main {
+
+    .logoList {
+      width: 80px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: column;
+
+      .logo1 {
+        padding: 10px 0 24px 10px;
+        cursor: pointer;
+
+        >img {
+          width: 80%;
+          height: 80%;
+        }
+      }
+
+      .logo2 {
+        margin: 15px 0;
+        width: 47px;
+        height: 47px;
+        text-align: center;
+        border-radius: 50%;
+        overflow: hidden;
+        cursor: pointer;
+
+        >img {
+          max-width: 47px;
+          max-height: 47px;
+          min-width: 47px;
+          min-height: 47px;
+        }
+      }
+
+      .userName {
+        margin-bottom: 40px;
+        cursor: pointer;
+
+        >span {
+          display: block;
+        }
+      }
+    }
+
+    .sidebarBox {
+      padding-bottom: 110px;
+      width: 80px;
+      position: relative;
+      z-index: 99999;
+
+      .sidebarList {
+        color: hsla(0, 0%, 100%, .55);
+
+        // 一级菜单
+        .sidebarName {
+          position: relative;
+          cursor: pointer;
+
+          .iconfont {
+            padding: 10px 30px;
+            font-size: 20px;
+            display: block;
+
+            &:hover {
+              color: hsla(0, 0%, 100%, 1);
+            }
+          }
+
+          &:hover {
+            .treeItem-out {
+              display: block;
+              opacity: 1;
+            }
+          }
+
+          .treeItem-out {
+            top: 0;
+            left: 80px;
+            padding-left: 5px;
+            display: none;
+            position: absolute;
+            opacity: 0;
+            transition: all linear 0.12s;
+
+            .sideItemList {
+              background: #39444D;
+              position: relative;
+
+              &:first-child {
+                border-radius: 5px 5px 0 0;
+              }
+
+              &:last-child {
+                border-radius: 0 0 5px 5px;
+              }
+
+              .side-item {
+                .itemList {
+                  top: 0;
+                  left: 160px;
+                  padding-left: 5px;
+                  display: none;
+                  position: absolute;
+                  opacity: 0;
+
+                  .item {
+                    padding: 10px 20px;
+                    width: 120px;
+                    height: 20px;
+                    background: #39444D;
+
+                    &:first-child {
+                      border-radius: 5px 5px 0 0;
+                    }
+
+                    &:last-child {
+                      border-radius: 0 0 5px 5px;
+                    }
+
+                    &:hover {
+                      .item-Name {
+                        color: hsla(0, 0%, 100%, 1);
+                      }
+                    }
+                  }
+                }
+
+                &.widthAdd {
+                  .side-itemName {
+                    padding: 12px 20px;
+                    width: 180px;
+                  }
+
+                  .itemList {
+                    left: 220px;
+                  }
+                }
+
+                .side-itemName {
+                  padding: 10px 20px;
+                  width: 120px;
+                  height: 20px;
+                  display: block;
+                  position: relative;
+
+                  >span {
+                    top: 4px;
+                    right: 0;
+                    font-size: 14px;
+                    position: absolute;
+                  }
+                }
+
+                &:hover {
+                  .itemList {
+                    display: block;
+                    opacity: 1;
+                  }
+                }
+              }
+
+              &:hover {
+                .side-itemName {
+                  color: hsla(0, 0%, 100%, 1);
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .footer {
+    padding: 2px;
+    max-width: 80px;
+    overflow: hidden;
+
+    >span {
+      display: block;
+
+      &.word {
+        position: relative;
+
+        >span {
+          top: -1.5px;
+          font-size: 75%;
+          position: absolute;
+          transform: scale(0.7);
+        }
+      }
+    }
+  }
+}

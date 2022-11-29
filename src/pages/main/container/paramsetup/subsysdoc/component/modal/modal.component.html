@@ -1,0 +1,28 @@
+<div class="modal-out" [ngClass]="{'active': show}">
+    <div class="bg" (click)="goCancel()"></div>
+    <div class="container">
+        <div class="header"><span class="title">{{systemTitle}}</span></div>
+        <div class="main">
+            <div>
+                <span>子系统图片:</span>
+                <div style="width: 40px; height: 40px;">
+                    <a target="blank" [href]="modalSrc" *ngIf="modalSrc">
+                        <img style="width: 40px; height: 40px;" [src]="modalSrc" alt="systemImage">
+                    </a>
+                </div>
+            </div>
+            <div>
+                <span>子系统名称：</span>
+                <span>{{SName}}</span>
+            </div>
+            <div>
+                <span>子系统验收文档：</span>
+                <app-manyfile [docList]="docList"></app-manyfile>
+            </div>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+            <button mat-button (click)="goCancel()"><span class="iconfont iconpstep"></span>取消</button>
+        </div>
+    </div>
+</div>

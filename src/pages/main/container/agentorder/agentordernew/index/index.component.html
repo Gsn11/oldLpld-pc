@@ -1,0 +1,29 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+	<div class="top-bar">
+		<app-calendar title="开始日期" ></app-calendar>
+		<span style="margin: 0 10px;"> - </span>
+		<app-calendar title="结束日期"></app-calendar>
+		<mat-form-field style="margin-left: 20px;" class="example-form-field">
+			<input matInput [(ngModel)]="name" type="text" placeholder="维修工单名称">
+		</mat-form-field>
+		<button style="margin-left: 20px;" mat-raised-button color="primary" class="loginBtn">搜索</button>
+		<button style="margin-left: 20px;" mat-raised-button color="primary" class="loginBtn" (click)="addStrategygroup()">新增派单</button>
+	</div>
+	<div>
+		<!-- <div class="mat-elevation-z8">
+			<table mat-table [dataSource]="[1]" style="width: 100%;">
+				<ng-container matColumnDef="index">
+					<th mat-header-cell *matHeaderCellDef> 序号 </th>
+					<td mat-cell *matCellDef="let element; let i = index"> 11 </td>
+				</ng-container>
+				<tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+				<tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+			</table>
+			<div style="background: white;">
+				<mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+				[pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+			</div>
+		</div> -->
+	</div>
+</div>

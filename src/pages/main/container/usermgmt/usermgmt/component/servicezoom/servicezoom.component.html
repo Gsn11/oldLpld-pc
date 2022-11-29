@@ -1,0 +1,27 @@
+<div class="detailsOut">
+    <div class="service-out">
+        <span>服务范围</span>
+        <div>
+            <div class="checkServiceBtn">
+                <span (click)="chooseService()">选择服务范围</span>
+            </div>
+            <div class="item" *ngIf="regionChooseList">
+                <div *ngFor="let r of regionChooseList, let rIndex = index">
+                    {{r.region}}
+                    <span class="iconfont iconclose" (click)="deleteItem(rIndex)"></span>
+                </div>
+            </div>
+        </div>
+        <div class="service-container" *ngIf="checkServiceZoom">
+            <div class="tree-out">
+                <mat-checkbox class="example-margin allCheckItem" (change)="checkAll($event)">所有地区
+                </mat-checkbox>
+                <app-treecheckitem [List]="region" [isType]="isType"></app-treecheckitem>
+            </div>
+            <div class="btnList">
+                <button mat-button (click)="checkOk()"><span class="iconfont iconsave"></span>确定</button>
+                <button mat-button (click)="closeChoosePlant()"><span class="iconfont iconpstep"></span>取消</button>
+            </div>
+        </div>
+    </div>
+</div>

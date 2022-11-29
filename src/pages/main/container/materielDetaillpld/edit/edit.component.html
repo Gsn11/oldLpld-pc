@@ -1,0 +1,51 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+
+<div class="containerPadding">
+	<div class="main">
+		<div>
+			<p>物料</p>
+			<span>{{name}}</span>
+		</div>
+		<div>
+			<p><span style="color: red;">* </span>出入库</p>
+			<mat-form-field>
+				<mat-label>出入库</mat-label>
+				<mat-select [formControl]="inOut">
+					<mat-option *ngFor="let s of inOutList" [value]="s.name">
+						{{s.name}}
+					</mat-option>
+				</mat-select>
+			</mat-form-field>
+		</div>
+		<div>
+			<p><span style="color: red;">* </span>数量</p>
+			<mat-form-field class="example-form-field">
+				<input matInput type="text" [(ngModel)]="num" placeholder="数量">
+			</mat-form-field>
+		</div>
+		<div>
+			<p>单位价格</p>
+			<mat-form-field class="example-form-field">
+				<input matInput type="number" [(ngModel)]="unitPrice" placeholder="单位价格">
+			</mat-form-field>
+		</div>
+		<div>
+			<p>价格</p>
+			<mat-form-field class="example-form-field">
+				<input matInput type="number" [(ngModel)]="price" placeholder="价格">
+			</mat-form-field>
+		</div>
+		<div>
+			<p>物料图片</p>
+			<app-manyfile [setImgsrcData]="imgsrcData"></app-manyfile>
+		</div>
+		<div>
+			<p>备注</p>
+			<textarea style="width: 100%;height: 80px; border: 1px solid #ddd; padding: 10px; border-radius: 5px;" matInput placeholder="请输入备注" [(ngModel)]="remark"></textarea>
+		</div>
+		<div class="btn-g">
+			<button mat-raised-button color="primary" class="loginBtn" (click)="goBack()">取消</button>
+			<button mat-raised-button color="primary" class="loginBtn" (click)="editDetail()">保存</button>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,68 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+  <div class="searchList">
+    <div>
+      <span>设备名称: {{bemInfoData.DeviceName}}</span>
+    </div>
+    <div>
+        派单类型：
+        <mat-form-field class="flex">
+            <select matNativeControl (change)="getList()" required [(ngModel)]="scheduleType">
+                <option value="">全部</option>
+                <option value="0">巡查派单</option>
+                <option value="1">保养派单</option>
+                <option value="2,3">维修派单</option>
+            </select>
+        </mat-form-field>
+    </div>
+    <div>
+      <span>设备编号: {{bemInfoData.DeviceNo}}</span>
+    </div>
+    <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="list" style="width: 100%;">
+      <ng-container matColumnDef="OrderNo">
+        <th mat-header-cell *matHeaderCellDef> 派单编号 </th>
+        <td mat-cell *matCellDef="let element"> {{element.OrderNo}} </td>
+      </ng-container>
+      <ng-container matColumnDef="MSName">
+        <th mat-header-cell *matHeaderCellDef> 派单名称 </th>
+        <td mat-cell *matCellDef="let element"> {{element.MSName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Diagnose">
+        <th mat-header-cell *matHeaderCellDef> 维保描述 </th>
+        <td mat-cell *matCellDef="let element"> {{element.Diagnose}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Conclusion">
+        <th mat-header-cell *matHeaderCellDef> 维保结论 </th>
+        <td mat-cell *matCellDef="let element"> {{element.Conclusion}} </td>
+      </ng-container>
+      <ng-container matColumnDef="PayOrderType">
+        <th mat-header-cell *matHeaderCellDef> 模式 </th>
+        <td mat-cell *matCellDef="let element"> {{element.Type | modelTypeTranslate}} </td>
+      </ng-container>
+      <ng-container matColumnDef="OrderTime">
+        <th mat-header-cell *matHeaderCellDef> 	派单时间 </th>
+        <td mat-cell *matCellDef="let element"> {{element.OrderTime}} </td>
+      </ng-container>
+      <ng-container matColumnDef="State">
+        <th mat-header-cell *matHeaderCellDef> 	状态 </th>
+        <td mat-cell *matCellDef="let element"> {{element.State | stateTypeTranslate}}</td>
+      </ng-container>
+      <ng-container matColumnDef="Other">
+        <th mat-header-cell *matHeaderCellDef> 操作 </th>
+        <td mat-cell *matCellDef="let element" class="Other">
+          <span (click)="gotoInfo(element)">查看</span>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+    </table>
+    <div style="background: white;">
+      <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+        [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>

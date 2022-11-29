@@ -1,0 +1,163 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+  <div class="searchList">
+    <div>
+      <mat-form-field>
+        <mat-select placeholder="子系统" [formControl]="SystemSelect" (selectionChange)="selectClose($event)">
+          <mat-option [value]="''">无</mat-option>
+          <mat-option *ngFor="let s of SystemList" [value]="s.SName">{{s.SName}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-form-field" style="margin-left: 10px;">
+        <input matInput type="text" placeholder="设备" [(ngModel)]="searchName" (keyup.enter)="applyFilter()">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1;applyFilter()">搜索</button>
+    </div>
+    <div>
+      <button mat-raised-button *ngIf="this.DeviceType === 'alertsms'" color="primary" class="download" (click)="operation()">手动报警</button>
+      <button mat-stroked-button color="primary" class="download" (click)="downloadDeviceFile()">导出Excel</button>
+    </div>
+  </div>
+
+
+  <div class="mat-elevation-z8">
+      <table matSort mat-table [dataSource]="initialCompanyList" style="width: 100%;">
+        <ng-container matColumnDef="timeStr">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 报警时间 </th>
+          <td mat-cell *matCellDef="let element"> {{element.timeStr}} </td>
+        </ng-container>
+        <ng-container matColumnDef="building">
+          <th mat-header-cell *matHeaderCellDef> 报警位置 </th>
+          <td mat-cell *matCellDef="let element">
+            <span *ngIf="element.building">{{element.building}}</span>
+            <span *ngIf="element.floor"> - {{element.floor}}</span>
+            <span *ngIf="element.zone"> - {{element.zone}}</span>
+            <span *ngIf="element.spacePos"> - {{element.spacePos}}</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="devName">
+          <th mat-header-cell *matHeaderCellDef> 报警设备 </th>
+          <td mat-cell *matCellDef="let element"> {{element.devName}} </td>
+        </ng-container>
+        <ng-container matColumnDef="metricDesc">
+          <th mat-header-cell *matHeaderCellDef> 报警内容 </th>
+          <td mat-cell *matCellDef="let element"> {{element.metricDesc}},{{element.msg}} </td>
+        </ng-container>
+        <ng-container matColumnDef="levelName">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> 重要等级 </th>
+          <td mat-cell *matCellDef="let element"> 
+            {{element.levelName}}  {{element.LevelType == 0 ? '设备故障': element.LevelType == 1 ? '防汛防台风' : element.LevelType == 2 ? '次氯酸钠泄漏事故' : element.LevelType == 3 ? '水源水质突发事件' : element.LevelType == 4 ? '制水生产水质突发事件': element.LevelType == 5 ? '反恐怖防范' : element.LevelType == 6 ? '火灾事故' : element.LevelType == 7 ? '供水设备故障突发事件' : '有限空间作业事故'}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="time">
+          <th mat-header-cell *matHeaderCellDef> 持续时间 </th>
+          <td mat-cell *matCellDef="let element"> {{getTime(element.duration)}} </td>
+        </ng-container>
+        <ng-container matColumnDef="orderState">
+          <th mat-header-cell *matHeaderCellDef> 处理状态 </th>
+          <td mat-cell *matCellDef="let element"> {{element.orderState | stateTypeTranslate}} </td>
+        </ng-container>
+        <ng-container matColumnDef="ring" *ngIf="DeviceType === 'alertsms'">
+          <th mat-header-cell *matHeaderCellDef> 铃声 </th>
+          <td mat-cell *matCellDef="let element">
+            <audio [src]="element.levelRing == 1?'../../../assets/video/huojing.mp3':element.levelRing == 2?'../../../assets/video/shuijing.mp3':''" controls="controls" loop="loop" [autoplay]="element.levelName=='一级'?'autoplay':false"></audio>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Other">
+          <th mat-header-cell *matHeaderCellDef> 操作 </th>
+          <td mat-cell *matCellDef="let element" class="Other">
+            <span (click)="gotoInfo(element)">查看</span>
+            <span *ngIf="element.orderState === -1" (click)="gotoAdd(element)">派单</span>
+            <span *ngIf="this.DeviceType === 'alertsms'" (click)="sendMessage(element)">启动预案</span>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+      </table>
+      <div style="background: white;">
+        <mat-paginator #MatPaginator [pageSizeOptions]="[5, 10, 20]" (page)="change($event)" [pageIndex]="pageIndex - 1" [pageSize]="10" showFirstLastButtons>
+        </mat-paginator>
+      </div>
+    </div>
+    <div class="dialog-window" *ngIf="alarmInfo">
+      <div class="dialog">
+        <div class="dialog-padding">
+          <div class="dialog-title">预案内容配置</div>
+          <i nz-icon [nzType]="'close'" (click)="alarmInfo = false;typeSave = ''" style="position: absolute;top: 10px;right: 10px;cursor: pointer;width: 30px;height: 30px;"></i>
+          <div class="dialog-info">
+            <div style="margin-bottom: 20px;">报警等级：<span>{{alarmLevel}}</span><button mat-raised-button color="primary" style="margin-left: 20px;" class="loginBtn" (click)="templateFlag = true">选择短信模板</button></div>
+            <mat-form-field>
+              <input matInput placeholder="请输入警报名称" required [(ngModel)]="warningName" >
+            </mat-form-field>
+            <mat-form-field>
+               <textarea  matInput rows='4' style="resize: none;" required placeholder="请输入报警内容" [(ngModel)]="warningContent"></textarea>
+            </mat-form-field>
+            <mat-form-field class="example-form-field">
+              <mat-label>是否启用报警铃声</mat-label>
+                <select matNativeControl  required [(ngModel)]="ringType">
+                    <option value="0">无铃声</option>
+                    <option value="1">火警铃声</option>
+                    <option value="2">水警铃声</option>
+                </select>
+            </mat-form-field>
+            <div><span>送达用户：</span>{{saveUserData.names}}<button mat-raised-button color="primary" class="loginBtn" (click)="openUserModelDialog()">添加用户</button></div>
+          </div>
+          <div class="dialog-button" style="margin-top: 80px;">
+            <button mat-raised-button class="back" (click)="alarmInfo = false;typeSave = ''">取消</button>
+            <button mat-raised-button color="primary" class="loginBtn" (click)="setConfim = true ; alarmInfo = false">确认发送</button>
+          </div>
+        </div>	
+      </div>
+      <div  class="dialog" *ngIf="alarmCheckBox" >
+        <div class="dialog-padding">
+          <ul style="overflow-y:auto;height: 420px;">
+            <li *ngFor="let item of userListData">
+                  <mat-checkbox
+                  [(ngModel)]=item.single (change)="updateAllComplete($event)"
+                  >{{item.Name}},{{item.UserTel}}
+                  </mat-checkbox>
+            </li>
+          </ul>
+          <div class="dialog-button-window">
+            <button mat-raised-button class="back" (click)="alarmCheckBox = false">取消</button>
+            <button mat-raised-button color="primary" class="loginBtn" (click)="saveUser()">保存</button>
+          </div>
+        </div>
+      </div>
+      <div  class="dialog" *ngIf="templateFlag" >
+        <div class="dialog-padding">
+          <div class="dialog-title">报警模板</div>
+          <div class="searchList">
+            <div style="display: flex;justify-content: space-between;">
+              <mat-form-field class="example-form-field">
+                <mat-label>请选择报警等级</mat-label>
+                <mat-select [formControl]="buildingType">
+                    <mat-option [value]="">无</mat-option>
+                    <mat-option *ngFor="let i of gradeList" [value]="i.Seq">
+                        {{i.AlertLevelName}}
+                    </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput placeholder="请输入模板名称或电话" [(ngModel)]="templateName" >
+              </mat-form-field>
+            </div>
+            <div>
+              <button mat-raised-button color="primary" class="loginBtn" (click)="templateList(null,2)">搜索</button>
+            </div>
+          </div>
+          <div style="overflow-y:auto;height: 310px;padding-left:15px;margin-top: 5px;">
+            <mat-radio-group [value]="radioType" (change)="templateRadioChange($event)">
+              <mat-radio-button *ngFor="let item of templateData;" [value]=item.Seq>{{item.LevelName}} {{item.AlertLevelName}} {{item.LevelType == 0 ? '设备故障': item.LevelType == 1 ? '防汛防台风' : item.LevelType == 2 ? '次氯酸钠泄漏事故' : item.LevelType == 3 ? '水源水质突发事件' : item.LevelType == 4 ? '制水生产水质突发事件': item.LevelType == 5 ? '反恐怖防范' : item.LevelType == 6 ? '火灾事故' : item.LevelType == 7 ? '供水设备故障突发事件' : '有限空间作业事故'}},{{item.Name}}{{i}}</mat-radio-button>
+            </mat-radio-group>
+          </div>
+          <div class="dialog-button-window">
+            <button mat-raised-button class="back" (click)="templateFlag = false">取消</button>
+            <button mat-raised-button color="primary" class="loginBtn" (click)="saveTemplate()">保存</button>
+          </div>
+        </div>
+      </div>
+     </div>
+     <app-send [confim]="setConfim" (setConfimResult)="sendInfo($event)"></app-send>
+</div>
+<!-- <app-confim [confim]="setConfim" (setConfimResult)="delete($event)"></app-confim> -->

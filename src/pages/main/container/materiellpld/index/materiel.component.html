@@ -1,0 +1,151 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<app-excelupload [url]="'ent/material/6206'" (getList)="getList(true)"></app-excelupload>
+<div class="containerPadding">
+    <div style="background: #fff;">
+        <div class="searchList">
+            <mat-form-field class="example-form-field">
+                <input matInput type="text" placeholder="设备名称/编号" [(ngModel)]="searchVal" (keyup.enter)="getList(true)">
+            </mat-form-field>
+            <!-- <mat-form-field class="example-form-field">
+                <input matInput type="text" placeholder="剩余量" [(ngModel)]="surplus" (keyup.enter)="getList()">
+            </mat-form-field> -->
+            <div *ngIf="buildData.buidType != '联排联调'" style="padding-left: 10px;">
+                物料分类：
+                <mat-form-field class="flex">
+                    <select matNativeControl [(ngModel)]="itemClassCheck">
+                        <option value="">全部</option>
+                        <option *ngFor="let item of itemClassList" [value]="item.DMSeq">{{item.DMName}} - {{item.Id}}</option>
+                    </select>
+                </mat-form-field>
+            </div>
+            <!-- <mat-form-field class="example-form-field">
+                <mat-label>请选择建筑物</mat-label>
+                <mat-select [formControl]="buildingType">
+                      <mat-option [value]="">无</mat-option>
+                        <mat-option *ngFor="let i of BuildingList" [value]="i.Seq">
+                                {{i.Name}}
+                        </mat-option>
+                </mat-select>
+            </mat-form-field> -->
+            <button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1;getList(true)">搜索</button>
+            <div style="margin-left: auto;">
+                <button mat-raised-button color="primary" class="loginBtn" (click)="fileBoxChange()">导入</button>
+                <button mat-raised-button color="primary" class="loginBtn" (click)="materielExpot()">导出</button>
+                <button mat-raised-button color="primary" class="loginBtn" (click)="goPage('add', '')">新增</button>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="list" style="width: 100%;">
+                <ng-container matColumnDef="index">
+                    <th mat-header-cell *matHeaderCellDef> 序号 </th>
+                    <td mat-cell *matCellDef="let element; let i = index"> {{i * pageIndex + 1}} </td>
+                </ng-container>
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> 编号 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.DeviceNo}} </td>
+                </ng-container>
+                <ng-container matColumnDef="model">
+                    <th mat-header-cell *matHeaderCellDef> 型号 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Model}} </td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> 名称 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.DeviceName }} </td>
+                </ng-container>
+                <ng-container matColumnDef="surplus">
+                    <th mat-header-cell *matHeaderCellDef> 剩余量 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Quantity }} </td>
+                </ng-container>
+                <ng-container matColumnDef="unit">
+                    <th mat-header-cell *matHeaderCellDef> 单位 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Unit }} </td>
+                </ng-container>
+                <ng-container matColumnDef="Other">
+                    <th mat-header-cell *matHeaderCellDef> 操作 </th>
+                    <td mat-cell *matCellDef="let element" class="Other">
+                        <span (click)="checkListFn(element, 'out')">出库</span>
+                        <span (click)="checkListFn(element, 'enter')">入库</span>
+                        <span (click)="goPage('record', element)">历史</span>
+                        <span (click)="goPage('look', element)">查看</span>
+                        <span (click)="goPage('edit', element)">编辑</span>
+                        <span (click)="delSeq = element.Seq; setConfim = true">删除</span>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+            </table>
+            <div style="background: white;">
+                <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+                [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="mask" *ngIf="operateStock">
+        <div class="stock-box">
+            <p class="tit">{{checkList.DeviceName}}{{operateStock == 'out' ? '出库单' : '入库单'}}</p>
+            <button mat-raised-button color="primary" class="export-btn" (click)="stockExport()">导出</button>
+            <div class="con">
+                <p>编号：{{checkList.DeviceNo}}</p>
+                <p>当前余量：{{checkList.Quantity}}</p>
+                <!-- 出库 -->
+                <p *ngIf="operateStock == 'out'">出库时间：{{checkList.sysTime}}</p>
+                <p *ngIf="operateStock == 'out'">出库人：{{checkList.personName}}</p>
+                <div style="display: flex;" *ngIf="operateStock == 'out'">
+                    <p>出库量：</p>
+                    <mat-form-field class="example-form-field">
+                        <input [(ngModel)]="operateStockData.num" matInput type="number" placeholder="出库量">
+                    </mat-form-field>
+                </div>
+                <!-- 出库 -->
+                <!-- 入库 -->
+                <p *ngIf="operateStock == 'enter'">入库时间：{{checkList.sysTime}}</p>
+                <p *ngIf="operateStock == 'enter'">入库人：{{checkList.personName}}</p>
+                <div style="display: flex; align-items: center;" *ngIf="operateStock == 'enter'">
+                    <p>入库量：</p>
+                    <mat-form-field class="example-form-field">
+                        <input [(ngModel)]="operateStockData.num" matInput type="number" placeholder="入库量">
+                    </mat-form-field>
+                    <span>单位：{{checkList.Unit}}</span>
+                </div>
+                <div style="display: flex; align-items: center;" *ngIf="operateStock == 'enter'">
+                    <p>单价：</p>
+                    <mat-form-field class="example-form-field">
+                        <input matInput [(ngModel)]="operateStockData.price" type="number" placeholder="单价">
+                    </mat-form-field>
+                    <span>元</span>
+                </div>
+                <p *ngIf="operateStock == 'enter'">总价：{{ operateStockData.price * operateStockData.num ? operateStockData.price * operateStockData.num : '' }}元</p>
+                <div style="display: flex; align-items: center;" *ngIf="operateStock == 'enter'">
+                    <p>实际支付：</p>
+                    <mat-form-field class="example-form-field">
+                        <input matInput [(ngModel)]="operateStockData.actualPrice" type="number" placeholder="实际支付">
+                    </mat-form-field>
+                    <span>元</span>
+                </div>
+                <!-- 入库 -->
+                <div style="display: flex;">
+                    <p style="flex-shrink: 0;">操作记录：</p>
+                    <textarea [(ngModel)]="operateStockData.record" placeholder="操作记录"></textarea>
+                </div>
+                <div style="display: flex; align-items: center;">
+                    <p style="flex-shrink: 0;">抄送通知：</p>
+                    <span (click)="openMsgDialog()" style="color: #0152AD; cursor: pointer;margin-left: 10px;">{{operateStockData.msgName ? operateStockData.msgName : '选择信息接收用户'}}</span>
+                </div>
+                <div *ngIf="buildData.buidType != '联排联调'" style="display: flex;">
+                    <p >图片：</p>
+                    <app-manyfile [maxLength]="3" [setImgsrcData]="imgsrcData"></app-manyfile>
+                </div>
+            </div>
+            <div class="btn-g">
+                <button mat-raised-button color="primary" class="" (click)="operateStock = ''">取消</button>
+                <button mat-raised-button color="primary" class="" (click)="operateStockFn()">确定</button>
+            </div>
+        </div>
+    </div>
+    <app-confim [confim]="setConfim" (setConfimResult)="del($event)"></app-confim>
+</div>

@@ -1,0 +1,43 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <!-- <div class="pointInput" *ngIf="!checkRecharge">
+        <div class="point">
+            <div class="title">充值金额：</div>
+            <mat-form-field class="example-full-width">
+                <input matInput type="number" placeholder="请输入金额" [(ngModel)]="Point">
+            </mat-form-field>
+            <button mat-raised-button color="primary" style="margin-left: 10px;" (click)="rechargeCheck()">点击充值</button>
+        </div>
+    </div> -->
+    <div class="rechargeChoose">
+        <!-- <div class="defaultInfo"> -->
+            <!-- <div>
+                <span>您正在为 <span style="color: red;">{{this.userInfo.Customer.Name}}</span> 充值,请在30分钟内完成支付</span>
+            </div> -->
+            <!-- <div>
+                <span>充值金额：</span>
+                <span>{{Point}}</span>
+            </div> -->
+        <!-- </div> -->
+        <div class="chooseOut">
+            <div class="title">支付方式：</div>
+            <div class="chooseItem">
+                <div [ngClass]="{'active': chooseRecharge === 'alipay'}" (click)="changeRechargeMode('alipay')">
+                    <span>支付宝</span>
+                </div>
+                <div [ngClass]="{'active': chooseRecharge === 'wechat'}" (click)="changeRechargeMode('wechat')">
+                    <span>微信支付</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button mat-raised-button color="primary" (click)="rechargeBuy()">立即支付</button>
+        </div>
+        <div style="margin-top: 10px;">
+                <!-- (change)="checkAll($event, 'r')" -->
+            <!-- <mat-checkbox class="example-margin checkItem" [(ngModel)]="checkAgreement"> -->
+                充值即代表我已经阅读并同意 《关于充值的特别提示和约定》
+            <!-- </mat-checkbox> -->
+        </div>
+    </div>
+</div>

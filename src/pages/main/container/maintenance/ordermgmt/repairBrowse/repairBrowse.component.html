@@ -1,0 +1,158 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+
+<div class="container">
+    <div class="select-bar">
+        <mat-form-field>
+            <select matNativeControl (change)="getPlanList()" required [(ngModel)]="checkType">
+                <option value="0">巡检任务</option>
+                <option value="2">维修任务</option>
+                <option value="1">保养任务</option>
+            </select>
+        </mat-form-field>
+            
+        <mat-form-field>
+            <input matInput [matDatepicker]="dp" placeholder="请选择日期" [value]="selectDate">
+            <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp startView="multi-year" (monthSelected)="chosenMonthHandler($event, dp)"
+                panelClass="example-month-picker">
+            </mat-datepicker>
+        </mat-form-field>
+        <!-- <div style="height: 61px;">
+            
+            <mat-form-field >
+                <select matNativeControl (change)="switchBuildType()" required [(ngModel)]="checkBuild">
+                    <option value="">全部</option>
+                    <option *ngFor="let item of buildingList" value="{{item.Seq}}">{{item.Name}}</option>
+                </select>
+            </mat-form-field>
+        </div> -->
+    <div style="display: flex;align-items: center;">
+        <div style="font-size: 12px;font-weight: 400;margin-right: 20px;">建筑物</div>
+        <mat-form-field>
+            <select matNativeControl  required [(ngModel)]="checkBuild">
+                <option value="">全部</option>
+                <option *ngFor="let item of buildingList" value="{{item.Seq}}">{{item.Name}}</option>
+            </select>
+        </mat-form-field>
+    </div>
+        <div class="btn" style="cursor: pointer;" (click)="getPlanList()">查询</div>
+        <div class="real-time-detail" style="cursor: pointer;" (click)="goRealTimeDetail()">实时巡检详情</div>
+        <div>
+            <button mat-stroked-button color="primary" class="download" (click)="downloadDeviceFile()">导出Excel</button>
+        </div>
+    </div>
+
+    <div class="con">
+        <div class="xj" *ngIf="checkType != 2">
+            <div class="hd-bar">
+                <ul class="week"></ul>
+                <div class="color">
+                    <div>
+                        <span class="c1"></span>
+                        已完成
+                    </div>
+                    <div>
+                        <span class="c2"></span>
+                        异常
+                    </div>
+                    <div>
+                        <span class="c3"></span>
+                        待审核
+                    </div>
+                    <div>
+                        <span class="c4"></span>
+                        待确认
+                    </div>
+                    <div>
+                        <span class="c5"></span>
+                        执行中
+                    </div>
+                    <div>
+                        <span class="c6"></span>
+                        未开始
+                    </div>
+                    <div>
+                        <span class="c7"></span>
+                        异常终止
+                    </div>
+                </div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <td>计划名称</td>
+                        <td class="is-week" *ngFor="let item of (xjList[0] ? xjList[0].dataList : []); let i = index">
+                            {{item.weekDay}}
+                            <br/>
+                            {{i + 1}}
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let item of xjList">
+                        <td (click)="goDetail('list', item)" style="cursor: pointer;">
+                            {{item.MSName}}
+                        </td>
+                        <td (click)="goDetail(checkType == 0 ? 'xj' : 'by', item2)" [ngStyle]="{'cursor': item2.State ? 'pointer' : ''}" [ngClass]="{'c1': (item2.State == 9 || item2.State == 10 || item2.State == 16  || item2.State == 32 || item2.State == 48  || item2.State == 73), 'c3': (item2.State == 70 || item2.State == 72), 'c4': item2.State == 71, 'c5': (item2.State == 74 || item2.State == 75), 'c6': (item2.State == -1), 'c7': (item2.State == 11 || item2.State == 12 || item2.State == 13 || item2.State == 49)}" *ngFor="let item2 of item.dataList; let i = index">
+                            <div *ngIf="item2.Exception == 1" style="width:15px;height: 15px;border-radius: 50%;background: #F56C6C;margin: 0 auto;"></div>
+                            <div *ngIf="item2.Exception != 1"style="width:15px;height: 15px;border-radius: 50%;"></div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="wx" *ngIf="checkType == 2">
+            <div class="hd-bar">
+                <ul class="week">
+                    <li (click)="wxWeekIndex = i;setwxWeekTotal()" *ngFor="let item of wxWeekTotal,let i = index" [ngClass]="{'on': i == wxWeekIndex}">{{item.name}}</li>
+                </ul>
+                <div class="color">
+                    <div>
+                        <span class="c1"></span>
+                        已完成
+                    </div>
+                    <div>
+                        <span class="c2"></span>
+                        异常
+                    </div>
+                    <div>
+                        <span class="c3"></span>
+                        待审核
+                    </div>
+                    <div>
+                        <span class="c4"></span>
+                        待确认
+                    </div>
+                    <div>
+                        <span class="c5"></span>
+                        执行中
+                    </div>
+                    <div>
+                        <span class="c7"></span>
+                        异常终止
+                    </div>
+                </div>
+            </div>
+            <div class="table">
+                <div class="tbody th" style="border:none;">
+                    <div>
+                        <div *ngFor="let item of wxGetDayList">
+                            {{item.day}}<br/>{{item.week}}
+                        </div>
+                    </div>
+                </div>
+                <div class="tbody">
+                    <div *ngFor="let item of wxGetDayList" class="wx-list">
+                        <div (click)="goDetail('wx', item2)" *ngFor="let item2 of item.dataList" [ngClass]="{'c1': (item2.State == 9 || item2.State == 10 || item2.State == 16  || item2.State == 32 || item2.State == 48  || item2.State == 73), 'c3': (item2.State == 70 || item2.State == 72), 'c4': item2.State == 71, 'c5': (item2.State == 74 || item2.State == 75), 'c7': (item2.State == 11 || item2.State == 12 || item2.State == 13 || item2.State == 49)}" style="position: relative;">
+                            <div *ngIf="item2.Exception == 1" style="width:15px;height: 15px;border-radius: 50%;background: #F56C6C;margin: 0 auto;left: 5px;top: 5px;position: absolute;"></div>
+                            {{item2.MsName}}
+                        </div>
+                        <!-- <div class="c2">
+                            泵闸巡检08:00<br/>(红星排涝站巡检)
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

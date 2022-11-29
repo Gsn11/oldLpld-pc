@@ -1,0 +1,47 @@
+@import '../../../../../common/utils/css/table.scss';
+table {
+  width: 100%;
+}
+.mat-elevation-z8{
+  background: #FFFFFF;
+}
+.btn{
+  margin: 20px;
+  padding: 10px 20px;
+  border: none!important;
+}
+.btnSlect{
+  background: #2196F3;
+  color: #fff;
+  border: none;
+  outline: none;
+}
+.template{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.template div{
+  width: 25%;
+}
+.WidCss{
+  width: 100px!important;
+}
+.orderfixSearchList {
+    margin: 0 0 20px 0;
+    padding: 21px 38px;
+    background: #FFFFFF;
+    box-shadow: 0px 0px 10px 0px rgba(11, 7, 8, 0.1);
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    flex-flow: column;
+    .searchTools {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .download {
+            margin-right: 10px;
+        }
+    }
+}

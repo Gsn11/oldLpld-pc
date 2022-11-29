@@ -1,0 +1,21 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="page-main">
+    <div class="video-list">
+        <button 
+            *ngFor="let item of videoList" 
+            mat-raised-button 
+            [color]="false ? 'primary' : false" 
+            class="loginBtn"
+            (click)="lookVideo(item)"
+        >{{item.cameraName}}</button>
+    </div>
+
+    <video
+        #video
+        class="video-js"
+        preload="auto"
+        autoplay
+        controls
+        data-setup="{}"
+    ></video>
+</div>

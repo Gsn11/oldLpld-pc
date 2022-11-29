@@ -1,0 +1,167 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span> 设备编号</span>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput placeholder="请输入设备编号" [(ngModel)]="DeviceNo">
+        </mat-form-field>
+    </div>
+    <!-- <div>
+        <span> 自动编号</span>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput [(ngModel)]="code" readonly>
+        </mat-form-field>
+    </div> -->
+    <div>
+        <span>设备名称</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入设备名称" [(ngModel)]="DeviceName">
+        </mat-form-field>
+    </div>
+    <div *ngIf="buildData.buildType != '联排联调'">
+        <span>固定资产编号</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入固定资产编号" [(ngModel)]="assetNumber">
+        </mat-form-field>
+    </div>
+    <div *ngIf="buildData.buildType != '联排联调'">
+        <span>固定资产名称</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入固定资产名称" [(ngModel)]="assetName">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>设备常用名</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入设备常用名" [(ngModel)]="DeviceExtno">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>{{buildData.buildType === '联排联调' ? '所属子系统' : '系统分类'}}</span>
+        <mat-form-field>
+            <mat-label>请选择{{buildData.buildType === '联排联调' ? '所属子系统' : '系统分类'}}</mat-label>
+            <mat-select [formControl]="SelectSubSys">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let s of SubSys" [value]="s.Seq">
+                    {{s.SName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 设备型号 </span>
+        <span (click)="openDeviceModelDialog()" class="chooseName">{{DeviceModelName}}</span>
+    </div>
+    <div>
+        <span>出厂编号</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入出厂编号" [(ngModel)]="factoryNum">
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectDeviceModel && SelectDeviceModel.FName">
+        <span>厂商</span>
+        <span style="color: gray;">{{SelectDeviceModel.FName}}</span>
+    </div>
+    <div *ngIf="SelectDeviceModel && SelectDeviceModel.BRName">
+        <span>品牌</span>
+        <span style="color: gray;">{{SelectDeviceModel.BRName}}</span>
+    </div>
+    <div>
+        <span>状态</span>
+        <mat-form-field>
+            <mat-label>请选择状态</mat-label>
+            <mat-select [formControl]="stateSelect">
+                <mat-option *ngFor="let s of stateList" [value]="s.state">
+                    {{s.state | typeTranslate}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div>
+        <span>{{buildData.buildType === '联排联调' ? '报警级别' : 'ABC分类'}}</span>
+        <mat-form-field>
+            <mat-label>请选择{{buildData.buildType === '联排联调' ? '报警级别' : 'ABC分类'}}</mat-label>
+            <mat-select [formControl]="SelectAlertLevel">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let a of AlertLevel" [value]="a.Seq">
+                    {{a.AlertLevelName}} {{a.LevelType == 0 ? '设备故障': a.LevelType == 1 ? '防汛防台风' : a.LevelType == 2 ? '次氯酸钠泄漏事故' : a.LevelType == 3 ? '水源水质突发事件' : a.LevelType == 4 ? '制水生产水质突发事件': a.LevelType == 5 ? '反恐怖防范' : a.LevelType == 6 ? '火灾事故' : a.LevelType == 7 ? '供水设备故障突发事件' : '有限空间作业事故'}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div>
+        <span>{{buildData.buildType === '联排联调' ? '价格' : '单价'}}</span>
+        <mat-form-field class="example-full-width">
+            <input matInput [placeholder]="'请输入' + (buildData.buildType === '联排联调' ? '价格' : '单价')" [(ngModel)]="Price">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>购买日期</span>
+        <app-calendar [setCreateDate]="BuyDate" (getTime)="getBuyDate($event)"></app-calendar>
+    </div>
+    <div>
+        <span>出厂日期</span>
+        <app-calendar [setCreateDate]="ManuDate" (getTime)="getManuDate($event)"></app-calendar>
+    </div>
+    <div>
+        <span>安装日期</span>
+        <app-calendar [setCreateDate]="InstallDate" (getTime)="getInstallDate($event)"></app-calendar>
+    </div>
+    <div>
+        <span>保修截止日期</span>
+        <app-calendar [setCreateDate]="WarrantyExpire" (getTime)="getWarrantyExpire($event)"></app-calendar>
+    </div>
+    <div *ngIf="buildData.buildType == '联排联调'">
+        <span><span style="color: red;">*</span> {{'Building' | wordTranslate}}</span>
+        <span (click)="openDialog()" class="chooseName">{{DefalutName}}</span>
+    </div>
+    <div *ngIf="buildData.buildType != '联排联调'">
+        <span>功能位置</span>
+        <span (click)="openDialog()" class="chooseName">{{DefalutName}}</span>
+    </div>
+    <div *ngIf="SelectItem && SelectItem.Floor && buildData.buildType == '联排联调'">
+        <span>所在楼层</span>
+        <span style="color: gray;">{{SelectItem.Floor}}</span>
+    </div>
+    <div *ngIf="SelectItem && SelectItem.Zone">
+        <span>{{buildData.buildType === '联排联调' ? '所在楼层的区域/房间' : '所在位置'}}</span>
+        <span style="color: gray;">{{SelectItem.Zone}}</span>
+    </div>
+    <div *ngIf="SelectItem && SelectItem.SpacePos && buildData.buildType == '联排联调'">
+        <span>所在区域/房间的空间位置</span>
+        <span style="color: gray;">{{SelectItem.SpacePos}}</span>
+    </div>
+    <div>
+        <span>上次保养时间</span>
+        <app-calendar [setCreateDate]="LastMaintainDate" (getTime)="getLastMaintainDate($event)"></app-calendar>
+    </div>
+    <div>
+        <span>保养周期</span>
+        <div>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="请输入保养周期(单位：天)" [(ngModel)]="MaintainPeriod" (input)="MaintainPeriodChange($event)" maxlength="3">
+            </mat-form-field>
+        </div>
+    </div>
+    <div>
+        <span>下次保养时间</span>
+        <span style="color: gray;">{{keepDate}}</span>
+    </div>
+    <div>
+        <span>{{buildData.buildType === '联排联调' ? '设备寿命' : '使用年限'}}</span>
+        <mat-form-field class="example-full-width">
+            <input matInput [placeholder]="'请输入' + (buildData.buildType === '联排联调' ? '设备寿命(单位：年)' : '使用年限(单位：年)')" [(ngModel)]="ServiceLife" maxlength="3">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>其它图片和文档</span>
+        <app-manyfile [setImgsrcData]="imgsrcData" [docList]="docListData"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoHistory()"><span class="iconfont"></span> 历史记录</button>
+        <button mat-button (click)="gotoHistoryState()"><span class="iconfont"></span>状态记录</button>
+        <button class="primise" mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

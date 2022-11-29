@@ -1,0 +1,52 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+  <div class="searchList">
+    <div>
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" placeholder="子系统名称" [(ngModel)]="searchName" (keyup.enter)="getList()">
+      </mat-form-field>
+      <button mat-raised-button color="primary" class="loginBtn" (click)="pageIndex = 1;getList()">搜索</button>
+    </div>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="list" style="width: 100%;">
+      <ng-container matColumnDef="SName">
+        <th mat-header-cell *matHeaderCellDef> 子系统 </th>
+        <td mat-cell *matCellDef="let element"> {{element.SName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="Img">
+        <th mat-header-cell *matHeaderCellDef> 子系统图标 </th>
+        <td mat-cell *matCellDef="let element">
+          <a target="blank" [href]="element.Img" *ngIf="element.Img"><img class="subsystemImage" [src]="element.Img" alt="subsysImage"></a>
+          <span *ngIf="!element.Img">暂无</span>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="DocUrl">
+        <th mat-header-cell *matHeaderCellDef> 子系统验收文档 </th>
+        <td mat-cell *matCellDef="let element">
+          <div *ngFor="let d of element.Docs"
+            style="margin:10px 0px; text-overflow: clip; white-space: pre-wrap; word-break: break-all;">
+            <a target="blank" [href]="d.DocUrl">{{d.DocDesc ? d.DocDesc : '无名称'}}</a>
+          </div>
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="Other">
+        <th mat-header-cell *matHeaderCellDef> 操作 </th>
+        <td mat-cell *matCellDef="let element" class="Other">
+          <span  (click)="gotoEdit(element)">编辑</span>
+          <!-- <span *ngIf="customer === element.Customer" class="deleteItem" (click)="showConfim(element.Seq)">删除</span>
+          <span *ngIf="customer !== element.Customer" class="enable">不可操作</span> -->
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+    </table>
+    <div style="background: white;">
+      <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+        [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+  <app-confim [confim]="setConfim" (setConfimResult)="tableConfimResult($event)"></app-confim>
+</div>
+<app-modal (updateData)="getList()"></app-modal>

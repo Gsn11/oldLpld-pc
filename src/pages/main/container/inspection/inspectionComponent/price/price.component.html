@@ -1,0 +1,85 @@
+<div class="Items-out">
+    <div class="btn-list">
+        <button mat-raised-button color="primary" (click)="tamplateModalBox()">模版库</button>
+        <button mat-raised-button color="primary" (click)="itemModalBox()">新增条目</button>
+    </div>
+
+    <mat-card>
+        <div class="template">
+            <div><span>报价条目</span></div>
+            <div><span>价格</span></div>
+            <div><span>所涉设备</span></div>
+            <div><span>操作</span></div>
+        </div>
+    </mat-card>
+
+    <mat-card *ngFor="let i of Items, let iIndex = index">
+        <div class="template">
+            <div><span>{{i.ItemName || i.Item}}</span></div>
+            <div *ngIf="!i.PricePayee"><span>{{i.Price}}</span></div>
+            <div *ngIf="i.PricePayee"><span>{{i.PricePayee}}</span></div>
+            <div><span>{{i.DeviceName}}({{i.DeviceNo}})</span></div>
+            <div>
+                <span class="editItem" (click)="itemModalBox('edit', iIndex)">编辑</span>
+                <span class="deleteItem" (click)="deleteItem(iIndex)">删除</span>
+            </div>
+        </div>
+    </mat-card>
+</div>
+
+<!-- 模板库 -->
+<div class="modal-out" [ngClass]="{'active': treeModalShow }">
+    <div class="bg" (click)="treeCancel()"></div>
+    <div class="container">
+        <div class="header"><span class="title">模板查找</span></div>
+        <div class="main">
+            <div>
+                <mat-form-field>
+                    <mat-label>请选择子系统</mat-label>
+                    <mat-select [formControl]="SelectSubSystems" (selectionChange)="subsystemChange($event)">
+                        <mat-option>无</mat-option>
+                        <mat-option *ngFor="let s of SubSystems" [value]="s.Seq">{{s.SName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="select-out">
+                    <mat-select [placeholder]="CustomerOfferItems && CustomerOfferItems.length !== 0 ? '请选择报价条目' : '此系统无报价条目'" [formControl]="SelectCustomerOfferItems" multiple>
+                        <mat-option *ngFor="let c of CustomerOfferItems" [value]="c.COISeq">{{c.ItemName}}(￥{{c.Price}}) - {{c.DeviceNo}}({{c.DeviceName}})</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="treeCancel()">取消</button>
+            <button mat-button (click)="templateSave()">确认</button>
+        </div>
+    </div>
+</div>
+
+<!-- 新增条目 -->
+<div class="modal-out" [ngClass]="{'active': itemShow}">
+    <div class="bg" (click)="itemCancel()"></div>
+    <div class="container">
+        <div class="header"><span class="title">新增模版条目</span></div>
+        <div class="main">
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="请输入报价条目" [(ngModel)]="ItemName">
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width">
+                    <input matInput type="number" placeholder="请输入价格" [(ngModel)]="Price">
+                </mat-form-field>
+            </div>
+            <div>
+                <span (click)="openDialog()" class="chooseDeviceName">{{deviceName}}</span>
+            </div>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="itemCancel()"><span class="iconfont iconpstep"></span>取消</button>
+            <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        </div>
+    </div>
+</div>

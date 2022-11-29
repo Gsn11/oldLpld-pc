@@ -1,0 +1,25 @@
+<div class="Dashboard">
+    <div class="homeBtn" (click)="gotoHome()"><span>返回</span></div>
+    <div class="topCharts" style="height: 31%;">
+        <div class="pie1" style="height: 100%; width: 31%;">
+            <div echarts [options]="pieTopLeft" style="width: 100%; height: 100%;"></div>
+        </div>
+        <div class="pie2" style="height: 100%; width: 31%;">
+            <div echarts [options]="pieTopMiddle" style="width: 100%; height: 100%;"></div>
+        </div>
+        <div class="pie3" style="height: 100%; width: 31%;">
+            <div echarts [options]="pieTopRight" style="width: 100%; height: 100%;"></div>
+        </div>
+    </div>
+    <div class="middleCharts" style="height:31%;">
+        <div class="middle-left" style="height: 100%; width: 50%;">
+            <div echarts [options]="barMiddleLeft" style="height: 100%; width: 100%"></div>
+        </div>
+        <div class="middle-right" style="height: 100%; width: 50%;">
+            <div echarts [options]="lineMiddleRight" style="height: 100%; width: 100%"></div>
+        </div>
+    </div>
+    <div class="bottomCharts" style="width: 100%; height: 31%;">
+        <div echarts [options]="barBottom" style="height: 100%; width: 100%"></div>
+    </div>
+</div>

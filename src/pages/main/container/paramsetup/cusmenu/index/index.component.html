@@ -1,0 +1,28 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+	<div class="switch-out">
+		<app-tree class="treeList" [List]="sidebarData" [allSwitchIsOpen]="allSwitchIsOpen"
+			(setTreeChange)="treeChange($event)"></app-tree>
+	</div>
+	<div class="inputInfo" style="height: 100%; align-items: start;">
+		<div style="height: 400px; margin-top: 200px;">
+			<div class="header">
+				<span>当前选择：</span>
+				<span>{{nowItemName}}</span>
+			</div>
+			<div class="main">
+				<div class="infoList">
+					<div>
+						<mat-form-field class="example-full-width inputField">
+							<input matInput placeholder="请输入菜单名称" [formControl]="newChildrenItem" required>
+							<mat-error *ngIf="newChildrenItem.invalid">{{getnewChildrenItemErrorMessage()}}</mat-error>
+						</mat-form-field>
+					</div>
+				</div>
+				<div class="btnList">
+					<button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

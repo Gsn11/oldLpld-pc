@@ -1,0 +1,36 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>二维码</span>
+        <span>
+            <qr-code [value]="bemInfoData.UUID" [size]="120"></qr-code>
+        </span>
+    </div>
+    <div>
+        <span *ngIf="buildData.buildType === '联排联调'">{{'BuildingName' | wordTranslate}}</span>
+        <span *ngIf="buildData.buildType === '东南水厂'">功能位置</span>
+        <span>{{bemInfoData.CName}}({{bemInfoData.BuildingName}})</span>
+    </div>
+    <div *ngIf="buildData.buildType === '联排联调'">
+        <span>所在楼层</span>
+        <span>{{bemInfoData.Floor}}</span>
+    </div>
+    <div>
+        <span>所在楼层的区域/房间</span>
+        <span>{{bemInfoData.Zone}}</span>
+    </div>
+    <div *ngIf="buildData.buildType === '联排联调'">
+        <span>所在区域/房间的空间位置</span>
+        <span>{{bemInfoData.SpacePos}}</span>
+    </div>
+    <div>
+        <span>设施图片</span>
+        <app-manyfile [setImgsrcData]="imgsrcData" [setType]="manyFileUseType"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="gotoEdit()" *ngIf="userPower"><span class="iconfont iconedit"></span>编辑</button>
+        <button mat-button (click)="showConfim()" *ngIf="userPower"><span class="iconfont icondelete"></span>删除</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>
+<app-confim [confim]="setConfim" (setConfimResult)="infoConfimResult($event)"></app-confim>

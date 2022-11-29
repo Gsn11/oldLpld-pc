@@ -1,0 +1,77 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+  <div class="searchList">
+    <div>
+      <mat-form-field>
+          <mat-label>请选择设备类型</mat-label>
+          <mat-select [formControl]="deviceMainTypeSelect">
+              <mat-option [value]="0">所有类型</mat-option>
+              <mat-option *ngFor="let d of deviceMainType" [value]="d">
+                  {{d | deviceMainTypeTranslate}}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
+      <mat-form-field class="example-form-field">
+        <input matInput type="number" placeholder="库存量" [(ngModel)]="number" (keyup.enter)="getList()">
+      </mat-form-field>
+  </div>
+    <div>
+      <mat-form-field class="example-form-field">
+        <input matInput type="text" placeholder="型号名称" [(ngModel)]="searchName" (keyup.enter)="getList()">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="pageIndex = 1;getList()">搜索</button>
+    </div>
+    <div>
+    <!-- <button mat-stroked-button color="primary" class="download" (click)="fileBoxChange()">设备型号导入</button> -->
+    <!-- <button mat-raised-button color="primary" class="loginBtn" (click)="gotoAdd()">新增</button> -->
+  </div>
+  </div>
+
+  <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="list" style="width: 100%;">
+      <ng-container matColumnDef="MainType">
+        <th mat-header-cell *matHeaderCellDef> 设备主分类 </th>
+        <td mat-cell *matCellDef="let element"> {{element.MainType | deviceMainTypeTranslate}} </td>
+      </ng-container>
+      <ng-container matColumnDef="DTName">
+        <th mat-header-cell *matHeaderCellDef> 设备分类 </th>
+        <td mat-cell *matCellDef="let element"> {{element.DTName}} </td>
+      </ng-container>
+      <ng-container matColumnDef="DMName">
+        <th mat-header-cell *matHeaderCellDef> 设备名称-型号 </th>
+        <td mat-cell *matCellDef="let element">
+          <span *ngIf="element.DMName">{{element.DMName}} - </span> {{element.Id}}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="BRName">
+        <th mat-header-cell *matHeaderCellDef> 厂商品牌 </th>
+        <td mat-cell *matCellDef="let element"> {{element.BRName }} </td>
+      </ng-container>
+      <ng-container matColumnDef="Total">
+        <th mat-header-cell *matHeaderCellDef> 库存 </th>
+        <td mat-cell *matCellDef="let element"> {{element.Total }} </td>
+      </ng-container>
+      <ng-container matColumnDef="State">
+        <th mat-header-cell *matHeaderCellDef> 状态 </th>
+        <td mat-cell *matCellDef="let element"> {{element.State=== 0?'正常':'已删除' }} </td>
+      </ng-container>
+      <ng-container matColumnDef="Other">
+        <th mat-header-cell *matHeaderCellDef> 操作 </th>
+        <td mat-cell *matCellDef="let element" class="Other">
+          <span (click)="gotoInfo(element)">查看</span>
+          <!-- <span *ngIf="customer === element.Customer" (click)="gotoEdit(element)">编辑</span>
+          <span *ngIf="customer === element.Customer" class="deleteItem" (click)="showConfim(element.DMSeq)">删除</span>
+          <span *ngIf="customer !== element.Customer" class="enable">不可操作</span> -->
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+    </table>
+    <div style="background: white;">
+      <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+        [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+  <app-confim [confim]="setConfim" (setConfimResult)="tableConfimResult($event)"></app-confim>
+</div>
+<app-excelupload [url]="UploadAddr" (getList)="getList()" [info]="downloadInfo"></app-excelupload>

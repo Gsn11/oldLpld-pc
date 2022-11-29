@@ -1,0 +1,44 @@
+<div class="sidebar">
+    <div class="sidebarMain">
+        <div class="logoList">
+            <div class="logo2" (click)="gotoUserinfo()">
+                <img *ngIf="avatar" [src]="avatar" alt="logo2Image">
+                <img *ngIf="!avatar" src="../../../../assets/all/logo2.png" alt="logo2Image">
+            </div>
+            <div class="userName" (click)="gotoUserinfo()"><span>{{userName}}</span></div>
+        </div>
+        <div class="sidebarBox">
+            <div class="sidebarList" *ngFor="let s of sidebarData,let dindex = index">
+                <div class="sidebarName" (click)="toggle(dindex)" [ngClass]="{'activeSidebarList': sidebarIndex === dindex}">
+                    <span class="iconfont" [class]="s.icon" [ngClass]="{'active': s.iconShow === 1}">
+                    </span>
+                    {{s.name}}
+                    <span class="iconfont iconadd" *ngIf="s.submenu.length !== 0 && !s.switch"></span>
+                    <span class="iconfont iconreduce" *ngIf="s.submenu.length !== 0 && s.switch"></span>
+                </div>
+                <div class="sideItemList" *ngFor="let c of s.submenu,let cindex = index"
+                    [@firstSwitch]="s.switch ? 'open' : 'closed'">
+                    <div class="sideItemName" (click)="toggleItem(dindex, cindex)"
+                        [ngClass]="{'activeSideBarItem': sideItemIndex === cindex, 'activeOff': isThirdOpen === true}">
+                        <span class="iconfont iconadd" *ngIf="c.submenu.length !== 0 && !c.switch"></span>
+                        <span class="iconfont iconreduce" *ngIf="c.submenu.length !== 0 && c.switch"></span>
+                        {{c.name}}
+                    </div>
+                    <div class="itemList" [@thirdSwitch]="c.switch ? 'open' : 'closed'">
+                        <div class="item" *ngFor="let cc of c.submenu,let ccIndex = index"
+                            (click)="thirdChoose(dindex, cindex, ccIndex)"
+                            [ngClass]="{'activeItem': sideThirdIndex === ccIndex}">
+                            {{cc.name}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <span *ngIf="!Isentver">inside BEM <sup>IMS</sup></span>
+        <span *ngIf="!Isentver">{{version.Version}}</span>
+        <span *ngIf="Isentver">(BEM-EF-CLOUD)云平台V1.0</span>
+    </div>
+</div>

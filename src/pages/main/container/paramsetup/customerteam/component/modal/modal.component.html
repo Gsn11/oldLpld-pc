@@ -1,0 +1,26 @@
+<div class="modal-out" [ngClass]="{'active': show}">
+    <div class="bg" (click)="switchModalBox()"></div>
+    <div class="container">
+        <div class="header"><span class="title">新增下属部门</span></div>
+        <div class="main">
+            <div style="margin-top: 10px;">
+                <span>所属部门父级：{{Name}}</span>
+            </div>
+            <div>
+                <mat-form-field class="example-full-width inputField">
+                    <input matInput placeholder="请输入部门分类名称" [formControl]="newChildrenItem" required>
+                    <mat-error *ngIf="newChildrenItem.invalid">{{getnewChildrenItemErrorMessage()}}</mat-error>
+                </mat-form-field>
+            </div>
+            <div style="margin-right: auto;">
+                <mat-checkbox [(ngModel)]="serverStatistics">
+                    服务统计
+                </mat-checkbox>
+            </div>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="goCancel()"><span class="iconfont iconpstep"></span>取消</button>
+            <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        </div>
+    </div>
+</div>

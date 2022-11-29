@@ -1,0 +1,67 @@
+@import '../../../../../common/utils/css/table.scss';
+
+.containerPadding{
+    padding: 20px 35px 35px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.add-parts{
+    display: block;
+    margin-left: auto;
+    margin-bottom: 20px;
+}
+
+.top-txt p{
+    font-size: 14px;
+}
+
+.dev-pop{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    left: 0;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .main{
+        padding: 20px;
+        background: #fff;
+        border-radius: 10px;
+        .dev-list{
+            width: 400px;
+            height: 200px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            ul{
+                list-style: none;
+                margin: 0;
+                padding: 0;
+            }
+            li{
+                height: 30px;
+                align-items: center;
+                display: flex;
+                overflow: hidden;
+                p{
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                }
+                span{
+                    cursor: pointer;
+                    margin-left: 10px;
+                }
+            }
+        }
+        .btn-g{
+            justify-content: center;
+            display: flex;
+            button{
+                margin:0 10px;
+            }
+        }
+    }
+}

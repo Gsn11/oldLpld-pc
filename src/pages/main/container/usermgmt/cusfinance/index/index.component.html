@@ -1,0 +1,64 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+  <div class="financeSearchList">
+    <div class="money">
+      <span>余额（元）：{{Amount}} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span>冻结余额（元）：{{AmountFreeze}} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span>总充值金额（元）：{{Recharge}} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+      <span>总提现金额（元）：{{Withdraw}} &nbsp;&nbsp;&nbsp;&nbsp;</span>
+    </div>
+    <div class="fSearchList">
+      <div>
+        <app-calendar [setCreateDate]="BeginTime" (getTime)="getBeginTime($event)" title="开始日期"></app-calendar>
+        <button mat-raised-button color="primary" class="loginBtn" style="margin-left: 10px;" (click)="pageIndex = 1;getList()">搜索</button>
+        <button mat-raised-button class="GrayBtn" style="margin-left: 10px;" (click)="clear()">清除</button>
+      </div>
+      <button mat-raised-button color="primary" style="margin-left: 10px;" (click)="gotoRecharge()">充值</button>
+    </div>
+  </div>
+
+  <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="List" style="width: 100%;">
+          <ng-container matColumnDef="PayOrderno">
+            <th mat-header-cell *matHeaderCellDef> 支付流水号 </th>
+            <td mat-cell *matCellDef="let element"> {{element.PayOrderno}} </td>
+          </ng-container>
+        <ng-container matColumnDef="Time">
+          <th mat-header-cell *matHeaderCellDef> 时间 </th>
+          <td mat-cell *matCellDef="let element"> {{element.Time}} </td>
+        </ng-container>
+        <ng-container matColumnDef="PayeeName">
+          <th mat-header-cell *matHeaderCellDef> 收款人 </th>
+          <td mat-cell *matCellDef="let element"> {{element.PayeeName || element.PayeeAct}} </td>
+        </ng-container>
+        <ng-container matColumnDef="AmountPayee">
+          <th mat-header-cell *matHeaderCellDef> 收款金额（元） </th>
+          <td mat-cell *matCellDef="let element"> {{ element.getMoney }} </td>
+        </ng-container>
+        <ng-container matColumnDef="PayerName">
+          <th mat-header-cell *matHeaderCellDef> 付款人 </th>
+          <td mat-cell *matCellDef="let element"> {{element.PayerName }} </td>
+        </ng-container>
+        <ng-container matColumnDef="Amount">
+          <th mat-header-cell *matHeaderCellDef> 付款金额（元） </th>
+          <td mat-cell *matCellDef="let element"> {{ element.Amount }} </td>
+        </ng-container>
+        <ng-container matColumnDef="State">
+          <th mat-header-cell *matHeaderCellDef> 状态 </th>
+          <td mat-cell *matCellDef="let element"> {{ element.State | financeTypeTranslate }} </td>
+        </ng-container>
+        <ng-container matColumnDef="Other">
+          <th mat-header-cell *matHeaderCellDef> 操作 </th>
+          <td mat-cell *matCellDef="let element" class="Other">
+            <span (click)="gotoInfo(element)">查看</span>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+      </table>
+      <div style="background: white;">
+        <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+          [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+      </div>
+    </div>
+</div>

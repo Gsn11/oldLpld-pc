@@ -1,0 +1,185 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="detailOut">
+    <div>
+        <span>派单类别</span>
+        <span>报警派单</span>
+    </div>
+    <div>
+        <span>{{'customer' | wordTranslate}}</span>
+        <span>{{bemInfoData.customer}}</span>
+    </div>
+    <div>
+        <span>设备编号</span>
+        <span>{{bemInfoData.device}}</span>
+    </div>
+    <div>
+        <span>设备名称</span>
+        <span>{{bemInfoData.devName}}</span>
+    </div>
+    <div>
+        <span>所属子系统</span>
+        <span>{{bemInfoData.subsys}}</span>
+    </div>
+    <div>
+        <span>设备型号</span>
+        <span>{{bemInfoData.model}}</span>
+    </div>
+    <div *ngIf="DeviceList">
+        <span>厂商</span>
+        <span>{{DeviceList.Facturer}}</span>
+    </div>
+    <div *ngIf="DeviceList">
+        <span>品牌</span>
+        <span>{{DeviceList.Brand}}</span>
+    </div>
+    <div *ngIf="DeviceList">
+        <span>购买日期</span>
+        <span>{{DeviceList.BuyDate}}</span>
+    </div>
+    <div *ngIf="DeviceList">
+        <span>出厂日期</span>
+        <span>{{DeviceList.ManuDate}}</span>
+    </div>
+    <div *ngIf="DeviceList">
+        <span>安装日期</span>
+        <span>{{DeviceList.InstallDate}}</span>
+    </div>
+    <div *ngIf="DeviceList">
+        <span>设备重要性等级</span>
+        <span>{{DeviceList.AlertLevelName}}</span>
+    </div>
+    <div style="width: 100%; height: 1px; border-bottom: 1px dashed #a1a1a1;"></div>
+    <div>
+        <span>省份/城市/区县</span>
+        <span>
+            <span *ngIf="bemInfoData.Country">{{bemInfoData.Country === 'CN'? '中国': ''}}</span>
+            <span *ngIf="bemInfoData.provinceCode"> / {{bemInfoData.provinceCode | codeTranslateProvince}}</span>
+            <span *ngIf="bemInfoData.cityCode"> /
+                {{bemInfoData.cityCode | codeTranslateCity: bemInfoData.provinceCode }}</span>
+            <span *ngIf="bemInfoData.districtCode"> /
+                {{bemInfoData.districtCode | codeTranslateDistrict: [bemInfoData.provinceCode, bemInfoData.cityCode]}}</span>
+        </span>
+    </div>
+    <div *ngIf="DeviceList">
+        <span>设备位置</span>
+        <span>
+            <span *ngIf="DeviceList.Building">{{DeviceList.Building}}</span>
+            <span *ngIf="DeviceList.Floor"> - {{DeviceList.Floor}}</span>
+            <span *ngIf="DeviceList.Zone"> - {{DeviceList.Zone}}</span>
+            <span *ngIf="DeviceList.SpacePos"> - {{DeviceList.SpacePos}}</span></span>
+    </div>
+    <div style="width: 100%; height: 1px; border-bottom: 1px dashed #a1a1a1;"></div>
+    <div>
+        <span>首次报警时间</span>
+        <span>{{bemInfoData.firstTimeStr}}</span>
+    </div>
+    <div>
+        <span>故障描述</span>
+        <span>{{bemInfoData.msg}}</span>
+    </div>
+    <div style="width: 100%; height: 1px; border-bottom: 1px dashed #a1a1a1;"></div>
+    <div *ngIf="SelectServiceType.value !== '0'">
+        <span>接单时限（小时）</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入接单时限（小时）" [(ngModel)]="OrderTimeOut" maxlength="4">
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectServiceType.value !== '0'">
+        <span>抵达时限（小时）</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入抵达时限（小时）" [(ngModel)]="WorkExpire" maxlength="4">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>处理反馈时限（小时）</span>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="请输入处理反馈时限（小时）" [(ngModel)]="ArriveExpire" maxlength="4">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>处理反馈类型</span>
+        <div>
+            <mat-form-field>
+                <mat-label>请选择处理反馈类型</mat-label>
+                <mat-select [formControl]="SelectItems">
+                    <mat-option *ngFor="let i of Items" [value]="i">{{i | feedbacktypeTranslate}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div>
+        <span><span style="color: red;">*</span> 任务名称</span>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput placeholder="请输入任务名称" [(ngModel)]="MSName">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>任务描述</span>
+        <mat-form-field class="example-full-width inputField">
+            <input matInput placeholder="请输入任务描述" [(ngModel)]="MSDesc">
+        </mat-form-field>
+    </div>
+    <div>
+        <span>{{'Users' | wordTranslate}}</span>
+        <mat-form-field class="inputField">
+            <mat-label>{{'LebalUsers' | wordTranslate}}</mat-label>
+            <mat-select [formControl]="SelectUsers">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let u of Users" [value]="u.Seq">
+                    {{u.LoginId}} ({{u.Name}}) - {{u.UserTel}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectServiceType.value !== '0'">
+        <span>上门费（元）</span>
+        <div>
+            <span>{{ServiceFee}}</span>
+        </div>
+    </div>
+    <div>
+        <span>服务提供方</span>
+        <mat-form-field>
+            <mat-label>请选择服务提供方</mat-label>
+            <mat-select [formControl]="SelectServiceType" (selectionChange)="serviceTypeChange($event)">
+                <mat-option *ngFor="let s of ServiceType" [value]="s.state">
+                    {{s.name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectServiceType.value === '0'">
+        <span><span style="color: red;">*</span> 工作人员</span>
+        <mat-form-field class="inputField">
+            <mat-label>请选择工作人员</mat-label>
+            <mat-select [formControl]="SelectWorkers">
+                <mat-option *ngFor="let w of Workers" [value]="w.Seq">
+                    {{w.LoginId}} ({{w.Name}}) - {{w.UserTel}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectServiceType.value === '1'">
+        <span><span style="color: red;">*</span> 固定服务商</span>
+        <mat-form-field>
+            <mat-label>请选择固定服务商</mat-label>
+            <mat-select [formControl]="SelectServiceProviders">
+                <mat-option *ngFor="let s of ServiceProviders" [value]="s.Seq">
+                    {{s.SPName}} ({{s.Contact}}) - {{s.Tel}} {{s.BusiDomain}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div *ngIf="SelectServiceType.value === '1' || SelectServiceType.value === '2'">
+        <span>报价</span>
+        <app-price style="width: calc(100% - 220px);"></app-price>
+    </div>
+    <div>
+        <span>其它图片</span>
+        <app-manyfile [setImgsrcData]="imgsrcData"></app-manyfile>
+    </div>
+    <div class="btnList">
+        <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 派单</button>
+        <button mat-button (click)="goback()"><span class="iconfont iconpstep"></span>返回</button>
+    </div>
+</div>

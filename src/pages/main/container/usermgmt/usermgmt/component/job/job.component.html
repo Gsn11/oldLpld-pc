@@ -1,0 +1,35 @@
+<div class="detailsOut">
+    <div>
+        <span>部门岗位</span>
+        <mat-form-field>
+            <mat-label>请选择部门</mat-label>
+            <mat-select [formControl]="SelectTeams">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let t of Teams" [value]="t">
+                    {{t.TName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <mat-form-field style="margin-left: 35px;">
+            <mat-label>请选择岗位</mat-label>
+            <mat-select [formControl]="SelectJobs">
+                <mat-option>无</mat-option>
+                <mat-option *ngFor="let j of Jobs" [value]="j">
+                    {{j.JName}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+        <div class="btnList">
+            <button nz-button nzType="primary" (click)="userJobCheck()">添加(必填)</button>
+            <!-- <button mat-button (click)="userJobCheck()"><span class="iconfont"></span> 添加</button> -->
+        </div>
+    </div>
+    <div>
+        <span></span>
+        <div class="item">
+            <div *ngFor="let u of userJob, let uIndex = index">{{u.TName}} - {{u.JName}}
+                <span class="iconfont iconclose" (click)="deleteUserJobsItem(uIndex)"></span>
+            </div>
+        </div>
+    </div>
+</div>

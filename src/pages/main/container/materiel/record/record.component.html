@@ -1,0 +1,70 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+
+<div class="containerPadding">
+    <div class="tit">{{materialItem.DeviceName}} (编号{{materialItem.DeviceNo}})</div>
+    <div>
+        <div class="mat-elevation-z8">
+            <table mat-table [dataSource]="list" style="width: 100%;">
+                <ng-container matColumnDef="time">
+                    <th mat-header-cell *matHeaderCellDef> 时间 </th>
+                    <td mat-cell *matCellDef="let element; let i = index"> {{ element.MsTime }} </td>
+                </ng-container>
+                <ng-container matColumnDef="state">
+                    <th mat-header-cell *matHeaderCellDef> 状态 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.TypeName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="number">
+                    <th mat-header-cell *matHeaderCellDef> 数量 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Quantity}} </td>
+                </ng-container>
+                <ng-container matColumnDef="unit">
+                    <th mat-header-cell *matHeaderCellDef> 单位 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.MaterialUnit }} </td>
+                </ng-container>
+                <ng-container matColumnDef="price">
+                    <th mat-header-cell *matHeaderCellDef> 单价 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.UnitPrice }} </td>
+                </ng-container>
+                <ng-container matColumnDef="totalPrice">
+                    <th mat-header-cell *matHeaderCellDef> 总价 </th>
+                    <td mat-cell *matCellDef="let element">{{(element.UnitPrice * element.Quantity * 100).toFixed(0) / 100 }} </td>
+                </ng-container>
+                <ng-container matColumnDef="realTotalPrice">
+                    <th mat-header-cell *matHeaderCellDef> 实际 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.Price }} </td>
+                </ng-container>
+                <ng-container matColumnDef="operatePerson">
+                    <th mat-header-cell *matHeaderCellDef> 操作人员 </th>
+                    <td mat-cell *matCellDef="let element"> {{element.OpName }} </td>
+                </ng-container>
+                <ng-container matColumnDef="record">
+                    <th mat-header-cell *matHeaderCellDef> 操作记录 </th>
+                    <td mat-cell *matCellDef="let element" class="Other">
+                       {{element.Remark}}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="lookImg" *ngIf="buildData.buidType != '联排联调'">
+                    <th mat-header-cell *matHeaderCellDef> 查看图片 </th>
+                    <td mat-cell *matCellDef="let element"> <span style="color: #006BE3; cursor: pointer;" (click)="lookImg(element)">查看</span> </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"></tr>
+            </table>
+            <div style="background: white;">
+                <mat-paginator [pageSizeOptions]="pageSizeOptions" [length]="paginatorTotal" [pageIndex]="pageIndex - 1"
+                [pageSize]="pageSize" (page)="change($event)" showFirstLastButtons></mat-paginator>
+            </div>
+        </div>
+    </div>
+    <div class="look-img" *ngIf="showImgPopup" (click)="showImgPopup = false;">
+        <div style="height: 60%;">
+            <div>
+                <img *ngFor="let item of imgList" [src]="item.ImgUrl"/>
+            </div>
+            <button mat-raised-button color="primary" class="close-btn" (click)="showImgPopup = false;">关闭</button>
+        </div>
+    </div>
+    <div class="btn-g">
+        <button mat-raised-button color="primary" class="close-btn" (click)="goBack()">取消</button>
+    </div>
+</div>

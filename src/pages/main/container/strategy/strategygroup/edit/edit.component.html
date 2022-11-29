@@ -1,0 +1,66 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+   <div class="main">
+      <div>
+         <p>运维名称</p>
+         <mat-form-field class="example-full-width">
+             <input matInput placeholder="请输入运维名称" [(ngModel)]="name">
+         </mat-form-field>
+      </div>
+      <div>
+         <p>计划生效时间</p>
+         <div>
+            <div>
+                <app-calendar [setCreateDate]="BeginDate" (getTime)="getBeginTime($event)" title="请选择开始日期"></app-calendar>
+                <app-timeselect (getTime)="getScheduleFirstTime($event)" [time]="BeginTime"></app-timeselect>
+            </div>
+            <div>
+                <app-calendar [setCreateDate]="EndDate" (getTime)="getEndTime($event)" title="请选择结束日期"></app-calendar>
+                <app-timeselect (getTime)="getScheduleEndTime($event)" [time]="EndTime"></app-timeselect>
+            </div>
+         </div>
+      </div>
+      <div>
+         <p>策略内容</p>
+         <div style="flex: 1">
+            <table mat-table [dataSource]="list" style="width: 100%; border: 1px solid #eee;">
+               <ng-container matColumnDef="serialNumber">
+                  <th mat-header-cell *matHeaderCellDef> 序号 </th>
+                  <td mat-cell *matCellDef="let element; let i = index"> {{i + 1}} </td>
+               </ng-container>
+               <ng-container matColumnDef="date">
+                  <th mat-header-cell *matHeaderCellDef> 策略名称 </th>
+                  <td mat-cell *matCellDef="let element"> {{element.Name}} </td>
+               </ng-container>
+               <ng-container matColumnDef="operate">
+                  <th mat-header-cell *matHeaderCellDef> 操作 </th>
+                  <td mat-cell *matCellDef="let element; let i = index" class="Other">
+                     <span (click)="lookStrategy(i)">查看</span>
+                     <span (click)="del(i)">删除</span>
+                  </td>
+               </ng-container>
+               <tr mat-header-row *matHeaderRowDef="columns"></tr>
+               <tr mat-row *matRowDef="let row; columns: columns;" class="example-element-row"></tr>
+            </table>
+            <div style="background: rgb(141, 141, 141);;">
+               <button mat-raised-button color="primary" style="float: right; margin-top: 10px;" (click)="selectStrategy()">新增</button>
+               <!-- <mat-paginator #MatPaginator [pageSizeOptions]="[5, 10, 20]" (page)="change($event)" [pageIndex]="pageIndex - 1" [pageSize]="10" showFirstLastButtons>
+               </mat-paginator> -->
+            </div>
+         </div>
+      </div>
+      <div>
+         <p>备注</p>
+         <textarea style="width: 400px; height: 130px; resize: none;padding: 10px; outline: none; border: 1px solid #eee;" [(ngModel)]="remark"></textarea>
+      </div>
+      <div>
+          <p>相关信息</p>
+          <app-manyfile [setImgsrcData]="imgsrcData" [docList]="docListData"></app-manyfile>
+      </div>
+    
+      <div class="btn-g">
+          <button mat-raised-button color="primary" (click)="add()">确定</button>
+          <button mat-raised-button color="primary" onclick="window.history.back()">返回</button>
+        </div>
+   </div>
+</div>

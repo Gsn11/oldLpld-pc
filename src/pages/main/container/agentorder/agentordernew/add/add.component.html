@@ -1,0 +1,37 @@
+<app-crumbs [crumbs]="crumbsList"></app-crumbs>
+<div class="containerPadding">
+	<div class="main" style="background-color: #fff; padding: 0 20px;">
+		<div>
+			<span>维修工单名称</span>
+			<mat-form-field class="example-form-field">
+				<input matInput [(ngModel)]="name" type="text" placeholder="维修工单名称">
+			</mat-form-field>
+		</div>
+		<div style="display: flex; align-items: center;">
+			<span style="margin-top: 50px;">维修设备</span>
+			<app-items *ngIf="MaintenanceTemplates && Builds" style="flex: 1" [MaintenanceTemplates]="MaintenanceTemplates" [Builds]="Builds" [Items]="scheItem" type="维修"></app-items>
+		</div>
+		<div>
+			<span>故障描述</span>
+			<mat-form-field class="example-full-width" style="width: 100%;">
+				<textarea style="width: 100%;height: 80px;" matInput placeholder="请输入故障描述" [(ngModel)]="des"></textarea>
+			</mat-form-field>
+		</div>
+		<div>
+			<span><span style="color: red;">*</span> 主管审核</span>
+			<span (click)="openUserModelDialog()" class="chooseName">
+				{{workPerList.length == 0 ? '请选择主管' : ''}}
+				<span *ngFor="let item of workPerList; let i = index;">{{item.Name}}{{i == workPerList.length - 1 ? '' : '、'}}</span>
+			</span>
+		</div>
+		<div>
+			<span>其它图片</span>
+			<app-manyfile [setImgsrcData]="imgsrcData"></app-manyfile>
+		</div>
+		
+		<div class="btn">
+			<button mat-raised-button class="back" (click)="goback()">返回</button> 
+			<button color="primary" mat-raised-button  class="edit" (click)="dispatch()">派单</button>
+		</div>
+	</div>
+</div>

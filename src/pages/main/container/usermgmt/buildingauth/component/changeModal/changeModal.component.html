@@ -1,0 +1,16 @@
+<div class="modal-out" [ngClass]="{'active': show}">
+    <div class="bg" (click)="switchModalBox()"></div>
+    <div class="container">
+        <div class="header"><span class="title">{{title}}</span></div>
+        <div class="main">
+            <div *ngFor="let s of setUsers, let sIndex = index">
+                <mat-radio-button value="s.LoginId" (change)="radioChange(sIndex)">{{s.LoginId}} ({{s.Name}})
+                    ({{s.UserTel}})</mat-radio-button>
+            </div>
+        </div>
+        <div class="footer">
+            <button mat-button (click)="goCancel()"><span class="iconfont iconpstep"></span>取消</button>
+            <button mat-button (click)="userSave()"><span class="iconfont iconsave"></span> 保存</button>
+        </div>
+    </div>
+</div>
